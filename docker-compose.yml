@@ -1,37 +1,99 @@
 version: "3.9"
 
 services:
-  app:
+  # Auth PostgreSQL
+  postgres_auth:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${AUTH_DB}
+    ports:
+      - "5433:5432" # Host port -> Container port
+    volumes:
+      - auth_db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  # User PostgreSQL
+  postgres_user:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${USER_DB}
+    ports:
+      - "5434:5432"
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  # Course PostgreSQL
+  postgres_course:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${COURSE_DB}
+    ports:
+      - "5435:5432"
+    volumes:
+      - course_db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  # Auth app
+  auth_app:
     build:
-      context: .
+      context: ./auth
       dockerfile: Dockerfile
     ports:
-      - "7056:7056"
+      - "${AUTH_PORT}:${AUTH_PORT}"
     environment:
-      - AUTH_DATABASE_URL=postgresql://root:root123@postgres:5432/auth_db?schema=public
-      - USER_DATABASE_URL=postgresql://root:root123@postgres:5432/user_db?schema=public
-      - COURSE_DATABASE_URL=postgresql://root:root123@postgres:5432/course_db?schema=public
-      - PORT=${PORT}
-      - HOST=${HOST}
-      - MODE=${MODE}
+      - DATABASE_URL=${AUTH_DATABASE_URL}
+      - PORT=${AUTH_PORT}
       - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
       - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
       - CODE_SEED=${CODE_SEED}
     depends_on:
-      - postgres
+      - postgres_auth
     networks:
       - app_network
 
-  postgres:
-    image: postgres:15
-    container_name: my_postgres
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root123
+  # User app
+  user_app:
+    build:
+      context: ./user
+      dockerfile: Dockerfile
     ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - "${USER_PORT}:${USER_PORT}"
+    environment:
+      - DATABASE_URL=${USER_DATABASE_URL}
+      - PORT=${USER_PORT}
+      - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - CODE_SEED=${CODE_SEED}
+    depends_on:
+      - postgres_user
+    networks:
+      - app_network
+
+  # Course app
+  course_app:
+    build:
+      context: ./course
+      dockerfile: Dockerfile
+    ports:
+      - "${COURSE_PORT}:${COURSE_PORT}"
+    environment:
+      - DATABASE_URL=${COURSE_DATABASE_URL}
+      - PORT=${COURSE_PORT}
+      - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - CODE_SEED=${CODE_SEED}
+    depends_on:
+      - postgres_course
     networks:
       - app_network
 
@@ -40,4 +102,6 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data:
+  auth_db_data:
+  user_db_data:
+  course_db_data:
