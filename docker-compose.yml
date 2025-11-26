@@ -1,107 +1,21 @@
-version: "3.9"
-
 services:
-  # Auth PostgreSQL
-  postgres_auth:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${AUTH_DB}
-    ports:
-      - "5433:5432" # Host port -> Container port
-    volumes:
-      - auth_db_data:/var/lib/postgresql/data
-    networks:
-      - app_network
-
-  # User PostgreSQL
-  postgres_user:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${USER_DB}
-    ports:
-      - "5434:5432"
-    volumes:
-      - user_db_data:/var/lib/postgresql/data
-    networks:
-      - app_network
-
-  # Course PostgreSQL
-  postgres_course:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${COURSE_DB}
-    ports:
-      - "5435:5432"
-    volumes:
-      - course_db_data:/var/lib/postgresql/data
-    networks:
-      - app_network
-
-  # Auth app
-  auth_app:
+  app:
     build:
-      context: ./auth
+      context: .
       dockerfile: Dockerfile
     ports:
-      - "${AUTH_PORT}:${AUTH_PORT}"
+      - "7056:7056"
     environment:
-      - DATABASE_URL=${AUTH_DATABASE_URL}
-      - PORT=${AUTH_PORT}
+      - DATABASE_URL=${DATABASE_URL}
+      - PORT=${PORT}
+      - HOST=${HOST}
+      - MODE=${MODE}
       - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
       - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
       - CODE_SEED=${CODE_SEED}
-    depends_on:
-      - postgres_auth
-    networks:
-      - app_network
-
-  # User app
-  user_app:
-    build:
-      context: ./user
-      dockerfile: Dockerfile
-    ports:
-      - "${USER_PORT}:${USER_PORT}"
-    environment:
-      - DATABASE_URL=${USER_DATABASE_URL}
-      - PORT=${USER_PORT}
-      - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
-      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
-      - CODE_SEED=${CODE_SEED}
-    depends_on:
-      - postgres_user
-    networks:
-      - app_network
-
-  # Course app
-  course_app:
-    build:
-      context: ./course
-      dockerfile: Dockerfile
-    ports:
-      - "${COURSE_PORT}:${COURSE_PORT}"
-    environment:
-      - DATABASE_URL=${COURSE_DATABASE_URL}
-      - PORT=${COURSE_PORT}
-      - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
-      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
-      - CODE_SEED=${CODE_SEED}
-    depends_on:
-      - postgres_course
     networks:
       - app_network
 
 networks:
   app_network:
     driver: bridge
-
-volumes:
-  auth_db_data:
-  user_db_data:
-  course_db_data:
