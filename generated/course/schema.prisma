@@ -147,8 +147,7 @@ model UserOnCourse {
   status    CourseStatus @default(IN_PROGRESS)
   createdAt DateTime     @default(now()) @map("created_at")
   updatedAt DateTime     @default(now()) @map("updated_at")
-
-  course Course @relation(fields: [courseId], references: [id])
+  course    Course       @relation(fields: [courseId], references: [id])
 }
 
 model CourseSection {

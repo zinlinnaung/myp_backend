@@ -1,6 +1,5 @@
 {
   "name": "prisma-client-e02f7e3ba1a19e7e64e1540e9ec8fd74c63a884aa179abd97199aa8ecfc82f84",
-  "type": "commonjs",
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "index-browser.js",
@@ -78,21 +77,8 @@
       "import": "./generator-build/index.js",
       "default": "./generator-build/index.js"
     },
-    "./sql": {
-      "require": {
-        "types": "./sql.d.ts",
-        "node": "./sql.js",
-        "default": "./sql.js"
-      },
-      "import": {
-        "types": "./sql.d.ts",
-        "node": "./sql.mjs",
-        "default": "./sql.mjs"
-      },
-      "default": "./sql.js"
-    },
     "./*": "./*"
   },
-  "version": "6.0.0",
+  "version": "5.14.0",
   "sideEffects": false
 }

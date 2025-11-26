@@ -44,8 +44,8 @@ export type OtpSession = $Result.DefaultSelection<Prisma.$OtpSessionPayload>
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
  */
 export class PrismaClient<
-  ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  T extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
+  U = 'log' extends keyof T ? T['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<T['log']> : never : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
@@ -65,7 +65,7 @@ export class PrismaClient<
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
    */
 
-  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
+  constructor(optionsArg ?: Prisma.Subset<T, Prisma.PrismaClientOptions>);
   $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): void;
 
   /**
@@ -131,7 +131,6 @@ export class PrismaClient<
    */
   $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
 
-
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
    * @example
@@ -150,7 +149,7 @@ export class PrismaClient<
   $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
 
 
-  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb, ExtArgs>
+  $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
 
       /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -201,6 +200,7 @@ export namespace Prisma {
   export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
   export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
   export import PrismaClientValidationError = runtime.PrismaClientValidationError
+  export import NotFoundError = runtime.NotFoundError
 
   /**
    * Re-export of sql-template-tag
@@ -210,8 +210,6 @@ export namespace Prisma {
   export import join = runtime.join
   export import raw = runtime.raw
   export import Sql = runtime.Sql
-
-
 
   /**
    * Decimal.js
@@ -239,8 +237,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.0.0
-   * Query Engine version: 5dbef10bdbfb579e07d35cc85fb1518d357cb99e
+   * Prisma Client JS version: 5.14.0
+   * Query Engine version: e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
    */
   export type PrismaVersion = {
     client: string
@@ -252,13 +250,51 @@ export namespace Prisma {
    * Utility Types
    */
 
+  /**
+   * From https://github.com/sindresorhus/type-fest/
+   * Matches a JSON object.
+   * This type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from. 
+   */
+  export type JsonObject = {[Key in string]?: JsonValue}
 
-  export import JsonObject = runtime.JsonObject
-  export import JsonArray = runtime.JsonArray
-  export import JsonValue = runtime.JsonValue
-  export import InputJsonObject = runtime.InputJsonObject
-  export import InputJsonArray = runtime.InputJsonArray
-  export import InputJsonValue = runtime.InputJsonValue
+  /**
+   * From https://github.com/sindresorhus/type-fest/
+   * Matches a JSON array.
+   */
+  export interface JsonArray extends Array<JsonValue> {}
+
+  /**
+   * From https://github.com/sindresorhus/type-fest/
+   * Matches any valid JSON value.
+   */
+  export type JsonValue = string | number | boolean | JsonObject | JsonArray | null
+
+  /**
+   * Matches a JSON object.
+   * Unlike `JsonObject`, this type allows undefined and read-only properties.
+   */
+  export type InputJsonObject = {readonly [Key in string]?: InputJsonValue | null}
+
+  /**
+   * Matches a JSON array.
+   * Unlike `JsonArray`, readonly arrays are assignable to this type.
+   */
+  export interface InputJsonArray extends ReadonlyArray<InputJsonValue | null> {}
+
+  /**
+   * Matches any valid value that can be used as an input for operations like
+   * create and update as the value of a JSON field. Unlike `JsonValue`, this
+   * type allows read-only arrays and read-only object properties and disallows
+   * `null` at the top level.
+   *
+   * `null` cannot be used as the value of a JSON field because its meaning
+   * would be ambiguous. Use `Prisma.JsonNull` to store the JSON null value or
+   * `Prisma.DbNull` to clear the JSON value and set the field to the database
+   * NULL value instead.
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-by-null-values
+   */
+  export type InputJsonValue = string | number | boolean | InputJsonObject | InputJsonArray | { toJSON(): unknown }
 
   /**
    * Types of the values used to represent different kinds of `null` values when working with JSON fields.
@@ -633,82 +669,83 @@ export namespace Prisma {
     db?: Datasource
   }
 
-  interface TypeMapCb extends $Utils.Fn<{extArgs: $Extensions.InternalArgs, clientOptions: PrismaClientOptions }, $Utils.Record<string, any>> {
-    returns: Prisma.TypeMap<this['params']['extArgs'], this['params']['clientOptions']>
+
+  interface TypeMapCb extends $Utils.Fn<{extArgs: $Extensions.InternalArgs}, $Utils.Record<string, any>> {
+    returns: Prisma.TypeMap<this['params']['extArgs']>
   }
 
-  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: "user" | "refreshToken" | "otpSession"
+      modelProps: 'user' | 'refreshToken' | 'otpSession'
       txIsolationLevel: Prisma.TransactionIsolationLevel
-    }
+    },
     model: {
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.UserFindUniqueArgs<ExtArgs>
+            args: Prisma.UserFindUniqueArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           findFirst: {
-            args: Prisma.UserFindFirstArgs<ExtArgs>
+            args: Prisma.UserFindFirstArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           findMany: {
-            args: Prisma.UserFindManyArgs<ExtArgs>
+            args: Prisma.UserFindManyArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           create: {
-            args: Prisma.UserCreateArgs<ExtArgs>
+            args: Prisma.UserCreateArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           createMany: {
-            args: Prisma.UserCreateManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.UserCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           delete: {
-            args: Prisma.UserDeleteArgs<ExtArgs>
+            args: Prisma.UserDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           update: {
-            args: Prisma.UserUpdateArgs<ExtArgs>
+            args: Prisma.UserUpdateArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           deleteMany: {
-            args: Prisma.UserDeleteManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.UserDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.UserUpdateManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.UserUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.UserUpsertArgs<ExtArgs>
+            args: Prisma.UserUpsertArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           aggregate: {
-            args: Prisma.UserAggregateArgs<ExtArgs>
+            args: Prisma.UserAggregateArgs<ExtArgs>,
             result: $Utils.Optional<AggregateUser>
           }
           groupBy: {
-            args: Prisma.UserGroupByArgs<ExtArgs>
+            args: Prisma.UserGroupByArgs<ExtArgs>,
             result: $Utils.Optional<UserGroupByOutputType>[]
           }
           count: {
-            args: Prisma.UserCountArgs<ExtArgs>
+            args: Prisma.UserCountArgs<ExtArgs>,
             result: $Utils.Optional<UserCountAggregateOutputType> | number
           }
         }
@@ -718,67 +755,67 @@ export namespace Prisma {
         fields: Prisma.RefreshTokenFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.RefreshTokenFindUniqueArgs<ExtArgs>
+            args: Prisma.RefreshTokenFindUniqueArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.RefreshTokenFindUniqueOrThrowArgs<ExtArgs>
+            args: Prisma.RefreshTokenFindUniqueOrThrowArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
           }
           findFirst: {
-            args: Prisma.RefreshTokenFindFirstArgs<ExtArgs>
+            args: Prisma.RefreshTokenFindFirstArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.RefreshTokenFindFirstOrThrowArgs<ExtArgs>
+            args: Prisma.RefreshTokenFindFirstOrThrowArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
           }
           findMany: {
-            args: Prisma.RefreshTokenFindManyArgs<ExtArgs>
+            args: Prisma.RefreshTokenFindManyArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
           }
           create: {
-            args: Prisma.RefreshTokenCreateArgs<ExtArgs>
+            args: Prisma.RefreshTokenCreateArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
           }
           createMany: {
-            args: Prisma.RefreshTokenCreateManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.RefreshTokenCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.RefreshTokenCreateManyAndReturnArgs<ExtArgs>
+            args: Prisma.RefreshTokenCreateManyAndReturnArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
           }
           delete: {
-            args: Prisma.RefreshTokenDeleteArgs<ExtArgs>
+            args: Prisma.RefreshTokenDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
           }
           update: {
-            args: Prisma.RefreshTokenUpdateArgs<ExtArgs>
+            args: Prisma.RefreshTokenUpdateArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
           }
           deleteMany: {
-            args: Prisma.RefreshTokenDeleteManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.RefreshTokenDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.RefreshTokenUpdateManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.RefreshTokenUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.RefreshTokenUpsertArgs<ExtArgs>
+            args: Prisma.RefreshTokenUpsertArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
           }
           aggregate: {
-            args: Prisma.RefreshTokenAggregateArgs<ExtArgs>
+            args: Prisma.RefreshTokenAggregateArgs<ExtArgs>,
             result: $Utils.Optional<AggregateRefreshToken>
           }
           groupBy: {
-            args: Prisma.RefreshTokenGroupByArgs<ExtArgs>
+            args: Prisma.RefreshTokenGroupByArgs<ExtArgs>,
             result: $Utils.Optional<RefreshTokenGroupByOutputType>[]
           }
           count: {
-            args: Prisma.RefreshTokenCountArgs<ExtArgs>
+            args: Prisma.RefreshTokenCountArgs<ExtArgs>,
             result: $Utils.Optional<RefreshTokenCountAggregateOutputType> | number
           }
         }
@@ -788,67 +825,67 @@ export namespace Prisma {
         fields: Prisma.OtpSessionFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.OtpSessionFindUniqueArgs<ExtArgs>
+            args: Prisma.OtpSessionFindUniqueArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.OtpSessionFindUniqueOrThrowArgs<ExtArgs>
+            args: Prisma.OtpSessionFindUniqueOrThrowArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
           }
           findFirst: {
-            args: Prisma.OtpSessionFindFirstArgs<ExtArgs>
+            args: Prisma.OtpSessionFindFirstArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.OtpSessionFindFirstOrThrowArgs<ExtArgs>
+            args: Prisma.OtpSessionFindFirstOrThrowArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
           }
           findMany: {
-            args: Prisma.OtpSessionFindManyArgs<ExtArgs>
+            args: Prisma.OtpSessionFindManyArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>[]
           }
           create: {
-            args: Prisma.OtpSessionCreateArgs<ExtArgs>
+            args: Prisma.OtpSessionCreateArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
           }
           createMany: {
-            args: Prisma.OtpSessionCreateManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.OtpSessionCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.OtpSessionCreateManyAndReturnArgs<ExtArgs>
+            args: Prisma.OtpSessionCreateManyAndReturnArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>[]
           }
           delete: {
-            args: Prisma.OtpSessionDeleteArgs<ExtArgs>
+            args: Prisma.OtpSessionDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
           }
           update: {
-            args: Prisma.OtpSessionUpdateArgs<ExtArgs>
+            args: Prisma.OtpSessionUpdateArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
           }
           deleteMany: {
-            args: Prisma.OtpSessionDeleteManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.OtpSessionDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.OtpSessionUpdateManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.OtpSessionUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.OtpSessionUpsertArgs<ExtArgs>
+            args: Prisma.OtpSessionUpsertArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
           }
           aggregate: {
-            args: Prisma.OtpSessionAggregateArgs<ExtArgs>
+            args: Prisma.OtpSessionAggregateArgs<ExtArgs>,
             result: $Utils.Optional<AggregateOtpSession>
           }
           groupBy: {
-            args: Prisma.OtpSessionGroupByArgs<ExtArgs>
+            args: Prisma.OtpSessionGroupByArgs<ExtArgs>,
             result: $Utils.Optional<OtpSessionGroupByOutputType>[]
           }
           count: {
-            args: Prisma.OtpSessionCountArgs<ExtArgs>
+            args: Prisma.OtpSessionCountArgs<ExtArgs>,
             result: $Utils.Optional<OtpSessionCountAggregateOutputType> | number
           }
         }
@@ -858,15 +895,11 @@ export namespace Prisma {
     other: {
       payload: any
       operations: {
-        $executeRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
-          result: any
-        }
         $executeRawUnsafe: {
           args: [query: string, ...values: any[]],
           result: any
         }
-        $queryRaw: {
+        $executeRaw: {
           args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
           result: any
         }
@@ -874,10 +907,14 @@ export namespace Prisma {
           args: [query: string, ...values: any[]],
           result: any
         }
+        $queryRaw: {
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          result: any
+        }
       }
     }
   }
-  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
+  export const defineExtension: $Extensions.ExtendsHook<'define', Prisma.TypeMapCb, $Extensions.DefaultArgs>
   export type DefaultPrismaClient = PrismaClient
   export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
   export interface PrismaClientOptions {
@@ -921,7 +958,6 @@ export namespace Prisma {
       isolationLevel?: Prisma.TransactionIsolationLevel
     }
   }
-
 
   /* Types for Logging */
   export type LogLevel = 'info' | 'query' | 'warn' | 'error'
@@ -1318,26 +1354,6 @@ export namespace Prisma {
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
-  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    email?: boolean
-    username?: boolean
-    phone?: boolean
-    password?: boolean
-    googleId?: boolean
-    firstName?: boolean
-    lastName?: boolean
-    country?: boolean
-    city?: boolean
-    township?: boolean
-    dateOfBirth?: boolean
-    gender?: boolean
-    feedback?: boolean
-    isActive?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["user"]>
-
   export type UserSelectScalar = {
     id?: boolean
     email?: boolean
@@ -1358,12 +1374,13 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
+
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     otpSessions?: boolean | User$otpSessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -1393,6 +1410,7 @@ export namespace Prisma {
     composites: {}
   }
 
+
   type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
 
   type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
@@ -1412,8 +1430,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    **/
+    findUnique<T extends UserFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
      * Find one User that matches the filter or throw an error with `error.code='P2025'` 
@@ -1426,8 +1446,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    **/
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
      * Find the first User that matches the filter.
@@ -1441,8 +1463,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    **/
+    findFirst<T extends UserFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
      * Find the first User that matches the filter or
@@ -1457,8 +1481,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    **/
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
      * Find zero or more Users that matches the filter.
@@ -1475,8 +1501,10 @@ export namespace Prisma {
      * // Only select the `id`
      * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
      * 
-     */
-    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany">>
+    **/
+    findMany<T extends UserFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a User.
@@ -1489,8 +1517,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    **/
+    create<T extends UserCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserCreateArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
      * Create many Users.
@@ -1503,8 +1533,10 @@ export namespace Prisma {
      *   ]
      * })
      *     
-     */
-    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    createMany<T extends UserCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many Users and returns the data saved in the database.
@@ -1527,8 +1559,10 @@ export namespace Prisma {
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * 
-     */
-    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn">>
+    **/
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a User.
@@ -1541,8 +1575,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    **/
+    delete<T extends UserDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
      * Update one User.
@@ -1558,8 +1594,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    **/
+    update<T extends UserUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
      * Delete zero or more Users.
@@ -1572,8 +1610,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    deleteMany<T extends UserDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Users.
@@ -1591,8 +1631,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    updateMany<T extends UserUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one User.
@@ -1610,9 +1652,10 @@ export namespace Prisma {
      *     // ... the filter for the User we want to update
      *   }
      * })
-     */
-    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
-
+    **/
+    upsert<T extends UserUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
      * Count the number of Users.
@@ -1752,31 +1795,33 @@ export namespace Prisma {
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany"> | Null>
-    otpSessions<T extends User$otpSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$otpSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "findMany"> | Null>
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    otpSessions<T extends User$otpSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$otpSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
 
 
 
@@ -2016,7 +2061,11 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the User
      */
-    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data used to create many Users.
      */
@@ -2344,16 +2393,6 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["refreshToken"]>
 
-  export type RefreshTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    token?: boolean
-    userId?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
-    isRevoked?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["refreshToken"]>
-
   export type RefreshTokenSelectScalar = {
     id?: boolean
     token?: boolean
@@ -2363,12 +2402,11 @@ export namespace Prisma {
     isRevoked?: boolean
   }
 
+
   export type RefreshTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type RefreshTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
+
 
   export type $RefreshTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "RefreshToken"
@@ -2385,6 +2423,7 @@ export namespace Prisma {
     }, ExtArgs["result"]["refreshToken"]>
     composites: {}
   }
+
 
   type RefreshTokenGetPayload<S extends boolean | null | undefined | RefreshTokenDefaultArgs> = $Result.GetResult<Prisma.$RefreshTokenPayload, S>
 
@@ -2405,8 +2444,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findUnique<T extends RefreshTokenFindUniqueArgs>(args: SelectSubset<T, RefreshTokenFindUniqueArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    **/
+    findUnique<T extends RefreshTokenFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, RefreshTokenFindUniqueArgs<ExtArgs>>
+    ): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
      * Find one RefreshToken that matches the filter or throw an error with `error.code='P2025'` 
@@ -2419,8 +2460,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findUniqueOrThrow<T extends RefreshTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, RefreshTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    **/
+    findUniqueOrThrow<T extends RefreshTokenFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, RefreshTokenFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
      * Find the first RefreshToken that matches the filter.
@@ -2434,8 +2477,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findFirst<T extends RefreshTokenFindFirstArgs>(args?: SelectSubset<T, RefreshTokenFindFirstArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    **/
+    findFirst<T extends RefreshTokenFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, RefreshTokenFindFirstArgs<ExtArgs>>
+    ): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
      * Find the first RefreshToken that matches the filter or
@@ -2450,8 +2495,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findFirstOrThrow<T extends RefreshTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, RefreshTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    **/
+    findFirstOrThrow<T extends RefreshTokenFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, RefreshTokenFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
      * Find zero or more RefreshTokens that matches the filter.
@@ -2468,8 +2515,10 @@ export namespace Prisma {
      * // Only select the `id`
      * const refreshTokenWithIdOnly = await prisma.refreshToken.findMany({ select: { id: true } })
      * 
-     */
-    findMany<T extends RefreshTokenFindManyArgs>(args?: SelectSubset<T, RefreshTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany">>
+    **/
+    findMany<T extends RefreshTokenFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RefreshTokenFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a RefreshToken.
@@ -2482,8 +2531,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    create<T extends RefreshTokenCreateArgs>(args: SelectSubset<T, RefreshTokenCreateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    **/
+    create<T extends RefreshTokenCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, RefreshTokenCreateArgs<ExtArgs>>
+    ): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
      * Create many RefreshTokens.
@@ -2496,8 +2547,10 @@ export namespace Prisma {
      *   ]
      * })
      *     
-     */
-    createMany<T extends RefreshTokenCreateManyArgs>(args?: SelectSubset<T, RefreshTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    createMany<T extends RefreshTokenCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RefreshTokenCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many RefreshTokens and returns the data saved in the database.
@@ -2520,8 +2573,10 @@ export namespace Prisma {
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * 
-     */
-    createManyAndReturn<T extends RefreshTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, RefreshTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "createManyAndReturn">>
+    **/
+    createManyAndReturn<T extends RefreshTokenCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, RefreshTokenCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a RefreshToken.
@@ -2534,8 +2589,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    delete<T extends RefreshTokenDeleteArgs>(args: SelectSubset<T, RefreshTokenDeleteArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    **/
+    delete<T extends RefreshTokenDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, RefreshTokenDeleteArgs<ExtArgs>>
+    ): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
      * Update one RefreshToken.
@@ -2551,8 +2608,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    update<T extends RefreshTokenUpdateArgs>(args: SelectSubset<T, RefreshTokenUpdateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    **/
+    update<T extends RefreshTokenUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, RefreshTokenUpdateArgs<ExtArgs>>
+    ): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
      * Delete zero or more RefreshTokens.
@@ -2565,8 +2624,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    deleteMany<T extends RefreshTokenDeleteManyArgs>(args?: SelectSubset<T, RefreshTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    deleteMany<T extends RefreshTokenDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RefreshTokenDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more RefreshTokens.
@@ -2584,8 +2645,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    updateMany<T extends RefreshTokenUpdateManyArgs>(args: SelectSubset<T, RefreshTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    updateMany<T extends RefreshTokenUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, RefreshTokenUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one RefreshToken.
@@ -2603,9 +2666,10 @@ export namespace Prisma {
      *     // ... the filter for the RefreshToken we want to update
      *   }
      * })
-     */
-    upsert<T extends RefreshTokenUpsertArgs>(args: SelectSubset<T, RefreshTokenUpsertArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
-
+    **/
+    upsert<T extends RefreshTokenUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, RefreshTokenUpsertArgs<ExtArgs>>
+    ): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
      * Count the number of RefreshTokens.
@@ -2745,30 +2809,31 @@ export namespace Prisma {
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export interface Prisma__RefreshTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
 
 
 
@@ -2997,16 +3062,16 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the RefreshToken
      */
-    select?: RefreshTokenSelectCreateManyAndReturn<ExtArgs> | null
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
     /**
      * The data used to create many RefreshTokens.
      */
     data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3337,22 +3402,6 @@ export namespace Prisma {
     user?: boolean | OtpSession$userArgs<ExtArgs>
   }, ExtArgs["result"]["otpSession"]>
 
-  export type OtpSessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    phone?: boolean
-    email?: boolean
-    transId?: boolean
-    userId?: boolean
-    otpCode?: boolean
-    service?: boolean
-    app?: boolean
-    isVerified?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | OtpSession$userArgs<ExtArgs>
-  }, ExtArgs["result"]["otpSession"]>
-
   export type OtpSessionSelectScalar = {
     id?: boolean
     phone?: boolean
@@ -3368,12 +3417,11 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
+
   export type OtpSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | OtpSession$userArgs<ExtArgs>
   }
-  export type OtpSessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | OtpSession$userArgs<ExtArgs>
-  }
+
 
   export type $OtpSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OtpSession"
@@ -3397,6 +3445,7 @@ export namespace Prisma {
     composites: {}
   }
 
+
   type OtpSessionGetPayload<S extends boolean | null | undefined | OtpSessionDefaultArgs> = $Result.GetResult<Prisma.$OtpSessionPayload, S>
 
   type OtpSessionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
@@ -3416,8 +3465,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findUnique<T extends OtpSessionFindUniqueArgs>(args: SelectSubset<T, OtpSessionFindUniqueArgs<ExtArgs>>): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    **/
+    findUnique<T extends OtpSessionFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionFindUniqueArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
      * Find one OtpSession that matches the filter or throw an error with `error.code='P2025'` 
@@ -3430,8 +3481,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findUniqueOrThrow<T extends OtpSessionFindUniqueOrThrowArgs>(args: SelectSubset<T, OtpSessionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    **/
+    findUniqueOrThrow<T extends OtpSessionFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
      * Find the first OtpSession that matches the filter.
@@ -3445,8 +3498,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findFirst<T extends OtpSessionFindFirstArgs>(args?: SelectSubset<T, OtpSessionFindFirstArgs<ExtArgs>>): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    **/
+    findFirst<T extends OtpSessionFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionFindFirstArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
      * Find the first OtpSession that matches the filter or
@@ -3461,8 +3516,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findFirstOrThrow<T extends OtpSessionFindFirstOrThrowArgs>(args?: SelectSubset<T, OtpSessionFindFirstOrThrowArgs<ExtArgs>>): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    **/
+    findFirstOrThrow<T extends OtpSessionFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
      * Find zero or more OtpSessions that matches the filter.
@@ -3479,8 +3536,10 @@ export namespace Prisma {
      * // Only select the `id`
      * const otpSessionWithIdOnly = await prisma.otpSession.findMany({ select: { id: true } })
      * 
-     */
-    findMany<T extends OtpSessionFindManyArgs>(args?: SelectSubset<T, OtpSessionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "findMany">>
+    **/
+    findMany<T extends OtpSessionFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a OtpSession.
@@ -3493,8 +3552,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    create<T extends OtpSessionCreateArgs>(args: SelectSubset<T, OtpSessionCreateArgs<ExtArgs>>): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    **/
+    create<T extends OtpSessionCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionCreateArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
      * Create many OtpSessions.
@@ -3507,8 +3568,10 @@ export namespace Prisma {
      *   ]
      * })
      *     
-     */
-    createMany<T extends OtpSessionCreateManyArgs>(args?: SelectSubset<T, OtpSessionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    createMany<T extends OtpSessionCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many OtpSessions and returns the data saved in the database.
@@ -3531,8 +3594,10 @@ export namespace Prisma {
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
      * 
-     */
-    createManyAndReturn<T extends OtpSessionCreateManyAndReturnArgs>(args?: SelectSubset<T, OtpSessionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "createManyAndReturn">>
+    **/
+    createManyAndReturn<T extends OtpSessionCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a OtpSession.
@@ -3545,8 +3610,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    delete<T extends OtpSessionDeleteArgs>(args: SelectSubset<T, OtpSessionDeleteArgs<ExtArgs>>): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    **/
+    delete<T extends OtpSessionDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionDeleteArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
      * Update one OtpSession.
@@ -3562,8 +3629,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    update<T extends OtpSessionUpdateArgs>(args: SelectSubset<T, OtpSessionUpdateArgs<ExtArgs>>): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    **/
+    update<T extends OtpSessionUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionUpdateArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
      * Delete zero or more OtpSessions.
@@ -3576,8 +3645,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    deleteMany<T extends OtpSessionDeleteManyArgs>(args?: SelectSubset<T, OtpSessionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    deleteMany<T extends OtpSessionDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more OtpSessions.
@@ -3595,8 +3666,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    updateMany<T extends OtpSessionUpdateManyArgs>(args: SelectSubset<T, OtpSessionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    updateMany<T extends OtpSessionUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one OtpSession.
@@ -3614,9 +3687,10 @@ export namespace Prisma {
      *     // ... the filter for the OtpSession we want to update
      *   }
      * })
-     */
-    upsert<T extends OtpSessionUpsertArgs>(args: SelectSubset<T, OtpSessionUpsertArgs<ExtArgs>>): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
-
+    **/
+    upsert<T extends OtpSessionUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionUpsertArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
      * Count the number of OtpSessions.
@@ -3756,30 +3830,31 @@ export namespace Prisma {
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export interface Prisma__OtpSessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends OtpSession$userArgs<ExtArgs> = {}>(args?: Subset<T, OtpSession$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    user<T extends OtpSession$userArgs<ExtArgs> = {}>(args?: Subset<T, OtpSession$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
 
 
 
@@ -4014,16 +4089,16 @@ export namespace Prisma {
     /**
      * Select specific fields to fetch from the OtpSession
      */
-    select?: OtpSessionSelectCreateManyAndReturn<ExtArgs> | null
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
     /**
      * The data used to create many OtpSessions.
      */
     data: OtpSessionCreateManyInput | OtpSessionCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4422,7 +4497,7 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
     createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
     isRevoked?: BoolFilter<"RefreshToken"> | boolean
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
   export type RefreshTokenOrderByWithRelationInput = {
@@ -4445,7 +4520,7 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
     createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
     isRevoked?: BoolFilter<"RefreshToken"> | boolean
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id" | "token">
 
   export type RefreshTokenOrderByWithAggregationInput = {
@@ -4488,7 +4563,7 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"OtpSession"> | Date | string
     createdAt?: DateTimeFilter<"OtpSession"> | Date | string
     updatedAt?: DateTimeFilter<"OtpSession"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
   export type OtpSessionOrderByWithRelationInput = {
@@ -4523,7 +4598,7 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"OtpSession"> | Date | string
     createdAt?: DateTimeFilter<"OtpSession"> | Date | string
     updatedAt?: DateTimeFilter<"OtpSession"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id" | "transId">
 
   export type OtpSessionOrderByWithAggregationInput = {
@@ -5090,7 +5165,7 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type UserScalarRelationFilter = {
+  export type UserRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
   }
@@ -5122,7 +5197,7 @@ export namespace Prisma {
     isRevoked?: SortOrder
   }
 
-  export type UserNullableScalarRelationFilter = {
+  export type UserNullableRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
   }
@@ -5868,6 +5943,26 @@ export namespace Prisma {
   }
 
 
+
+  /**
+   * Aliases for legacy arg types
+   */
+    /**
+     * @deprecated Use UserCountOutputTypeDefaultArgs instead
+     */
+    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserDefaultArgs instead
+     */
+    export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RefreshTokenDefaultArgs instead
+     */
+    export type RefreshTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RefreshTokenDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use OtpSessionDefaultArgs instead
+     */
+    export type OtpSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OtpSessionDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
