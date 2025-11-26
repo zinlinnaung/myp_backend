@@ -1,0 +1,275 @@
+// Course Service Database Schema
+generator client {
+    provider = "prisma-client-js"
+    output   = "../../../generated/course"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("COURSE_DATABASE_URL")
+}
+
+// Post service only stores author ID reference, not full user data
+model Post {
+    id          String    @id @default(uuid())
+    title       String
+    content     String
+    excerpt     String?
+    slug        String?   @unique
+    published   Boolean   @default(false)
+    authorId    String    @map("author_id")
+    tags        String[]  @default([])
+    createdAt   DateTime  @default(now()) @map("created_at")
+    updatedAt   DateTime  @updatedAt @map("updated_at")
+    publishedAt DateTime? @map("published_at")
+
+    @@map("posts")
+}
+
+// Post service events for analytics
+model PostEvent {
+    id        String   @id @default(uuid())
+    postId    String   @map("post_id")
+    eventType String   @map("event_type")
+    authorId  String   @map("author_id")
+    eventData Json?    @map("event_data")
+    createdAt DateTime @default(now()) @map("created_at")
+
+    @@map("post_events")
+}
+
+// Post view analytics
+model PostView {
+    id        String   @id @default(uuid())
+    postId    String   @map("post_id")
+    viewerId  String?  @map("viewer_id")
+    ipAddress String?  @map("ip_address")
+    userAgent String?  @map("user_agent")
+    createdAt DateTime @default(now()) @map("created_at")
+
+    @@map("post_views")
+}
+
+model HomeSlider {
+    id        String   @id @default(uuid())
+    image     String
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @default(now()) @map("updated_at")
+}
+
+model Category {
+    id            String        @id @default(uuid())
+    name          String
+    isDeleted     Boolean       @default(false)
+    type          CategoryType
+    createdAt     DateTime      @default(now()) @map("created_at")
+    updatedAt     DateTime      @default(now()) @map("updated_at")
+    subCategories SubCategory[]
+    courses       Course[]
+    contents      Content[]
+
+    @@map("category")
+}
+
+model SubCategory {
+    id         String   @id @default(uuid())
+    name       String
+    categoryId String
+    isDeleted  Boolean  @default(false)
+    createdAt  DateTime @default(now()) @map("created_at")
+    updatedAt  DateTime @default(now()) @map("updated_at")
+
+    category Category @relation(fields: [categoryId], references: [id])
+    courses  Course[]
+
+    @@map("sub_category")
+}
+
+model HomeCategory {
+    id        String             @id @default(uuid())
+    name      String
+    isDeleted Boolean            @default(false)
+    createdAt DateTime           @default(now()) @map("created_at")
+    updatedAt DateTime           @default(now()) @map("updated_at")
+    items     HomeCategoryItem[]
+
+    @@map("home_category")
+}
+
+model HomeCategoryItem {
+    id             String     @id @default(uuid())
+    homeCategoryId String
+    courseId       String     @db.Uuid
+    type           CourseType
+    createdAt      DateTime   @default(now()) @map("created_at")
+    updatedAt      DateTime   @default(now()) @map("updated_at")
+
+    homeCategory HomeCategory @relation(fields: [homeCategoryId], references: [id])
+    course       Course       @relation(fields: [courseId], references: [id])
+
+    @@map("home_category_item")
+}
+
+model Course {
+    id             String   @id @default(uuid()) @db.Uuid
+    image          String?
+    name           String
+    description    String?
+    duration       Int?
+    videoCount     Int      @default(0)
+    enrolledCount  Int      @default(0)
+    isDeleted      Boolean  @default(false)
+    rating         Float    @default(0)
+    date           DateTime @default(now())
+    parentCourseId String?  @db.Uuid
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+    categoryId     String?
+    subCategoryId  String?
+
+    parentCourse     Course?            @relation("CourseToParent", fields: [parentCourseId], references: [id])
+    subCourses       Course[]           @relation("CourseToParent")
+    users            UserOnCourse[]
+    category         Category?          @relation(fields: [categoryId], references: [id])
+    subCategory      SubCategory?       @relation(fields: [subCategoryId], references: [id])
+    HomeCategoryItem HomeCategoryItem[]
+    CourseSection    CourseSection[]
+    reviews          Review[]
+    ratings          Rating[]
+
+    @@map("course")
+}
+
+model UserOnCourse {
+    id        String       @id @default(uuid()) @db.Uuid
+    userId    String
+    courseId  String       @db.Uuid
+    status    CourseStatus @default(IN_PROGRESS)
+    createdAt DateTime     @default(now()) @map("created_at")
+    updatedAt DateTime     @default(now()) @map("updated_at")
+    course    Course       @relation(fields: [courseId], references: [id])
+}
+
+model CourseSection {
+    id          String   @id @default(uuid())
+    title       String
+    description String?
+    courseId    String   @map("course_id") @db.Uuid
+    createdAt   DateTime @default(now()) @map("created_at")
+    updatedAt   DateTime @updatedAt @map("updated_at")
+
+    course     Course     @relation(fields: [courseId], references: [id])
+    activities Activity[]
+
+    @@map("course_section")
+}
+
+model Activity {
+    id        String       @id @default(uuid())
+    title     String
+    type      ActivityType @default(LESSON)
+    content   String?
+    videoUrl  String?      @map("video_url")
+    duration  Int?
+    order     Int          @default(0)
+    sectionId String       @map("section_id")
+    createdAt DateTime     @default(now()) @map("created_at")
+    updatedAt DateTime     @updatedAt @map("updated_at")
+
+    section CourseSection @relation(fields: [sectionId], references: [id])
+
+    @@map("activity")
+}
+
+model Review {
+    id        String   @id @default(uuid())
+    courseId  String   @db.Uuid
+    userId    String
+    text      String
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    course Course @relation(fields: [courseId], references: [id])
+
+    @@map("review")
+}
+
+model Rating {
+    id        String   @id @default(uuid())
+    userId    String
+    courseId  String   @db.Uuid
+    rating    Int
+    comment   String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    course Course @relation(fields: [courseId], references: [id])
+}
+
+model Faq {
+    id        String   @id @default(uuid())
+    question  String
+    answer    String
+    isDeleted Boolean  @default(false)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("faq")
+}
+
+// Content Types - Stores all categories of content
+model ContentType {
+    id          String   @id @default(uuid())
+    name        String
+    description String?
+    createdAt   DateTime @default(now()) @map("created_at")
+    updatedAt   DateTime @updatedAt @map("updated_at")
+
+    contents Content[]
+
+    @@map("content_types")
+}
+
+// Contents - Stores all content items (regardless of type)
+model Content {
+    id           String    @id @default(uuid())
+    typeId       String    @map("type_id")
+    categoryId   String?   @map("category_id")
+    title        String
+    description  String?
+    fileUrl      String?   @map("file_url")
+    thumbnailUrl String?   @map("thumbnail_url")
+    author       String?
+    content      String?
+    publishedAt  DateTime? @map("published_at")
+    createdAt    DateTime  @default(now()) @map("created_at")
+    updatedAt    DateTime  @updatedAt @map("updated_at")
+
+    type     ContentType @relation(fields: [typeId], references: [id])
+    category Category?   @relation(fields: [categoryId], references: [id])
+
+    @@map("contents")
+}
+
+enum CategoryType {
+    NORMAL
+    FEATURE
+}
+
+enum CourseType {
+    NORMAL
+    FEATURE
+}
+
+enum ActivityType {
+    LESSON
+    VIDEO
+    QUIZ
+    ASSIGNMENT
+    RESOURCE
+}
+
+enum CourseStatus {
+    IN_PROGRESS
+    DONE
+}
