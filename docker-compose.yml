@@ -1,6 +1,7 @@
 version: "3.9"
 
 services:
+  # Auth DB
   auth_db:
     image: postgres:15
     container_name: auth_db
@@ -10,9 +11,8 @@ services:
       POSTGRES_DB: auth_db
     networks:
       - app_network
-    ports:
-      - "5432:5432"
 
+  # Course DB
   course_db:
     image: postgres:15
     container_name: course_db
@@ -22,9 +22,8 @@ services:
       POSTGRES_DB: course_db
     networks:
       - app_network
-    ports:
-      - "5433:5432"
 
+  # User DB
   user_db:
     image: postgres:15
     container_name: user_db
@@ -34,25 +33,16 @@ services:
       POSTGRES_DB: user_db
     networks:
       - app_network
-    ports:
-      - "5434:5432"
 
+  # Your App
   app:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "7056:7056"
-    environment:
-      - AUTH_DATABASE_URL=postgresql://root:root123@auth_db:5432/auth_db?schema=public
-      - COURSE_DATABASE_URL=postgresql://root:root123@course_db:5432/course_db?schema=public
-      - USER_DATABASE_URL=postgresql://root:root123@user_db:5432/user_db?schema=public
-      - PORT=${PORT}
-      - HOST=${HOST}
-      - MODE=${MODE}
-      - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
-      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
-      - CODE_SEED=${CODE_SEED}
+    env_file:
+      - .env
     networks:
       - app_network
     depends_on:
