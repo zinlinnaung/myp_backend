@@ -1,74 +1,71 @@
-// Auth Service Database Schema
 generator client {
-    provider = "prisma-client-js"
-    output   = "../../../generated/auth"
+  provider = "prisma-client-js"
+  output   = "../../../generated/auth"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("AUTH_DATABASE_URL")
+  provider = "postgresql"
+  url      = env("AUTH_DATABASE_URL")
 }
 
-// Auth service only needs user authentication data
 model User {
-    id          String    @id @default(uuid())
-    email       String    @unique
-    username    String    @unique
-    phone       String?   @unique
-    password    String?
-    googleId    String?   @unique @map("google_id")
-    firstName   String?   @map("first_name")
-    lastName    String?   @map("last_name")
-    country     String?
-    city        String?
-    township    String?
-    dateOfBirth DateTime? @map("date_of_birth")
-    gender      String?
-    feedback    String?
-    isActive    Boolean   @default(true) @map("is_active")
-    createdAt   DateTime  @default(now()) @map("created_at")
-    updatedAt   DateTime  @updatedAt @map("updated_at")
+  id            String         @id @default(uuid())
+  email         String         @unique
+  username      String         @unique
+  password      String?
+  firstName     String?        @map("first_name")
+  lastName      String?        @map("last_name")
+  isActive      Boolean        @default(true) @map("is_active")
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+  phone         String?        @unique
+  googleId      String?        @unique @map("google_id")
+  city          String?
+  country       String?
+  dateOfBirth   DateTime?      @map("date_of_birth")
+  feedback      String?
+  gender        String?
+  township      String?
+  otpSessions   OtpSession[]
+  refreshTokens RefreshToken[]
 
-    // Relations
-    refreshTokens RefreshToken[]
-    otpSessions   OtpSession[]
-
-    @@map("users")
+  @@map("users")
 }
 
 model RefreshToken {
-    id        String   @id @default(uuid())
-    token     String   @unique
-    userId    String   @map("user_id")
-    expiresAt DateTime @map("expires_at")
-    createdAt DateTime @default(now()) @map("created_at")
-    isRevoked Boolean  @default(false) @map("is_revoked")
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  isRevoked Boolean  @default(false) @map("is_revoked")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    // Relations
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-    @@map("refresh_tokens")
+  @@map("refresh_tokens")
 }
 
 model OtpSession {
-    id         String   @id @default(uuid())
-    phone      String?  @map("phone")
-    email      String?  @map("email")
-    transId    String   @unique @map("trans_id")
-    userId     String?  @map("user_id")
-    otpCode    String?  @map("otp_code")
-    service    String   @default("login_otp")
-    app        String   @default("myp")
-    isVerified Boolean  @default(false) @map("is_verified")
-    expiresAt  DateTime @map("expires_at")
-    createdAt  DateTime @default(now()) @map("created_at")
-    updatedAt  DateTime @updatedAt @map("updated_at")
+  id                 String    @id @default(uuid())
+  phone              String?   @map("phone")
+  email              String?   @map("email")
+  transId            String    @unique @map("trans_id")
+  userId             String?   @map("user_id")
+  otpCode            String?   @map("otp_code")
+  service            String    @default("login_otp")
+  app                String    @default("myp")
+  isVerified         Boolean   @default(false) @map("is_verified")
+  expiresAt          DateTime  @map("expires_at")
+  createdAt          DateTime  @default(now()) @map("created_at")
+  updatedAt          DateTime  @updatedAt @map("updated_at")
+  attempt_count      Int       @default(0)
+  delivery_status    String    @default("pending")
+  last_attempt_at    DateTime?
+  sms_poh_message_id String?
+  user               User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    // Relations
-    user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-    @@index([phone])
-    @@index([email])
-    @@index([transId])
-    @@map("otp_sessions")
+  @@index([phone])
+  @@index([email])
+  @@index([transId])
+  @@index([delivery_status])
+  @@map("otp_sessions")
 }

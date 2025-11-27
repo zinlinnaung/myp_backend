@@ -1050,13 +1050,13 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    refreshTokens: number
     otpSessions: number
+    refreshTokens: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
     otpSessions?: boolean | UserCountOutputTypeCountOtpSessionsArgs
+    refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   }
 
   // Custom InputTypes
@@ -1073,15 +1073,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountRefreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RefreshTokenWhereInput
+  export type UserCountOutputTypeCountOtpSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OtpSessionWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountOtpSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OtpSessionWhereInput
+  export type UserCountOutputTypeCountRefreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RefreshTokenWhereInput
   }
 
 
@@ -1103,60 +1103,60 @@ export namespace Prisma {
     id: string | null
     email: string | null
     username: string | null
-    phone: string | null
     password: string | null
-    googleId: string | null
     firstName: string | null
     lastName: string | null
-    country: string | null
-    city: string | null
-    township: string | null
-    dateOfBirth: Date | null
-    gender: string | null
-    feedback: string | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    phone: string | null
+    googleId: string | null
+    city: string | null
+    country: string | null
+    dateOfBirth: Date | null
+    feedback: string | null
+    gender: string | null
+    township: string | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
     email: string | null
     username: string | null
-    phone: string | null
     password: string | null
-    googleId: string | null
     firstName: string | null
     lastName: string | null
-    country: string | null
-    city: string | null
-    township: string | null
-    dateOfBirth: Date | null
-    gender: string | null
-    feedback: string | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    phone: string | null
+    googleId: string | null
+    city: string | null
+    country: string | null
+    dateOfBirth: Date | null
+    feedback: string | null
+    gender: string | null
+    township: string | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     email: number
     username: number
-    phone: number
     password: number
-    googleId: number
     firstName: number
     lastName: number
-    country: number
-    city: number
-    township: number
-    dateOfBirth: number
-    gender: number
-    feedback: number
     isActive: number
     createdAt: number
     updatedAt: number
+    phone: number
+    googleId: number
+    city: number
+    country: number
+    dateOfBirth: number
+    feedback: number
+    gender: number
+    township: number
     _all: number
   }
 
@@ -1165,60 +1165,60 @@ export namespace Prisma {
     id?: true
     email?: true
     username?: true
-    phone?: true
     password?: true
-    googleId?: true
     firstName?: true
     lastName?: true
-    country?: true
-    city?: true
-    township?: true
-    dateOfBirth?: true
-    gender?: true
-    feedback?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
+    phone?: true
+    googleId?: true
+    city?: true
+    country?: true
+    dateOfBirth?: true
+    feedback?: true
+    gender?: true
+    township?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     email?: true
     username?: true
-    phone?: true
     password?: true
-    googleId?: true
     firstName?: true
     lastName?: true
-    country?: true
-    city?: true
-    township?: true
-    dateOfBirth?: true
-    gender?: true
-    feedback?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
+    phone?: true
+    googleId?: true
+    city?: true
+    country?: true
+    dateOfBirth?: true
+    feedback?: true
+    gender?: true
+    township?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     email?: true
     username?: true
-    phone?: true
     password?: true
-    googleId?: true
     firstName?: true
     lastName?: true
-    country?: true
-    city?: true
-    township?: true
-    dateOfBirth?: true
-    gender?: true
-    feedback?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
+    phone?: true
+    googleId?: true
+    city?: true
+    country?: true
+    dateOfBirth?: true
+    feedback?: true
+    gender?: true
+    township?: true
     _all?: true
   }
 
@@ -1298,20 +1298,20 @@ export namespace Prisma {
     id: string
     email: string
     username: string
-    phone: string | null
     password: string | null
-    googleId: string | null
     firstName: string | null
     lastName: string | null
-    country: string | null
-    city: string | null
-    township: string | null
-    dateOfBirth: Date | null
-    gender: string | null
-    feedback: string | null
     isActive: boolean
     createdAt: Date
     updatedAt: Date
+    phone: string | null
+    googleId: string | null
+    city: string | null
+    country: string | null
+    dateOfBirth: Date | null
+    feedback: string | null
+    gender: string | null
+    township: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1335,22 +1335,22 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     username?: boolean
-    phone?: boolean
     password?: boolean
-    googleId?: boolean
     firstName?: boolean
     lastName?: boolean
-    country?: boolean
-    city?: boolean
-    township?: boolean
-    dateOfBirth?: boolean
-    gender?: boolean
-    feedback?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
+    phone?: boolean
+    googleId?: boolean
+    city?: boolean
+    country?: boolean
+    dateOfBirth?: boolean
+    feedback?: boolean
+    gender?: boolean
+    township?: boolean
     otpSessions?: boolean | User$otpSessionsArgs<ExtArgs>
+    refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1358,26 +1358,26 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     username?: boolean
-    phone?: boolean
     password?: boolean
-    googleId?: boolean
     firstName?: boolean
     lastName?: boolean
-    country?: boolean
-    city?: boolean
-    township?: boolean
-    dateOfBirth?: boolean
-    gender?: boolean
-    feedback?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    phone?: boolean
+    googleId?: boolean
+    city?: boolean
+    country?: boolean
+    dateOfBirth?: boolean
+    feedback?: boolean
+    gender?: boolean
+    township?: boolean
   }
 
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     otpSessions?: boolean | User$otpSessionsArgs<ExtArgs>
+    refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1385,27 +1385,27 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
       otpSessions: Prisma.$OtpSessionPayload<ExtArgs>[]
+      refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
       username: string
-      phone: string | null
       password: string | null
-      googleId: string | null
       firstName: string | null
       lastName: string | null
-      country: string | null
-      city: string | null
-      township: string | null
-      dateOfBirth: Date | null
-      gender: string | null
-      feedback: string | null
       isActive: boolean
       createdAt: Date
       updatedAt: Date
+      phone: string | null
+      googleId: string | null
+      city: string | null
+      country: string | null
+      dateOfBirth: Date | null
+      feedback: string | null
+      gender: string | null
+      township: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1797,9 +1797,9 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     otpSessions<T extends User$otpSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$otpSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1832,20 +1832,20 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly username: FieldRef<"User", 'String'>
-    readonly phone: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
-    readonly googleId: FieldRef<"User", 'String'>
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
-    readonly country: FieldRef<"User", 'String'>
-    readonly city: FieldRef<"User", 'String'>
-    readonly township: FieldRef<"User", 'String'>
-    readonly dateOfBirth: FieldRef<"User", 'DateTime'>
-    readonly gender: FieldRef<"User", 'String'>
-    readonly feedback: FieldRef<"User", 'String'>
     readonly isActive: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly phone: FieldRef<"User", 'String'>
+    readonly googleId: FieldRef<"User", 'String'>
+    readonly city: FieldRef<"User", 'String'>
+    readonly country: FieldRef<"User", 'String'>
+    readonly dateOfBirth: FieldRef<"User", 'DateTime'>
+    readonly feedback: FieldRef<"User", 'String'>
+    readonly gender: FieldRef<"User", 'String'>
+    readonly township: FieldRef<"User", 'String'>
   }
     
 
@@ -2164,26 +2164,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.refreshTokens
-   */
-  export type User$refreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RefreshToken
-     */
-    select?: RefreshTokenSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RefreshTokenInclude<ExtArgs> | null
-    where?: RefreshTokenWhereInput
-    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
-    cursor?: RefreshTokenWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
-  }
-
-  /**
    * User.otpSessions
    */
   export type User$otpSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2201,6 +2181,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OtpSessionScalarFieldEnum | OtpSessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.refreshTokens
+   */
+  export type User$refreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    where?: RefreshTokenWhereInput
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    cursor?: RefreshTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
   }
 
   /**
@@ -3185,8 +3185,18 @@ export namespace Prisma {
 
   export type AggregateOtpSession = {
     _count: OtpSessionCountAggregateOutputType | null
+    _avg: OtpSessionAvgAggregateOutputType | null
+    _sum: OtpSessionSumAggregateOutputType | null
     _min: OtpSessionMinAggregateOutputType | null
     _max: OtpSessionMaxAggregateOutputType | null
+  }
+
+  export type OtpSessionAvgAggregateOutputType = {
+    attempt_count: number | null
+  }
+
+  export type OtpSessionSumAggregateOutputType = {
+    attempt_count: number | null
   }
 
   export type OtpSessionMinAggregateOutputType = {
@@ -3202,6 +3212,10 @@ export namespace Prisma {
     expiresAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    attempt_count: number | null
+    delivery_status: string | null
+    last_attempt_at: Date | null
+    sms_poh_message_id: string | null
   }
 
   export type OtpSessionMaxAggregateOutputType = {
@@ -3217,6 +3231,10 @@ export namespace Prisma {
     expiresAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    attempt_count: number | null
+    delivery_status: string | null
+    last_attempt_at: Date | null
+    sms_poh_message_id: string | null
   }
 
   export type OtpSessionCountAggregateOutputType = {
@@ -3232,9 +3250,21 @@ export namespace Prisma {
     expiresAt: number
     createdAt: number
     updatedAt: number
+    attempt_count: number
+    delivery_status: number
+    last_attempt_at: number
+    sms_poh_message_id: number
     _all: number
   }
 
+
+  export type OtpSessionAvgAggregateInputType = {
+    attempt_count?: true
+  }
+
+  export type OtpSessionSumAggregateInputType = {
+    attempt_count?: true
+  }
 
   export type OtpSessionMinAggregateInputType = {
     id?: true
@@ -3249,6 +3279,10 @@ export namespace Prisma {
     expiresAt?: true
     createdAt?: true
     updatedAt?: true
+    attempt_count?: true
+    delivery_status?: true
+    last_attempt_at?: true
+    sms_poh_message_id?: true
   }
 
   export type OtpSessionMaxAggregateInputType = {
@@ -3264,6 +3298,10 @@ export namespace Prisma {
     expiresAt?: true
     createdAt?: true
     updatedAt?: true
+    attempt_count?: true
+    delivery_status?: true
+    last_attempt_at?: true
+    sms_poh_message_id?: true
   }
 
   export type OtpSessionCountAggregateInputType = {
@@ -3279,6 +3317,10 @@ export namespace Prisma {
     expiresAt?: true
     createdAt?: true
     updatedAt?: true
+    attempt_count?: true
+    delivery_status?: true
+    last_attempt_at?: true
+    sms_poh_message_id?: true
     _all?: true
   }
 
@@ -3320,6 +3362,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: OtpSessionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OtpSessionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: OtpSessionMinAggregateInputType
@@ -3350,6 +3404,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: OtpSessionCountAggregateInputType | true
+    _avg?: OtpSessionAvgAggregateInputType
+    _sum?: OtpSessionSumAggregateInputType
     _min?: OtpSessionMinAggregateInputType
     _max?: OtpSessionMaxAggregateInputType
   }
@@ -3367,7 +3423,13 @@ export namespace Prisma {
     expiresAt: Date
     createdAt: Date
     updatedAt: Date
+    attempt_count: number
+    delivery_status: string
+    last_attempt_at: Date | null
+    sms_poh_message_id: string | null
     _count: OtpSessionCountAggregateOutputType | null
+    _avg: OtpSessionAvgAggregateOutputType | null
+    _sum: OtpSessionSumAggregateOutputType | null
     _min: OtpSessionMinAggregateOutputType | null
     _max: OtpSessionMaxAggregateOutputType | null
   }
@@ -3399,6 +3461,10 @@ export namespace Prisma {
     expiresAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    attempt_count?: boolean
+    delivery_status?: boolean
+    last_attempt_at?: boolean
+    sms_poh_message_id?: boolean
     user?: boolean | OtpSession$userArgs<ExtArgs>
   }, ExtArgs["result"]["otpSession"]>
 
@@ -3415,6 +3481,10 @@ export namespace Prisma {
     expiresAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    attempt_count?: boolean
+    delivery_status?: boolean
+    last_attempt_at?: boolean
+    sms_poh_message_id?: boolean
   }
 
 
@@ -3441,6 +3511,10 @@ export namespace Prisma {
       expiresAt: Date
       createdAt: Date
       updatedAt: Date
+      attempt_count: number
+      delivery_status: string
+      last_attempt_at: Date | null
+      sms_poh_message_id: string | null
     }, ExtArgs["result"]["otpSession"]>
     composites: {}
   }
@@ -3874,6 +3948,10 @@ export namespace Prisma {
     readonly expiresAt: FieldRef<"OtpSession", 'DateTime'>
     readonly createdAt: FieldRef<"OtpSession", 'DateTime'>
     readonly updatedAt: FieldRef<"OtpSession", 'DateTime'>
+    readonly attempt_count: FieldRef<"OtpSession", 'Int'>
+    readonly delivery_status: FieldRef<"OtpSession", 'String'>
+    readonly last_attempt_at: FieldRef<"OtpSession", 'DateTime'>
+    readonly sms_poh_message_id: FieldRef<"OtpSession", 'String'>
   }
     
 
@@ -4239,20 +4317,20 @@ export namespace Prisma {
     id: 'id',
     email: 'email',
     username: 'username',
-    phone: 'phone',
     password: 'password',
-    googleId: 'googleId',
     firstName: 'firstName',
     lastName: 'lastName',
-    country: 'country',
-    city: 'city',
-    township: 'township',
-    dateOfBirth: 'dateOfBirth',
-    gender: 'gender',
-    feedback: 'feedback',
     isActive: 'isActive',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    phone: 'phone',
+    googleId: 'googleId',
+    city: 'city',
+    country: 'country',
+    dateOfBirth: 'dateOfBirth',
+    feedback: 'feedback',
+    gender: 'gender',
+    township: 'township'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4282,7 +4360,11 @@ export namespace Prisma {
     isVerified: 'isVerified',
     expiresAt: 'expiresAt',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    attempt_count: 'attempt_count',
+    delivery_status: 'delivery_status',
+    last_attempt_at: 'last_attempt_at',
+    sms_poh_message_id: 'sms_poh_message_id'
   };
 
   export type OtpSessionScalarFieldEnum = (typeof OtpSessionScalarFieldEnum)[keyof typeof OtpSessionScalarFieldEnum]
@@ -4332,6 +4414,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -4342,13 +4431,6 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -4364,6 +4446,20 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
@@ -4376,44 +4472,44 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     username?: StringFilter<"User"> | string
-    phone?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
-    googleId?: StringNullableFilter<"User"> | string | null
     firstName?: StringNullableFilter<"User"> | string | null
     lastName?: StringNullableFilter<"User"> | string | null
-    country?: StringNullableFilter<"User"> | string | null
-    city?: StringNullableFilter<"User"> | string | null
-    township?: StringNullableFilter<"User"> | string | null
-    dateOfBirth?: DateTimeNullableFilter<"User"> | Date | string | null
-    gender?: StringNullableFilter<"User"> | string | null
-    feedback?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    refreshTokens?: RefreshTokenListRelationFilter
+    phone?: StringNullableFilter<"User"> | string | null
+    googleId?: StringNullableFilter<"User"> | string | null
+    city?: StringNullableFilter<"User"> | string | null
+    country?: StringNullableFilter<"User"> | string | null
+    dateOfBirth?: DateTimeNullableFilter<"User"> | Date | string | null
+    feedback?: StringNullableFilter<"User"> | string | null
+    gender?: StringNullableFilter<"User"> | string | null
+    township?: StringNullableFilter<"User"> | string | null
     otpSessions?: OtpSessionListRelationFilter
+    refreshTokens?: RefreshTokenListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
     username?: SortOrder
-    phone?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
-    googleId?: SortOrderInput | SortOrder
     firstName?: SortOrderInput | SortOrder
     lastName?: SortOrderInput | SortOrder
-    country?: SortOrderInput | SortOrder
-    city?: SortOrderInput | SortOrder
-    township?: SortOrderInput | SortOrder
-    dateOfBirth?: SortOrderInput | SortOrder
-    gender?: SortOrderInput | SortOrder
-    feedback?: SortOrderInput | SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    refreshTokens?: RefreshTokenOrderByRelationAggregateInput
+    phone?: SortOrderInput | SortOrder
+    googleId?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    dateOfBirth?: SortOrderInput | SortOrder
+    feedback?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
+    township?: SortOrderInput | SortOrder
     otpSessions?: OtpSessionOrderByRelationAggregateInput
+    refreshTokens?: RefreshTokenOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4428,37 +4524,37 @@ export namespace Prisma {
     password?: StringNullableFilter<"User"> | string | null
     firstName?: StringNullableFilter<"User"> | string | null
     lastName?: StringNullableFilter<"User"> | string | null
-    country?: StringNullableFilter<"User"> | string | null
-    city?: StringNullableFilter<"User"> | string | null
-    township?: StringNullableFilter<"User"> | string | null
-    dateOfBirth?: DateTimeNullableFilter<"User"> | Date | string | null
-    gender?: StringNullableFilter<"User"> | string | null
-    feedback?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    refreshTokens?: RefreshTokenListRelationFilter
+    city?: StringNullableFilter<"User"> | string | null
+    country?: StringNullableFilter<"User"> | string | null
+    dateOfBirth?: DateTimeNullableFilter<"User"> | Date | string | null
+    feedback?: StringNullableFilter<"User"> | string | null
+    gender?: StringNullableFilter<"User"> | string | null
+    township?: StringNullableFilter<"User"> | string | null
     otpSessions?: OtpSessionListRelationFilter
+    refreshTokens?: RefreshTokenListRelationFilter
   }, "id" | "email" | "username" | "phone" | "googleId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
     username?: SortOrder
-    phone?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
-    googleId?: SortOrderInput | SortOrder
     firstName?: SortOrderInput | SortOrder
     lastName?: SortOrderInput | SortOrder
-    country?: SortOrderInput | SortOrder
-    city?: SortOrderInput | SortOrder
-    township?: SortOrderInput | SortOrder
-    dateOfBirth?: SortOrderInput | SortOrder
-    gender?: SortOrderInput | SortOrder
-    feedback?: SortOrderInput | SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    googleId?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    dateOfBirth?: SortOrderInput | SortOrder
+    feedback?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
+    township?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -4471,20 +4567,20 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     username?: StringWithAggregatesFilter<"User"> | string
-    phone?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
-    googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
     firstName?: StringNullableWithAggregatesFilter<"User"> | string | null
     lastName?: StringNullableWithAggregatesFilter<"User"> | string | null
-    country?: StringNullableWithAggregatesFilter<"User"> | string | null
-    city?: StringNullableWithAggregatesFilter<"User"> | string | null
-    township?: StringNullableWithAggregatesFilter<"User"> | string | null
-    dateOfBirth?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-    gender?: StringNullableWithAggregatesFilter<"User"> | string | null
-    feedback?: StringNullableWithAggregatesFilter<"User"> | string | null
     isActive?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    phone?: StringNullableWithAggregatesFilter<"User"> | string | null
+    googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    city?: StringNullableWithAggregatesFilter<"User"> | string | null
+    country?: StringNullableWithAggregatesFilter<"User"> | string | null
+    dateOfBirth?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    feedback?: StringNullableWithAggregatesFilter<"User"> | string | null
+    gender?: StringNullableWithAggregatesFilter<"User"> | string | null
+    township?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type RefreshTokenWhereInput = {
@@ -4563,6 +4659,10 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"OtpSession"> | Date | string
     createdAt?: DateTimeFilter<"OtpSession"> | Date | string
     updatedAt?: DateTimeFilter<"OtpSession"> | Date | string
+    attempt_count?: IntFilter<"OtpSession"> | number
+    delivery_status?: StringFilter<"OtpSession"> | string
+    last_attempt_at?: DateTimeNullableFilter<"OtpSession"> | Date | string | null
+    sms_poh_message_id?: StringNullableFilter<"OtpSession"> | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
@@ -4579,6 +4679,10 @@ export namespace Prisma {
     expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    attempt_count?: SortOrder
+    delivery_status?: SortOrder
+    last_attempt_at?: SortOrderInput | SortOrder
+    sms_poh_message_id?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -4598,6 +4702,10 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"OtpSession"> | Date | string
     createdAt?: DateTimeFilter<"OtpSession"> | Date | string
     updatedAt?: DateTimeFilter<"OtpSession"> | Date | string
+    attempt_count?: IntFilter<"OtpSession"> | number
+    delivery_status?: StringFilter<"OtpSession"> | string
+    last_attempt_at?: DateTimeNullableFilter<"OtpSession"> | Date | string | null
+    sms_poh_message_id?: StringNullableFilter<"OtpSession"> | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id" | "transId">
 
@@ -4614,9 +4722,15 @@ export namespace Prisma {
     expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    attempt_count?: SortOrder
+    delivery_status?: SortOrder
+    last_attempt_at?: SortOrderInput | SortOrder
+    sms_poh_message_id?: SortOrderInput | SortOrder
     _count?: OtpSessionCountOrderByAggregateInput
+    _avg?: OtpSessionAvgOrderByAggregateInput
     _max?: OtpSessionMaxOrderByAggregateInput
     _min?: OtpSessionMinOrderByAggregateInput
+    _sum?: OtpSessionSumOrderByAggregateInput
   }
 
   export type OtpSessionScalarWhereWithAggregatesInput = {
@@ -4635,154 +4749,158 @@ export namespace Prisma {
     expiresAt?: DateTimeWithAggregatesFilter<"OtpSession"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"OtpSession"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"OtpSession"> | Date | string
+    attempt_count?: IntWithAggregatesFilter<"OtpSession"> | number
+    delivery_status?: StringWithAggregatesFilter<"OtpSession"> | string
+    last_attempt_at?: DateTimeNullableWithAggregatesFilter<"OtpSession"> | Date | string | null
+    sms_poh_message_id?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
   }
 
   export type UserCreateInput = {
     id?: string
     email: string
     username: string
-    phone?: string | null
     password?: string | null
-    googleId?: string | null
     firstName?: string | null
     lastName?: string | null
-    country?: string | null
-    city?: string | null
-    township?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: string | null
-    feedback?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    phone?: string | null
+    googleId?: string | null
+    city?: string | null
+    country?: string | null
+    dateOfBirth?: Date | string | null
+    feedback?: string | null
+    gender?: string | null
+    township?: string | null
     otpSessions?: OtpSessionCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     email: string
     username: string
-    phone?: string | null
     password?: string | null
-    googleId?: string | null
     firstName?: string | null
     lastName?: string | null
-    country?: string | null
-    city?: string | null
-    township?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: string | null
-    feedback?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    phone?: string | null
+    googleId?: string | null
+    city?: string | null
+    country?: string | null
+    dateOfBirth?: Date | string | null
+    feedback?: string | null
+    gender?: string | null
+    township?: string | null
     otpSessions?: OtpSessionUncheckedCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    township?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    township?: NullableStringFieldUpdateOperationsInput | string | null
     otpSessions?: OtpSessionUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    township?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    township?: NullableStringFieldUpdateOperationsInput | string | null
     otpSessions?: OtpSessionUncheckedUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
     email: string
     username: string
-    phone?: string | null
     password?: string | null
-    googleId?: string | null
     firstName?: string | null
     lastName?: string | null
-    country?: string | null
-    city?: string | null
-    township?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: string | null
-    feedback?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    phone?: string | null
+    googleId?: string | null
+    city?: string | null
+    country?: string | null
+    dateOfBirth?: Date | string | null
+    feedback?: string | null
+    gender?: string | null
+    township?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    township?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    township?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    township?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    township?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RefreshTokenCreateInput = {
@@ -4859,6 +4977,10 @@ export namespace Prisma {
     expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    attempt_count?: number
+    delivery_status?: string
+    last_attempt_at?: Date | string | null
+    sms_poh_message_id?: string | null
     user?: UserCreateNestedOneWithoutOtpSessionsInput
   }
 
@@ -4875,6 +4997,10 @@ export namespace Prisma {
     expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    attempt_count?: number
+    delivery_status?: string
+    last_attempt_at?: Date | string | null
+    sms_poh_message_id?: string | null
   }
 
   export type OtpSessionUpdateInput = {
@@ -4889,6 +5015,10 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneWithoutOtpSessionsNestedInput
   }
 
@@ -4905,6 +5035,10 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OtpSessionCreateManyInput = {
@@ -4920,6 +5054,10 @@ export namespace Prisma {
     expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    attempt_count?: number
+    delivery_status?: string
+    last_attempt_at?: Date | string | null
+    sms_poh_message_id?: string | null
   }
 
   export type OtpSessionUpdateManyMutationInput = {
@@ -4934,6 +5072,10 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OtpSessionUncheckedUpdateManyInput = {
@@ -4949,6 +5091,10 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -4981,17 +5127,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -5008,10 +5143,15 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type RefreshTokenListRelationFilter = {
-    every?: RefreshTokenWhereInput
-    some?: RefreshTokenWhereInput
-    none?: RefreshTokenWhereInput
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type OtpSessionListRelationFilter = {
@@ -5020,16 +5160,22 @@ export namespace Prisma {
     none?: OtpSessionWhereInput
   }
 
+  export type RefreshTokenListRelationFilter = {
+    every?: RefreshTokenWhereInput
+    some?: RefreshTokenWhereInput
+    none?: RefreshTokenWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
-  export type RefreshTokenOrderByRelationAggregateInput = {
+  export type OtpSessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type OtpSessionOrderByRelationAggregateInput = {
+  export type RefreshTokenOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -5037,60 +5183,60 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     username?: SortOrder
-    phone?: SortOrder
     password?: SortOrder
-    googleId?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    country?: SortOrder
-    city?: SortOrder
-    township?: SortOrder
-    dateOfBirth?: SortOrder
-    gender?: SortOrder
-    feedback?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    phone?: SortOrder
+    googleId?: SortOrder
+    city?: SortOrder
+    country?: SortOrder
+    dateOfBirth?: SortOrder
+    feedback?: SortOrder
+    gender?: SortOrder
+    township?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     username?: SortOrder
-    phone?: SortOrder
     password?: SortOrder
-    googleId?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    country?: SortOrder
-    city?: SortOrder
-    township?: SortOrder
-    dateOfBirth?: SortOrder
-    gender?: SortOrder
-    feedback?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    phone?: SortOrder
+    googleId?: SortOrder
+    city?: SortOrder
+    country?: SortOrder
+    dateOfBirth?: SortOrder
+    feedback?: SortOrder
+    gender?: SortOrder
+    township?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     username?: SortOrder
-    phone?: SortOrder
     password?: SortOrder
-    googleId?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    country?: SortOrder
-    city?: SortOrder
-    township?: SortOrder
-    dateOfBirth?: SortOrder
-    gender?: SortOrder
-    feedback?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    phone?: SortOrder
+    googleId?: SortOrder
+    city?: SortOrder
+    country?: SortOrder
+    dateOfBirth?: SortOrder
+    feedback?: SortOrder
+    gender?: SortOrder
+    township?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5129,20 +5275,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
@@ -5163,6 +5295,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type UserRelationFilter = {
@@ -5197,6 +5343,17 @@ export namespace Prisma {
     isRevoked?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type UserNullableRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -5215,6 +5372,14 @@ export namespace Prisma {
     expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    attempt_count?: SortOrder
+    delivery_status?: SortOrder
+    last_attempt_at?: SortOrder
+    sms_poh_message_id?: SortOrder
+  }
+
+  export type OtpSessionAvgOrderByAggregateInput = {
+    attempt_count?: SortOrder
   }
 
   export type OtpSessionMaxOrderByAggregateInput = {
@@ -5230,6 +5395,10 @@ export namespace Prisma {
     expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    attempt_count?: SortOrder
+    delivery_status?: SortOrder
+    last_attempt_at?: SortOrder
+    sms_poh_message_id?: SortOrder
   }
 
   export type OtpSessionMinOrderByAggregateInput = {
@@ -5245,13 +5414,30 @@ export namespace Prisma {
     expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    attempt_count?: SortOrder
+    delivery_status?: SortOrder
+    last_attempt_at?: SortOrder
+    sms_poh_message_id?: SortOrder
   }
 
-  export type RefreshTokenCreateNestedManyWithoutUserInput = {
-    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
-    createMany?: RefreshTokenCreateManyUserInputEnvelope
-    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+  export type OtpSessionSumOrderByAggregateInput = {
+    attempt_count?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type OtpSessionCreateNestedManyWithoutUserInput = {
@@ -5261,7 +5447,7 @@ export namespace Prisma {
     connect?: OtpSessionWhereUniqueInput | OtpSessionWhereUniqueInput[]
   }
 
-  export type RefreshTokenUncheckedCreateNestedManyWithoutUserInput = {
+  export type RefreshTokenCreateNestedManyWithoutUserInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
     createMany?: RefreshTokenCreateManyUserInputEnvelope
@@ -5275,16 +5461,19 @@ export namespace Prisma {
     connect?: OtpSessionWhereUniqueInput | OtpSessionWhereUniqueInput[]
   }
 
+  export type RefreshTokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
+    createMany?: RefreshTokenCreateManyUserInputEnvelope
+    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -5295,18 +5484,8 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type RefreshTokenUpdateManyWithoutUserNestedInput = {
-    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
-    upsert?: RefreshTokenUpsertWithWhereUniqueWithoutUserInput | RefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: RefreshTokenCreateManyUserInputEnvelope
-    set?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    disconnect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    delete?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    update?: RefreshTokenUpdateWithWhereUniqueWithoutUserInput | RefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: RefreshTokenUpdateManyWithWhereWithoutUserInput | RefreshTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type OtpSessionUpdateManyWithoutUserNestedInput = {
@@ -5323,7 +5502,7 @@ export namespace Prisma {
     deleteMany?: OtpSessionScalarWhereInput | OtpSessionScalarWhereInput[]
   }
 
-  export type RefreshTokenUncheckedUpdateManyWithoutUserNestedInput = {
+  export type RefreshTokenUpdateManyWithoutUserNestedInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
     upsert?: RefreshTokenUpsertWithWhereUniqueWithoutUserInput | RefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
@@ -5351,6 +5530,20 @@ export namespace Prisma {
     deleteMany?: OtpSessionScalarWhereInput | OtpSessionScalarWhereInput[]
   }
 
+  export type RefreshTokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
+    upsert?: RefreshTokenUpsertWithWhereUniqueWithoutUserInput | RefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RefreshTokenCreateManyUserInputEnvelope
+    set?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    disconnect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    delete?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    update?: RefreshTokenUpdateWithWhereUniqueWithoutUserInput | RefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RefreshTokenUpdateManyWithWhereWithoutUserInput | RefreshTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutRefreshTokensInput = {
     create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
     connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
@@ -5369,6 +5562,14 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutOtpSessionsInput, UserUncheckedCreateWithoutOtpSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutOtpSessionsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type UserUpdateOneWithoutOtpSessionsNestedInput = {
@@ -5409,17 +5610,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -5434,6 +5624,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5492,20 +5693,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
@@ -5526,6 +5713,93 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type OtpSessionCreateWithoutUserInput = {
+    id?: string
+    phone?: string | null
+    email?: string | null
+    transId: string
+    otpCode?: string | null
+    service?: string
+    app?: string
+    isVerified?: boolean
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attempt_count?: number
+    delivery_status?: string
+    last_attempt_at?: Date | string | null
+    sms_poh_message_id?: string | null
+  }
+
+  export type OtpSessionUncheckedCreateWithoutUserInput = {
+    id?: string
+    phone?: string | null
+    email?: string | null
+    transId: string
+    otpCode?: string | null
+    service?: string
+    app?: string
+    isVerified?: boolean
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attempt_count?: number
+    delivery_status?: string
+    last_attempt_at?: Date | string | null
+    sms_poh_message_id?: string | null
+  }
+
+  export type OtpSessionCreateOrConnectWithoutUserInput = {
+    where: OtpSessionWhereUniqueInput
+    create: XOR<OtpSessionCreateWithoutUserInput, OtpSessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type OtpSessionCreateManyUserInputEnvelope = {
+    data: OtpSessionCreateManyUserInput | OtpSessionCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type RefreshTokenCreateWithoutUserInput = {
@@ -5552,72 +5826,6 @@ export namespace Prisma {
   export type RefreshTokenCreateManyUserInputEnvelope = {
     data: RefreshTokenCreateManyUserInput | RefreshTokenCreateManyUserInput[]
     skipDuplicates?: boolean
-  }
-
-  export type OtpSessionCreateWithoutUserInput = {
-    id?: string
-    phone?: string | null
-    email?: string | null
-    transId: string
-    otpCode?: string | null
-    service?: string
-    app?: string
-    isVerified?: boolean
-    expiresAt: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type OtpSessionUncheckedCreateWithoutUserInput = {
-    id?: string
-    phone?: string | null
-    email?: string | null
-    transId: string
-    otpCode?: string | null
-    service?: string
-    app?: string
-    isVerified?: boolean
-    expiresAt: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type OtpSessionCreateOrConnectWithoutUserInput = {
-    where: OtpSessionWhereUniqueInput
-    create: XOR<OtpSessionCreateWithoutUserInput, OtpSessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type OtpSessionCreateManyUserInputEnvelope = {
-    data: OtpSessionCreateManyUserInput | OtpSessionCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type RefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
-    where: RefreshTokenWhereUniqueInput
-    update: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
-    create: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput>
-  }
-
-  export type RefreshTokenUpdateWithWhereUniqueWithoutUserInput = {
-    where: RefreshTokenWhereUniqueInput
-    data: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
-  }
-
-  export type RefreshTokenUpdateManyWithWhereWithoutUserInput = {
-    where: RefreshTokenScalarWhereInput
-    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type RefreshTokenScalarWhereInput = {
-    AND?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
-    OR?: RefreshTokenScalarWhereInput[]
-    NOT?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
-    id?: StringFilter<"RefreshToken"> | string
-    token?: StringFilter<"RefreshToken"> | string
-    userId?: StringFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    isRevoked?: BoolFilter<"RefreshToken"> | boolean
   }
 
   export type OtpSessionUpsertWithWhereUniqueWithoutUserInput = {
@@ -5652,26 +5860,58 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"OtpSession"> | Date | string
     createdAt?: DateTimeFilter<"OtpSession"> | Date | string
     updatedAt?: DateTimeFilter<"OtpSession"> | Date | string
+    attempt_count?: IntFilter<"OtpSession"> | number
+    delivery_status?: StringFilter<"OtpSession"> | string
+    last_attempt_at?: DateTimeNullableFilter<"OtpSession"> | Date | string | null
+    sms_poh_message_id?: StringNullableFilter<"OtpSession"> | string | null
+  }
+
+  export type RefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: RefreshTokenWhereUniqueInput
+    update: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
+    create: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type RefreshTokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: RefreshTokenWhereUniqueInput
+    data: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RefreshTokenUpdateManyWithWhereWithoutUserInput = {
+    where: RefreshTokenScalarWhereInput
+    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RefreshTokenScalarWhereInput = {
+    AND?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+    OR?: RefreshTokenScalarWhereInput[]
+    NOT?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+    id?: StringFilter<"RefreshToken"> | string
+    token?: StringFilter<"RefreshToken"> | string
+    userId?: StringFilter<"RefreshToken"> | string
+    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    isRevoked?: BoolFilter<"RefreshToken"> | boolean
   }
 
   export type UserCreateWithoutRefreshTokensInput = {
     id?: string
     email: string
     username: string
-    phone?: string | null
     password?: string | null
-    googleId?: string | null
     firstName?: string | null
     lastName?: string | null
-    country?: string | null
-    city?: string | null
-    township?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: string | null
-    feedback?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    phone?: string | null
+    googleId?: string | null
+    city?: string | null
+    country?: string | null
+    dateOfBirth?: Date | string | null
+    feedback?: string | null
+    gender?: string | null
+    township?: string | null
     otpSessions?: OtpSessionCreateNestedManyWithoutUserInput
   }
 
@@ -5679,20 +5919,20 @@ export namespace Prisma {
     id?: string
     email: string
     username: string
-    phone?: string | null
     password?: string | null
-    googleId?: string | null
     firstName?: string | null
     lastName?: string | null
-    country?: string | null
-    city?: string | null
-    township?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: string | null
-    feedback?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    phone?: string | null
+    googleId?: string | null
+    city?: string | null
+    country?: string | null
+    dateOfBirth?: Date | string | null
+    feedback?: string | null
+    gender?: string | null
+    township?: string | null
     otpSessions?: OtpSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -5716,20 +5956,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    township?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    township?: NullableStringFieldUpdateOperationsInput | string | null
     otpSessions?: OtpSessionUpdateManyWithoutUserNestedInput
   }
 
@@ -5737,20 +5977,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    township?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    township?: NullableStringFieldUpdateOperationsInput | string | null
     otpSessions?: OtpSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -5758,20 +5998,20 @@ export namespace Prisma {
     id?: string
     email: string
     username: string
-    phone?: string | null
     password?: string | null
-    googleId?: string | null
     firstName?: string | null
     lastName?: string | null
-    country?: string | null
-    city?: string | null
-    township?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: string | null
-    feedback?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    phone?: string | null
+    googleId?: string | null
+    city?: string | null
+    country?: string | null
+    dateOfBirth?: Date | string | null
+    feedback?: string | null
+    gender?: string | null
+    township?: string | null
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
@@ -5779,20 +6019,20 @@ export namespace Prisma {
     id?: string
     email: string
     username: string
-    phone?: string | null
     password?: string | null
-    googleId?: string | null
     firstName?: string | null
     lastName?: string | null
-    country?: string | null
-    city?: string | null
-    township?: string | null
-    dateOfBirth?: Date | string | null
-    gender?: string | null
-    feedback?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    phone?: string | null
+    googleId?: string | null
+    city?: string | null
+    country?: string | null
+    dateOfBirth?: Date | string | null
+    feedback?: string | null
+    gender?: string | null
+    township?: string | null
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -5816,20 +6056,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    township?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    township?: NullableStringFieldUpdateOperationsInput | string | null
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
@@ -5837,29 +6077,21 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    township?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    township?: NullableStringFieldUpdateOperationsInput | string | null
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type RefreshTokenCreateManyUserInput = {
-    id?: string
-    token: string
-    expiresAt: Date | string
-    createdAt?: Date | string
-    isRevoked?: boolean
   }
 
   export type OtpSessionCreateManyUserInput = {
@@ -5874,6 +6106,72 @@ export namespace Prisma {
     expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    attempt_count?: number
+    delivery_status?: string
+    last_attempt_at?: Date | string | null
+    sms_poh_message_id?: string | null
+  }
+
+  export type RefreshTokenCreateManyUserInput = {
+    id?: string
+    token: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    isRevoked?: boolean
+  }
+
+  export type OtpSessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    transId?: StringFieldUpdateOperationsInput | string
+    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
+    service?: StringFieldUpdateOperationsInput | string
+    app?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OtpSessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    transId?: StringFieldUpdateOperationsInput | string
+    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
+    service?: StringFieldUpdateOperationsInput | string
+    app?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OtpSessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    transId?: StringFieldUpdateOperationsInput | string
+    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
+    service?: StringFieldUpdateOperationsInput | string
+    app?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RefreshTokenUpdateWithoutUserInput = {
@@ -5898,48 +6196,6 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isRevoked?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type OtpSessionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    transId?: StringFieldUpdateOperationsInput | string
-    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
-    service?: StringFieldUpdateOperationsInput | string
-    app?: StringFieldUpdateOperationsInput | string
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OtpSessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    transId?: StringFieldUpdateOperationsInput | string
-    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
-    service?: StringFieldUpdateOperationsInput | string
-    app?: StringFieldUpdateOperationsInput | string
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OtpSessionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    transId?: StringFieldUpdateOperationsInput | string
-    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
-    service?: StringFieldUpdateOperationsInput | string
-    app?: StringFieldUpdateOperationsInput | string
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

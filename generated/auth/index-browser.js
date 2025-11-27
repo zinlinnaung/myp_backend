@@ -123,20 +123,20 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   username: 'username',
-  phone: 'phone',
   password: 'password',
-  googleId: 'googleId',
   firstName: 'firstName',
   lastName: 'lastName',
-  country: 'country',
-  city: 'city',
-  township: 'township',
-  dateOfBirth: 'dateOfBirth',
-  gender: 'gender',
-  feedback: 'feedback',
   isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  phone: 'phone',
+  googleId: 'googleId',
+  city: 'city',
+  country: 'country',
+  dateOfBirth: 'dateOfBirth',
+  feedback: 'feedback',
+  gender: 'gender',
+  township: 'township'
 };
 
 exports.Prisma.RefreshTokenScalarFieldEnum = {
@@ -160,7 +160,11 @@ exports.Prisma.OtpSessionScalarFieldEnum = {
   isVerified: 'isVerified',
   expiresAt: 'expiresAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  attempt_count: 'attempt_count',
+  delivery_status: 'delivery_status',
+  last_attempt_at: 'last_attempt_at',
+  sms_poh_message_id: 'sms_poh_message_id'
 };
 
 exports.Prisma.SortOrder = {

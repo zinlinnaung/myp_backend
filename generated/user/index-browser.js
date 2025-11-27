@@ -123,23 +123,23 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   username: 'username',
-  password: 'password',
   firstName: 'firstName',
   lastName: 'lastName',
-  phone: 'phone',
   avatar: 'avatar',
   bio: 'bio',
   location: 'location',
   website: 'website',
-  country: 'country',
-  city: 'city',
-  township: 'township',
-  dateOfBirth: 'dateOfBirth',
-  gender: 'gender',
-  feedback: 'feedback',
   isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  password: 'password',
+  phone: 'phone',
+  city: 'city',
+  country: 'country',
+  dateOfBirth: 'dateOfBirth',
+  feedback: 'feedback',
+  gender: 'gender',
+  township: 'township'
 };
 
 exports.Prisma.UserEventScalarFieldEnum = {

@@ -1,47 +1,44 @@
-// User Service Database Schema
 generator client {
-    provider = "prisma-client-js"
-    output   = "../../../generated/user"
+  provider = "prisma-client-js"
+  output   = "../../../generated/user"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("USER_DATABASE_URL")
+  provider = "postgresql"
+  url      = env("USER_DATABASE_URL")
 }
 
-// User service manages detailed user profiles
 model User {
-    id          String    @id @default(uuid())
-    email       String?   @unique
-    username    String    @unique
-    password    String    @default("")
-    firstName   String?   @map("first_name")
-    lastName    String?   @map("last_name")
-    phone       String?   @unique
-    avatar      String?
-    bio         String?
-    location    String?
-    website     String?
-    country     String?
-    city        String?
-    township    String?
-    dateOfBirth DateTime? @map("date_of_birth")
-    gender      String?
-    feedback    String?
-    isActive    Boolean   @default(true) @map("is_active")
-    createdAt   DateTime  @default(now()) @map("created_at")
-    updatedAt   DateTime  @updatedAt @map("updated_at")
+  id          String    @id @default(uuid())
+  email       String?   @unique
+  username    String    @unique
+  firstName   String?   @map("first_name")
+  lastName    String?   @map("last_name")
+  avatar      String?
+  bio         String?
+  location    String?
+  website     String?
+  isActive    Boolean   @default(true) @map("is_active")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  password    String    @default("")
+  phone       String?   @unique
+  city        String?
+  country     String?
+  dateOfBirth DateTime? @map("date_of_birth")
+  feedback    String?
+  gender      String?
+  township    String?
 
-    @@map("users")
+  @@map("users")
 }
 
-// User service maintains user events for audit
 model UserEvent {
-    id        String   @id @default(uuid())
-    userId    String   @map("user_id")
-    eventType String   @map("event_type")
-    eventData Json?    @map("event_data")
-    createdAt DateTime @default(now()) @map("created_at")
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  eventType String   @map("event_type")
+  eventData Json?    @map("event_data")
+  createdAt DateTime @default(now()) @map("created_at")
 
-    @@map("user_events")
+  @@map("user_events")
 }
