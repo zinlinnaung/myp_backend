@@ -15,6 +15,7 @@ import { CourseModule } from './Course/course.module';
 import { SubCategoryModule } from './SubCategory/sub-category.module';
 import { CategoryModule } from './Category/category.module';
 import { AuthModule } from './Auth/auth.module';
+import { HomeCategoryModule } from './HomeCategory/home-category.module';
 // import { AtGuard } from './common/guards';
 // import { AuthenticationModule } from './authentication/authentication.module';
 // import { UserModule } from './user/user.module';
@@ -44,6 +45,7 @@ import { AuthModule } from './Auth/auth.module';
     UserModule,
     AuthModule,
     SubCategoryModule,
+    HomeCategoryModule,
 
     // MlcheckerModule,
     // CmsModule,
