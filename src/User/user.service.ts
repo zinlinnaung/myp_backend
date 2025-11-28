@@ -13,7 +13,7 @@ export class UserService {
   async create(dto: CreateUserDto) {
     // Check unique email
     if (dto.email) {
-      const emailExists = await this.prisma.user.user.findFirst({
+      const emailExists = await this.prisma.auth.user.findFirst({
         where: { email: dto.email },
       });
       if (emailExists) {
@@ -22,7 +22,7 @@ export class UserService {
     }
 
     // Check unique username
-    const usernameExists = await this.prisma.user.user.findFirst({
+    const usernameExists = await this.prisma.auth.user.findFirst({
       where: { username: dto.username },
     });
     if (usernameExists) {
@@ -31,7 +31,7 @@ export class UserService {
 
     // Check unique phone
     if (dto.phone) {
-      const phoneExists = await this.prisma.user.user.findFirst({
+      const phoneExists = await this.prisma.auth.user.findFirst({
         where: { phone: dto.phone },
       });
       if (phoneExists) {
@@ -39,17 +39,17 @@ export class UserService {
       }
     }
 
-    return this.prisma.user.user.create({
+    return this.prisma.auth.user.create({
       data: dto,
     });
   }
 
   async findAll() {
-    return this.prisma.user.user.findMany();
+    return this.prisma.auth.user.findMany();
   }
 
   async findOne(id: string) {
-    const user = await this.prisma.user.user.findUnique({
+    const user = await this.prisma.auth.user.findUnique({
       where: { id },
     });
 
@@ -63,7 +63,7 @@ export class UserService {
 
     // check unique email
     if (dto.email) {
-      const emailExists = await this.prisma.user.user.findFirst({
+      const emailExists = await this.prisma.auth.user.findFirst({
         where: { email: dto.email, NOT: { id } },
       });
       if (emailExists) {
@@ -73,7 +73,7 @@ export class UserService {
 
     // check unique username
     if (dto.username) {
-      const usernameExists = await this.prisma.user.user.findFirst({
+      const usernameExists = await this.prisma.auth.user.findFirst({
         where: { username: dto.username, NOT: { id } },
       });
       if (usernameExists) {
@@ -83,7 +83,7 @@ export class UserService {
 
     // check unique phone
     if (dto.phone) {
-      const phoneExists = await this.prisma.user.user.findFirst({
+      const phoneExists = await this.prisma.auth.user.findFirst({
         where: { phone: dto.phone, NOT: { id } },
       });
       if (phoneExists) {
@@ -91,7 +91,7 @@ export class UserService {
       }
     }
 
-    return this.prisma.user.user.update({
+    return this.prisma.auth.user.update({
       where: { id },
       data: dto,
     });
@@ -100,7 +100,7 @@ export class UserService {
   async remove(id: string) {
     await this.findOne(id);
 
-    return this.prisma.user.user.delete({
+    return this.prisma.auth.user.delete({
       where: { id },
     });
   }
@@ -108,7 +108,7 @@ export class UserService {
   async deactivate(id: string) {
     await this.findOne(id);
 
-    return this.prisma.user.user.update({
+    return this.prisma.auth.user.update({
       where: { id },
       data: { isActive: false },
     });
