@@ -51,7 +51,28 @@ export class HomeCategoryService {
   async updateCategory(id: string, dto: UpdateHomeCategoryDto) {
     return this.prisma.course.homeCategory.update({
       where: { id },
-      data: { name: dto.name },
+      data: {
+        name: dto.name,
+
+        // Update items when itemIds is sent
+        items: dto.itemIds
+          ? {
+              // Remove items not in dto.itemIds
+              deleteMany: {
+                courseId: {
+                  notIn: dto.itemIds,
+                },
+              },
+
+              // Add new items that don't exist
+              create: dto.itemIds.map((courseId) => ({
+                courseId,
+                type: 'NORMAL', // or dto.type if dynamic
+              })),
+            }
+          : undefined,
+      },
+      include: { items: true },
     });
   }
 
