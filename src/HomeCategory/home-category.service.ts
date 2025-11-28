@@ -49,28 +49,41 @@ export class HomeCategoryService {
   }
 
   async updateCategory(id: string, dto: UpdateHomeCategoryDto) {
+    const current = await this.prisma.course.homeCategory.findUnique({
+      where: { id },
+      include: { items: true },
+    });
+
+    if (!current) {
+      throw new NotFoundException('HomeCategory not found');
+    }
+
+    const currentIds = current.items.map((i) => i.courseId);
+    const newIds = dto.itemIds ?? [];
+
+    // 1. Find removed items
+    const toDelete = currentIds.filter((id) => !newIds.includes(id));
+
+    // 2. Find new items to create
+    const toCreate = newIds.filter((id) => !currentIds.includes(id));
+
     return this.prisma.course.homeCategory.update({
       where: { id },
       data: {
         name: dto.name,
 
-        // Update items when itemIds is sent
-        items: dto.itemIds
-          ? {
-              // Remove items not in dto.itemIds
-              deleteMany: {
-                courseId: {
-                  notIn: dto.itemIds,
-                },
-              },
+        items: {
+          // remove old relations
+          deleteMany: {
+            courseId: { in: toDelete },
+          },
 
-              // Add new items that don't exist
-              create: dto.itemIds.map((courseId) => ({
-                courseId,
-                type: 'NORMAL', // or dto.type if dynamic
-              })),
-            }
-          : undefined,
+          // add new ones
+          create: toCreate.map((courseId) => ({
+            courseId,
+            type: 'NORMAL',
+          })),
+        },
       },
       include: { items: true },
     });
