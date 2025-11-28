@@ -1,40 +1,6 @@
 version: "3.9"
 
 services:
-  # Auth DB
-  auth_db:
-    image: postgres:15
-    container_name: auth_db
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root123
-      POSTGRES_DB: auth_db
-    networks:
-      - app_network
-
-  # Course DB
-  course_db:
-    image: postgres:15
-    container_name: course_db
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root123
-      POSTGRES_DB: course_db
-    networks:
-      - app_network
-
-  # User DB
-  user_db:
-    image: postgres:15
-    container_name: user_db
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root123
-      POSTGRES_DB: user_db
-    networks:
-      - app_network
-
-  # Your App
   app:
     build:
       context: .
@@ -45,10 +11,8 @@ services:
       - .env
     networks:
       - app_network
-    depends_on:
-      - auth_db
-      - course_db
-      - user_db
+    # No depends_on because DBs are external
+    restart: unless-stopped
 
 networks:
   app_network:
