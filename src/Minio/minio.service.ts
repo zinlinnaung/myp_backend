@@ -1,31 +1,72 @@
 import { Injectable } from '@nestjs/common';
 import { Client } from 'minio';
-import { Express } from 'express';
 
 @Injectable()
 export class MinioService {
-  private readonly client: Client;
+  private readonly bucketName = 'dev'; // Correct bucket
 
-  constructor() {
-    this.client = new Client({
-      endPoint: process.env.MINIO_END_POINT!,
-      port: Number(process.env.MINIO_PORT),
-      useSSL: process.env.MINIO_USE_SSL === 'true',
-      accessKey: process.env.MINIO_ACCESS_KEY!,
-      secretKey: process.env.MINIO_SECRET_KEY!,
-    });
+  private readonly client = new Client({
+    endPoint: 'mmyouth-minio.bitmyanmar.info',
+    port: 443,
+    useSSL: true,
+    accessKey: 'minio',
+    secretKey: '1XUKd8CCtASzGvtn',
+  });
+
+  async uploadImage(
+    fileBuffer: Buffer,
+    fileName: string,
+    folder: string,
+    isPublic: boolean,
+  ): Promise<string> {
+    // Check if bucket exists
+    const exists = await this.client.bucketExists(this.bucketName);
+    if (!exists) {
+      await this.client.makeBucket(this.bucketName);
+    }
+
+    console.log(isPublic);
+
+    // Build object key
+    const baseFolder = isPublic ? 'public' : 'private';
+    const objectName = `${baseFolder}/${folder}/${fileName}`; // <-- folder structure
+
+    await this.client.putObject(
+      this.bucketName,
+      objectName,
+      fileBuffer,
+      fileBuffer.length,
+      {
+        'Content-Type': fileName.endsWith('.png')
+          ? 'image/png'
+          : 'application/octet-stream',
+      },
+    );
+
+    if (isPublic) {
+      // Public URL
+      return `https://mmyouth-minio.bitmyanmar.info/${this.bucketName}/${objectName}`;
+    }
+
+    // Private = pre-signed URL (expires in 24 hours)
+    return this.client.presignedGetObject(
+      this.bucketName,
+      objectName,
+      24 * 60 * 60,
+    );
   }
 
-  async upload(file: Express.Multer.File, bucket: string, folder?: string) {
-    const name = `${Date.now()}-${file.originalname}`;
-
-    const objectName = folder ? `${folder}/${name}` : name;
-
-    await this.client.putObject(bucket, objectName, file.buffer);
-
-    return {
-      fileName: objectName,
-      url: `https://${process.env.MINIO_END_POINT}/${bucket}/${objectName}`,
-    };
+  // Optional: generate signed URL for existing private object
+  async getPrivateFileUrl(
+    folder: string,
+    fileName: string,
+    expiresInSec = 3600,
+  ) {
+    const objectName = `private/${folder}/${fileName}`;
+    return this.client.presignedGetObject(
+      this.bucketName,
+      objectName,
+      expiresInSec,
+    );
   }
 }
