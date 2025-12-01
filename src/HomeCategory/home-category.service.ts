@@ -8,7 +8,6 @@ import {
   CreateHomeCategoryItemDto,
   UpdateHomeCategoryItemDto,
 } from './dto/home-category-item.dto';
-import { CourseType } from 'generated/course';
 
 @Injectable()
 export class HomeCategoryService {

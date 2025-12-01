@@ -1,4 +1,3 @@
-// Course Service Database Schema
 generator client {
   provider = "prisma-client-js"
   output   = "../../../generated/course"
@@ -9,7 +8,6 @@ datasource db {
   url      = env("COURSE_DATABASE_URL")
 }
 
-// Post service only stores author ID reference, not full user data
 model Post {
   id          String    @id @default(uuid())
   title       String
@@ -26,7 +24,6 @@ model Post {
   @@map("posts")
 }
 
-// Post service events for analytics
 model PostEvent {
   id        String   @id @default(uuid())
   postId    String   @map("post_id")
@@ -38,7 +35,6 @@ model PostEvent {
   @@map("post_events")
 }
 
-// Post view analytics
 model PostView {
   id        String   @id @default(uuid())
   postId    String   @map("post_id")
@@ -60,13 +56,13 @@ model HomeSlider {
 model Category {
   id            String        @id @default(uuid())
   name          String
-  isDeleted     Boolean       @default(false)
-  type          CategoryType
   createdAt     DateTime      @default(now()) @map("created_at")
   updatedAt     DateTime      @default(now()) @map("updated_at")
-  subCategories SubCategory[]
-  courses       Course[]
+  isDeleted     Boolean       @default(false)
+  type          CategoryType
   contents      Content[]
+  courses       Course[]
+  subCategories SubCategory[]
 
   @@map("category")
 }
@@ -75,12 +71,11 @@ model SubCategory {
   id         String   @id @default(uuid())
   name       String
   categoryId String
-  isDeleted  Boolean  @default(false)
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @default(now()) @map("updated_at")
-
-  category Category @relation(fields: [categoryId], references: [id])
-  courses  Course[]
+  isDeleted  Boolean  @default(false)
+  courses    Course[]
+  category   Category @relation(fields: [categoryId], references: [id])
 
   @@map("sub_category")
 }
@@ -88,54 +83,56 @@ model SubCategory {
 model HomeCategory {
   id        String             @id @default(uuid())
   name      String
-  isDeleted Boolean            @default(false)
   createdAt DateTime           @default(now()) @map("created_at")
   updatedAt DateTime           @default(now()) @map("updated_at")
+  isDeleted Boolean            @default(false)
   items     HomeCategoryItem[]
 
   @@map("home_category")
 }
 
 model HomeCategoryItem {
-  id             String     @id @default(uuid())
+  id             String       @id @default(uuid())
   homeCategoryId String
-  courseId       String     @db.Uuid
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @default(now()) @map("updated_at")
   type           CourseType
-  createdAt      DateTime   @default(now()) @map("created_at")
-  updatedAt      DateTime   @default(now()) @map("updated_at")
+  courseId       String       @db.Uuid
+  isDeleted      Boolean      @default(false)
+  course         Course       @relation(fields: [courseId], references: [id])
+  homeCategory   HomeCategory @relation(fields: [homeCategoryId], references: [id])
 
-  homeCategory HomeCategory @relation(fields: [homeCategoryId], references: [id])
-  course       Course       @relation(fields: [courseId], references: [id])
-
+  @@unique([homeCategoryId, courseId])
   @@map("home_category_item")
 }
 
 model Course {
-  id             String   @id @default(uuid()) @db.Uuid
-  image          String?
-  name           String
-  description    String?
-  duration       Int?
-  videoCount     Int      @default(0)
-  enrolledCount  Int      @default(0)
-  isDeleted      Boolean  @default(false)
-  rating         Float    @default(0)
-  date           DateTime @default(now())
-  parentCourseId String?  @db.Uuid
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  categoryId     String?
-  subCategoryId  String?
-
+  name             String
+  image            String?
+  enrolledCount    Int                @default(0)
+  date             DateTime           @default(now())
+  categoryId       String?
+  subCategoryId    String?
+  isDeleted        Boolean            @default(false)
+  createdAt        DateTime           @default(now())
+  description      String?
+  duration         Int?
+  parentCourseId   String?            @db.Uuid
+  updatedAt        DateTime           @updatedAt
+  videoCount       Int                @default(0)
+  id               String             @id @default(uuid()) @map("id") @db.Uuid
+  rating           Float              @default(0)
+  previewImage     String?
+  previewVideo     String?
+  ratings          Rating[]
+  users            UserOnCourse[]
+  Category         Category?          @relation(fields: [categoryId], references: [id])
   parentCourse     Course?            @relation("CourseToParent", fields: [parentCourseId], references: [id])
   subCourses       Course[]           @relation("CourseToParent")
-  users            UserOnCourse[]
-  category         Category?          @relation(fields: [categoryId], references: [id])
-  subCategory      SubCategory?       @relation(fields: [subCategoryId], references: [id])
-  HomeCategoryItem HomeCategoryItem[]
+  SubCategory      SubCategory?       @relation(fields: [subCategoryId], references: [id])
   CourseSection    CourseSection[]
+  HomeCategoryItem HomeCategoryItem[]
   reviews          Review[]
-  ratings          Rating[]
 
   @@map("course")
 }
@@ -147,36 +144,34 @@ model UserOnCourse {
   status    CourseStatus @default(IN_PROGRESS)
   createdAt DateTime     @default(now()) @map("created_at")
   updatedAt DateTime     @default(now()) @map("updated_at")
-  course    Course       @relation(fields: [courseId], references: [id])
+  Course    Course       @relation(fields: [courseId], references: [id])
 }
 
 model CourseSection {
-  id          String   @id @default(uuid())
+  id          String     @id @default(uuid())
   title       String
   description String?
-  courseId    String   @map("course_id") @db.Uuid
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-
-  course     Course     @relation(fields: [courseId], references: [id])
-  activities Activity[]
+  courseId    String     @map("course_id") @db.Uuid
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+  activities  Activity[]
+  course      Course     @relation(fields: [courseId], references: [id])
 
   @@map("course_section")
 }
 
 model Activity {
-  id        String       @id @default(uuid())
+  id        String        @id @default(uuid())
   title     String
-  type      ActivityType @default(LESSON)
+  type      ActivityType  @default(URL)
   content   String?
-  videoUrl  String?      @map("video_url")
+  videoUrl  String?       @map("video_url")
   duration  Int?
-  order     Int          @default(0)
-  sectionId String       @map("section_id")
-  createdAt DateTime     @default(now()) @map("created_at")
-  updatedAt DateTime     @updatedAt @map("updated_at")
-
-  section CourseSection @relation(fields: [sectionId], references: [id])
+  order     Int           @default(0)
+  sectionId String        @map("section_id")
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+  section   CourseSection @relation(fields: [sectionId], references: [id])
 
   @@map("activity")
 }
@@ -188,8 +183,7 @@ model Review {
   text      String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-
-  course Course @relation(fields: [courseId], references: [id])
+  Course    Course   @relation(fields: [courseId], references: [id])
 
   @@map("review")
 }
@@ -202,8 +196,7 @@ model Rating {
   comment   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  course Course @relation(fields: [courseId], references: [id])
+  course    Course   @relation(fields: [courseId], references: [id])
 }
 
 model Faq {
@@ -217,36 +210,32 @@ model Faq {
   @@map("faq")
 }
 
-// Content Types - Stores all categories of content
 model ContentType {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   name        String
   description String?
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-
-  contents Content[]
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  contents    Content[]
 
   @@map("content_types")
 }
 
-// Contents - Stores all content items (regardless of type)
 model Content {
-  id           String    @id @default(uuid())
-  typeId       String    @map("type_id")
-  categoryId   String?   @map("category_id")
+  id           String      @id @default(uuid())
+  typeId       String      @map("type_id")
   title        String
   description  String?
-  fileUrl      String?   @map("file_url")
-  thumbnailUrl String?   @map("thumbnail_url")
+  fileUrl      String?     @map("file_url")
+  thumbnailUrl String?     @map("thumbnail_url")
   author       String?
+  publishedAt  DateTime?   @map("published_at")
+  createdAt    DateTime    @default(now()) @map("created_at")
+  updatedAt    DateTime    @updatedAt @map("updated_at")
+  categoryId   String?     @map("category_id")
   content      String?
-  publishedAt  DateTime? @map("published_at")
-  createdAt    DateTime  @default(now()) @map("created_at")
-  updatedAt    DateTime  @updatedAt @map("updated_at")
-
-  type     ContentType @relation(fields: [typeId], references: [id])
-  category Category?   @relation(fields: [categoryId], references: [id])
+  category     Category?   @relation(fields: [categoryId], references: [id])
+  type         ContentType @relation(fields: [typeId], references: [id])
 
   @@map("contents")
 }
@@ -262,11 +251,10 @@ enum CourseType {
 }
 
 enum ActivityType {
-  LESSON
-  VIDEO
-  QUIZ
-  ASSIGNMENT
-  RESOURCE
+  FILE
+  H5P
+  URL
+  PAGE
 }
 
 enum CourseStatus {

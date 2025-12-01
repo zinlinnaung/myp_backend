@@ -161,54 +161,57 @@ exports.Prisma.HomeSliderScalarFieldEnum = {
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  isDeleted: 'isDeleted',
-  type: 'type',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  isDeleted: 'isDeleted',
+  type: 'type'
 };
 
 exports.Prisma.SubCategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
   categoryId: 'categoryId',
-  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  isDeleted: 'isDeleted'
 };
 
 exports.Prisma.HomeCategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  isDeleted: 'isDeleted'
 };
 
 exports.Prisma.HomeCategoryItemScalarFieldEnum = {
   id: 'id',
   homeCategoryId: 'homeCategoryId',
-  courseId: 'courseId',
-  type: 'type',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  type: 'type',
+  courseId: 'courseId',
+  isDeleted: 'isDeleted'
 };
 
 exports.Prisma.CourseScalarFieldEnum = {
-  id: 'id',
-  image: 'image',
   name: 'name',
+  image: 'image',
+  enrolledCount: 'enrolledCount',
+  date: 'date',
+  categoryId: 'categoryId',
+  subCategoryId: 'subCategoryId',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt',
   description: 'description',
   duration: 'duration',
-  videoCount: 'videoCount',
-  enrolledCount: 'enrolledCount',
-  isDeleted: 'isDeleted',
-  rating: 'rating',
-  date: 'date',
   parentCourseId: 'parentCourseId',
-  createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  categoryId: 'categoryId',
-  subCategoryId: 'subCategoryId'
+  videoCount: 'videoCount',
+  id: 'id',
+  rating: 'rating',
+  previewImage: 'previewImage',
+  previewVideo: 'previewVideo'
 };
 
 exports.Prisma.UserOnCourseScalarFieldEnum = {
@@ -281,16 +284,16 @@ exports.Prisma.ContentTypeScalarFieldEnum = {
 exports.Prisma.ContentScalarFieldEnum = {
   id: 'id',
   typeId: 'typeId',
-  categoryId: 'categoryId',
   title: 'title',
   description: 'description',
   fileUrl: 'fileUrl',
   thumbnailUrl: 'thumbnailUrl',
   author: 'author',
-  content: 'content',
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  categoryId: 'categoryId',
+  content: 'content'
 };
 
 exports.Prisma.SortOrder = {
@@ -334,11 +337,10 @@ exports.CourseStatus = exports.$Enums.CourseStatus = {
 };
 
 exports.ActivityType = exports.$Enums.ActivityType = {
-  LESSON: 'LESSON',
-  VIDEO: 'VIDEO',
-  QUIZ: 'QUIZ',
-  ASSIGNMENT: 'ASSIGNMENT',
-  RESOURCE: 'RESOURCE'
+  FILE: 'FILE',
+  H5P: 'H5P',
+  URL: 'URL',
+  PAGE: 'PAGE'
 };
 
 exports.Prisma.ModelName = {

@@ -128,11 +128,10 @@ export type CourseStatus = (typeof CourseStatus)[keyof typeof CourseStatus]
 
 
 export const ActivityType: {
-  LESSON: 'LESSON',
-  VIDEO: 'VIDEO',
-  QUIZ: 'QUIZ',
-  ASSIGNMENT: 'ASSIGNMENT',
-  RESOURCE: 'RESOURCE'
+  FILE: 'FILE',
+  H5P: 'H5P',
+  URL: 'URL',
+  PAGE: 'PAGE'
 };
 
 export type ActivityType = (typeof ActivityType)[keyof typeof ActivityType]
@@ -2310,15 +2309,15 @@ export namespace Prisma {
    */
 
   export type CategoryCountOutputType = {
-    subCategories: number
-    courses: number
     contents: number
+    courses: number
+    subCategories: number
   }
 
   export type CategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subCategories?: boolean | CategoryCountOutputTypeCountSubCategoriesArgs
-    courses?: boolean | CategoryCountOutputTypeCountCoursesArgs
     contents?: boolean | CategoryCountOutputTypeCountContentsArgs
+    courses?: boolean | CategoryCountOutputTypeCountCoursesArgs
+    subCategories?: boolean | CategoryCountOutputTypeCountSubCategoriesArgs
   }
 
   // Custom InputTypes
@@ -2335,8 +2334,8 @@ export namespace Prisma {
   /**
    * CategoryCountOutputType without action
    */
-  export type CategoryCountOutputTypeCountSubCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SubCategoryWhereInput
+  export type CategoryCountOutputTypeCountContentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContentWhereInput
   }
 
   /**
@@ -2349,8 +2348,8 @@ export namespace Prisma {
   /**
    * CategoryCountOutputType without action
    */
-  export type CategoryCountOutputTypeCountContentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ContentWhereInput
+  export type CategoryCountOutputTypeCountSubCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubCategoryWhereInput
   }
 
 
@@ -2421,21 +2420,21 @@ export namespace Prisma {
    */
 
   export type CourseCountOutputType = {
-    subCourses: number
-    users: number
-    HomeCategoryItem: number
-    CourseSection: number
-    reviews: number
     ratings: number
+    users: number
+    subCourses: number
+    CourseSection: number
+    HomeCategoryItem: number
+    reviews: number
   }
 
   export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subCourses?: boolean | CourseCountOutputTypeCountSubCoursesArgs
-    users?: boolean | CourseCountOutputTypeCountUsersArgs
-    HomeCategoryItem?: boolean | CourseCountOutputTypeCountHomeCategoryItemArgs
-    CourseSection?: boolean | CourseCountOutputTypeCountCourseSectionArgs
-    reviews?: boolean | CourseCountOutputTypeCountReviewsArgs
     ratings?: boolean | CourseCountOutputTypeCountRatingsArgs
+    users?: boolean | CourseCountOutputTypeCountUsersArgs
+    subCourses?: boolean | CourseCountOutputTypeCountSubCoursesArgs
+    CourseSection?: boolean | CourseCountOutputTypeCountCourseSectionArgs
+    HomeCategoryItem?: boolean | CourseCountOutputTypeCountHomeCategoryItemArgs
+    reviews?: boolean | CourseCountOutputTypeCountReviewsArgs
   }
 
   // Custom InputTypes
@@ -2452,8 +2451,8 @@ export namespace Prisma {
   /**
    * CourseCountOutputType without action
    */
-  export type CourseCountOutputTypeCountSubCoursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CourseWhereInput
+  export type CourseCountOutputTypeCountRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RatingWhereInput
   }
 
   /**
@@ -2466,8 +2465,8 @@ export namespace Prisma {
   /**
    * CourseCountOutputType without action
    */
-  export type CourseCountOutputTypeCountHomeCategoryItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: HomeCategoryItemWhereInput
+  export type CourseCountOutputTypeCountSubCoursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CourseWhereInput
   }
 
   /**
@@ -2480,15 +2479,15 @@ export namespace Prisma {
   /**
    * CourseCountOutputType without action
    */
-  export type CourseCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReviewWhereInput
+  export type CourseCountOutputTypeCountHomeCategoryItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HomeCategoryItemWhereInput
   }
 
   /**
    * CourseCountOutputType without action
    */
-  export type CourseCountOutputTypeCountRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RatingWhereInput
+  export type CourseCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewWhereInput
   }
 
 
@@ -6232,28 +6231,28 @@ export namespace Prisma {
   export type CategoryMinAggregateOutputType = {
     id: string | null
     name: string | null
-    isDeleted: boolean | null
-    type: $Enums.CategoryType | null
     createdAt: Date | null
     updatedAt: Date | null
+    isDeleted: boolean | null
+    type: $Enums.CategoryType | null
   }
 
   export type CategoryMaxAggregateOutputType = {
     id: string | null
     name: string | null
-    isDeleted: boolean | null
-    type: $Enums.CategoryType | null
     createdAt: Date | null
     updatedAt: Date | null
+    isDeleted: boolean | null
+    type: $Enums.CategoryType | null
   }
 
   export type CategoryCountAggregateOutputType = {
     id: number
     name: number
-    isDeleted: number
-    type: number
     createdAt: number
     updatedAt: number
+    isDeleted: number
+    type: number
     _all: number
   }
 
@@ -6261,28 +6260,28 @@ export namespace Prisma {
   export type CategoryMinAggregateInputType = {
     id?: true
     name?: true
-    isDeleted?: true
-    type?: true
     createdAt?: true
     updatedAt?: true
+    isDeleted?: true
+    type?: true
   }
 
   export type CategoryMaxAggregateInputType = {
     id?: true
     name?: true
-    isDeleted?: true
-    type?: true
     createdAt?: true
     updatedAt?: true
+    isDeleted?: true
+    type?: true
   }
 
   export type CategoryCountAggregateInputType = {
     id?: true
     name?: true
-    isDeleted?: true
-    type?: true
     createdAt?: true
     updatedAt?: true
+    isDeleted?: true
+    type?: true
     _all?: true
   }
 
@@ -6361,10 +6360,10 @@ export namespace Prisma {
   export type CategoryGroupByOutputType = {
     id: string
     name: string
-    isDeleted: boolean
-    type: $Enums.CategoryType
     createdAt: Date
     updatedAt: Date
+    isDeleted: boolean
+    type: $Enums.CategoryType
     _count: CategoryCountAggregateOutputType | null
     _min: CategoryMinAggregateOutputType | null
     _max: CategoryMaxAggregateOutputType | null
@@ -6387,30 +6386,30 @@ export namespace Prisma {
   export type CategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    isDeleted?: boolean
-    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    subCategories?: boolean | Category$subCategoriesArgs<ExtArgs>
-    courses?: boolean | Category$coursesArgs<ExtArgs>
+    isDeleted?: boolean
+    type?: boolean
     contents?: boolean | Category$contentsArgs<ExtArgs>
+    courses?: boolean | Category$coursesArgs<ExtArgs>
+    subCategories?: boolean | Category$subCategoriesArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["category"]>
 
   export type CategorySelectScalar = {
     id?: boolean
     name?: boolean
-    isDeleted?: boolean
-    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isDeleted?: boolean
+    type?: boolean
   }
 
 
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subCategories?: boolean | Category$subCategoriesArgs<ExtArgs>
-    courses?: boolean | Category$coursesArgs<ExtArgs>
     contents?: boolean | Category$contentsArgs<ExtArgs>
+    courses?: boolean | Category$coursesArgs<ExtArgs>
+    subCategories?: boolean | Category$subCategoriesArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -6418,17 +6417,17 @@ export namespace Prisma {
   export type $CategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Category"
     objects: {
-      subCategories: Prisma.$SubCategoryPayload<ExtArgs>[]
-      courses: Prisma.$CoursePayload<ExtArgs>[]
       contents: Prisma.$ContentPayload<ExtArgs>[]
+      courses: Prisma.$CoursePayload<ExtArgs>[]
+      subCategories: Prisma.$SubCategoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      isDeleted: boolean
-      type: $Enums.CategoryType
       createdAt: Date
       updatedAt: Date
+      isDeleted: boolean
+      type: $Enums.CategoryType
     }, ExtArgs["result"]["category"]>
     composites: {}
   }
@@ -6820,11 +6819,11 @@ export namespace Prisma {
   export interface Prisma__CategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    subCategories<T extends Category$subCategoriesArgs<ExtArgs> = {}>(args?: Subset<T, Category$subCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, 'findMany'> | Null>;
+    contents<T extends Category$contentsArgs<ExtArgs> = {}>(args?: Subset<T, Category$contentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     courses<T extends Category$coursesArgs<ExtArgs> = {}>(args?: Subset<T, Category$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    contents<T extends Category$contentsArgs<ExtArgs> = {}>(args?: Subset<T, Category$contentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, 'findMany'> | Null>;
+    subCategories<T extends Category$subCategoriesArgs<ExtArgs> = {}>(args?: Subset<T, Category$subCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6856,10 +6855,10 @@ export namespace Prisma {
   interface CategoryFieldRefs {
     readonly id: FieldRef<"Category", 'String'>
     readonly name: FieldRef<"Category", 'String'>
-    readonly isDeleted: FieldRef<"Category", 'Boolean'>
-    readonly type: FieldRef<"Category", 'CategoryType'>
     readonly createdAt: FieldRef<"Category", 'DateTime'>
     readonly updatedAt: FieldRef<"Category", 'DateTime'>
+    readonly isDeleted: FieldRef<"Category", 'Boolean'>
+    readonly type: FieldRef<"Category", 'CategoryType'>
   }
     
 
@@ -7178,23 +7177,23 @@ export namespace Prisma {
   }
 
   /**
-   * Category.subCategories
+   * Category.contents
    */
-  export type Category$subCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Category$contentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SubCategory
+     * Select specific fields to fetch from the Content
      */
-    select?: SubCategorySelect<ExtArgs> | null
+    select?: ContentSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SubCategoryInclude<ExtArgs> | null
-    where?: SubCategoryWhereInput
-    orderBy?: SubCategoryOrderByWithRelationInput | SubCategoryOrderByWithRelationInput[]
-    cursor?: SubCategoryWhereUniqueInput
+    include?: ContentInclude<ExtArgs> | null
+    where?: ContentWhereInput
+    orderBy?: ContentOrderByWithRelationInput | ContentOrderByWithRelationInput[]
+    cursor?: ContentWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SubCategoryScalarFieldEnum | SubCategoryScalarFieldEnum[]
+    distinct?: ContentScalarFieldEnum | ContentScalarFieldEnum[]
   }
 
   /**
@@ -7218,23 +7217,23 @@ export namespace Prisma {
   }
 
   /**
-   * Category.contents
+   * Category.subCategories
    */
-  export type Category$contentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Category$subCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Content
+     * Select specific fields to fetch from the SubCategory
      */
-    select?: ContentSelect<ExtArgs> | null
+    select?: SubCategorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ContentInclude<ExtArgs> | null
-    where?: ContentWhereInput
-    orderBy?: ContentOrderByWithRelationInput | ContentOrderByWithRelationInput[]
-    cursor?: ContentWhereUniqueInput
+    include?: SubCategoryInclude<ExtArgs> | null
+    where?: SubCategoryWhereInput
+    orderBy?: SubCategoryOrderByWithRelationInput | SubCategoryOrderByWithRelationInput[]
+    cursor?: SubCategoryWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ContentScalarFieldEnum | ContentScalarFieldEnum[]
+    distinct?: SubCategoryScalarFieldEnum | SubCategoryScalarFieldEnum[]
   }
 
   /**
@@ -7266,27 +7265,27 @@ export namespace Prisma {
     id: string | null
     name: string | null
     categoryId: string | null
-    isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    isDeleted: boolean | null
   }
 
   export type SubCategoryMaxAggregateOutputType = {
     id: string | null
     name: string | null
     categoryId: string | null
-    isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    isDeleted: boolean | null
   }
 
   export type SubCategoryCountAggregateOutputType = {
     id: number
     name: number
     categoryId: number
-    isDeleted: number
     createdAt: number
     updatedAt: number
+    isDeleted: number
     _all: number
   }
 
@@ -7295,27 +7294,27 @@ export namespace Prisma {
     id?: true
     name?: true
     categoryId?: true
-    isDeleted?: true
     createdAt?: true
     updatedAt?: true
+    isDeleted?: true
   }
 
   export type SubCategoryMaxAggregateInputType = {
     id?: true
     name?: true
     categoryId?: true
-    isDeleted?: true
     createdAt?: true
     updatedAt?: true
+    isDeleted?: true
   }
 
   export type SubCategoryCountAggregateInputType = {
     id?: true
     name?: true
     categoryId?: true
-    isDeleted?: true
     createdAt?: true
     updatedAt?: true
+    isDeleted?: true
     _all?: true
   }
 
@@ -7395,9 +7394,9 @@ export namespace Prisma {
     id: string
     name: string
     categoryId: string
-    isDeleted: boolean
     createdAt: Date
     updatedAt: Date
+    isDeleted: boolean
     _count: SubCategoryCountAggregateOutputType | null
     _min: SubCategoryMinAggregateOutputType | null
     _max: SubCategoryMaxAggregateOutputType | null
@@ -7421,11 +7420,11 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     categoryId?: boolean
-    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
+    isDeleted?: boolean
     courses?: boolean | SubCategory$coursesArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
     _count?: boolean | SubCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subCategory"]>
 
@@ -7433,15 +7432,15 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     categoryId?: boolean
-    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isDeleted?: boolean
   }
 
 
   export type SubCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
     courses?: boolean | SubCategory$coursesArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
     _count?: boolean | SubCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7449,16 +7448,16 @@ export namespace Prisma {
   export type $SubCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SubCategory"
     objects: {
-      category: Prisma.$CategoryPayload<ExtArgs>
       courses: Prisma.$CoursePayload<ExtArgs>[]
+      category: Prisma.$CategoryPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       categoryId: string
-      isDeleted: boolean
       createdAt: Date
       updatedAt: Date
+      isDeleted: boolean
     }, ExtArgs["result"]["subCategory"]>
     composites: {}
   }
@@ -7850,9 +7849,9 @@ export namespace Prisma {
   export interface Prisma__SubCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     courses<T extends SubCategory$coursesArgs<ExtArgs> = {}>(args?: Subset<T, SubCategory$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7885,9 +7884,9 @@ export namespace Prisma {
     readonly id: FieldRef<"SubCategory", 'String'>
     readonly name: FieldRef<"SubCategory", 'String'>
     readonly categoryId: FieldRef<"SubCategory", 'String'>
-    readonly isDeleted: FieldRef<"SubCategory", 'Boolean'>
     readonly createdAt: FieldRef<"SubCategory", 'DateTime'>
     readonly updatedAt: FieldRef<"SubCategory", 'DateTime'>
+    readonly isDeleted: FieldRef<"SubCategory", 'Boolean'>
   }
     
 
@@ -8253,25 +8252,25 @@ export namespace Prisma {
   export type HomeCategoryMinAggregateOutputType = {
     id: string | null
     name: string | null
-    isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    isDeleted: boolean | null
   }
 
   export type HomeCategoryMaxAggregateOutputType = {
     id: string | null
     name: string | null
-    isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    isDeleted: boolean | null
   }
 
   export type HomeCategoryCountAggregateOutputType = {
     id: number
     name: number
-    isDeleted: number
     createdAt: number
     updatedAt: number
+    isDeleted: number
     _all: number
   }
 
@@ -8279,25 +8278,25 @@ export namespace Prisma {
   export type HomeCategoryMinAggregateInputType = {
     id?: true
     name?: true
-    isDeleted?: true
     createdAt?: true
     updatedAt?: true
+    isDeleted?: true
   }
 
   export type HomeCategoryMaxAggregateInputType = {
     id?: true
     name?: true
-    isDeleted?: true
     createdAt?: true
     updatedAt?: true
+    isDeleted?: true
   }
 
   export type HomeCategoryCountAggregateInputType = {
     id?: true
     name?: true
-    isDeleted?: true
     createdAt?: true
     updatedAt?: true
+    isDeleted?: true
     _all?: true
   }
 
@@ -8376,9 +8375,9 @@ export namespace Prisma {
   export type HomeCategoryGroupByOutputType = {
     id: string
     name: string
-    isDeleted: boolean
     createdAt: Date
     updatedAt: Date
+    isDeleted: boolean
     _count: HomeCategoryCountAggregateOutputType | null
     _min: HomeCategoryMinAggregateOutputType | null
     _max: HomeCategoryMaxAggregateOutputType | null
@@ -8401,9 +8400,9 @@ export namespace Prisma {
   export type HomeCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isDeleted?: boolean
     items?: boolean | HomeCategory$itemsArgs<ExtArgs>
     _count?: boolean | HomeCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["homeCategory"]>
@@ -8411,9 +8410,9 @@ export namespace Prisma {
   export type HomeCategorySelectScalar = {
     id?: boolean
     name?: boolean
-    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isDeleted?: boolean
   }
 
 
@@ -8431,9 +8430,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      isDeleted: boolean
       createdAt: Date
       updatedAt: Date
+      isDeleted: boolean
     }, ExtArgs["result"]["homeCategory"]>
     composites: {}
   }
@@ -8857,9 +8856,9 @@ export namespace Prisma {
   interface HomeCategoryFieldRefs {
     readonly id: FieldRef<"HomeCategory", 'String'>
     readonly name: FieldRef<"HomeCategory", 'String'>
-    readonly isDeleted: FieldRef<"HomeCategory", 'Boolean'>
     readonly createdAt: FieldRef<"HomeCategory", 'DateTime'>
     readonly updatedAt: FieldRef<"HomeCategory", 'DateTime'>
+    readonly isDeleted: FieldRef<"HomeCategory", 'Boolean'>
   }
     
 
@@ -9225,28 +9224,31 @@ export namespace Prisma {
   export type HomeCategoryItemMinAggregateOutputType = {
     id: string | null
     homeCategoryId: string | null
-    courseId: string | null
-    type: $Enums.CourseType | null
     createdAt: Date | null
     updatedAt: Date | null
+    type: $Enums.CourseType | null
+    courseId: string | null
+    isDeleted: boolean | null
   }
 
   export type HomeCategoryItemMaxAggregateOutputType = {
     id: string | null
     homeCategoryId: string | null
-    courseId: string | null
-    type: $Enums.CourseType | null
     createdAt: Date | null
     updatedAt: Date | null
+    type: $Enums.CourseType | null
+    courseId: string | null
+    isDeleted: boolean | null
   }
 
   export type HomeCategoryItemCountAggregateOutputType = {
     id: number
     homeCategoryId: number
-    courseId: number
-    type: number
     createdAt: number
     updatedAt: number
+    type: number
+    courseId: number
+    isDeleted: number
     _all: number
   }
 
@@ -9254,28 +9256,31 @@ export namespace Prisma {
   export type HomeCategoryItemMinAggregateInputType = {
     id?: true
     homeCategoryId?: true
-    courseId?: true
-    type?: true
     createdAt?: true
     updatedAt?: true
+    type?: true
+    courseId?: true
+    isDeleted?: true
   }
 
   export type HomeCategoryItemMaxAggregateInputType = {
     id?: true
     homeCategoryId?: true
-    courseId?: true
-    type?: true
     createdAt?: true
     updatedAt?: true
+    type?: true
+    courseId?: true
+    isDeleted?: true
   }
 
   export type HomeCategoryItemCountAggregateInputType = {
     id?: true
     homeCategoryId?: true
-    courseId?: true
-    type?: true
     createdAt?: true
     updatedAt?: true
+    type?: true
+    courseId?: true
+    isDeleted?: true
     _all?: true
   }
 
@@ -9354,10 +9359,11 @@ export namespace Prisma {
   export type HomeCategoryItemGroupByOutputType = {
     id: string
     homeCategoryId: string
-    courseId: string
-    type: $Enums.CourseType
     createdAt: Date
     updatedAt: Date
+    type: $Enums.CourseType
+    courseId: string
+    isDeleted: boolean
     _count: HomeCategoryItemCountAggregateOutputType | null
     _min: HomeCategoryItemMinAggregateOutputType | null
     _max: HomeCategoryItemMaxAggregateOutputType | null
@@ -9380,43 +9386,46 @@ export namespace Prisma {
   export type HomeCategoryItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     homeCategoryId?: boolean
-    courseId?: boolean
-    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    homeCategory?: boolean | HomeCategoryDefaultArgs<ExtArgs>
+    type?: boolean
+    courseId?: boolean
+    isDeleted?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    homeCategory?: boolean | HomeCategoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["homeCategoryItem"]>
 
   export type HomeCategoryItemSelectScalar = {
     id?: boolean
     homeCategoryId?: boolean
-    courseId?: boolean
-    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    type?: boolean
+    courseId?: boolean
+    isDeleted?: boolean
   }
 
 
   export type HomeCategoryItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    homeCategory?: boolean | HomeCategoryDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    homeCategory?: boolean | HomeCategoryDefaultArgs<ExtArgs>
   }
 
 
   export type $HomeCategoryItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "HomeCategoryItem"
     objects: {
-      homeCategory: Prisma.$HomeCategoryPayload<ExtArgs>
       course: Prisma.$CoursePayload<ExtArgs>
+      homeCategory: Prisma.$HomeCategoryPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       homeCategoryId: string
-      courseId: string
-      type: $Enums.CourseType
       createdAt: Date
       updatedAt: Date
+      type: $Enums.CourseType
+      courseId: string
+      isDeleted: boolean
     }, ExtArgs["result"]["homeCategoryItem"]>
     composites: {}
   }
@@ -9808,9 +9817,9 @@ export namespace Prisma {
   export interface Prisma__HomeCategoryItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    homeCategory<T extends HomeCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HomeCategoryDefaultArgs<ExtArgs>>): Prisma__HomeCategoryClient<$Result.GetResult<Prisma.$HomeCategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    homeCategory<T extends HomeCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HomeCategoryDefaultArgs<ExtArgs>>): Prisma__HomeCategoryClient<$Result.GetResult<Prisma.$HomeCategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9842,10 +9851,11 @@ export namespace Prisma {
   interface HomeCategoryItemFieldRefs {
     readonly id: FieldRef<"HomeCategoryItem", 'String'>
     readonly homeCategoryId: FieldRef<"HomeCategoryItem", 'String'>
-    readonly courseId: FieldRef<"HomeCategoryItem", 'String'>
-    readonly type: FieldRef<"HomeCategoryItem", 'CourseType'>
     readonly createdAt: FieldRef<"HomeCategoryItem", 'DateTime'>
     readonly updatedAt: FieldRef<"HomeCategoryItem", 'DateTime'>
+    readonly type: FieldRef<"HomeCategoryItem", 'CourseType'>
+    readonly courseId: FieldRef<"HomeCategoryItem", 'String'>
+    readonly isDeleted: FieldRef<"HomeCategoryItem", 'Boolean'>
   }
     
 
@@ -10191,141 +10201,153 @@ export namespace Prisma {
   }
 
   export type CourseAvgAggregateOutputType = {
+    enrolledCount: number | null
     duration: number | null
     videoCount: number | null
-    enrolledCount: number | null
     rating: number | null
   }
 
   export type CourseSumAggregateOutputType = {
+    enrolledCount: number | null
     duration: number | null
     videoCount: number | null
-    enrolledCount: number | null
     rating: number | null
   }
 
   export type CourseMinAggregateOutputType = {
-    id: string | null
-    image: string | null
     name: string | null
-    description: string | null
-    duration: number | null
-    videoCount: number | null
+    image: string | null
     enrolledCount: number | null
-    isDeleted: boolean | null
-    rating: number | null
     date: Date | null
-    parentCourseId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
     categoryId: string | null
     subCategoryId: string | null
+    isDeleted: boolean | null
+    createdAt: Date | null
+    description: string | null
+    duration: number | null
+    parentCourseId: string | null
+    updatedAt: Date | null
+    videoCount: number | null
+    id: string | null
+    rating: number | null
+    previewImage: string | null
+    previewVideo: string | null
   }
 
   export type CourseMaxAggregateOutputType = {
-    id: string | null
-    image: string | null
     name: string | null
-    description: string | null
-    duration: number | null
-    videoCount: number | null
+    image: string | null
     enrolledCount: number | null
-    isDeleted: boolean | null
-    rating: number | null
     date: Date | null
-    parentCourseId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
     categoryId: string | null
     subCategoryId: string | null
+    isDeleted: boolean | null
+    createdAt: Date | null
+    description: string | null
+    duration: number | null
+    parentCourseId: string | null
+    updatedAt: Date | null
+    videoCount: number | null
+    id: string | null
+    rating: number | null
+    previewImage: string | null
+    previewVideo: string | null
   }
 
   export type CourseCountAggregateOutputType = {
-    id: number
-    image: number
     name: number
-    description: number
-    duration: number
-    videoCount: number
+    image: number
     enrolledCount: number
-    isDeleted: number
-    rating: number
     date: number
-    parentCourseId: number
-    createdAt: number
-    updatedAt: number
     categoryId: number
     subCategoryId: number
+    isDeleted: number
+    createdAt: number
+    description: number
+    duration: number
+    parentCourseId: number
+    updatedAt: number
+    videoCount: number
+    id: number
+    rating: number
+    previewImage: number
+    previewVideo: number
     _all: number
   }
 
 
   export type CourseAvgAggregateInputType = {
+    enrolledCount?: true
     duration?: true
     videoCount?: true
-    enrolledCount?: true
     rating?: true
   }
 
   export type CourseSumAggregateInputType = {
+    enrolledCount?: true
     duration?: true
     videoCount?: true
-    enrolledCount?: true
     rating?: true
   }
 
   export type CourseMinAggregateInputType = {
-    id?: true
-    image?: true
     name?: true
-    description?: true
-    duration?: true
-    videoCount?: true
+    image?: true
     enrolledCount?: true
-    isDeleted?: true
-    rating?: true
     date?: true
-    parentCourseId?: true
-    createdAt?: true
-    updatedAt?: true
     categoryId?: true
     subCategoryId?: true
+    isDeleted?: true
+    createdAt?: true
+    description?: true
+    duration?: true
+    parentCourseId?: true
+    updatedAt?: true
+    videoCount?: true
+    id?: true
+    rating?: true
+    previewImage?: true
+    previewVideo?: true
   }
 
   export type CourseMaxAggregateInputType = {
-    id?: true
-    image?: true
     name?: true
-    description?: true
-    duration?: true
-    videoCount?: true
+    image?: true
     enrolledCount?: true
-    isDeleted?: true
-    rating?: true
     date?: true
-    parentCourseId?: true
-    createdAt?: true
-    updatedAt?: true
     categoryId?: true
     subCategoryId?: true
+    isDeleted?: true
+    createdAt?: true
+    description?: true
+    duration?: true
+    parentCourseId?: true
+    updatedAt?: true
+    videoCount?: true
+    id?: true
+    rating?: true
+    previewImage?: true
+    previewVideo?: true
   }
 
   export type CourseCountAggregateInputType = {
-    id?: true
-    image?: true
     name?: true
-    description?: true
-    duration?: true
-    videoCount?: true
+    image?: true
     enrolledCount?: true
-    isDeleted?: true
-    rating?: true
     date?: true
-    parentCourseId?: true
-    createdAt?: true
-    updatedAt?: true
     categoryId?: true
     subCategoryId?: true
+    isDeleted?: true
+    createdAt?: true
+    description?: true
+    duration?: true
+    parentCourseId?: true
+    updatedAt?: true
+    videoCount?: true
+    id?: true
+    rating?: true
+    previewImage?: true
+    previewVideo?: true
     _all?: true
   }
 
@@ -10416,21 +10438,23 @@ export namespace Prisma {
   }
 
   export type CourseGroupByOutputType = {
-    id: string
-    image: string | null
     name: string
-    description: string | null
-    duration: number | null
-    videoCount: number
+    image: string | null
     enrolledCount: number
-    isDeleted: boolean
-    rating: number
     date: Date
-    parentCourseId: string | null
-    createdAt: Date
-    updatedAt: Date
     categoryId: string | null
     subCategoryId: string | null
+    isDeleted: boolean
+    createdAt: Date
+    description: string | null
+    duration: number | null
+    parentCourseId: string | null
+    updatedAt: Date
+    videoCount: number
+    id: string
+    rating: number
+    previewImage: string | null
+    previewVideo: string | null
     _count: CourseCountAggregateOutputType | null
     _avg: CourseAvgAggregateOutputType | null
     _sum: CourseSumAggregateOutputType | null
@@ -10453,62 +10477,66 @@ export namespace Prisma {
 
 
   export type CourseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    image?: boolean
     name?: boolean
-    description?: boolean
-    duration?: boolean
-    videoCount?: boolean
+    image?: boolean
     enrolledCount?: boolean
-    isDeleted?: boolean
-    rating?: boolean
     date?: boolean
-    parentCourseId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     categoryId?: boolean
     subCategoryId?: boolean
+    isDeleted?: boolean
+    createdAt?: boolean
+    description?: boolean
+    duration?: boolean
+    parentCourseId?: boolean
+    updatedAt?: boolean
+    videoCount?: boolean
+    id?: boolean
+    rating?: boolean
+    previewImage?: boolean
+    previewVideo?: boolean
+    ratings?: boolean | Course$ratingsArgs<ExtArgs>
+    users?: boolean | Course$usersArgs<ExtArgs>
+    Category?: boolean | Course$CategoryArgs<ExtArgs>
     parentCourse?: boolean | Course$parentCourseArgs<ExtArgs>
     subCourses?: boolean | Course$subCoursesArgs<ExtArgs>
-    users?: boolean | Course$usersArgs<ExtArgs>
-    category?: boolean | Course$categoryArgs<ExtArgs>
-    subCategory?: boolean | Course$subCategoryArgs<ExtArgs>
-    HomeCategoryItem?: boolean | Course$HomeCategoryItemArgs<ExtArgs>
+    SubCategory?: boolean | Course$SubCategoryArgs<ExtArgs>
     CourseSection?: boolean | Course$CourseSectionArgs<ExtArgs>
+    HomeCategoryItem?: boolean | Course$HomeCategoryItemArgs<ExtArgs>
     reviews?: boolean | Course$reviewsArgs<ExtArgs>
-    ratings?: boolean | Course$ratingsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
   export type CourseSelectScalar = {
-    id?: boolean
-    image?: boolean
     name?: boolean
-    description?: boolean
-    duration?: boolean
-    videoCount?: boolean
+    image?: boolean
     enrolledCount?: boolean
-    isDeleted?: boolean
-    rating?: boolean
     date?: boolean
-    parentCourseId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
     categoryId?: boolean
     subCategoryId?: boolean
+    isDeleted?: boolean
+    createdAt?: boolean
+    description?: boolean
+    duration?: boolean
+    parentCourseId?: boolean
+    updatedAt?: boolean
+    videoCount?: boolean
+    id?: boolean
+    rating?: boolean
+    previewImage?: boolean
+    previewVideo?: boolean
   }
 
 
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ratings?: boolean | Course$ratingsArgs<ExtArgs>
+    users?: boolean | Course$usersArgs<ExtArgs>
+    Category?: boolean | Course$CategoryArgs<ExtArgs>
     parentCourse?: boolean | Course$parentCourseArgs<ExtArgs>
     subCourses?: boolean | Course$subCoursesArgs<ExtArgs>
-    users?: boolean | Course$usersArgs<ExtArgs>
-    category?: boolean | Course$categoryArgs<ExtArgs>
-    subCategory?: boolean | Course$subCategoryArgs<ExtArgs>
-    HomeCategoryItem?: boolean | Course$HomeCategoryItemArgs<ExtArgs>
+    SubCategory?: boolean | Course$SubCategoryArgs<ExtArgs>
     CourseSection?: boolean | Course$CourseSectionArgs<ExtArgs>
+    HomeCategoryItem?: boolean | Course$HomeCategoryItemArgs<ExtArgs>
     reviews?: boolean | Course$reviewsArgs<ExtArgs>
-    ratings?: boolean | Course$ratingsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -10516,32 +10544,34 @@ export namespace Prisma {
   export type $CoursePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Course"
     objects: {
+      ratings: Prisma.$RatingPayload<ExtArgs>[]
+      users: Prisma.$UserOnCoursePayload<ExtArgs>[]
+      Category: Prisma.$CategoryPayload<ExtArgs> | null
       parentCourse: Prisma.$CoursePayload<ExtArgs> | null
       subCourses: Prisma.$CoursePayload<ExtArgs>[]
-      users: Prisma.$UserOnCoursePayload<ExtArgs>[]
-      category: Prisma.$CategoryPayload<ExtArgs> | null
-      subCategory: Prisma.$SubCategoryPayload<ExtArgs> | null
-      HomeCategoryItem: Prisma.$HomeCategoryItemPayload<ExtArgs>[]
+      SubCategory: Prisma.$SubCategoryPayload<ExtArgs> | null
       CourseSection: Prisma.$CourseSectionPayload<ExtArgs>[]
+      HomeCategoryItem: Prisma.$HomeCategoryItemPayload<ExtArgs>[]
       reviews: Prisma.$ReviewPayload<ExtArgs>[]
-      ratings: Prisma.$RatingPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      image: string | null
       name: string
-      description: string | null
-      duration: number | null
-      videoCount: number
+      image: string | null
       enrolledCount: number
-      isDeleted: boolean
-      rating: number
       date: Date
-      parentCourseId: string | null
-      createdAt: Date
-      updatedAt: Date
       categoryId: string | null
       subCategoryId: string | null
+      isDeleted: boolean
+      createdAt: Date
+      description: string | null
+      duration: number | null
+      parentCourseId: string | null
+      updatedAt: Date
+      videoCount: number
+      id: string
+      rating: number
+      previewImage: string | null
+      previewVideo: string | null
     }, ExtArgs["result"]["course"]>
     composites: {}
   }
@@ -10634,8 +10664,8 @@ export namespace Prisma {
      * // Get first 10 Courses
      * const courses = await prisma.course.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const courseWithIdOnly = await prisma.course.findMany({ select: { id: true } })
+     * // Only select the `name`
+     * const courseWithNameOnly = await prisma.course.findMany({ select: { name: true } })
      * 
     **/
     findMany<T extends CourseFindManyArgs<ExtArgs>>(
@@ -10685,9 +10715,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Courses and only return the `id`
-     * const courseWithIdOnly = await prisma.course.createManyAndReturn({ 
-     *   select: { id: true },
+     * // Create many Courses and only return the `name`
+     * const courseWithNameOnly = await prisma.course.createManyAndReturn({ 
+     *   select: { name: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -10933,23 +10963,23 @@ export namespace Prisma {
   export interface Prisma__CourseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    ratings<T extends Course$ratingsArgs<ExtArgs> = {}>(args?: Subset<T, Course$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    users<T extends Course$usersArgs<ExtArgs> = {}>(args?: Subset<T, Course$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserOnCoursePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    Category<T extends Course$CategoryArgs<ExtArgs> = {}>(args?: Subset<T, Course$CategoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     parentCourse<T extends Course$parentCourseArgs<ExtArgs> = {}>(args?: Subset<T, Course$parentCourseArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     subCourses<T extends Course$subCoursesArgs<ExtArgs> = {}>(args?: Subset<T, Course$subCoursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    users<T extends Course$usersArgs<ExtArgs> = {}>(args?: Subset<T, Course$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserOnCoursePayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    category<T extends Course$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Course$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    subCategory<T extends Course$subCategoryArgs<ExtArgs> = {}>(args?: Subset<T, Course$subCategoryArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    HomeCategoryItem<T extends Course$HomeCategoryItemArgs<ExtArgs> = {}>(args?: Subset<T, Course$HomeCategoryItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HomeCategoryItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+    SubCategory<T extends Course$SubCategoryArgs<ExtArgs> = {}>(args?: Subset<T, Course$SubCategoryArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     CourseSection<T extends Course$CourseSectionArgs<ExtArgs> = {}>(args?: Subset<T, Course$CourseSectionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CourseSectionPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    reviews<T extends Course$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, Course$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, 'findMany'> | Null>;
+    HomeCategoryItem<T extends Course$HomeCategoryItemArgs<ExtArgs> = {}>(args?: Subset<T, Course$HomeCategoryItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HomeCategoryItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    ratings<T extends Course$ratingsArgs<ExtArgs> = {}>(args?: Subset<T, Course$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, 'findMany'> | Null>;
+    reviews<T extends Course$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, Course$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -10979,21 +11009,23 @@ export namespace Prisma {
    * Fields of the Course model
    */ 
   interface CourseFieldRefs {
-    readonly id: FieldRef<"Course", 'String'>
-    readonly image: FieldRef<"Course", 'String'>
     readonly name: FieldRef<"Course", 'String'>
-    readonly description: FieldRef<"Course", 'String'>
-    readonly duration: FieldRef<"Course", 'Int'>
-    readonly videoCount: FieldRef<"Course", 'Int'>
+    readonly image: FieldRef<"Course", 'String'>
     readonly enrolledCount: FieldRef<"Course", 'Int'>
-    readonly isDeleted: FieldRef<"Course", 'Boolean'>
-    readonly rating: FieldRef<"Course", 'Float'>
     readonly date: FieldRef<"Course", 'DateTime'>
-    readonly parentCourseId: FieldRef<"Course", 'String'>
-    readonly createdAt: FieldRef<"Course", 'DateTime'>
-    readonly updatedAt: FieldRef<"Course", 'DateTime'>
     readonly categoryId: FieldRef<"Course", 'String'>
     readonly subCategoryId: FieldRef<"Course", 'String'>
+    readonly isDeleted: FieldRef<"Course", 'Boolean'>
+    readonly createdAt: FieldRef<"Course", 'DateTime'>
+    readonly description: FieldRef<"Course", 'String'>
+    readonly duration: FieldRef<"Course", 'Int'>
+    readonly parentCourseId: FieldRef<"Course", 'String'>
+    readonly updatedAt: FieldRef<"Course", 'DateTime'>
+    readonly videoCount: FieldRef<"Course", 'Int'>
+    readonly id: FieldRef<"Course", 'String'>
+    readonly rating: FieldRef<"Course", 'Float'>
+    readonly previewImage: FieldRef<"Course", 'String'>
+    readonly previewVideo: FieldRef<"Course", 'String'>
   }
     
 
@@ -11312,6 +11344,61 @@ export namespace Prisma {
   }
 
   /**
+   * Course.ratings
+   */
+  export type Course$ratingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: RatingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RatingInclude<ExtArgs> | null
+    where?: RatingWhereInput
+    orderBy?: RatingOrderByWithRelationInput | RatingOrderByWithRelationInput[]
+    cursor?: RatingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RatingScalarFieldEnum | RatingScalarFieldEnum[]
+  }
+
+  /**
+   * Course.users
+   */
+  export type Course$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOnCourse
+     */
+    select?: UserOnCourseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOnCourseInclude<ExtArgs> | null
+    where?: UserOnCourseWhereInput
+    orderBy?: UserOnCourseOrderByWithRelationInput | UserOnCourseOrderByWithRelationInput[]
+    cursor?: UserOnCourseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserOnCourseScalarFieldEnum | UserOnCourseScalarFieldEnum[]
+  }
+
+  /**
+   * Course.Category
+   */
+  export type Course$CategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    where?: CategoryWhereInput
+  }
+
+  /**
    * Course.parentCourse
    */
   export type Course$parentCourseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11347,44 +11434,9 @@ export namespace Prisma {
   }
 
   /**
-   * Course.users
+   * Course.SubCategory
    */
-  export type Course$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserOnCourse
-     */
-    select?: UserOnCourseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserOnCourseInclude<ExtArgs> | null
-    where?: UserOnCourseWhereInput
-    orderBy?: UserOnCourseOrderByWithRelationInput | UserOnCourseOrderByWithRelationInput[]
-    cursor?: UserOnCourseWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserOnCourseScalarFieldEnum | UserOnCourseScalarFieldEnum[]
-  }
-
-  /**
-   * Course.category
-   */
-  export type Course$categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Category
-     */
-    select?: CategorySelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CategoryInclude<ExtArgs> | null
-    where?: CategoryWhereInput
-  }
-
-  /**
-   * Course.subCategory
-   */
-  export type Course$subCategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Course$SubCategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the SubCategory
      */
@@ -11394,26 +11446,6 @@ export namespace Prisma {
      */
     include?: SubCategoryInclude<ExtArgs> | null
     where?: SubCategoryWhereInput
-  }
-
-  /**
-   * Course.HomeCategoryItem
-   */
-  export type Course$HomeCategoryItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the HomeCategoryItem
-     */
-    select?: HomeCategoryItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HomeCategoryItemInclude<ExtArgs> | null
-    where?: HomeCategoryItemWhereInput
-    orderBy?: HomeCategoryItemOrderByWithRelationInput | HomeCategoryItemOrderByWithRelationInput[]
-    cursor?: HomeCategoryItemWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: HomeCategoryItemScalarFieldEnum | HomeCategoryItemScalarFieldEnum[]
   }
 
   /**
@@ -11437,6 +11469,26 @@ export namespace Prisma {
   }
 
   /**
+   * Course.HomeCategoryItem
+   */
+  export type Course$HomeCategoryItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HomeCategoryItem
+     */
+    select?: HomeCategoryItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HomeCategoryItemInclude<ExtArgs> | null
+    where?: HomeCategoryItemWhereInput
+    orderBy?: HomeCategoryItemOrderByWithRelationInput | HomeCategoryItemOrderByWithRelationInput[]
+    cursor?: HomeCategoryItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HomeCategoryItemScalarFieldEnum | HomeCategoryItemScalarFieldEnum[]
+  }
+
+  /**
    * Course.reviews
    */
   export type Course$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11454,26 +11506,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
-  }
-
-  /**
-   * Course.ratings
-   */
-  export type Course$ratingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Rating
-     */
-    select?: RatingSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RatingInclude<ExtArgs> | null
-    where?: RatingWhereInput
-    orderBy?: RatingOrderByWithRelationInput | RatingOrderByWithRelationInput[]
-    cursor?: RatingWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: RatingScalarFieldEnum | RatingScalarFieldEnum[]
   }
 
   /**
@@ -11663,7 +11695,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    course?: boolean | CourseDefaultArgs<ExtArgs>
+    Course?: boolean | CourseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userOnCourse"]>
 
   export type UserOnCourseSelectScalar = {
@@ -11677,14 +11709,14 @@ export namespace Prisma {
 
 
   export type UserOnCourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    course?: boolean | CourseDefaultArgs<ExtArgs>
+    Course?: boolean | CourseDefaultArgs<ExtArgs>
   }
 
 
   export type $UserOnCoursePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserOnCourse"
     objects: {
-      course: Prisma.$CoursePayload<ExtArgs>
+      Course: Prisma.$CoursePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12084,7 +12116,7 @@ export namespace Prisma {
   export interface Prisma__UserOnCourseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    Course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -12624,8 +12656,8 @@ export namespace Prisma {
     courseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    course?: boolean | CourseDefaultArgs<ExtArgs>
     activities?: boolean | CourseSection$activitiesArgs<ExtArgs>
+    course?: boolean | CourseDefaultArgs<ExtArgs>
     _count?: boolean | CourseSectionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["courseSection"]>
 
@@ -12640,8 +12672,8 @@ export namespace Prisma {
 
 
   export type CourseSectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    course?: boolean | CourseDefaultArgs<ExtArgs>
     activities?: boolean | CourseSection$activitiesArgs<ExtArgs>
+    course?: boolean | CourseDefaultArgs<ExtArgs>
     _count?: boolean | CourseSectionCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -12649,8 +12681,8 @@ export namespace Prisma {
   export type $CourseSectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "CourseSection"
     objects: {
-      course: Prisma.$CoursePayload<ExtArgs>
       activities: Prisma.$ActivityPayload<ExtArgs>[]
+      course: Prisma.$CoursePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -13050,9 +13082,9 @@ export namespace Prisma {
   export interface Prisma__CourseSectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     activities<T extends CourseSection$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, CourseSection$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -14655,7 +14687,7 @@ export namespace Prisma {
     text?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    course?: boolean | CourseDefaultArgs<ExtArgs>
+    Course?: boolean | CourseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["review"]>
 
   export type ReviewSelectScalar = {
@@ -14669,14 +14701,14 @@ export namespace Prisma {
 
 
   export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    course?: boolean | CourseDefaultArgs<ExtArgs>
+    Course?: boolean | CourseDefaultArgs<ExtArgs>
   }
 
 
   export type $ReviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Review"
     objects: {
-      course: Prisma.$CoursePayload<ExtArgs>
+      Course: Prisma.$CoursePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -15076,7 +15108,7 @@ export namespace Prisma {
   export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    Course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -18344,46 +18376,46 @@ export namespace Prisma {
   export type ContentMinAggregateOutputType = {
     id: string | null
     typeId: string | null
-    categoryId: string | null
     title: string | null
     description: string | null
     fileUrl: string | null
     thumbnailUrl: string | null
     author: string | null
-    content: string | null
     publishedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    categoryId: string | null
+    content: string | null
   }
 
   export type ContentMaxAggregateOutputType = {
     id: string | null
     typeId: string | null
-    categoryId: string | null
     title: string | null
     description: string | null
     fileUrl: string | null
     thumbnailUrl: string | null
     author: string | null
-    content: string | null
     publishedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    categoryId: string | null
+    content: string | null
   }
 
   export type ContentCountAggregateOutputType = {
     id: number
     typeId: number
-    categoryId: number
     title: number
     description: number
     fileUrl: number
     thumbnailUrl: number
     author: number
-    content: number
     publishedAt: number
     createdAt: number
     updatedAt: number
+    categoryId: number
+    content: number
     _all: number
   }
 
@@ -18391,46 +18423,46 @@ export namespace Prisma {
   export type ContentMinAggregateInputType = {
     id?: true
     typeId?: true
-    categoryId?: true
     title?: true
     description?: true
     fileUrl?: true
     thumbnailUrl?: true
     author?: true
-    content?: true
     publishedAt?: true
     createdAt?: true
     updatedAt?: true
+    categoryId?: true
+    content?: true
   }
 
   export type ContentMaxAggregateInputType = {
     id?: true
     typeId?: true
-    categoryId?: true
     title?: true
     description?: true
     fileUrl?: true
     thumbnailUrl?: true
     author?: true
-    content?: true
     publishedAt?: true
     createdAt?: true
     updatedAt?: true
+    categoryId?: true
+    content?: true
   }
 
   export type ContentCountAggregateInputType = {
     id?: true
     typeId?: true
-    categoryId?: true
     title?: true
     description?: true
     fileUrl?: true
     thumbnailUrl?: true
     author?: true
-    content?: true
     publishedAt?: true
     createdAt?: true
     updatedAt?: true
+    categoryId?: true
+    content?: true
     _all?: true
   }
 
@@ -18509,16 +18541,16 @@ export namespace Prisma {
   export type ContentGroupByOutputType = {
     id: string
     typeId: string
-    categoryId: string | null
     title: string
     description: string | null
     fileUrl: string | null
     thumbnailUrl: string | null
     author: string | null
-    content: string | null
     publishedAt: Date | null
     createdAt: Date
     updatedAt: Date
+    categoryId: string | null
+    content: string | null
     _count: ContentCountAggregateOutputType | null
     _min: ContentMinAggregateOutputType | null
     _max: ContentMaxAggregateOutputType | null
@@ -18541,61 +18573,61 @@ export namespace Prisma {
   export type ContentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     typeId?: boolean
-    categoryId?: boolean
     title?: boolean
     description?: boolean
     fileUrl?: boolean
     thumbnailUrl?: boolean
     author?: boolean
-    content?: boolean
     publishedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    type?: boolean | ContentTypeDefaultArgs<ExtArgs>
+    categoryId?: boolean
+    content?: boolean
     category?: boolean | Content$categoryArgs<ExtArgs>
+    type?: boolean | ContentTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["content"]>
 
   export type ContentSelectScalar = {
     id?: boolean
     typeId?: boolean
-    categoryId?: boolean
     title?: boolean
     description?: boolean
     fileUrl?: boolean
     thumbnailUrl?: boolean
     author?: boolean
-    content?: boolean
     publishedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    categoryId?: boolean
+    content?: boolean
   }
 
 
   export type ContentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    type?: boolean | ContentTypeDefaultArgs<ExtArgs>
     category?: boolean | Content$categoryArgs<ExtArgs>
+    type?: boolean | ContentTypeDefaultArgs<ExtArgs>
   }
 
 
   export type $ContentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Content"
     objects: {
-      type: Prisma.$ContentTypePayload<ExtArgs>
       category: Prisma.$CategoryPayload<ExtArgs> | null
+      type: Prisma.$ContentTypePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       typeId: string
-      categoryId: string | null
       title: string
       description: string | null
       fileUrl: string | null
       thumbnailUrl: string | null
       author: string | null
-      content: string | null
       publishedAt: Date | null
       createdAt: Date
       updatedAt: Date
+      categoryId: string | null
+      content: string | null
     }, ExtArgs["result"]["content"]>
     composites: {}
   }
@@ -18987,9 +19019,9 @@ export namespace Prisma {
   export interface Prisma__ContentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    type<T extends ContentTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContentTypeDefaultArgs<ExtArgs>>): Prisma__ContentTypeClient<$Result.GetResult<Prisma.$ContentTypePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     category<T extends Content$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Content$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    type<T extends ContentTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContentTypeDefaultArgs<ExtArgs>>): Prisma__ContentTypeClient<$Result.GetResult<Prisma.$ContentTypePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -19021,16 +19053,16 @@ export namespace Prisma {
   interface ContentFieldRefs {
     readonly id: FieldRef<"Content", 'String'>
     readonly typeId: FieldRef<"Content", 'String'>
-    readonly categoryId: FieldRef<"Content", 'String'>
     readonly title: FieldRef<"Content", 'String'>
     readonly description: FieldRef<"Content", 'String'>
     readonly fileUrl: FieldRef<"Content", 'String'>
     readonly thumbnailUrl: FieldRef<"Content", 'String'>
     readonly author: FieldRef<"Content", 'String'>
-    readonly content: FieldRef<"Content", 'String'>
     readonly publishedAt: FieldRef<"Content", 'DateTime'>
     readonly createdAt: FieldRef<"Content", 'DateTime'>
     readonly updatedAt: FieldRef<"Content", 'DateTime'>
+    readonly categoryId: FieldRef<"Content", 'String'>
+    readonly content: FieldRef<"Content", 'String'>
   }
     
 
@@ -19446,10 +19478,10 @@ export namespace Prisma {
   export const CategoryScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    isDeleted: 'isDeleted',
-    type: 'type',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    isDeleted: 'isDeleted',
+    type: 'type'
   };
 
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
@@ -19459,9 +19491,9 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     categoryId: 'categoryId',
-    isDeleted: 'isDeleted',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    isDeleted: 'isDeleted'
   };
 
   export type SubCategoryScalarFieldEnum = (typeof SubCategoryScalarFieldEnum)[keyof typeof SubCategoryScalarFieldEnum]
@@ -19470,9 +19502,9 @@ export namespace Prisma {
   export const HomeCategoryScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    isDeleted: 'isDeleted',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    isDeleted: 'isDeleted'
   };
 
   export type HomeCategoryScalarFieldEnum = (typeof HomeCategoryScalarFieldEnum)[keyof typeof HomeCategoryScalarFieldEnum]
@@ -19481,31 +19513,34 @@ export namespace Prisma {
   export const HomeCategoryItemScalarFieldEnum: {
     id: 'id',
     homeCategoryId: 'homeCategoryId',
-    courseId: 'courseId',
-    type: 'type',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    type: 'type',
+    courseId: 'courseId',
+    isDeleted: 'isDeleted'
   };
 
   export type HomeCategoryItemScalarFieldEnum = (typeof HomeCategoryItemScalarFieldEnum)[keyof typeof HomeCategoryItemScalarFieldEnum]
 
 
   export const CourseScalarFieldEnum: {
-    id: 'id',
-    image: 'image',
     name: 'name',
+    image: 'image',
+    enrolledCount: 'enrolledCount',
+    date: 'date',
+    categoryId: 'categoryId',
+    subCategoryId: 'subCategoryId',
+    isDeleted: 'isDeleted',
+    createdAt: 'createdAt',
     description: 'description',
     duration: 'duration',
-    videoCount: 'videoCount',
-    enrolledCount: 'enrolledCount',
-    isDeleted: 'isDeleted',
-    rating: 'rating',
-    date: 'date',
     parentCourseId: 'parentCourseId',
-    createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    categoryId: 'categoryId',
-    subCategoryId: 'subCategoryId'
+    videoCount: 'videoCount',
+    id: 'id',
+    rating: 'rating',
+    previewImage: 'previewImage',
+    previewVideo: 'previewVideo'
   };
 
   export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
@@ -19602,16 +19637,16 @@ export namespace Prisma {
   export const ContentScalarFieldEnum: {
     id: 'id',
     typeId: 'typeId',
-    categoryId: 'categoryId',
     title: 'title',
     description: 'description',
     fileUrl: 'fileUrl',
     thumbnailUrl: 'thumbnailUrl',
     author: 'author',
-    content: 'content',
     publishedAt: 'publishedAt',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    categoryId: 'categoryId',
+    content: 'content'
   };
 
   export type ContentScalarFieldEnum = (typeof ContentScalarFieldEnum)[keyof typeof ContentScalarFieldEnum]
@@ -20041,25 +20076,25 @@ export namespace Prisma {
     NOT?: CategoryWhereInput | CategoryWhereInput[]
     id?: StringFilter<"Category"> | string
     name?: StringFilter<"Category"> | string
-    isDeleted?: BoolFilter<"Category"> | boolean
-    type?: EnumCategoryTypeFilter<"Category"> | $Enums.CategoryType
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
-    subCategories?: SubCategoryListRelationFilter
-    courses?: CourseListRelationFilter
+    isDeleted?: BoolFilter<"Category"> | boolean
+    type?: EnumCategoryTypeFilter<"Category"> | $Enums.CategoryType
     contents?: ContentListRelationFilter
+    courses?: CourseListRelationFilter
+    subCategories?: SubCategoryListRelationFilter
   }
 
   export type CategoryOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    isDeleted?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    subCategories?: SubCategoryOrderByRelationAggregateInput
-    courses?: CourseOrderByRelationAggregateInput
+    isDeleted?: SortOrder
+    type?: SortOrder
     contents?: ContentOrderByRelationAggregateInput
+    courses?: CourseOrderByRelationAggregateInput
+    subCategories?: SubCategoryOrderByRelationAggregateInput
   }
 
   export type CategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -20068,22 +20103,22 @@ export namespace Prisma {
     OR?: CategoryWhereInput[]
     NOT?: CategoryWhereInput | CategoryWhereInput[]
     name?: StringFilter<"Category"> | string
-    isDeleted?: BoolFilter<"Category"> | boolean
-    type?: EnumCategoryTypeFilter<"Category"> | $Enums.CategoryType
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
-    subCategories?: SubCategoryListRelationFilter
-    courses?: CourseListRelationFilter
+    isDeleted?: BoolFilter<"Category"> | boolean
+    type?: EnumCategoryTypeFilter<"Category"> | $Enums.CategoryType
     contents?: ContentListRelationFilter
+    courses?: CourseListRelationFilter
+    subCategories?: SubCategoryListRelationFilter
   }, "id">
 
   export type CategoryOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    isDeleted?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
+    type?: SortOrder
     _count?: CategoryCountOrderByAggregateInput
     _max?: CategoryMaxOrderByAggregateInput
     _min?: CategoryMinOrderByAggregateInput
@@ -20095,10 +20130,10 @@ export namespace Prisma {
     NOT?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Category"> | string
     name?: StringWithAggregatesFilter<"Category"> | string
-    isDeleted?: BoolWithAggregatesFilter<"Category"> | boolean
-    type?: EnumCategoryTypeWithAggregatesFilter<"Category"> | $Enums.CategoryType
     createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
+    isDeleted?: BoolWithAggregatesFilter<"Category"> | boolean
+    type?: EnumCategoryTypeWithAggregatesFilter<"Category"> | $Enums.CategoryType
   }
 
   export type SubCategoryWhereInput = {
@@ -20108,22 +20143,22 @@ export namespace Prisma {
     id?: StringFilter<"SubCategory"> | string
     name?: StringFilter<"SubCategory"> | string
     categoryId?: StringFilter<"SubCategory"> | string
-    isDeleted?: BoolFilter<"SubCategory"> | boolean
     createdAt?: DateTimeFilter<"SubCategory"> | Date | string
     updatedAt?: DateTimeFilter<"SubCategory"> | Date | string
-    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
+    isDeleted?: BoolFilter<"SubCategory"> | boolean
     courses?: CourseListRelationFilter
+    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
   }
 
   export type SubCategoryOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     categoryId?: SortOrder
-    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    category?: CategoryOrderByWithRelationInput
+    isDeleted?: SortOrder
     courses?: CourseOrderByRelationAggregateInput
+    category?: CategoryOrderByWithRelationInput
   }
 
   export type SubCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -20133,20 +20168,20 @@ export namespace Prisma {
     NOT?: SubCategoryWhereInput | SubCategoryWhereInput[]
     name?: StringFilter<"SubCategory"> | string
     categoryId?: StringFilter<"SubCategory"> | string
-    isDeleted?: BoolFilter<"SubCategory"> | boolean
     createdAt?: DateTimeFilter<"SubCategory"> | Date | string
     updatedAt?: DateTimeFilter<"SubCategory"> | Date | string
-    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
+    isDeleted?: BoolFilter<"SubCategory"> | boolean
     courses?: CourseListRelationFilter
+    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
   }, "id">
 
   export type SubCategoryOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     categoryId?: SortOrder
-    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
     _count?: SubCategoryCountOrderByAggregateInput
     _max?: SubCategoryMaxOrderByAggregateInput
     _min?: SubCategoryMinOrderByAggregateInput
@@ -20159,9 +20194,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"SubCategory"> | string
     name?: StringWithAggregatesFilter<"SubCategory"> | string
     categoryId?: StringWithAggregatesFilter<"SubCategory"> | string
-    isDeleted?: BoolWithAggregatesFilter<"SubCategory"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"SubCategory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SubCategory"> | Date | string
+    isDeleted?: BoolWithAggregatesFilter<"SubCategory"> | boolean
   }
 
   export type HomeCategoryWhereInput = {
@@ -20170,18 +20205,18 @@ export namespace Prisma {
     NOT?: HomeCategoryWhereInput | HomeCategoryWhereInput[]
     id?: StringFilter<"HomeCategory"> | string
     name?: StringFilter<"HomeCategory"> | string
-    isDeleted?: BoolFilter<"HomeCategory"> | boolean
     createdAt?: DateTimeFilter<"HomeCategory"> | Date | string
     updatedAt?: DateTimeFilter<"HomeCategory"> | Date | string
+    isDeleted?: BoolFilter<"HomeCategory"> | boolean
     items?: HomeCategoryItemListRelationFilter
   }
 
   export type HomeCategoryOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
     items?: HomeCategoryItemOrderByRelationAggregateInput
   }
 
@@ -20191,18 +20226,18 @@ export namespace Prisma {
     OR?: HomeCategoryWhereInput[]
     NOT?: HomeCategoryWhereInput | HomeCategoryWhereInput[]
     name?: StringFilter<"HomeCategory"> | string
-    isDeleted?: BoolFilter<"HomeCategory"> | boolean
     createdAt?: DateTimeFilter<"HomeCategory"> | Date | string
     updatedAt?: DateTimeFilter<"HomeCategory"> | Date | string
+    isDeleted?: BoolFilter<"HomeCategory"> | boolean
     items?: HomeCategoryItemListRelationFilter
   }, "id">
 
   export type HomeCategoryOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
     _count?: HomeCategoryCountOrderByAggregateInput
     _max?: HomeCategoryMaxOrderByAggregateInput
     _min?: HomeCategoryMinOrderByAggregateInput
@@ -20214,9 +20249,9 @@ export namespace Prisma {
     NOT?: HomeCategoryScalarWhereWithAggregatesInput | HomeCategoryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"HomeCategory"> | string
     name?: StringWithAggregatesFilter<"HomeCategory"> | string
-    isDeleted?: BoolWithAggregatesFilter<"HomeCategory"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"HomeCategory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"HomeCategory"> | Date | string
+    isDeleted?: BoolWithAggregatesFilter<"HomeCategory"> | boolean
   }
 
   export type HomeCategoryItemWhereInput = {
@@ -20225,46 +20260,51 @@ export namespace Prisma {
     NOT?: HomeCategoryItemWhereInput | HomeCategoryItemWhereInput[]
     id?: StringFilter<"HomeCategoryItem"> | string
     homeCategoryId?: StringFilter<"HomeCategoryItem"> | string
-    courseId?: UuidFilter<"HomeCategoryItem"> | string
-    type?: EnumCourseTypeFilter<"HomeCategoryItem"> | $Enums.CourseType
     createdAt?: DateTimeFilter<"HomeCategoryItem"> | Date | string
     updatedAt?: DateTimeFilter<"HomeCategoryItem"> | Date | string
-    homeCategory?: XOR<HomeCategoryRelationFilter, HomeCategoryWhereInput>
+    type?: EnumCourseTypeFilter<"HomeCategoryItem"> | $Enums.CourseType
+    courseId?: UuidFilter<"HomeCategoryItem"> | string
+    isDeleted?: BoolFilter<"HomeCategoryItem"> | boolean
     course?: XOR<CourseRelationFilter, CourseWhereInput>
+    homeCategory?: XOR<HomeCategoryRelationFilter, HomeCategoryWhereInput>
   }
 
   export type HomeCategoryItemOrderByWithRelationInput = {
     id?: SortOrder
     homeCategoryId?: SortOrder
-    courseId?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    homeCategory?: HomeCategoryOrderByWithRelationInput
+    type?: SortOrder
+    courseId?: SortOrder
+    isDeleted?: SortOrder
     course?: CourseOrderByWithRelationInput
+    homeCategory?: HomeCategoryOrderByWithRelationInput
   }
 
   export type HomeCategoryItemWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    homeCategoryId_courseId?: HomeCategoryItemHomeCategoryIdCourseIdCompoundUniqueInput
     AND?: HomeCategoryItemWhereInput | HomeCategoryItemWhereInput[]
     OR?: HomeCategoryItemWhereInput[]
     NOT?: HomeCategoryItemWhereInput | HomeCategoryItemWhereInput[]
     homeCategoryId?: StringFilter<"HomeCategoryItem"> | string
-    courseId?: UuidFilter<"HomeCategoryItem"> | string
-    type?: EnumCourseTypeFilter<"HomeCategoryItem"> | $Enums.CourseType
     createdAt?: DateTimeFilter<"HomeCategoryItem"> | Date | string
     updatedAt?: DateTimeFilter<"HomeCategoryItem"> | Date | string
-    homeCategory?: XOR<HomeCategoryRelationFilter, HomeCategoryWhereInput>
+    type?: EnumCourseTypeFilter<"HomeCategoryItem"> | $Enums.CourseType
+    courseId?: UuidFilter<"HomeCategoryItem"> | string
+    isDeleted?: BoolFilter<"HomeCategoryItem"> | boolean
     course?: XOR<CourseRelationFilter, CourseWhereInput>
-  }, "id">
+    homeCategory?: XOR<HomeCategoryRelationFilter, HomeCategoryWhereInput>
+  }, "id" | "homeCategoryId_courseId">
 
   export type HomeCategoryItemOrderByWithAggregationInput = {
     id?: SortOrder
     homeCategoryId?: SortOrder
-    courseId?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    type?: SortOrder
+    courseId?: SortOrder
+    isDeleted?: SortOrder
     _count?: HomeCategoryItemCountOrderByAggregateInput
     _max?: HomeCategoryItemMaxOrderByAggregateInput
     _min?: HomeCategoryItemMinOrderByAggregateInput
@@ -20276,67 +20316,72 @@ export namespace Prisma {
     NOT?: HomeCategoryItemScalarWhereWithAggregatesInput | HomeCategoryItemScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"HomeCategoryItem"> | string
     homeCategoryId?: StringWithAggregatesFilter<"HomeCategoryItem"> | string
-    courseId?: UuidWithAggregatesFilter<"HomeCategoryItem"> | string
-    type?: EnumCourseTypeWithAggregatesFilter<"HomeCategoryItem"> | $Enums.CourseType
     createdAt?: DateTimeWithAggregatesFilter<"HomeCategoryItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"HomeCategoryItem"> | Date | string
+    type?: EnumCourseTypeWithAggregatesFilter<"HomeCategoryItem"> | $Enums.CourseType
+    courseId?: UuidWithAggregatesFilter<"HomeCategoryItem"> | string
+    isDeleted?: BoolWithAggregatesFilter<"HomeCategoryItem"> | boolean
   }
 
   export type CourseWhereInput = {
     AND?: CourseWhereInput | CourseWhereInput[]
     OR?: CourseWhereInput[]
     NOT?: CourseWhereInput | CourseWhereInput[]
-    id?: UuidFilter<"Course"> | string
-    image?: StringNullableFilter<"Course"> | string | null
     name?: StringFilter<"Course"> | string
-    description?: StringNullableFilter<"Course"> | string | null
-    duration?: IntNullableFilter<"Course"> | number | null
-    videoCount?: IntFilter<"Course"> | number
+    image?: StringNullableFilter<"Course"> | string | null
     enrolledCount?: IntFilter<"Course"> | number
-    isDeleted?: BoolFilter<"Course"> | boolean
-    rating?: FloatFilter<"Course"> | number
     date?: DateTimeFilter<"Course"> | Date | string
-    parentCourseId?: UuidNullableFilter<"Course"> | string | null
-    createdAt?: DateTimeFilter<"Course"> | Date | string
-    updatedAt?: DateTimeFilter<"Course"> | Date | string
     categoryId?: StringNullableFilter<"Course"> | string | null
     subCategoryId?: StringNullableFilter<"Course"> | string | null
+    isDeleted?: BoolFilter<"Course"> | boolean
+    createdAt?: DateTimeFilter<"Course"> | Date | string
+    description?: StringNullableFilter<"Course"> | string | null
+    duration?: IntNullableFilter<"Course"> | number | null
+    parentCourseId?: UuidNullableFilter<"Course"> | string | null
+    updatedAt?: DateTimeFilter<"Course"> | Date | string
+    videoCount?: IntFilter<"Course"> | number
+    id?: UuidFilter<"Course"> | string
+    rating?: FloatFilter<"Course"> | number
+    previewImage?: StringNullableFilter<"Course"> | string | null
+    previewVideo?: StringNullableFilter<"Course"> | string | null
+    ratings?: RatingListRelationFilter
+    users?: UserOnCourseListRelationFilter
+    Category?: XOR<CategoryNullableRelationFilter, CategoryWhereInput> | null
     parentCourse?: XOR<CourseNullableRelationFilter, CourseWhereInput> | null
     subCourses?: CourseListRelationFilter
-    users?: UserOnCourseListRelationFilter
-    category?: XOR<CategoryNullableRelationFilter, CategoryWhereInput> | null
-    subCategory?: XOR<SubCategoryNullableRelationFilter, SubCategoryWhereInput> | null
-    HomeCategoryItem?: HomeCategoryItemListRelationFilter
+    SubCategory?: XOR<SubCategoryNullableRelationFilter, SubCategoryWhereInput> | null
     CourseSection?: CourseSectionListRelationFilter
+    HomeCategoryItem?: HomeCategoryItemListRelationFilter
     reviews?: ReviewListRelationFilter
-    ratings?: RatingListRelationFilter
   }
 
   export type CourseOrderByWithRelationInput = {
-    id?: SortOrder
-    image?: SortOrderInput | SortOrder
     name?: SortOrder
-    description?: SortOrderInput | SortOrder
-    duration?: SortOrderInput | SortOrder
-    videoCount?: SortOrder
+    image?: SortOrderInput | SortOrder
     enrolledCount?: SortOrder
-    isDeleted?: SortOrder
-    rating?: SortOrder
     date?: SortOrder
-    parentCourseId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     categoryId?: SortOrderInput | SortOrder
     subCategoryId?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    createdAt?: SortOrder
+    description?: SortOrderInput | SortOrder
+    duration?: SortOrderInput | SortOrder
+    parentCourseId?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    videoCount?: SortOrder
+    id?: SortOrder
+    rating?: SortOrder
+    previewImage?: SortOrderInput | SortOrder
+    previewVideo?: SortOrderInput | SortOrder
+    ratings?: RatingOrderByRelationAggregateInput
+    users?: UserOnCourseOrderByRelationAggregateInput
+    Category?: CategoryOrderByWithRelationInput
     parentCourse?: CourseOrderByWithRelationInput
     subCourses?: CourseOrderByRelationAggregateInput
-    users?: UserOnCourseOrderByRelationAggregateInput
-    category?: CategoryOrderByWithRelationInput
-    subCategory?: SubCategoryOrderByWithRelationInput
-    HomeCategoryItem?: HomeCategoryItemOrderByRelationAggregateInput
+    SubCategory?: SubCategoryOrderByWithRelationInput
     CourseSection?: CourseSectionOrderByRelationAggregateInput
+    HomeCategoryItem?: HomeCategoryItemOrderByRelationAggregateInput
     reviews?: ReviewOrderByRelationAggregateInput
-    ratings?: RatingOrderByRelationAggregateInput
   }
 
   export type CourseWhereUniqueInput = Prisma.AtLeast<{
@@ -20344,47 +20389,51 @@ export namespace Prisma {
     AND?: CourseWhereInput | CourseWhereInput[]
     OR?: CourseWhereInput[]
     NOT?: CourseWhereInput | CourseWhereInput[]
-    image?: StringNullableFilter<"Course"> | string | null
     name?: StringFilter<"Course"> | string
-    description?: StringNullableFilter<"Course"> | string | null
-    duration?: IntNullableFilter<"Course"> | number | null
-    videoCount?: IntFilter<"Course"> | number
+    image?: StringNullableFilter<"Course"> | string | null
     enrolledCount?: IntFilter<"Course"> | number
-    isDeleted?: BoolFilter<"Course"> | boolean
-    rating?: FloatFilter<"Course"> | number
     date?: DateTimeFilter<"Course"> | Date | string
-    parentCourseId?: UuidNullableFilter<"Course"> | string | null
-    createdAt?: DateTimeFilter<"Course"> | Date | string
-    updatedAt?: DateTimeFilter<"Course"> | Date | string
     categoryId?: StringNullableFilter<"Course"> | string | null
     subCategoryId?: StringNullableFilter<"Course"> | string | null
+    isDeleted?: BoolFilter<"Course"> | boolean
+    createdAt?: DateTimeFilter<"Course"> | Date | string
+    description?: StringNullableFilter<"Course"> | string | null
+    duration?: IntNullableFilter<"Course"> | number | null
+    parentCourseId?: UuidNullableFilter<"Course"> | string | null
+    updatedAt?: DateTimeFilter<"Course"> | Date | string
+    videoCount?: IntFilter<"Course"> | number
+    rating?: FloatFilter<"Course"> | number
+    previewImage?: StringNullableFilter<"Course"> | string | null
+    previewVideo?: StringNullableFilter<"Course"> | string | null
+    ratings?: RatingListRelationFilter
+    users?: UserOnCourseListRelationFilter
+    Category?: XOR<CategoryNullableRelationFilter, CategoryWhereInput> | null
     parentCourse?: XOR<CourseNullableRelationFilter, CourseWhereInput> | null
     subCourses?: CourseListRelationFilter
-    users?: UserOnCourseListRelationFilter
-    category?: XOR<CategoryNullableRelationFilter, CategoryWhereInput> | null
-    subCategory?: XOR<SubCategoryNullableRelationFilter, SubCategoryWhereInput> | null
-    HomeCategoryItem?: HomeCategoryItemListRelationFilter
+    SubCategory?: XOR<SubCategoryNullableRelationFilter, SubCategoryWhereInput> | null
     CourseSection?: CourseSectionListRelationFilter
+    HomeCategoryItem?: HomeCategoryItemListRelationFilter
     reviews?: ReviewListRelationFilter
-    ratings?: RatingListRelationFilter
   }, "id">
 
   export type CourseOrderByWithAggregationInput = {
-    id?: SortOrder
-    image?: SortOrderInput | SortOrder
     name?: SortOrder
-    description?: SortOrderInput | SortOrder
-    duration?: SortOrderInput | SortOrder
-    videoCount?: SortOrder
+    image?: SortOrderInput | SortOrder
     enrolledCount?: SortOrder
-    isDeleted?: SortOrder
-    rating?: SortOrder
     date?: SortOrder
-    parentCourseId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     categoryId?: SortOrderInput | SortOrder
     subCategoryId?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    createdAt?: SortOrder
+    description?: SortOrderInput | SortOrder
+    duration?: SortOrderInput | SortOrder
+    parentCourseId?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    videoCount?: SortOrder
+    id?: SortOrder
+    rating?: SortOrder
+    previewImage?: SortOrderInput | SortOrder
+    previewVideo?: SortOrderInput | SortOrder
     _count?: CourseCountOrderByAggregateInput
     _avg?: CourseAvgOrderByAggregateInput
     _max?: CourseMaxOrderByAggregateInput
@@ -20396,21 +20445,23 @@ export namespace Prisma {
     AND?: CourseScalarWhereWithAggregatesInput | CourseScalarWhereWithAggregatesInput[]
     OR?: CourseScalarWhereWithAggregatesInput[]
     NOT?: CourseScalarWhereWithAggregatesInput | CourseScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"Course"> | string
-    image?: StringNullableWithAggregatesFilter<"Course"> | string | null
     name?: StringWithAggregatesFilter<"Course"> | string
-    description?: StringNullableWithAggregatesFilter<"Course"> | string | null
-    duration?: IntNullableWithAggregatesFilter<"Course"> | number | null
-    videoCount?: IntWithAggregatesFilter<"Course"> | number
+    image?: StringNullableWithAggregatesFilter<"Course"> | string | null
     enrolledCount?: IntWithAggregatesFilter<"Course"> | number
-    isDeleted?: BoolWithAggregatesFilter<"Course"> | boolean
-    rating?: FloatWithAggregatesFilter<"Course"> | number
     date?: DateTimeWithAggregatesFilter<"Course"> | Date | string
-    parentCourseId?: UuidNullableWithAggregatesFilter<"Course"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
     categoryId?: StringNullableWithAggregatesFilter<"Course"> | string | null
     subCategoryId?: StringNullableWithAggregatesFilter<"Course"> | string | null
+    isDeleted?: BoolWithAggregatesFilter<"Course"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
+    description?: StringNullableWithAggregatesFilter<"Course"> | string | null
+    duration?: IntNullableWithAggregatesFilter<"Course"> | number | null
+    parentCourseId?: UuidNullableWithAggregatesFilter<"Course"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
+    videoCount?: IntWithAggregatesFilter<"Course"> | number
+    id?: UuidWithAggregatesFilter<"Course"> | string
+    rating?: FloatWithAggregatesFilter<"Course"> | number
+    previewImage?: StringNullableWithAggregatesFilter<"Course"> | string | null
+    previewVideo?: StringNullableWithAggregatesFilter<"Course"> | string | null
   }
 
   export type UserOnCourseWhereInput = {
@@ -20423,7 +20474,7 @@ export namespace Prisma {
     status?: EnumCourseStatusFilter<"UserOnCourse"> | $Enums.CourseStatus
     createdAt?: DateTimeFilter<"UserOnCourse"> | Date | string
     updatedAt?: DateTimeFilter<"UserOnCourse"> | Date | string
-    course?: XOR<CourseRelationFilter, CourseWhereInput>
+    Course?: XOR<CourseRelationFilter, CourseWhereInput>
   }
 
   export type UserOnCourseOrderByWithRelationInput = {
@@ -20433,7 +20484,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    course?: CourseOrderByWithRelationInput
+    Course?: CourseOrderByWithRelationInput
   }
 
   export type UserOnCourseWhereUniqueInput = Prisma.AtLeast<{
@@ -20446,7 +20497,7 @@ export namespace Prisma {
     status?: EnumCourseStatusFilter<"UserOnCourse"> | $Enums.CourseStatus
     createdAt?: DateTimeFilter<"UserOnCourse"> | Date | string
     updatedAt?: DateTimeFilter<"UserOnCourse"> | Date | string
-    course?: XOR<CourseRelationFilter, CourseWhereInput>
+    Course?: XOR<CourseRelationFilter, CourseWhereInput>
   }, "id">
 
   export type UserOnCourseOrderByWithAggregationInput = {
@@ -20483,8 +20534,8 @@ export namespace Prisma {
     courseId?: UuidFilter<"CourseSection"> | string
     createdAt?: DateTimeFilter<"CourseSection"> | Date | string
     updatedAt?: DateTimeFilter<"CourseSection"> | Date | string
-    course?: XOR<CourseRelationFilter, CourseWhereInput>
     activities?: ActivityListRelationFilter
+    course?: XOR<CourseRelationFilter, CourseWhereInput>
   }
 
   export type CourseSectionOrderByWithRelationInput = {
@@ -20494,8 +20545,8 @@ export namespace Prisma {
     courseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    course?: CourseOrderByWithRelationInput
     activities?: ActivityOrderByRelationAggregateInput
+    course?: CourseOrderByWithRelationInput
   }
 
   export type CourseSectionWhereUniqueInput = Prisma.AtLeast<{
@@ -20508,8 +20559,8 @@ export namespace Prisma {
     courseId?: UuidFilter<"CourseSection"> | string
     createdAt?: DateTimeFilter<"CourseSection"> | Date | string
     updatedAt?: DateTimeFilter<"CourseSection"> | Date | string
-    course?: XOR<CourseRelationFilter, CourseWhereInput>
     activities?: ActivityListRelationFilter
+    course?: XOR<CourseRelationFilter, CourseWhereInput>
   }, "id">
 
   export type CourseSectionOrderByWithAggregationInput = {
@@ -20628,7 +20679,7 @@ export namespace Prisma {
     text?: StringFilter<"Review"> | string
     createdAt?: DateTimeFilter<"Review"> | Date | string
     updatedAt?: DateTimeFilter<"Review"> | Date | string
-    course?: XOR<CourseRelationFilter, CourseWhereInput>
+    Course?: XOR<CourseRelationFilter, CourseWhereInput>
   }
 
   export type ReviewOrderByWithRelationInput = {
@@ -20638,7 +20689,7 @@ export namespace Prisma {
     text?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    course?: CourseOrderByWithRelationInput
+    Course?: CourseOrderByWithRelationInput
   }
 
   export type ReviewWhereUniqueInput = Prisma.AtLeast<{
@@ -20651,7 +20702,7 @@ export namespace Prisma {
     text?: StringFilter<"Review"> | string
     createdAt?: DateTimeFilter<"Review"> | Date | string
     updatedAt?: DateTimeFilter<"Review"> | Date | string
-    course?: XOR<CourseRelationFilter, CourseWhereInput>
+    Course?: XOR<CourseRelationFilter, CourseWhereInput>
   }, "id">
 
   export type ReviewOrderByWithAggregationInput = {
@@ -20863,35 +20914,35 @@ export namespace Prisma {
     NOT?: ContentWhereInput | ContentWhereInput[]
     id?: StringFilter<"Content"> | string
     typeId?: StringFilter<"Content"> | string
-    categoryId?: StringNullableFilter<"Content"> | string | null
     title?: StringFilter<"Content"> | string
     description?: StringNullableFilter<"Content"> | string | null
     fileUrl?: StringNullableFilter<"Content"> | string | null
     thumbnailUrl?: StringNullableFilter<"Content"> | string | null
     author?: StringNullableFilter<"Content"> | string | null
-    content?: StringNullableFilter<"Content"> | string | null
     publishedAt?: DateTimeNullableFilter<"Content"> | Date | string | null
     createdAt?: DateTimeFilter<"Content"> | Date | string
     updatedAt?: DateTimeFilter<"Content"> | Date | string
-    type?: XOR<ContentTypeRelationFilter, ContentTypeWhereInput>
+    categoryId?: StringNullableFilter<"Content"> | string | null
+    content?: StringNullableFilter<"Content"> | string | null
     category?: XOR<CategoryNullableRelationFilter, CategoryWhereInput> | null
+    type?: XOR<ContentTypeRelationFilter, ContentTypeWhereInput>
   }
 
   export type ContentOrderByWithRelationInput = {
     id?: SortOrder
     typeId?: SortOrder
-    categoryId?: SortOrderInput | SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
     fileUrl?: SortOrderInput | SortOrder
     thumbnailUrl?: SortOrderInput | SortOrder
     author?: SortOrderInput | SortOrder
-    content?: SortOrderInput | SortOrder
     publishedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    type?: ContentTypeOrderByWithRelationInput
+    categoryId?: SortOrderInput | SortOrder
+    content?: SortOrderInput | SortOrder
     category?: CategoryOrderByWithRelationInput
+    type?: ContentTypeOrderByWithRelationInput
   }
 
   export type ContentWhereUniqueInput = Prisma.AtLeast<{
@@ -20900,33 +20951,33 @@ export namespace Prisma {
     OR?: ContentWhereInput[]
     NOT?: ContentWhereInput | ContentWhereInput[]
     typeId?: StringFilter<"Content"> | string
-    categoryId?: StringNullableFilter<"Content"> | string | null
     title?: StringFilter<"Content"> | string
     description?: StringNullableFilter<"Content"> | string | null
     fileUrl?: StringNullableFilter<"Content"> | string | null
     thumbnailUrl?: StringNullableFilter<"Content"> | string | null
     author?: StringNullableFilter<"Content"> | string | null
-    content?: StringNullableFilter<"Content"> | string | null
     publishedAt?: DateTimeNullableFilter<"Content"> | Date | string | null
     createdAt?: DateTimeFilter<"Content"> | Date | string
     updatedAt?: DateTimeFilter<"Content"> | Date | string
-    type?: XOR<ContentTypeRelationFilter, ContentTypeWhereInput>
+    categoryId?: StringNullableFilter<"Content"> | string | null
+    content?: StringNullableFilter<"Content"> | string | null
     category?: XOR<CategoryNullableRelationFilter, CategoryWhereInput> | null
+    type?: XOR<ContentTypeRelationFilter, ContentTypeWhereInput>
   }, "id">
 
   export type ContentOrderByWithAggregationInput = {
     id?: SortOrder
     typeId?: SortOrder
-    categoryId?: SortOrderInput | SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
     fileUrl?: SortOrderInput | SortOrder
     thumbnailUrl?: SortOrderInput | SortOrder
     author?: SortOrderInput | SortOrder
-    content?: SortOrderInput | SortOrder
     publishedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrderInput | SortOrder
+    content?: SortOrderInput | SortOrder
     _count?: ContentCountOrderByAggregateInput
     _max?: ContentMaxOrderByAggregateInput
     _min?: ContentMinOrderByAggregateInput
@@ -20938,16 +20989,16 @@ export namespace Prisma {
     NOT?: ContentScalarWhereWithAggregatesInput | ContentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Content"> | string
     typeId?: StringWithAggregatesFilter<"Content"> | string
-    categoryId?: StringNullableWithAggregatesFilter<"Content"> | string | null
     title?: StringWithAggregatesFilter<"Content"> | string
     description?: StringNullableWithAggregatesFilter<"Content"> | string | null
     fileUrl?: StringNullableWithAggregatesFilter<"Content"> | string | null
     thumbnailUrl?: StringNullableWithAggregatesFilter<"Content"> | string | null
     author?: StringNullableWithAggregatesFilter<"Content"> | string | null
-    content?: StringNullableWithAggregatesFilter<"Content"> | string | null
     publishedAt?: DateTimeNullableWithAggregatesFilter<"Content"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Content"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Content"> | Date | string
+    categoryId?: StringNullableWithAggregatesFilter<"Content"> | string | null
+    content?: StringNullableWithAggregatesFilter<"Content"> | string | null
   }
 
   export type PostCreateInput = {
@@ -21226,115 +21277,115 @@ export namespace Prisma {
   export type CategoryCreateInput = {
     id?: string
     name: string
-    isDeleted?: boolean
-    type: $Enums.CategoryType
     createdAt?: Date | string
     updatedAt?: Date | string
-    subCategories?: SubCategoryCreateNestedManyWithoutCategoryInput
-    courses?: CourseCreateNestedManyWithoutCategoryInput
+    isDeleted?: boolean
+    type: $Enums.CategoryType
     contents?: ContentCreateNestedManyWithoutCategoryInput
+    courses?: CourseCreateNestedManyWithoutCategoryInput
+    subCategories?: SubCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateInput = {
     id?: string
     name: string
-    isDeleted?: boolean
-    type: $Enums.CategoryType
     createdAt?: Date | string
     updatedAt?: Date | string
-    subCategories?: SubCategoryUncheckedCreateNestedManyWithoutCategoryInput
-    courses?: CourseUncheckedCreateNestedManyWithoutCategoryInput
+    isDeleted?: boolean
+    type: $Enums.CategoryType
     contents?: ContentUncheckedCreateNestedManyWithoutCategoryInput
+    courses?: CourseUncheckedCreateNestedManyWithoutCategoryInput
+    subCategories?: SubCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategories?: SubCategoryUpdateManyWithoutCategoryNestedInput
-    courses?: CourseUpdateManyWithoutCategoryNestedInput
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     contents?: ContentUpdateManyWithoutCategoryNestedInput
+    courses?: CourseUpdateManyWithoutCategoryNestedInput
+    subCategories?: SubCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategories?: SubCategoryUncheckedUpdateManyWithoutCategoryNestedInput
-    courses?: CourseUncheckedUpdateManyWithoutCategoryNestedInput
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     contents?: ContentUncheckedUpdateManyWithoutCategoryNestedInput
+    courses?: CourseUncheckedUpdateManyWithoutCategoryNestedInput
+    subCategories?: SubCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryCreateManyInput = {
     id?: string
     name: string
-    isDeleted?: boolean
-    type: $Enums.CategoryType
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
+    type: $Enums.CategoryType
   }
 
   export type CategoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
   }
 
   export type CategoryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
   }
 
   export type SubCategoryCreateInput = {
     id?: string
     name: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    category: CategoryCreateNestedOneWithoutSubCategoriesInput
+    isDeleted?: boolean
     courses?: CourseCreateNestedManyWithoutSubCategoryInput
+    category: CategoryCreateNestedOneWithoutSubCategoriesInput
   }
 
   export type SubCategoryUncheckedCreateInput = {
     id?: string
     name: string
     categoryId: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
     courses?: CourseUncheckedCreateNestedManyWithoutSubCategoryInput
   }
 
   export type SubCategoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: CategoryUpdateOneRequiredWithoutSubCategoriesNestedInput
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     courses?: CourseUpdateManyWithoutSubCategoryNestedInput
+    category?: CategoryUpdateOneRequiredWithoutSubCategoriesNestedInput
   }
 
   export type SubCategoryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     courses?: CourseUncheckedUpdateManyWithoutSubCategoryNestedInput
   }
 
@@ -21342,294 +21393,315 @@ export namespace Prisma {
     id?: string
     name: string
     categoryId: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
   }
 
   export type SubCategoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SubCategoryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HomeCategoryCreateInput = {
     id?: string
     name: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
     items?: HomeCategoryItemCreateNestedManyWithoutHomeCategoryInput
   }
 
   export type HomeCategoryUncheckedCreateInput = {
     id?: string
     name: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
     items?: HomeCategoryItemUncheckedCreateNestedManyWithoutHomeCategoryInput
   }
 
   export type HomeCategoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     items?: HomeCategoryItemUpdateManyWithoutHomeCategoryNestedInput
   }
 
   export type HomeCategoryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     items?: HomeCategoryItemUncheckedUpdateManyWithoutHomeCategoryNestedInput
   }
 
   export type HomeCategoryCreateManyInput = {
     id?: string
     name: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
   }
 
   export type HomeCategoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HomeCategoryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HomeCategoryItemCreateInput = {
     id?: string
-    type: $Enums.CourseType
     createdAt?: Date | string
     updatedAt?: Date | string
-    homeCategory: HomeCategoryCreateNestedOneWithoutItemsInput
+    type: $Enums.CourseType
+    isDeleted?: boolean
     course: CourseCreateNestedOneWithoutHomeCategoryItemInput
+    homeCategory: HomeCategoryCreateNestedOneWithoutItemsInput
   }
 
   export type HomeCategoryItemUncheckedCreateInput = {
     id?: string
     homeCategoryId: string
-    courseId: string
-    type: $Enums.CourseType
     createdAt?: Date | string
     updatedAt?: Date | string
+    type: $Enums.CourseType
+    courseId: string
+    isDeleted?: boolean
   }
 
   export type HomeCategoryItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    homeCategory?: HomeCategoryUpdateOneRequiredWithoutItemsNestedInput
+    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     course?: CourseUpdateOneRequiredWithoutHomeCategoryItemNestedInput
+    homeCategory?: HomeCategoryUpdateOneRequiredWithoutItemsNestedInput
   }
 
   export type HomeCategoryItemUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     homeCategoryId?: StringFieldUpdateOperationsInput | string
-    courseId?: StringFieldUpdateOperationsInput | string
-    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+    courseId?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HomeCategoryItemCreateManyInput = {
     id?: string
     homeCategoryId: string
-    courseId: string
-    type: $Enums.CourseType
     createdAt?: Date | string
     updatedAt?: Date | string
+    type: $Enums.CourseType
+    courseId: string
+    isDeleted?: boolean
   }
 
   export type HomeCategoryItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HomeCategoryItemUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     homeCategoryId?: StringFieldUpdateOperationsInput | string
-    courseId?: StringFieldUpdateOperationsInput | string
-    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+    courseId?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CourseCreateInput = {
-    id?: string
-    image?: string | null
     name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    isDeleted?: boolean
+    createdAt?: Date | string
     description?: string | null
     duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseCreateNestedManyWithoutCourseInput
+    Category?: CategoryCreateNestedOneWithoutCoursesInput
     parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
     subCourses?: CourseCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseCreateNestedManyWithoutCourseInput
-    category?: CategoryCreateNestedOneWithoutCoursesInput
-    subCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
-    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
+    SubCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
     CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
     reviews?: ReviewCreateNestedManyWithoutCourseInput
-    ratings?: RatingCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateInput = {
-    id?: string
-    image?: string | null
     name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
+    image?: string | null
     enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
     date?: Date | string
-    parentCourseId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     categoryId?: string | null
     subCategoryId?: string | null
-    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    parentCourseId?: string | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
+    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
+    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
+    Category?: CategoryUpdateOneWithoutCoursesNestedInput
     parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
     subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
-    category?: CategoryUpdateOneWithoutCoursesNestedInput
-    subCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
-    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
+    SubCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
     CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
     reviews?: ReviewUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
+    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
+    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseCreateManyInput = {
-    id?: string
-    image?: string | null
     name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
+    image?: string | null
     enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
     date?: Date | string
-    parentCourseId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     categoryId?: string | null
     subCategoryId?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    parentCourseId?: string | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
   }
 
   export type CourseUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CourseUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserOnCourseCreateInput = {
@@ -21638,7 +21710,7 @@ export namespace Prisma {
     status?: $Enums.CourseStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    course: CourseCreateNestedOneWithoutUsersInput
+    Course: CourseCreateNestedOneWithoutUsersInput
   }
 
   export type UserOnCourseUncheckedCreateInput = {
@@ -21656,7 +21728,7 @@ export namespace Prisma {
     status?: EnumCourseStatusFieldUpdateOperationsInput | $Enums.CourseStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    course?: CourseUpdateOneRequiredWithoutUsersNestedInput
+    Course?: CourseUpdateOneRequiredWithoutUsersNestedInput
   }
 
   export type UserOnCourseUncheckedUpdateInput = {
@@ -21700,8 +21772,8 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    course: CourseCreateNestedOneWithoutCourseSectionInput
     activities?: ActivityCreateNestedManyWithoutSectionInput
+    course: CourseCreateNestedOneWithoutCourseSectionInput
   }
 
   export type CourseSectionUncheckedCreateInput = {
@@ -21720,8 +21792,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    course?: CourseUpdateOneRequiredWithoutCourseSectionNestedInput
     activities?: ActivityUpdateManyWithoutSectionNestedInput
+    course?: CourseUpdateOneRequiredWithoutCourseSectionNestedInput
   }
 
   export type CourseSectionUncheckedUpdateInput = {
@@ -21856,7 +21928,7 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    course: CourseCreateNestedOneWithoutReviewsInput
+    Course: CourseCreateNestedOneWithoutReviewsInput
   }
 
   export type ReviewUncheckedCreateInput = {
@@ -21874,7 +21946,7 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    course?: CourseUpdateOneRequiredWithoutReviewsNestedInput
+    Course?: CourseUpdateOneRequiredWithoutReviewsNestedInput
   }
 
   export type ReviewUncheckedUpdateInput = {
@@ -22111,27 +22183,27 @@ export namespace Prisma {
     fileUrl?: string | null
     thumbnailUrl?: string | null
     author?: string | null
-    content?: string | null
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    type: ContentTypeCreateNestedOneWithoutContentsInput
+    content?: string | null
     category?: CategoryCreateNestedOneWithoutContentsInput
+    type: ContentTypeCreateNestedOneWithoutContentsInput
   }
 
   export type ContentUncheckedCreateInput = {
     id?: string
     typeId: string
-    categoryId?: string | null
     title: string
     description?: string | null
     fileUrl?: string | null
     thumbnailUrl?: string | null
     author?: string | null
-    content?: string | null
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    categoryId?: string | null
+    content?: string | null
   }
 
   export type ContentUpdateInput = {
@@ -22141,42 +22213,42 @@ export namespace Prisma {
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
     author?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    type?: ContentTypeUpdateOneRequiredWithoutContentsNestedInput
+    content?: NullableStringFieldUpdateOperationsInput | string | null
     category?: CategoryUpdateOneWithoutContentsNestedInput
+    type?: ContentTypeUpdateOneRequiredWithoutContentsNestedInput
   }
 
   export type ContentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeId?: StringFieldUpdateOperationsInput | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
     author?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContentCreateManyInput = {
     id?: string
     typeId: string
-    categoryId?: string | null
     title: string
     description?: string | null
     fileUrl?: string | null
     thumbnailUrl?: string | null
     author?: string | null
-    content?: string | null
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    categoryId?: string | null
+    content?: string | null
   }
 
   export type ContentUpdateManyMutationInput = {
@@ -22186,25 +22258,25 @@ export namespace Prisma {
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
     author?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     typeId?: StringFieldUpdateOperationsInput | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
     author?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -22516,10 +22588,10 @@ export namespace Prisma {
     not?: NestedEnumCategoryTypeFilter<$PrismaModel> | $Enums.CategoryType
   }
 
-  export type SubCategoryListRelationFilter = {
-    every?: SubCategoryWhereInput
-    some?: SubCategoryWhereInput
-    none?: SubCategoryWhereInput
+  export type ContentListRelationFilter = {
+    every?: ContentWhereInput
+    some?: ContentWhereInput
+    none?: ContentWhereInput
   }
 
   export type CourseListRelationFilter = {
@@ -22528,13 +22600,13 @@ export namespace Prisma {
     none?: CourseWhereInput
   }
 
-  export type ContentListRelationFilter = {
-    every?: ContentWhereInput
-    some?: ContentWhereInput
-    none?: ContentWhereInput
+  export type SubCategoryListRelationFilter = {
+    every?: SubCategoryWhereInput
+    some?: SubCategoryWhereInput
+    none?: SubCategoryWhereInput
   }
 
-  export type SubCategoryOrderByRelationAggregateInput = {
+  export type ContentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22542,35 +22614,35 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type ContentOrderByRelationAggregateInput = {
+  export type SubCategoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type CategoryCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    isDeleted?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
+    type?: SortOrder
   }
 
   export type CategoryMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    isDeleted?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
+    type?: SortOrder
   }
 
   export type CategoryMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    isDeleted?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
+    type?: SortOrder
   }
 
   export type EnumCategoryTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -22592,27 +22664,27 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     categoryId?: SortOrder
-    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
   }
 
   export type SubCategoryMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     categoryId?: SortOrder
-    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
   }
 
   export type SubCategoryMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     categoryId?: SortOrder
-    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
   }
 
   export type HomeCategoryItemListRelationFilter = {
@@ -22628,25 +22700,32 @@ export namespace Prisma {
   export type HomeCategoryCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
   }
 
   export type HomeCategoryMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
   }
 
   export type HomeCategoryMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isDeleted?: SortOrder
+  }
+
+  export type EnumCourseTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CourseType | EnumCourseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCourseTypeFilter<$PrismaModel> | $Enums.CourseType
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -22661,11 +22740,9 @@ export namespace Prisma {
     not?: NestedUuidFilter<$PrismaModel> | string
   }
 
-  export type EnumCourseTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.CourseType | EnumCourseTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCourseTypeFilter<$PrismaModel> | $Enums.CourseType
+  export type CourseRelationFilter = {
+    is?: CourseWhereInput
+    isNot?: CourseWhereInput
   }
 
   export type HomeCategoryRelationFilter = {
@@ -22673,36 +22750,49 @@ export namespace Prisma {
     isNot?: HomeCategoryWhereInput
   }
 
-  export type CourseRelationFilter = {
-    is?: CourseWhereInput
-    isNot?: CourseWhereInput
+  export type HomeCategoryItemHomeCategoryIdCourseIdCompoundUniqueInput = {
+    homeCategoryId: string
+    courseId: string
   }
 
   export type HomeCategoryItemCountOrderByAggregateInput = {
     id?: SortOrder
     homeCategoryId?: SortOrder
-    courseId?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    type?: SortOrder
+    courseId?: SortOrder
+    isDeleted?: SortOrder
   }
 
   export type HomeCategoryItemMaxOrderByAggregateInput = {
     id?: SortOrder
     homeCategoryId?: SortOrder
-    courseId?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    type?: SortOrder
+    courseId?: SortOrder
+    isDeleted?: SortOrder
   }
 
   export type HomeCategoryItemMinOrderByAggregateInput = {
     id?: SortOrder
     homeCategoryId?: SortOrder
-    courseId?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    type?: SortOrder
+    courseId?: SortOrder
+    isDeleted?: SortOrder
+  }
+
+  export type EnumCourseTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CourseType | EnumCourseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCourseTypeWithAggregatesFilter<$PrismaModel> | $Enums.CourseType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCourseTypeFilter<$PrismaModel>
+    _max?: NestedEnumCourseTypeFilter<$PrismaModel>
   }
 
   export type UuidWithAggregatesFilter<$PrismaModel = never> = {
@@ -22720,27 +22810,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type EnumCourseTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.CourseType | EnumCourseTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCourseTypeWithAggregatesFilter<$PrismaModel> | $Enums.CourseType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumCourseTypeFilter<$PrismaModel>
-    _max?: NestedEnumCourseTypeFilter<$PrismaModel>
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -22752,15 +22821,15 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type UuidNullableFilter<$PrismaModel = never> = {
@@ -22775,9 +22844,21 @@ export namespace Prisma {
     not?: NestedUuidNullableFilter<$PrismaModel> | string | null
   }
 
-  export type CourseNullableRelationFilter = {
-    is?: CourseWhereInput | null
-    isNot?: CourseWhereInput | null
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type RatingListRelationFilter = {
+    every?: RatingWhereInput
+    some?: RatingWhereInput
+    none?: RatingWhereInput
   }
 
   export type UserOnCourseListRelationFilter = {
@@ -22789,6 +22870,11 @@ export namespace Prisma {
   export type CategoryNullableRelationFilter = {
     is?: CategoryWhereInput | null
     isNot?: CategoryWhereInput | null
+  }
+
+  export type CourseNullableRelationFilter = {
+    is?: CourseWhereInput | null
+    isNot?: CourseWhereInput | null
   }
 
   export type SubCategoryNullableRelationFilter = {
@@ -22808,10 +22894,8 @@ export namespace Prisma {
     none?: ReviewWhereInput
   }
 
-  export type RatingListRelationFilter = {
-    every?: RatingWhereInput
-    some?: RatingWhereInput
-    none?: RatingWhereInput
+  export type RatingOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type UserOnCourseOrderByRelationAggregateInput = {
@@ -22826,92 +22910,78 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type RatingOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type CourseCountOrderByAggregateInput = {
-    id?: SortOrder
-    image?: SortOrder
     name?: SortOrder
-    description?: SortOrder
-    duration?: SortOrder
-    videoCount?: SortOrder
+    image?: SortOrder
     enrolledCount?: SortOrder
-    isDeleted?: SortOrder
-    rating?: SortOrder
     date?: SortOrder
-    parentCourseId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     categoryId?: SortOrder
     subCategoryId?: SortOrder
+    isDeleted?: SortOrder
+    createdAt?: SortOrder
+    description?: SortOrder
+    duration?: SortOrder
+    parentCourseId?: SortOrder
+    updatedAt?: SortOrder
+    videoCount?: SortOrder
+    id?: SortOrder
+    rating?: SortOrder
+    previewImage?: SortOrder
+    previewVideo?: SortOrder
   }
 
   export type CourseAvgOrderByAggregateInput = {
+    enrolledCount?: SortOrder
     duration?: SortOrder
     videoCount?: SortOrder
-    enrolledCount?: SortOrder
     rating?: SortOrder
   }
 
   export type CourseMaxOrderByAggregateInput = {
-    id?: SortOrder
-    image?: SortOrder
     name?: SortOrder
-    description?: SortOrder
-    duration?: SortOrder
-    videoCount?: SortOrder
+    image?: SortOrder
     enrolledCount?: SortOrder
-    isDeleted?: SortOrder
-    rating?: SortOrder
     date?: SortOrder
-    parentCourseId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     categoryId?: SortOrder
     subCategoryId?: SortOrder
+    isDeleted?: SortOrder
+    createdAt?: SortOrder
+    description?: SortOrder
+    duration?: SortOrder
+    parentCourseId?: SortOrder
+    updatedAt?: SortOrder
+    videoCount?: SortOrder
+    id?: SortOrder
+    rating?: SortOrder
+    previewImage?: SortOrder
+    previewVideo?: SortOrder
   }
 
   export type CourseMinOrderByAggregateInput = {
-    id?: SortOrder
-    image?: SortOrder
     name?: SortOrder
-    description?: SortOrder
-    duration?: SortOrder
-    videoCount?: SortOrder
+    image?: SortOrder
     enrolledCount?: SortOrder
-    isDeleted?: SortOrder
-    rating?: SortOrder
     date?: SortOrder
-    parentCourseId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
     categoryId?: SortOrder
     subCategoryId?: SortOrder
+    isDeleted?: SortOrder
+    createdAt?: SortOrder
+    description?: SortOrder
+    duration?: SortOrder
+    parentCourseId?: SortOrder
+    updatedAt?: SortOrder
+    videoCount?: SortOrder
+    id?: SortOrder
+    rating?: SortOrder
+    previewImage?: SortOrder
+    previewVideo?: SortOrder
   }
 
   export type CourseSumOrderByAggregateInput = {
+    enrolledCount?: SortOrder
     duration?: SortOrder
     videoCount?: SortOrder
-    enrolledCount?: SortOrder
     rating?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -22930,20 +23000,20 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -22959,6 +23029,22 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type EnumCourseStatusFilter<$PrismaModel = never> = {
@@ -23237,46 +23323,46 @@ export namespace Prisma {
   export type ContentCountOrderByAggregateInput = {
     id?: SortOrder
     typeId?: SortOrder
-    categoryId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     fileUrl?: SortOrder
     thumbnailUrl?: SortOrder
     author?: SortOrder
-    content?: SortOrder
     publishedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
+    content?: SortOrder
   }
 
   export type ContentMaxOrderByAggregateInput = {
     id?: SortOrder
     typeId?: SortOrder
-    categoryId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     fileUrl?: SortOrder
     thumbnailUrl?: SortOrder
     author?: SortOrder
-    content?: SortOrder
     publishedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
+    content?: SortOrder
   }
 
   export type ContentMinOrderByAggregateInput = {
     id?: SortOrder
     typeId?: SortOrder
-    categoryId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     fileUrl?: SortOrder
     thumbnailUrl?: SortOrder
     author?: SortOrder
-    content?: SortOrder
     publishedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
+    content?: SortOrder
   }
 
   export type PostCreatetagsInput = {
@@ -23308,11 +23394,11 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type SubCategoryCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<SubCategoryCreateWithoutCategoryInput, SubCategoryUncheckedCreateWithoutCategoryInput> | SubCategoryCreateWithoutCategoryInput[] | SubCategoryUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: SubCategoryCreateOrConnectWithoutCategoryInput | SubCategoryCreateOrConnectWithoutCategoryInput[]
-    createMany?: SubCategoryCreateManyCategoryInputEnvelope
-    connect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
+  export type ContentCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<ContentCreateWithoutCategoryInput, ContentUncheckedCreateWithoutCategoryInput> | ContentCreateWithoutCategoryInput[] | ContentUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: ContentCreateOrConnectWithoutCategoryInput | ContentCreateOrConnectWithoutCategoryInput[]
+    createMany?: ContentCreateManyCategoryInputEnvelope
+    connect?: ContentWhereUniqueInput | ContentWhereUniqueInput[]
   }
 
   export type CourseCreateNestedManyWithoutCategoryInput = {
@@ -23322,25 +23408,11 @@ export namespace Prisma {
     connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
   }
 
-  export type ContentCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<ContentCreateWithoutCategoryInput, ContentUncheckedCreateWithoutCategoryInput> | ContentCreateWithoutCategoryInput[] | ContentUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: ContentCreateOrConnectWithoutCategoryInput | ContentCreateOrConnectWithoutCategoryInput[]
-    createMany?: ContentCreateManyCategoryInputEnvelope
-    connect?: ContentWhereUniqueInput | ContentWhereUniqueInput[]
-  }
-
-  export type SubCategoryUncheckedCreateNestedManyWithoutCategoryInput = {
+  export type SubCategoryCreateNestedManyWithoutCategoryInput = {
     create?: XOR<SubCategoryCreateWithoutCategoryInput, SubCategoryUncheckedCreateWithoutCategoryInput> | SubCategoryCreateWithoutCategoryInput[] | SubCategoryUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: SubCategoryCreateOrConnectWithoutCategoryInput | SubCategoryCreateOrConnectWithoutCategoryInput[]
     createMany?: SubCategoryCreateManyCategoryInputEnvelope
     connect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
-  }
-
-  export type CourseUncheckedCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput> | CourseCreateWithoutCategoryInput[] | CourseUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutCategoryInput | CourseCreateOrConnectWithoutCategoryInput[]
-    createMany?: CourseCreateManyCategoryInputEnvelope
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
   }
 
   export type ContentUncheckedCreateNestedManyWithoutCategoryInput = {
@@ -23350,36 +23422,22 @@ export namespace Prisma {
     connect?: ContentWhereUniqueInput | ContentWhereUniqueInput[]
   }
 
-  export type EnumCategoryTypeFieldUpdateOperationsInput = {
-    set?: $Enums.CategoryType
-  }
-
-  export type SubCategoryUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<SubCategoryCreateWithoutCategoryInput, SubCategoryUncheckedCreateWithoutCategoryInput> | SubCategoryCreateWithoutCategoryInput[] | SubCategoryUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: SubCategoryCreateOrConnectWithoutCategoryInput | SubCategoryCreateOrConnectWithoutCategoryInput[]
-    upsert?: SubCategoryUpsertWithWhereUniqueWithoutCategoryInput | SubCategoryUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: SubCategoryCreateManyCategoryInputEnvelope
-    set?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
-    disconnect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
-    delete?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
-    connect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
-    update?: SubCategoryUpdateWithWhereUniqueWithoutCategoryInput | SubCategoryUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: SubCategoryUpdateManyWithWhereWithoutCategoryInput | SubCategoryUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: SubCategoryScalarWhereInput | SubCategoryScalarWhereInput[]
-  }
-
-  export type CourseUpdateManyWithoutCategoryNestedInput = {
+  export type CourseUncheckedCreateNestedManyWithoutCategoryInput = {
     create?: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput> | CourseCreateWithoutCategoryInput[] | CourseUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutCategoryInput | CourseCreateOrConnectWithoutCategoryInput[]
-    upsert?: CourseUpsertWithWhereUniqueWithoutCategoryInput | CourseUpsertWithWhereUniqueWithoutCategoryInput[]
     createMany?: CourseCreateManyCategoryInputEnvelope
-    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
     connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    update?: CourseUpdateWithWhereUniqueWithoutCategoryInput | CourseUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: CourseUpdateManyWithWhereWithoutCategoryInput | CourseUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
+  export type SubCategoryUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<SubCategoryCreateWithoutCategoryInput, SubCategoryUncheckedCreateWithoutCategoryInput> | SubCategoryCreateWithoutCategoryInput[] | SubCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: SubCategoryCreateOrConnectWithoutCategoryInput | SubCategoryCreateOrConnectWithoutCategoryInput[]
+    createMany?: SubCategoryCreateManyCategoryInputEnvelope
+    connect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
+  }
+
+  export type EnumCategoryTypeFieldUpdateOperationsInput = {
+    set?: $Enums.CategoryType
   }
 
   export type ContentUpdateManyWithoutCategoryNestedInput = {
@@ -23396,21 +23454,7 @@ export namespace Prisma {
     deleteMany?: ContentScalarWhereInput | ContentScalarWhereInput[]
   }
 
-  export type SubCategoryUncheckedUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<SubCategoryCreateWithoutCategoryInput, SubCategoryUncheckedCreateWithoutCategoryInput> | SubCategoryCreateWithoutCategoryInput[] | SubCategoryUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: SubCategoryCreateOrConnectWithoutCategoryInput | SubCategoryCreateOrConnectWithoutCategoryInput[]
-    upsert?: SubCategoryUpsertWithWhereUniqueWithoutCategoryInput | SubCategoryUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: SubCategoryCreateManyCategoryInputEnvelope
-    set?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
-    disconnect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
-    delete?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
-    connect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
-    update?: SubCategoryUpdateWithWhereUniqueWithoutCategoryInput | SubCategoryUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: SubCategoryUpdateManyWithWhereWithoutCategoryInput | SubCategoryUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: SubCategoryScalarWhereInput | SubCategoryScalarWhereInput[]
-  }
-
-  export type CourseUncheckedUpdateManyWithoutCategoryNestedInput = {
+  export type CourseUpdateManyWithoutCategoryNestedInput = {
     create?: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput> | CourseCreateWithoutCategoryInput[] | CourseUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutCategoryInput | CourseCreateOrConnectWithoutCategoryInput[]
     upsert?: CourseUpsertWithWhereUniqueWithoutCategoryInput | CourseUpsertWithWhereUniqueWithoutCategoryInput[]
@@ -23422,6 +23466,20 @@ export namespace Prisma {
     update?: CourseUpdateWithWhereUniqueWithoutCategoryInput | CourseUpdateWithWhereUniqueWithoutCategoryInput[]
     updateMany?: CourseUpdateManyWithWhereWithoutCategoryInput | CourseUpdateManyWithWhereWithoutCategoryInput[]
     deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
+  export type SubCategoryUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<SubCategoryCreateWithoutCategoryInput, SubCategoryUncheckedCreateWithoutCategoryInput> | SubCategoryCreateWithoutCategoryInput[] | SubCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: SubCategoryCreateOrConnectWithoutCategoryInput | SubCategoryCreateOrConnectWithoutCategoryInput[]
+    upsert?: SubCategoryUpsertWithWhereUniqueWithoutCategoryInput | SubCategoryUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: SubCategoryCreateManyCategoryInputEnvelope
+    set?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
+    disconnect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
+    delete?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
+    connect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
+    update?: SubCategoryUpdateWithWhereUniqueWithoutCategoryInput | SubCategoryUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: SubCategoryUpdateManyWithWhereWithoutCategoryInput | SubCategoryUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: SubCategoryScalarWhereInput | SubCategoryScalarWhereInput[]
   }
 
   export type ContentUncheckedUpdateManyWithoutCategoryNestedInput = {
@@ -23438,10 +23496,32 @@ export namespace Prisma {
     deleteMany?: ContentScalarWhereInput | ContentScalarWhereInput[]
   }
 
-  export type CategoryCreateNestedOneWithoutSubCategoriesInput = {
-    create?: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput
-    connect?: CategoryWhereUniqueInput
+  export type CourseUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput> | CourseCreateWithoutCategoryInput[] | CourseUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutCategoryInput | CourseCreateOrConnectWithoutCategoryInput[]
+    upsert?: CourseUpsertWithWhereUniqueWithoutCategoryInput | CourseUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: CourseCreateManyCategoryInputEnvelope
+    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    update?: CourseUpdateWithWhereUniqueWithoutCategoryInput | CourseUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: CourseUpdateManyWithWhereWithoutCategoryInput | CourseUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
+  export type SubCategoryUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<SubCategoryCreateWithoutCategoryInput, SubCategoryUncheckedCreateWithoutCategoryInput> | SubCategoryCreateWithoutCategoryInput[] | SubCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: SubCategoryCreateOrConnectWithoutCategoryInput | SubCategoryCreateOrConnectWithoutCategoryInput[]
+    upsert?: SubCategoryUpsertWithWhereUniqueWithoutCategoryInput | SubCategoryUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: SubCategoryCreateManyCategoryInputEnvelope
+    set?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
+    disconnect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
+    delete?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
+    connect?: SubCategoryWhereUniqueInput | SubCategoryWhereUniqueInput[]
+    update?: SubCategoryUpdateWithWhereUniqueWithoutCategoryInput | SubCategoryUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: SubCategoryUpdateManyWithWhereWithoutCategoryInput | SubCategoryUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: SubCategoryScalarWhereInput | SubCategoryScalarWhereInput[]
   }
 
   export type CourseCreateNestedManyWithoutSubCategoryInput = {
@@ -23451,19 +23531,17 @@ export namespace Prisma {
     connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
   }
 
+  export type CategoryCreateNestedOneWithoutSubCategoriesInput = {
+    create?: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput
+    connect?: CategoryWhereUniqueInput
+  }
+
   export type CourseUncheckedCreateNestedManyWithoutSubCategoryInput = {
     create?: XOR<CourseCreateWithoutSubCategoryInput, CourseUncheckedCreateWithoutSubCategoryInput> | CourseCreateWithoutSubCategoryInput[] | CourseUncheckedCreateWithoutSubCategoryInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutSubCategoryInput | CourseCreateOrConnectWithoutSubCategoryInput[]
     createMany?: CourseCreateManySubCategoryInputEnvelope
     connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-  }
-
-  export type CategoryUpdateOneRequiredWithoutSubCategoriesNestedInput = {
-    create?: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput
-    upsert?: CategoryUpsertWithoutSubCategoriesInput
-    connect?: CategoryWhereUniqueInput
-    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutSubCategoriesInput, CategoryUpdateWithoutSubCategoriesInput>, CategoryUncheckedUpdateWithoutSubCategoriesInput>
   }
 
   export type CourseUpdateManyWithoutSubCategoryNestedInput = {
@@ -23478,6 +23556,14 @@ export namespace Prisma {
     update?: CourseUpdateWithWhereUniqueWithoutSubCategoryInput | CourseUpdateWithWhereUniqueWithoutSubCategoryInput[]
     updateMany?: CourseUpdateManyWithWhereWithoutSubCategoryInput | CourseUpdateManyWithWhereWithoutSubCategoryInput[]
     deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
+  export type CategoryUpdateOneRequiredWithoutSubCategoriesNestedInput = {
+    create?: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput
+    upsert?: CategoryUpsertWithoutSubCategoriesInput
+    connect?: CategoryWhereUniqueInput
+    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutSubCategoriesInput, CategoryUpdateWithoutSubCategoriesInput>, CategoryUncheckedUpdateWithoutSubCategoriesInput>
   }
 
   export type CourseUncheckedUpdateManyWithoutSubCategoryNestedInput = {
@@ -23536,28 +23622,20 @@ export namespace Prisma {
     deleteMany?: HomeCategoryItemScalarWhereInput | HomeCategoryItemScalarWhereInput[]
   }
 
-  export type HomeCategoryCreateNestedOneWithoutItemsInput = {
-    create?: XOR<HomeCategoryCreateWithoutItemsInput, HomeCategoryUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: HomeCategoryCreateOrConnectWithoutItemsInput
-    connect?: HomeCategoryWhereUniqueInput
-  }
-
   export type CourseCreateNestedOneWithoutHomeCategoryItemInput = {
     create?: XOR<CourseCreateWithoutHomeCategoryItemInput, CourseUncheckedCreateWithoutHomeCategoryItemInput>
     connectOrCreate?: CourseCreateOrConnectWithoutHomeCategoryItemInput
     connect?: CourseWhereUniqueInput
   }
 
-  export type EnumCourseTypeFieldUpdateOperationsInput = {
-    set?: $Enums.CourseType
-  }
-
-  export type HomeCategoryUpdateOneRequiredWithoutItemsNestedInput = {
+  export type HomeCategoryCreateNestedOneWithoutItemsInput = {
     create?: XOR<HomeCategoryCreateWithoutItemsInput, HomeCategoryUncheckedCreateWithoutItemsInput>
     connectOrCreate?: HomeCategoryCreateOrConnectWithoutItemsInput
-    upsert?: HomeCategoryUpsertWithoutItemsInput
     connect?: HomeCategoryWhereUniqueInput
-    update?: XOR<XOR<HomeCategoryUpdateToOneWithWhereWithoutItemsInput, HomeCategoryUpdateWithoutItemsInput>, HomeCategoryUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type EnumCourseTypeFieldUpdateOperationsInput = {
+    set?: $Enums.CourseType
   }
 
   export type CourseUpdateOneRequiredWithoutHomeCategoryItemNestedInput = {
@@ -23568,17 +23646,19 @@ export namespace Prisma {
     update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutHomeCategoryItemInput, CourseUpdateWithoutHomeCategoryItemInput>, CourseUncheckedUpdateWithoutHomeCategoryItemInput>
   }
 
-  export type CourseCreateNestedOneWithoutSubCoursesInput = {
-    create?: XOR<CourseCreateWithoutSubCoursesInput, CourseUncheckedCreateWithoutSubCoursesInput>
-    connectOrCreate?: CourseCreateOrConnectWithoutSubCoursesInput
-    connect?: CourseWhereUniqueInput
+  export type HomeCategoryUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<HomeCategoryCreateWithoutItemsInput, HomeCategoryUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: HomeCategoryCreateOrConnectWithoutItemsInput
+    upsert?: HomeCategoryUpsertWithoutItemsInput
+    connect?: HomeCategoryWhereUniqueInput
+    update?: XOR<XOR<HomeCategoryUpdateToOneWithWhereWithoutItemsInput, HomeCategoryUpdateWithoutItemsInput>, HomeCategoryUncheckedUpdateWithoutItemsInput>
   }
 
-  export type CourseCreateNestedManyWithoutParentCourseInput = {
-    create?: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput> | CourseCreateWithoutParentCourseInput[] | CourseUncheckedCreateWithoutParentCourseInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutParentCourseInput | CourseCreateOrConnectWithoutParentCourseInput[]
-    createMany?: CourseCreateManyParentCourseInputEnvelope
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+  export type RatingCreateNestedManyWithoutCourseInput = {
+    create?: XOR<RatingCreateWithoutCourseInput, RatingUncheckedCreateWithoutCourseInput> | RatingCreateWithoutCourseInput[] | RatingUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: RatingCreateOrConnectWithoutCourseInput | RatingCreateOrConnectWithoutCourseInput[]
+    createMany?: RatingCreateManyCourseInputEnvelope
+    connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
   }
 
   export type UserOnCourseCreateNestedManyWithoutCourseInput = {
@@ -23594,17 +23674,23 @@ export namespace Prisma {
     connect?: CategoryWhereUniqueInput
   }
 
+  export type CourseCreateNestedOneWithoutSubCoursesInput = {
+    create?: XOR<CourseCreateWithoutSubCoursesInput, CourseUncheckedCreateWithoutSubCoursesInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutSubCoursesInput
+    connect?: CourseWhereUniqueInput
+  }
+
+  export type CourseCreateNestedManyWithoutParentCourseInput = {
+    create?: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput> | CourseCreateWithoutParentCourseInput[] | CourseUncheckedCreateWithoutParentCourseInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutParentCourseInput | CourseCreateOrConnectWithoutParentCourseInput[]
+    createMany?: CourseCreateManyParentCourseInputEnvelope
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+  }
+
   export type SubCategoryCreateNestedOneWithoutCoursesInput = {
     create?: XOR<SubCategoryCreateWithoutCoursesInput, SubCategoryUncheckedCreateWithoutCoursesInput>
     connectOrCreate?: SubCategoryCreateOrConnectWithoutCoursesInput
     connect?: SubCategoryWhereUniqueInput
-  }
-
-  export type HomeCategoryItemCreateNestedManyWithoutCourseInput = {
-    create?: XOR<HomeCategoryItemCreateWithoutCourseInput, HomeCategoryItemUncheckedCreateWithoutCourseInput> | HomeCategoryItemCreateWithoutCourseInput[] | HomeCategoryItemUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: HomeCategoryItemCreateOrConnectWithoutCourseInput | HomeCategoryItemCreateOrConnectWithoutCourseInput[]
-    createMany?: HomeCategoryItemCreateManyCourseInputEnvelope
-    connect?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
   }
 
   export type CourseSectionCreateNestedManyWithoutCourseInput = {
@@ -23614,49 +23700,14 @@ export namespace Prisma {
     connect?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
   }
 
-  export type ReviewCreateNestedManyWithoutCourseInput = {
-    create?: XOR<ReviewCreateWithoutCourseInput, ReviewUncheckedCreateWithoutCourseInput> | ReviewCreateWithoutCourseInput[] | ReviewUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutCourseInput | ReviewCreateOrConnectWithoutCourseInput[]
-    createMany?: ReviewCreateManyCourseInputEnvelope
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-  }
-
-  export type RatingCreateNestedManyWithoutCourseInput = {
-    create?: XOR<RatingCreateWithoutCourseInput, RatingUncheckedCreateWithoutCourseInput> | RatingCreateWithoutCourseInput[] | RatingUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: RatingCreateOrConnectWithoutCourseInput | RatingCreateOrConnectWithoutCourseInput[]
-    createMany?: RatingCreateManyCourseInputEnvelope
-    connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
-  }
-
-  export type CourseUncheckedCreateNestedManyWithoutParentCourseInput = {
-    create?: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput> | CourseCreateWithoutParentCourseInput[] | CourseUncheckedCreateWithoutParentCourseInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutParentCourseInput | CourseCreateOrConnectWithoutParentCourseInput[]
-    createMany?: CourseCreateManyParentCourseInputEnvelope
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-  }
-
-  export type UserOnCourseUncheckedCreateNestedManyWithoutCourseInput = {
-    create?: XOR<UserOnCourseCreateWithoutCourseInput, UserOnCourseUncheckedCreateWithoutCourseInput> | UserOnCourseCreateWithoutCourseInput[] | UserOnCourseUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: UserOnCourseCreateOrConnectWithoutCourseInput | UserOnCourseCreateOrConnectWithoutCourseInput[]
-    createMany?: UserOnCourseCreateManyCourseInputEnvelope
-    connect?: UserOnCourseWhereUniqueInput | UserOnCourseWhereUniqueInput[]
-  }
-
-  export type HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput = {
+  export type HomeCategoryItemCreateNestedManyWithoutCourseInput = {
     create?: XOR<HomeCategoryItemCreateWithoutCourseInput, HomeCategoryItemUncheckedCreateWithoutCourseInput> | HomeCategoryItemCreateWithoutCourseInput[] | HomeCategoryItemUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: HomeCategoryItemCreateOrConnectWithoutCourseInput | HomeCategoryItemCreateOrConnectWithoutCourseInput[]
     createMany?: HomeCategoryItemCreateManyCourseInputEnvelope
     connect?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
   }
 
-  export type CourseSectionUncheckedCreateNestedManyWithoutCourseInput = {
-    create?: XOR<CourseSectionCreateWithoutCourseInput, CourseSectionUncheckedCreateWithoutCourseInput> | CourseSectionCreateWithoutCourseInput[] | CourseSectionUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: CourseSectionCreateOrConnectWithoutCourseInput | CourseSectionCreateOrConnectWithoutCourseInput[]
-    createMany?: CourseSectionCreateManyCourseInputEnvelope
-    connect?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
-  }
-
-  export type ReviewUncheckedCreateNestedManyWithoutCourseInput = {
+  export type ReviewCreateNestedManyWithoutCourseInput = {
     create?: XOR<ReviewCreateWithoutCourseInput, ReviewUncheckedCreateWithoutCourseInput> | ReviewCreateWithoutCourseInput[] | ReviewUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: ReviewCreateOrConnectWithoutCourseInput | ReviewCreateOrConnectWithoutCourseInput[]
     createMany?: ReviewCreateManyCourseInputEnvelope
@@ -23670,16 +23721,51 @@ export namespace Prisma {
     connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
+  export type UserOnCourseUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<UserOnCourseCreateWithoutCourseInput, UserOnCourseUncheckedCreateWithoutCourseInput> | UserOnCourseCreateWithoutCourseInput[] | UserOnCourseUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: UserOnCourseCreateOrConnectWithoutCourseInput | UserOnCourseCreateOrConnectWithoutCourseInput[]
+    createMany?: UserOnCourseCreateManyCourseInputEnvelope
+    connect?: UserOnCourseWhereUniqueInput | UserOnCourseWhereUniqueInput[]
+  }
+
+  export type CourseUncheckedCreateNestedManyWithoutParentCourseInput = {
+    create?: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput> | CourseCreateWithoutParentCourseInput[] | CourseUncheckedCreateWithoutParentCourseInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutParentCourseInput | CourseCreateOrConnectWithoutParentCourseInput[]
+    createMany?: CourseCreateManyParentCourseInputEnvelope
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+  }
+
+  export type CourseSectionUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<CourseSectionCreateWithoutCourseInput, CourseSectionUncheckedCreateWithoutCourseInput> | CourseSectionCreateWithoutCourseInput[] | CourseSectionUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: CourseSectionCreateOrConnectWithoutCourseInput | CourseSectionCreateOrConnectWithoutCourseInput[]
+    createMany?: CourseSectionCreateManyCourseInputEnvelope
+    connect?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
+  }
+
+  export type HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<HomeCategoryItemCreateWithoutCourseInput, HomeCategoryItemUncheckedCreateWithoutCourseInput> | HomeCategoryItemCreateWithoutCourseInput[] | HomeCategoryItemUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: HomeCategoryItemCreateOrConnectWithoutCourseInput | HomeCategoryItemCreateOrConnectWithoutCourseInput[]
+    createMany?: HomeCategoryItemCreateManyCourseInputEnvelope
+    connect?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
+  }
+
+  export type ReviewUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<ReviewCreateWithoutCourseInput, ReviewUncheckedCreateWithoutCourseInput> | ReviewCreateWithoutCourseInput[] | ReviewUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutCourseInput | ReviewCreateOrConnectWithoutCourseInput[]
+    createMany?: ReviewCreateManyCourseInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
@@ -23694,28 +23780,18 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type CourseUpdateOneWithoutSubCoursesNestedInput = {
-    create?: XOR<CourseCreateWithoutSubCoursesInput, CourseUncheckedCreateWithoutSubCoursesInput>
-    connectOrCreate?: CourseCreateOrConnectWithoutSubCoursesInput
-    upsert?: CourseUpsertWithoutSubCoursesInput
-    disconnect?: CourseWhereInput | boolean
-    delete?: CourseWhereInput | boolean
-    connect?: CourseWhereUniqueInput
-    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutSubCoursesInput, CourseUpdateWithoutSubCoursesInput>, CourseUncheckedUpdateWithoutSubCoursesInput>
-  }
-
-  export type CourseUpdateManyWithoutParentCourseNestedInput = {
-    create?: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput> | CourseCreateWithoutParentCourseInput[] | CourseUncheckedCreateWithoutParentCourseInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutParentCourseInput | CourseCreateOrConnectWithoutParentCourseInput[]
-    upsert?: CourseUpsertWithWhereUniqueWithoutParentCourseInput | CourseUpsertWithWhereUniqueWithoutParentCourseInput[]
-    createMany?: CourseCreateManyParentCourseInputEnvelope
-    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    update?: CourseUpdateWithWhereUniqueWithoutParentCourseInput | CourseUpdateWithWhereUniqueWithoutParentCourseInput[]
-    updateMany?: CourseUpdateManyWithWhereWithoutParentCourseInput | CourseUpdateManyWithWhereWithoutParentCourseInput[]
-    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  export type RatingUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<RatingCreateWithoutCourseInput, RatingUncheckedCreateWithoutCourseInput> | RatingCreateWithoutCourseInput[] | RatingUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: RatingCreateOrConnectWithoutCourseInput | RatingCreateOrConnectWithoutCourseInput[]
+    upsert?: RatingUpsertWithWhereUniqueWithoutCourseInput | RatingUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: RatingCreateManyCourseInputEnvelope
+    set?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    disconnect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    delete?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
+    update?: RatingUpdateWithWhereUniqueWithoutCourseInput | RatingUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: RatingUpdateManyWithWhereWithoutCourseInput | RatingUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: RatingScalarWhereInput | RatingScalarWhereInput[]
   }
 
   export type UserOnCourseUpdateManyWithoutCourseNestedInput = {
@@ -23742,6 +23818,30 @@ export namespace Prisma {
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutCoursesInput, CategoryUpdateWithoutCoursesInput>, CategoryUncheckedUpdateWithoutCoursesInput>
   }
 
+  export type CourseUpdateOneWithoutSubCoursesNestedInput = {
+    create?: XOR<CourseCreateWithoutSubCoursesInput, CourseUncheckedCreateWithoutSubCoursesInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutSubCoursesInput
+    upsert?: CourseUpsertWithoutSubCoursesInput
+    disconnect?: CourseWhereInput | boolean
+    delete?: CourseWhereInput | boolean
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutSubCoursesInput, CourseUpdateWithoutSubCoursesInput>, CourseUncheckedUpdateWithoutSubCoursesInput>
+  }
+
+  export type CourseUpdateManyWithoutParentCourseNestedInput = {
+    create?: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput> | CourseCreateWithoutParentCourseInput[] | CourseUncheckedCreateWithoutParentCourseInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutParentCourseInput | CourseCreateOrConnectWithoutParentCourseInput[]
+    upsert?: CourseUpsertWithWhereUniqueWithoutParentCourseInput | CourseUpsertWithWhereUniqueWithoutParentCourseInput[]
+    createMany?: CourseCreateManyParentCourseInputEnvelope
+    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    update?: CourseUpdateWithWhereUniqueWithoutParentCourseInput | CourseUpdateWithWhereUniqueWithoutParentCourseInput[]
+    updateMany?: CourseUpdateManyWithWhereWithoutParentCourseInput | CourseUpdateManyWithWhereWithoutParentCourseInput[]
+    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
   export type SubCategoryUpdateOneWithoutCoursesNestedInput = {
     create?: XOR<SubCategoryCreateWithoutCoursesInput, SubCategoryUncheckedCreateWithoutCoursesInput>
     connectOrCreate?: SubCategoryCreateOrConnectWithoutCoursesInput
@@ -23750,20 +23850,6 @@ export namespace Prisma {
     delete?: SubCategoryWhereInput | boolean
     connect?: SubCategoryWhereUniqueInput
     update?: XOR<XOR<SubCategoryUpdateToOneWithWhereWithoutCoursesInput, SubCategoryUpdateWithoutCoursesInput>, SubCategoryUncheckedUpdateWithoutCoursesInput>
-  }
-
-  export type HomeCategoryItemUpdateManyWithoutCourseNestedInput = {
-    create?: XOR<HomeCategoryItemCreateWithoutCourseInput, HomeCategoryItemUncheckedCreateWithoutCourseInput> | HomeCategoryItemCreateWithoutCourseInput[] | HomeCategoryItemUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: HomeCategoryItemCreateOrConnectWithoutCourseInput | HomeCategoryItemCreateOrConnectWithoutCourseInput[]
-    upsert?: HomeCategoryItemUpsertWithWhereUniqueWithoutCourseInput | HomeCategoryItemUpsertWithWhereUniqueWithoutCourseInput[]
-    createMany?: HomeCategoryItemCreateManyCourseInputEnvelope
-    set?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
-    disconnect?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
-    delete?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
-    connect?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
-    update?: HomeCategoryItemUpdateWithWhereUniqueWithoutCourseInput | HomeCategoryItemUpdateWithWhereUniqueWithoutCourseInput[]
-    updateMany?: HomeCategoryItemUpdateManyWithWhereWithoutCourseInput | HomeCategoryItemUpdateManyWithWhereWithoutCourseInput[]
-    deleteMany?: HomeCategoryItemScalarWhereInput | HomeCategoryItemScalarWhereInput[]
   }
 
   export type CourseSectionUpdateManyWithoutCourseNestedInput = {
@@ -23780,63 +23866,7 @@ export namespace Prisma {
     deleteMany?: CourseSectionScalarWhereInput | CourseSectionScalarWhereInput[]
   }
 
-  export type ReviewUpdateManyWithoutCourseNestedInput = {
-    create?: XOR<ReviewCreateWithoutCourseInput, ReviewUncheckedCreateWithoutCourseInput> | ReviewCreateWithoutCourseInput[] | ReviewUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutCourseInput | ReviewCreateOrConnectWithoutCourseInput[]
-    upsert?: ReviewUpsertWithWhereUniqueWithoutCourseInput | ReviewUpsertWithWhereUniqueWithoutCourseInput[]
-    createMany?: ReviewCreateManyCourseInputEnvelope
-    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    update?: ReviewUpdateWithWhereUniqueWithoutCourseInput | ReviewUpdateWithWhereUniqueWithoutCourseInput[]
-    updateMany?: ReviewUpdateManyWithWhereWithoutCourseInput | ReviewUpdateManyWithWhereWithoutCourseInput[]
-    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-  }
-
-  export type RatingUpdateManyWithoutCourseNestedInput = {
-    create?: XOR<RatingCreateWithoutCourseInput, RatingUncheckedCreateWithoutCourseInput> | RatingCreateWithoutCourseInput[] | RatingUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: RatingCreateOrConnectWithoutCourseInput | RatingCreateOrConnectWithoutCourseInput[]
-    upsert?: RatingUpsertWithWhereUniqueWithoutCourseInput | RatingUpsertWithWhereUniqueWithoutCourseInput[]
-    createMany?: RatingCreateManyCourseInputEnvelope
-    set?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
-    disconnect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
-    delete?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
-    connect?: RatingWhereUniqueInput | RatingWhereUniqueInput[]
-    update?: RatingUpdateWithWhereUniqueWithoutCourseInput | RatingUpdateWithWhereUniqueWithoutCourseInput[]
-    updateMany?: RatingUpdateManyWithWhereWithoutCourseInput | RatingUpdateManyWithWhereWithoutCourseInput[]
-    deleteMany?: RatingScalarWhereInput | RatingScalarWhereInput[]
-  }
-
-  export type CourseUncheckedUpdateManyWithoutParentCourseNestedInput = {
-    create?: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput> | CourseCreateWithoutParentCourseInput[] | CourseUncheckedCreateWithoutParentCourseInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutParentCourseInput | CourseCreateOrConnectWithoutParentCourseInput[]
-    upsert?: CourseUpsertWithWhereUniqueWithoutParentCourseInput | CourseUpsertWithWhereUniqueWithoutParentCourseInput[]
-    createMany?: CourseCreateManyParentCourseInputEnvelope
-    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    update?: CourseUpdateWithWhereUniqueWithoutParentCourseInput | CourseUpdateWithWhereUniqueWithoutParentCourseInput[]
-    updateMany?: CourseUpdateManyWithWhereWithoutParentCourseInput | CourseUpdateManyWithWhereWithoutParentCourseInput[]
-    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
-  }
-
-  export type UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput = {
-    create?: XOR<UserOnCourseCreateWithoutCourseInput, UserOnCourseUncheckedCreateWithoutCourseInput> | UserOnCourseCreateWithoutCourseInput[] | UserOnCourseUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: UserOnCourseCreateOrConnectWithoutCourseInput | UserOnCourseCreateOrConnectWithoutCourseInput[]
-    upsert?: UserOnCourseUpsertWithWhereUniqueWithoutCourseInput | UserOnCourseUpsertWithWhereUniqueWithoutCourseInput[]
-    createMany?: UserOnCourseCreateManyCourseInputEnvelope
-    set?: UserOnCourseWhereUniqueInput | UserOnCourseWhereUniqueInput[]
-    disconnect?: UserOnCourseWhereUniqueInput | UserOnCourseWhereUniqueInput[]
-    delete?: UserOnCourseWhereUniqueInput | UserOnCourseWhereUniqueInput[]
-    connect?: UserOnCourseWhereUniqueInput | UserOnCourseWhereUniqueInput[]
-    update?: UserOnCourseUpdateWithWhereUniqueWithoutCourseInput | UserOnCourseUpdateWithWhereUniqueWithoutCourseInput[]
-    updateMany?: UserOnCourseUpdateManyWithWhereWithoutCourseInput | UserOnCourseUpdateManyWithWhereWithoutCourseInput[]
-    deleteMany?: UserOnCourseScalarWhereInput | UserOnCourseScalarWhereInput[]
-  }
-
-  export type HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput = {
+  export type HomeCategoryItemUpdateManyWithoutCourseNestedInput = {
     create?: XOR<HomeCategoryItemCreateWithoutCourseInput, HomeCategoryItemUncheckedCreateWithoutCourseInput> | HomeCategoryItemCreateWithoutCourseInput[] | HomeCategoryItemUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: HomeCategoryItemCreateOrConnectWithoutCourseInput | HomeCategoryItemCreateOrConnectWithoutCourseInput[]
     upsert?: HomeCategoryItemUpsertWithWhereUniqueWithoutCourseInput | HomeCategoryItemUpsertWithWhereUniqueWithoutCourseInput[]
@@ -23850,21 +23880,7 @@ export namespace Prisma {
     deleteMany?: HomeCategoryItemScalarWhereInput | HomeCategoryItemScalarWhereInput[]
   }
 
-  export type CourseSectionUncheckedUpdateManyWithoutCourseNestedInput = {
-    create?: XOR<CourseSectionCreateWithoutCourseInput, CourseSectionUncheckedCreateWithoutCourseInput> | CourseSectionCreateWithoutCourseInput[] | CourseSectionUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: CourseSectionCreateOrConnectWithoutCourseInput | CourseSectionCreateOrConnectWithoutCourseInput[]
-    upsert?: CourseSectionUpsertWithWhereUniqueWithoutCourseInput | CourseSectionUpsertWithWhereUniqueWithoutCourseInput[]
-    createMany?: CourseSectionCreateManyCourseInputEnvelope
-    set?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
-    disconnect?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
-    delete?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
-    connect?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
-    update?: CourseSectionUpdateWithWhereUniqueWithoutCourseInput | CourseSectionUpdateWithWhereUniqueWithoutCourseInput[]
-    updateMany?: CourseSectionUpdateManyWithWhereWithoutCourseInput | CourseSectionUpdateManyWithWhereWithoutCourseInput[]
-    deleteMany?: CourseSectionScalarWhereInput | CourseSectionScalarWhereInput[]
-  }
-
-  export type ReviewUncheckedUpdateManyWithoutCourseNestedInput = {
+  export type ReviewUpdateManyWithoutCourseNestedInput = {
     create?: XOR<ReviewCreateWithoutCourseInput, ReviewUncheckedCreateWithoutCourseInput> | ReviewCreateWithoutCourseInput[] | ReviewUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: ReviewCreateOrConnectWithoutCourseInput | ReviewCreateOrConnectWithoutCourseInput[]
     upsert?: ReviewUpsertWithWhereUniqueWithoutCourseInput | ReviewUpsertWithWhereUniqueWithoutCourseInput[]
@@ -23892,6 +23908,76 @@ export namespace Prisma {
     deleteMany?: RatingScalarWhereInput | RatingScalarWhereInput[]
   }
 
+  export type UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<UserOnCourseCreateWithoutCourseInput, UserOnCourseUncheckedCreateWithoutCourseInput> | UserOnCourseCreateWithoutCourseInput[] | UserOnCourseUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: UserOnCourseCreateOrConnectWithoutCourseInput | UserOnCourseCreateOrConnectWithoutCourseInput[]
+    upsert?: UserOnCourseUpsertWithWhereUniqueWithoutCourseInput | UserOnCourseUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: UserOnCourseCreateManyCourseInputEnvelope
+    set?: UserOnCourseWhereUniqueInput | UserOnCourseWhereUniqueInput[]
+    disconnect?: UserOnCourseWhereUniqueInput | UserOnCourseWhereUniqueInput[]
+    delete?: UserOnCourseWhereUniqueInput | UserOnCourseWhereUniqueInput[]
+    connect?: UserOnCourseWhereUniqueInput | UserOnCourseWhereUniqueInput[]
+    update?: UserOnCourseUpdateWithWhereUniqueWithoutCourseInput | UserOnCourseUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: UserOnCourseUpdateManyWithWhereWithoutCourseInput | UserOnCourseUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: UserOnCourseScalarWhereInput | UserOnCourseScalarWhereInput[]
+  }
+
+  export type CourseUncheckedUpdateManyWithoutParentCourseNestedInput = {
+    create?: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput> | CourseCreateWithoutParentCourseInput[] | CourseUncheckedCreateWithoutParentCourseInput[]
+    connectOrCreate?: CourseCreateOrConnectWithoutParentCourseInput | CourseCreateOrConnectWithoutParentCourseInput[]
+    upsert?: CourseUpsertWithWhereUniqueWithoutParentCourseInput | CourseUpsertWithWhereUniqueWithoutParentCourseInput[]
+    createMany?: CourseCreateManyParentCourseInputEnvelope
+    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+    update?: CourseUpdateWithWhereUniqueWithoutParentCourseInput | CourseUpdateWithWhereUniqueWithoutParentCourseInput[]
+    updateMany?: CourseUpdateManyWithWhereWithoutParentCourseInput | CourseUpdateManyWithWhereWithoutParentCourseInput[]
+    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
+  export type CourseSectionUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<CourseSectionCreateWithoutCourseInput, CourseSectionUncheckedCreateWithoutCourseInput> | CourseSectionCreateWithoutCourseInput[] | CourseSectionUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: CourseSectionCreateOrConnectWithoutCourseInput | CourseSectionCreateOrConnectWithoutCourseInput[]
+    upsert?: CourseSectionUpsertWithWhereUniqueWithoutCourseInput | CourseSectionUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: CourseSectionCreateManyCourseInputEnvelope
+    set?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
+    disconnect?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
+    delete?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
+    connect?: CourseSectionWhereUniqueInput | CourseSectionWhereUniqueInput[]
+    update?: CourseSectionUpdateWithWhereUniqueWithoutCourseInput | CourseSectionUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: CourseSectionUpdateManyWithWhereWithoutCourseInput | CourseSectionUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: CourseSectionScalarWhereInput | CourseSectionScalarWhereInput[]
+  }
+
+  export type HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<HomeCategoryItemCreateWithoutCourseInput, HomeCategoryItemUncheckedCreateWithoutCourseInput> | HomeCategoryItemCreateWithoutCourseInput[] | HomeCategoryItemUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: HomeCategoryItemCreateOrConnectWithoutCourseInput | HomeCategoryItemCreateOrConnectWithoutCourseInput[]
+    upsert?: HomeCategoryItemUpsertWithWhereUniqueWithoutCourseInput | HomeCategoryItemUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: HomeCategoryItemCreateManyCourseInputEnvelope
+    set?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
+    disconnect?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
+    delete?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
+    connect?: HomeCategoryItemWhereUniqueInput | HomeCategoryItemWhereUniqueInput[]
+    update?: HomeCategoryItemUpdateWithWhereUniqueWithoutCourseInput | HomeCategoryItemUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: HomeCategoryItemUpdateManyWithWhereWithoutCourseInput | HomeCategoryItemUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: HomeCategoryItemScalarWhereInput | HomeCategoryItemScalarWhereInput[]
+  }
+
+  export type ReviewUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<ReviewCreateWithoutCourseInput, ReviewUncheckedCreateWithoutCourseInput> | ReviewCreateWithoutCourseInput[] | ReviewUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutCourseInput | ReviewCreateOrConnectWithoutCourseInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutCourseInput | ReviewUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: ReviewCreateManyCourseInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutCourseInput | ReviewUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutCourseInput | ReviewUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+  }
+
   export type CourseCreateNestedOneWithoutUsersInput = {
     create?: XOR<CourseCreateWithoutUsersInput, CourseUncheckedCreateWithoutUsersInput>
     connectOrCreate?: CourseCreateOrConnectWithoutUsersInput
@@ -23910,12 +23996,6 @@ export namespace Prisma {
     update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutUsersInput, CourseUpdateWithoutUsersInput>, CourseUncheckedUpdateWithoutUsersInput>
   }
 
-  export type CourseCreateNestedOneWithoutCourseSectionInput = {
-    create?: XOR<CourseCreateWithoutCourseSectionInput, CourseUncheckedCreateWithoutCourseSectionInput>
-    connectOrCreate?: CourseCreateOrConnectWithoutCourseSectionInput
-    connect?: CourseWhereUniqueInput
-  }
-
   export type ActivityCreateNestedManyWithoutSectionInput = {
     create?: XOR<ActivityCreateWithoutSectionInput, ActivityUncheckedCreateWithoutSectionInput> | ActivityCreateWithoutSectionInput[] | ActivityUncheckedCreateWithoutSectionInput[]
     connectOrCreate?: ActivityCreateOrConnectWithoutSectionInput | ActivityCreateOrConnectWithoutSectionInput[]
@@ -23923,19 +24003,17 @@ export namespace Prisma {
     connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
   }
 
+  export type CourseCreateNestedOneWithoutCourseSectionInput = {
+    create?: XOR<CourseCreateWithoutCourseSectionInput, CourseUncheckedCreateWithoutCourseSectionInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutCourseSectionInput
+    connect?: CourseWhereUniqueInput
+  }
+
   export type ActivityUncheckedCreateNestedManyWithoutSectionInput = {
     create?: XOR<ActivityCreateWithoutSectionInput, ActivityUncheckedCreateWithoutSectionInput> | ActivityCreateWithoutSectionInput[] | ActivityUncheckedCreateWithoutSectionInput[]
     connectOrCreate?: ActivityCreateOrConnectWithoutSectionInput | ActivityCreateOrConnectWithoutSectionInput[]
     createMany?: ActivityCreateManySectionInputEnvelope
     connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
-  }
-
-  export type CourseUpdateOneRequiredWithoutCourseSectionNestedInput = {
-    create?: XOR<CourseCreateWithoutCourseSectionInput, CourseUncheckedCreateWithoutCourseSectionInput>
-    connectOrCreate?: CourseCreateOrConnectWithoutCourseSectionInput
-    upsert?: CourseUpsertWithoutCourseSectionInput
-    connect?: CourseWhereUniqueInput
-    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutCourseSectionInput, CourseUpdateWithoutCourseSectionInput>, CourseUncheckedUpdateWithoutCourseSectionInput>
   }
 
   export type ActivityUpdateManyWithoutSectionNestedInput = {
@@ -23950,6 +24028,14 @@ export namespace Prisma {
     update?: ActivityUpdateWithWhereUniqueWithoutSectionInput | ActivityUpdateWithWhereUniqueWithoutSectionInput[]
     updateMany?: ActivityUpdateManyWithWhereWithoutSectionInput | ActivityUpdateManyWithWhereWithoutSectionInput[]
     deleteMany?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+  }
+
+  export type CourseUpdateOneRequiredWithoutCourseSectionNestedInput = {
+    create?: XOR<CourseCreateWithoutCourseSectionInput, CourseUncheckedCreateWithoutCourseSectionInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutCourseSectionInput
+    upsert?: CourseUpsertWithoutCourseSectionInput
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutCourseSectionInput, CourseUpdateWithoutCourseSectionInput>, CourseUncheckedUpdateWithoutCourseSectionInput>
   }
 
   export type ActivityUncheckedUpdateManyWithoutSectionNestedInput = {
@@ -24054,24 +24140,16 @@ export namespace Prisma {
     deleteMany?: ContentScalarWhereInput | ContentScalarWhereInput[]
   }
 
-  export type ContentTypeCreateNestedOneWithoutContentsInput = {
-    create?: XOR<ContentTypeCreateWithoutContentsInput, ContentTypeUncheckedCreateWithoutContentsInput>
-    connectOrCreate?: ContentTypeCreateOrConnectWithoutContentsInput
-    connect?: ContentTypeWhereUniqueInput
-  }
-
   export type CategoryCreateNestedOneWithoutContentsInput = {
     create?: XOR<CategoryCreateWithoutContentsInput, CategoryUncheckedCreateWithoutContentsInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutContentsInput
     connect?: CategoryWhereUniqueInput
   }
 
-  export type ContentTypeUpdateOneRequiredWithoutContentsNestedInput = {
+  export type ContentTypeCreateNestedOneWithoutContentsInput = {
     create?: XOR<ContentTypeCreateWithoutContentsInput, ContentTypeUncheckedCreateWithoutContentsInput>
     connectOrCreate?: ContentTypeCreateOrConnectWithoutContentsInput
-    upsert?: ContentTypeUpsertWithoutContentsInput
     connect?: ContentTypeWhereUniqueInput
-    update?: XOR<XOR<ContentTypeUpdateToOneWithWhereWithoutContentsInput, ContentTypeUpdateWithoutContentsInput>, ContentTypeUncheckedUpdateWithoutContentsInput>
   }
 
   export type CategoryUpdateOneWithoutContentsNestedInput = {
@@ -24082,6 +24160,14 @@ export namespace Prisma {
     delete?: CategoryWhereInput | boolean
     connect?: CategoryWhereUniqueInput
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutContentsInput, CategoryUpdateWithoutContentsInput>, CategoryUncheckedUpdateWithoutContentsInput>
+  }
+
+  export type ContentTypeUpdateOneRequiredWithoutContentsNestedInput = {
+    create?: XOR<ContentTypeCreateWithoutContentsInput, ContentTypeUncheckedCreateWithoutContentsInput>
+    connectOrCreate?: ContentTypeCreateOrConnectWithoutContentsInput
+    upsert?: ContentTypeUpsertWithoutContentsInput
+    connect?: ContentTypeWhereUniqueInput
+    update?: XOR<XOR<ContentTypeUpdateToOneWithWhereWithoutContentsInput, ContentTypeUpdateWithoutContentsInput>, ContentTypeUncheckedUpdateWithoutContentsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -24270,6 +24356,13 @@ export namespace Prisma {
     _max?: NestedEnumCategoryTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumCourseTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CourseType | EnumCourseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCourseTypeFilter<$PrismaModel> | $Enums.CourseType
+  }
+
   export type NestedUuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -24281,11 +24374,14 @@ export namespace Prisma {
     not?: NestedUuidFilter<$PrismaModel> | string
   }
 
-  export type NestedEnumCourseTypeFilter<$PrismaModel = never> = {
+  export type NestedEnumCourseTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.CourseType | EnumCourseTypeFieldRefInput<$PrismaModel>
     in?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCourseTypeFilter<$PrismaModel> | $Enums.CourseType
+    not?: NestedEnumCourseTypeWithAggregatesFilter<$PrismaModel> | $Enums.CourseType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCourseTypeFilter<$PrismaModel>
+    _max?: NestedEnumCourseTypeFilter<$PrismaModel>
   }
 
   export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
@@ -24302,14 +24398,15 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedEnumCourseTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.CourseType | EnumCourseTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CourseType[] | ListEnumCourseTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCourseTypeWithAggregatesFilter<$PrismaModel> | $Enums.CourseType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumCourseTypeFilter<$PrismaModel>
-    _max?: NestedEnumCourseTypeFilter<$PrismaModel>
+  export type NestedUuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedFloatFilter<$PrismaModel = never> = {
@@ -24323,15 +24420,20 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedUuidNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -24361,20 +24463,18 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -24391,20 +24491,6 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumCourseStatusFilter<$PrismaModel = never> = {
@@ -24441,21 +24527,119 @@ export namespace Prisma {
     _max?: NestedEnumActivityTypeFilter<$PrismaModel>
   }
 
+  export type ContentCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    description?: string | null
+    fileUrl?: string | null
+    thumbnailUrl?: string | null
+    author?: string | null
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    content?: string | null
+    type: ContentTypeCreateNestedOneWithoutContentsInput
+  }
+
+  export type ContentUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    typeId: string
+    title: string
+    description?: string | null
+    fileUrl?: string | null
+    thumbnailUrl?: string | null
+    author?: string | null
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    content?: string | null
+  }
+
+  export type ContentCreateOrConnectWithoutCategoryInput = {
+    where: ContentWhereUniqueInput
+    create: XOR<ContentCreateWithoutCategoryInput, ContentUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type ContentCreateManyCategoryInputEnvelope = {
+    data: ContentCreateManyCategoryInput | ContentCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CourseCreateWithoutCategoryInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseCreateNestedManyWithoutCourseInput
+    parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
+    subCourses?: CourseCreateNestedManyWithoutParentCourseInput
+    SubCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
+    CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
+    reviews?: ReviewCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutCategoryInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    subCategoryId?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    parentCourseId?: string | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
+    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
+    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutCategoryInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type CourseCreateManyCategoryInputEnvelope = {
+    data: CourseCreateManyCategoryInput | CourseCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SubCategoryCreateWithoutCategoryInput = {
     id?: string
     name: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
     courses?: CourseCreateNestedManyWithoutSubCategoryInput
   }
 
   export type SubCategoryUncheckedCreateWithoutCategoryInput = {
     id?: string
     name: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
     courses?: CourseUncheckedCreateNestedManyWithoutSubCategoryInput
   }
 
@@ -24469,98 +24653,77 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CourseCreateWithoutCategoryInput = {
-    id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
-    subCourses?: CourseCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseCreateNestedManyWithoutCourseInput
-    subCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
-    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
-    reviews?: ReviewCreateNestedManyWithoutCourseInput
-    ratings?: RatingCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseUncheckedCreateWithoutCategoryInput = {
-    id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    parentCourseId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    subCategoryId?: string | null
-    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
-    ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseCreateOrConnectWithoutCategoryInput = {
-    where: CourseWhereUniqueInput
-    create: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type CourseCreateManyCategoryInputEnvelope = {
-    data: CourseCreateManyCategoryInput | CourseCreateManyCategoryInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ContentCreateWithoutCategoryInput = {
-    id?: string
-    title: string
-    description?: string | null
-    fileUrl?: string | null
-    thumbnailUrl?: string | null
-    author?: string | null
-    content?: string | null
-    publishedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    type: ContentTypeCreateNestedOneWithoutContentsInput
-  }
-
-  export type ContentUncheckedCreateWithoutCategoryInput = {
-    id?: string
-    typeId: string
-    title: string
-    description?: string | null
-    fileUrl?: string | null
-    thumbnailUrl?: string | null
-    author?: string | null
-    content?: string | null
-    publishedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ContentCreateOrConnectWithoutCategoryInput = {
+  export type ContentUpsertWithWhereUniqueWithoutCategoryInput = {
     where: ContentWhereUniqueInput
+    update: XOR<ContentUpdateWithoutCategoryInput, ContentUncheckedUpdateWithoutCategoryInput>
     create: XOR<ContentCreateWithoutCategoryInput, ContentUncheckedCreateWithoutCategoryInput>
   }
 
-  export type ContentCreateManyCategoryInputEnvelope = {
-    data: ContentCreateManyCategoryInput | ContentCreateManyCategoryInput[]
-    skipDuplicates?: boolean
+  export type ContentUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: ContentWhereUniqueInput
+    data: XOR<ContentUpdateWithoutCategoryInput, ContentUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type ContentUpdateManyWithWhereWithoutCategoryInput = {
+    where: ContentScalarWhereInput
+    data: XOR<ContentUpdateManyMutationInput, ContentUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type ContentScalarWhereInput = {
+    AND?: ContentScalarWhereInput | ContentScalarWhereInput[]
+    OR?: ContentScalarWhereInput[]
+    NOT?: ContentScalarWhereInput | ContentScalarWhereInput[]
+    id?: StringFilter<"Content"> | string
+    typeId?: StringFilter<"Content"> | string
+    title?: StringFilter<"Content"> | string
+    description?: StringNullableFilter<"Content"> | string | null
+    fileUrl?: StringNullableFilter<"Content"> | string | null
+    thumbnailUrl?: StringNullableFilter<"Content"> | string | null
+    author?: StringNullableFilter<"Content"> | string | null
+    publishedAt?: DateTimeNullableFilter<"Content"> | Date | string | null
+    createdAt?: DateTimeFilter<"Content"> | Date | string
+    updatedAt?: DateTimeFilter<"Content"> | Date | string
+    categoryId?: StringNullableFilter<"Content"> | string | null
+    content?: StringNullableFilter<"Content"> | string | null
+  }
+
+  export type CourseUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: CourseWhereUniqueInput
+    update: XOR<CourseUpdateWithoutCategoryInput, CourseUncheckedUpdateWithoutCategoryInput>
+    create: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type CourseUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: CourseWhereUniqueInput
+    data: XOR<CourseUpdateWithoutCategoryInput, CourseUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type CourseUpdateManyWithWhereWithoutCategoryInput = {
+    where: CourseScalarWhereInput
+    data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type CourseScalarWhereInput = {
+    AND?: CourseScalarWhereInput | CourseScalarWhereInput[]
+    OR?: CourseScalarWhereInput[]
+    NOT?: CourseScalarWhereInput | CourseScalarWhereInput[]
+    name?: StringFilter<"Course"> | string
+    image?: StringNullableFilter<"Course"> | string | null
+    enrolledCount?: IntFilter<"Course"> | number
+    date?: DateTimeFilter<"Course"> | Date | string
+    categoryId?: StringNullableFilter<"Course"> | string | null
+    subCategoryId?: StringNullableFilter<"Course"> | string | null
+    isDeleted?: BoolFilter<"Course"> | boolean
+    createdAt?: DateTimeFilter<"Course"> | Date | string
+    description?: StringNullableFilter<"Course"> | string | null
+    duration?: IntNullableFilter<"Course"> | number | null
+    parentCourseId?: UuidNullableFilter<"Course"> | string | null
+    updatedAt?: DateTimeFilter<"Course"> | Date | string
+    videoCount?: IntFilter<"Course"> | number
+    id?: UuidFilter<"Course"> | string
+    rating?: FloatFilter<"Course"> | number
+    previewImage?: StringNullableFilter<"Course"> | string | null
+    previewVideo?: StringNullableFilter<"Course"> | string | null
   }
 
   export type SubCategoryUpsertWithWhereUniqueWithoutCategoryInput = {
@@ -24586,153 +24749,59 @@ export namespace Prisma {
     id?: StringFilter<"SubCategory"> | string
     name?: StringFilter<"SubCategory"> | string
     categoryId?: StringFilter<"SubCategory"> | string
-    isDeleted?: BoolFilter<"SubCategory"> | boolean
     createdAt?: DateTimeFilter<"SubCategory"> | Date | string
     updatedAt?: DateTimeFilter<"SubCategory"> | Date | string
-  }
-
-  export type CourseUpsertWithWhereUniqueWithoutCategoryInput = {
-    where: CourseWhereUniqueInput
-    update: XOR<CourseUpdateWithoutCategoryInput, CourseUncheckedUpdateWithoutCategoryInput>
-    create: XOR<CourseCreateWithoutCategoryInput, CourseUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type CourseUpdateWithWhereUniqueWithoutCategoryInput = {
-    where: CourseWhereUniqueInput
-    data: XOR<CourseUpdateWithoutCategoryInput, CourseUncheckedUpdateWithoutCategoryInput>
-  }
-
-  export type CourseUpdateManyWithWhereWithoutCategoryInput = {
-    where: CourseScalarWhereInput
-    data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyWithoutCategoryInput>
-  }
-
-  export type CourseScalarWhereInput = {
-    AND?: CourseScalarWhereInput | CourseScalarWhereInput[]
-    OR?: CourseScalarWhereInput[]
-    NOT?: CourseScalarWhereInput | CourseScalarWhereInput[]
-    id?: UuidFilter<"Course"> | string
-    image?: StringNullableFilter<"Course"> | string | null
-    name?: StringFilter<"Course"> | string
-    description?: StringNullableFilter<"Course"> | string | null
-    duration?: IntNullableFilter<"Course"> | number | null
-    videoCount?: IntFilter<"Course"> | number
-    enrolledCount?: IntFilter<"Course"> | number
-    isDeleted?: BoolFilter<"Course"> | boolean
-    rating?: FloatFilter<"Course"> | number
-    date?: DateTimeFilter<"Course"> | Date | string
-    parentCourseId?: UuidNullableFilter<"Course"> | string | null
-    createdAt?: DateTimeFilter<"Course"> | Date | string
-    updatedAt?: DateTimeFilter<"Course"> | Date | string
-    categoryId?: StringNullableFilter<"Course"> | string | null
-    subCategoryId?: StringNullableFilter<"Course"> | string | null
-  }
-
-  export type ContentUpsertWithWhereUniqueWithoutCategoryInput = {
-    where: ContentWhereUniqueInput
-    update: XOR<ContentUpdateWithoutCategoryInput, ContentUncheckedUpdateWithoutCategoryInput>
-    create: XOR<ContentCreateWithoutCategoryInput, ContentUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type ContentUpdateWithWhereUniqueWithoutCategoryInput = {
-    where: ContentWhereUniqueInput
-    data: XOR<ContentUpdateWithoutCategoryInput, ContentUncheckedUpdateWithoutCategoryInput>
-  }
-
-  export type ContentUpdateManyWithWhereWithoutCategoryInput = {
-    where: ContentScalarWhereInput
-    data: XOR<ContentUpdateManyMutationInput, ContentUncheckedUpdateManyWithoutCategoryInput>
-  }
-
-  export type ContentScalarWhereInput = {
-    AND?: ContentScalarWhereInput | ContentScalarWhereInput[]
-    OR?: ContentScalarWhereInput[]
-    NOT?: ContentScalarWhereInput | ContentScalarWhereInput[]
-    id?: StringFilter<"Content"> | string
-    typeId?: StringFilter<"Content"> | string
-    categoryId?: StringNullableFilter<"Content"> | string | null
-    title?: StringFilter<"Content"> | string
-    description?: StringNullableFilter<"Content"> | string | null
-    fileUrl?: StringNullableFilter<"Content"> | string | null
-    thumbnailUrl?: StringNullableFilter<"Content"> | string | null
-    author?: StringNullableFilter<"Content"> | string | null
-    content?: StringNullableFilter<"Content"> | string | null
-    publishedAt?: DateTimeNullableFilter<"Content"> | Date | string | null
-    createdAt?: DateTimeFilter<"Content"> | Date | string
-    updatedAt?: DateTimeFilter<"Content"> | Date | string
-  }
-
-  export type CategoryCreateWithoutSubCategoriesInput = {
-    id?: string
-    name: string
-    isDeleted?: boolean
-    type: $Enums.CategoryType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    courses?: CourseCreateNestedManyWithoutCategoryInput
-    contents?: ContentCreateNestedManyWithoutCategoryInput
-  }
-
-  export type CategoryUncheckedCreateWithoutSubCategoriesInput = {
-    id?: string
-    name: string
-    isDeleted?: boolean
-    type: $Enums.CategoryType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    courses?: CourseUncheckedCreateNestedManyWithoutCategoryInput
-    contents?: ContentUncheckedCreateNestedManyWithoutCategoryInput
-  }
-
-  export type CategoryCreateOrConnectWithoutSubCategoriesInput = {
-    where: CategoryWhereUniqueInput
-    create: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
+    isDeleted?: BoolFilter<"SubCategory"> | boolean
   }
 
   export type CourseCreateWithoutSubCategoryInput = {
-    id?: string
-    image?: string | null
     name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    isDeleted?: boolean
+    createdAt?: Date | string
     description?: string | null
     duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseCreateNestedManyWithoutCourseInput
+    Category?: CategoryCreateNestedOneWithoutCoursesInput
     parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
     subCourses?: CourseCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseCreateNestedManyWithoutCourseInput
-    category?: CategoryCreateNestedOneWithoutCoursesInput
-    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
     CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
     reviews?: ReviewCreateNestedManyWithoutCourseInput
-    ratings?: RatingCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutSubCategoryInput = {
-    id?: string
-    image?: string | null
     name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    categoryId?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
     description?: string | null
     duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
     parentCourseId?: string | null
-    createdAt?: Date | string
     updatedAt?: Date | string
-    categoryId?: string | null
-    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
+    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
+    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutSubCategoryInput = {
@@ -24745,37 +24814,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CategoryUpsertWithoutSubCategoriesInput = {
-    update: XOR<CategoryUpdateWithoutSubCategoriesInput, CategoryUncheckedUpdateWithoutSubCategoriesInput>
+  export type CategoryCreateWithoutSubCategoriesInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isDeleted?: boolean
+    type: $Enums.CategoryType
+    contents?: ContentCreateNestedManyWithoutCategoryInput
+    courses?: CourseCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUncheckedCreateWithoutSubCategoriesInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isDeleted?: boolean
+    type: $Enums.CategoryType
+    contents?: ContentUncheckedCreateNestedManyWithoutCategoryInput
+    courses?: CourseUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryCreateOrConnectWithoutSubCategoriesInput = {
+    where: CategoryWhereUniqueInput
     create: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
-    where?: CategoryWhereInput
-  }
-
-  export type CategoryUpdateToOneWithWhereWithoutSubCategoriesInput = {
-    where?: CategoryWhereInput
-    data: XOR<CategoryUpdateWithoutSubCategoriesInput, CategoryUncheckedUpdateWithoutSubCategoriesInput>
-  }
-
-  export type CategoryUpdateWithoutSubCategoriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courses?: CourseUpdateManyWithoutCategoryNestedInput
-    contents?: ContentUpdateManyWithoutCategoryNestedInput
-  }
-
-  export type CategoryUncheckedUpdateWithoutSubCategoriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courses?: CourseUncheckedUpdateManyWithoutCategoryNestedInput
-    contents?: ContentUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CourseUpsertWithWhereUniqueWithoutSubCategoryInput = {
@@ -24794,20 +24857,55 @@ export namespace Prisma {
     data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyWithoutSubCategoryInput>
   }
 
+  export type CategoryUpsertWithoutSubCategoriesInput = {
+    update: XOR<CategoryUpdateWithoutSubCategoriesInput, CategoryUncheckedUpdateWithoutSubCategoriesInput>
+    create: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
+    where?: CategoryWhereInput
+  }
+
+  export type CategoryUpdateToOneWithWhereWithoutSubCategoriesInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutSubCategoriesInput, CategoryUncheckedUpdateWithoutSubCategoriesInput>
+  }
+
+  export type CategoryUpdateWithoutSubCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
+    contents?: ContentUpdateManyWithoutCategoryNestedInput
+    courses?: CourseUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryUncheckedUpdateWithoutSubCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
+    contents?: ContentUncheckedUpdateManyWithoutCategoryNestedInput
+    courses?: CourseUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
   export type HomeCategoryItemCreateWithoutHomeCategoryInput = {
     id?: string
-    type: $Enums.CourseType
     createdAt?: Date | string
     updatedAt?: Date | string
+    type: $Enums.CourseType
+    isDeleted?: boolean
     course: CourseCreateNestedOneWithoutHomeCategoryItemInput
   }
 
   export type HomeCategoryItemUncheckedCreateWithoutHomeCategoryInput = {
     id?: string
-    courseId: string
-    type: $Enums.CourseType
     createdAt?: Date | string
     updatedAt?: Date | string
+    type: $Enums.CourseType
+    courseId: string
+    isDeleted?: boolean
   }
 
   export type HomeCategoryItemCreateOrConnectWithoutHomeCategoryInput = {
@@ -24842,26 +24940,82 @@ export namespace Prisma {
     NOT?: HomeCategoryItemScalarWhereInput | HomeCategoryItemScalarWhereInput[]
     id?: StringFilter<"HomeCategoryItem"> | string
     homeCategoryId?: StringFilter<"HomeCategoryItem"> | string
-    courseId?: UuidFilter<"HomeCategoryItem"> | string
-    type?: EnumCourseTypeFilter<"HomeCategoryItem"> | $Enums.CourseType
     createdAt?: DateTimeFilter<"HomeCategoryItem"> | Date | string
     updatedAt?: DateTimeFilter<"HomeCategoryItem"> | Date | string
+    type?: EnumCourseTypeFilter<"HomeCategoryItem"> | $Enums.CourseType
+    courseId?: UuidFilter<"HomeCategoryItem"> | string
+    isDeleted?: BoolFilter<"HomeCategoryItem"> | boolean
+  }
+
+  export type CourseCreateWithoutHomeCategoryItemInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseCreateNestedManyWithoutCourseInput
+    Category?: CategoryCreateNestedOneWithoutCoursesInput
+    parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
+    subCourses?: CourseCreateNestedManyWithoutParentCourseInput
+    SubCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
+    CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
+    reviews?: ReviewCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutHomeCategoryItemInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    categoryId?: string | null
+    subCategoryId?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    parentCourseId?: string | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
+    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
+    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutHomeCategoryItemInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutHomeCategoryItemInput, CourseUncheckedCreateWithoutHomeCategoryItemInput>
   }
 
   export type HomeCategoryCreateWithoutItemsInput = {
     id?: string
     name: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
   }
 
   export type HomeCategoryUncheckedCreateWithoutItemsInput = {
     id?: string
     name: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
   }
 
   export type HomeCategoryCreateOrConnectWithoutItemsInput = {
@@ -24869,55 +25023,65 @@ export namespace Prisma {
     create: XOR<HomeCategoryCreateWithoutItemsInput, HomeCategoryUncheckedCreateWithoutItemsInput>
   }
 
-  export type CourseCreateWithoutHomeCategoryItemInput = {
-    id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
-    subCourses?: CourseCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseCreateNestedManyWithoutCourseInput
-    category?: CategoryCreateNestedOneWithoutCoursesInput
-    subCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
-    CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
-    reviews?: ReviewCreateNestedManyWithoutCourseInput
-    ratings?: RatingCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseUncheckedCreateWithoutHomeCategoryItemInput = {
-    id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    parentCourseId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    categoryId?: string | null
-    subCategoryId?: string | null
-    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
-    ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseCreateOrConnectWithoutHomeCategoryItemInput = {
-    where: CourseWhereUniqueInput
+  export type CourseUpsertWithoutHomeCategoryItemInput = {
+    update: XOR<CourseUpdateWithoutHomeCategoryItemInput, CourseUncheckedUpdateWithoutHomeCategoryItemInput>
     create: XOR<CourseCreateWithoutHomeCategoryItemInput, CourseUncheckedCreateWithoutHomeCategoryItemInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutHomeCategoryItemInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutHomeCategoryItemInput, CourseUncheckedUpdateWithoutHomeCategoryItemInput>
+  }
+
+  export type CourseUpdateWithoutHomeCategoryItemInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
+    Category?: CategoryUpdateOneWithoutCoursesNestedInput
+    parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
+    subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
+    SubCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
+    CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutHomeCategoryItemInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
+    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
+    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type HomeCategoryUpsertWithoutItemsInput = {
@@ -24934,180 +25098,44 @@ export namespace Prisma {
   export type HomeCategoryUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HomeCategoryUncheckedUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CourseUpsertWithoutHomeCategoryItemInput = {
-    update: XOR<CourseUpdateWithoutHomeCategoryItemInput, CourseUncheckedUpdateWithoutHomeCategoryItemInput>
-    create: XOR<CourseCreateWithoutHomeCategoryItemInput, CourseUncheckedCreateWithoutHomeCategoryItemInput>
-    where?: CourseWhereInput
-  }
-
-  export type CourseUpdateToOneWithWhereWithoutHomeCategoryItemInput = {
-    where?: CourseWhereInput
-    data: XOR<CourseUpdateWithoutHomeCategoryItemInput, CourseUncheckedUpdateWithoutHomeCategoryItemInput>
-  }
-
-  export type CourseUpdateWithoutHomeCategoryItemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
-    subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
-    category?: CategoryUpdateOneWithoutCoursesNestedInput
-    subCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
-    CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUpdateManyWithoutCourseNestedInput
   }
 
-  export type CourseUncheckedUpdateWithoutHomeCategoryItemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseCreateWithoutSubCoursesInput = {
+  export type RatingCreateWithoutCourseInput = {
     id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
+    userId: string
+    rating: number
+    comment?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
-    users?: UserOnCourseCreateNestedManyWithoutCourseInput
-    category?: CategoryCreateNestedOneWithoutCoursesInput
-    subCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
-    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
-    reviews?: ReviewCreateNestedManyWithoutCourseInput
-    ratings?: RatingCreateNestedManyWithoutCourseInput
   }
 
-  export type CourseUncheckedCreateWithoutSubCoursesInput = {
+  export type RatingUncheckedCreateWithoutCourseInput = {
     id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    parentCourseId?: string | null
+    userId: string
+    rating: number
+    comment?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    categoryId?: string | null
-    subCategoryId?: string | null
-    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
-    ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
   }
 
-  export type CourseCreateOrConnectWithoutSubCoursesInput = {
-    where: CourseWhereUniqueInput
-    create: XOR<CourseCreateWithoutSubCoursesInput, CourseUncheckedCreateWithoutSubCoursesInput>
+  export type RatingCreateOrConnectWithoutCourseInput = {
+    where: RatingWhereUniqueInput
+    create: XOR<RatingCreateWithoutCourseInput, RatingUncheckedCreateWithoutCourseInput>
   }
 
-  export type CourseCreateWithoutParentCourseInput = {
-    id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    subCourses?: CourseCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseCreateNestedManyWithoutCourseInput
-    category?: CategoryCreateNestedOneWithoutCoursesInput
-    subCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
-    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
-    reviews?: ReviewCreateNestedManyWithoutCourseInput
-    ratings?: RatingCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseUncheckedCreateWithoutParentCourseInput = {
-    id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    categoryId?: string | null
-    subCategoryId?: string | null
-    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
-    ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseCreateOrConnectWithoutParentCourseInput = {
-    where: CourseWhereUniqueInput
-    create: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput>
-  }
-
-  export type CourseCreateManyParentCourseInputEnvelope = {
-    data: CourseCreateManyParentCourseInput | CourseCreateManyParentCourseInput[]
+  export type RatingCreateManyCourseInputEnvelope = {
+    data: RatingCreateManyCourseInput | RatingCreateManyCourseInput[]
     skipDuplicates?: boolean
   }
 
@@ -25140,23 +25168,23 @@ export namespace Prisma {
   export type CategoryCreateWithoutCoursesInput = {
     id?: string
     name: string
-    isDeleted?: boolean
-    type: $Enums.CategoryType
     createdAt?: Date | string
     updatedAt?: Date | string
-    subCategories?: SubCategoryCreateNestedManyWithoutCategoryInput
+    isDeleted?: boolean
+    type: $Enums.CategoryType
     contents?: ContentCreateNestedManyWithoutCategoryInput
+    subCategories?: SubCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateWithoutCoursesInput = {
     id?: string
     name: string
-    isDeleted?: boolean
-    type: $Enums.CategoryType
     createdAt?: Date | string
     updatedAt?: Date | string
-    subCategories?: SubCategoryUncheckedCreateNestedManyWithoutCategoryInput
+    isDeleted?: boolean
+    type: $Enums.CategoryType
     contents?: ContentUncheckedCreateNestedManyWithoutCategoryInput
+    subCategories?: SubCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryCreateOrConnectWithoutCoursesInput = {
@@ -25164,12 +25192,127 @@ export namespace Prisma {
     create: XOR<CategoryCreateWithoutCoursesInput, CategoryUncheckedCreateWithoutCoursesInput>
   }
 
+  export type CourseCreateWithoutSubCoursesInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseCreateNestedManyWithoutCourseInput
+    Category?: CategoryCreateNestedOneWithoutCoursesInput
+    parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
+    SubCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
+    CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
+    reviews?: ReviewCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutSubCoursesInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    categoryId?: string | null
+    subCategoryId?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    parentCourseId?: string | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
+    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutSubCoursesInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutSubCoursesInput, CourseUncheckedCreateWithoutSubCoursesInput>
+  }
+
+  export type CourseCreateWithoutParentCourseInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseCreateNestedManyWithoutCourseInput
+    Category?: CategoryCreateNestedOneWithoutCoursesInput
+    subCourses?: CourseCreateNestedManyWithoutParentCourseInput
+    SubCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
+    CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
+    reviews?: ReviewCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutParentCourseInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    categoryId?: string | null
+    subCategoryId?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
+    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
+    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutParentCourseInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput>
+  }
+
+  export type CourseCreateManyParentCourseInputEnvelope = {
+    data: CourseCreateManyParentCourseInput | CourseCreateManyParentCourseInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SubCategoryCreateWithoutCoursesInput = {
     id?: string
     name: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
     category: CategoryCreateNestedOneWithoutSubCategoriesInput
   }
 
@@ -25177,40 +25320,14 @@ export namespace Prisma {
     id?: string
     name: string
     categoryId: string
-    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    isDeleted?: boolean
   }
 
   export type SubCategoryCreateOrConnectWithoutCoursesInput = {
     where: SubCategoryWhereUniqueInput
     create: XOR<SubCategoryCreateWithoutCoursesInput, SubCategoryUncheckedCreateWithoutCoursesInput>
-  }
-
-  export type HomeCategoryItemCreateWithoutCourseInput = {
-    id?: string
-    type: $Enums.CourseType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    homeCategory: HomeCategoryCreateNestedOneWithoutItemsInput
-  }
-
-  export type HomeCategoryItemUncheckedCreateWithoutCourseInput = {
-    id?: string
-    homeCategoryId: string
-    type: $Enums.CourseType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type HomeCategoryItemCreateOrConnectWithoutCourseInput = {
-    where: HomeCategoryItemWhereUniqueInput
-    create: XOR<HomeCategoryItemCreateWithoutCourseInput, HomeCategoryItemUncheckedCreateWithoutCourseInput>
-  }
-
-  export type HomeCategoryItemCreateManyCourseInputEnvelope = {
-    data: HomeCategoryItemCreateManyCourseInput | HomeCategoryItemCreateManyCourseInput[]
-    skipDuplicates?: boolean
   }
 
   export type CourseSectionCreateWithoutCourseInput = {
@@ -25241,6 +25358,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type HomeCategoryItemCreateWithoutCourseInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    type: $Enums.CourseType
+    isDeleted?: boolean
+    homeCategory: HomeCategoryCreateNestedOneWithoutItemsInput
+  }
+
+  export type HomeCategoryItemUncheckedCreateWithoutCourseInput = {
+    id?: string
+    homeCategoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    type: $Enums.CourseType
+    isDeleted?: boolean
+  }
+
+  export type HomeCategoryItemCreateOrConnectWithoutCourseInput = {
+    where: HomeCategoryItemWhereUniqueInput
+    create: XOR<HomeCategoryItemCreateWithoutCourseInput, HomeCategoryItemUncheckedCreateWithoutCourseInput>
+  }
+
+  export type HomeCategoryItemCreateManyCourseInputEnvelope = {
+    data: HomeCategoryItemCreateManyCourseInput | HomeCategoryItemCreateManyCourseInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ReviewCreateWithoutCourseInput = {
     id?: string
     userId: string
@@ -25267,105 +25412,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type RatingCreateWithoutCourseInput = {
-    id?: string
-    userId: string
-    rating: number
-    comment?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type RatingUncheckedCreateWithoutCourseInput = {
-    id?: string
-    userId: string
-    rating: number
-    comment?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type RatingCreateOrConnectWithoutCourseInput = {
+  export type RatingUpsertWithWhereUniqueWithoutCourseInput = {
     where: RatingWhereUniqueInput
+    update: XOR<RatingUpdateWithoutCourseInput, RatingUncheckedUpdateWithoutCourseInput>
     create: XOR<RatingCreateWithoutCourseInput, RatingUncheckedCreateWithoutCourseInput>
   }
 
-  export type RatingCreateManyCourseInputEnvelope = {
-    data: RatingCreateManyCourseInput | RatingCreateManyCourseInput[]
-    skipDuplicates?: boolean
+  export type RatingUpdateWithWhereUniqueWithoutCourseInput = {
+    where: RatingWhereUniqueInput
+    data: XOR<RatingUpdateWithoutCourseInput, RatingUncheckedUpdateWithoutCourseInput>
   }
 
-  export type CourseUpsertWithoutSubCoursesInput = {
-    update: XOR<CourseUpdateWithoutSubCoursesInput, CourseUncheckedUpdateWithoutSubCoursesInput>
-    create: XOR<CourseCreateWithoutSubCoursesInput, CourseUncheckedCreateWithoutSubCoursesInput>
-    where?: CourseWhereInput
+  export type RatingUpdateManyWithWhereWithoutCourseInput = {
+    where: RatingScalarWhereInput
+    data: XOR<RatingUpdateManyMutationInput, RatingUncheckedUpdateManyWithoutCourseInput>
   }
 
-  export type CourseUpdateToOneWithWhereWithoutSubCoursesInput = {
-    where?: CourseWhereInput
-    data: XOR<CourseUpdateWithoutSubCoursesInput, CourseUncheckedUpdateWithoutSubCoursesInput>
-  }
-
-  export type CourseUpdateWithoutSubCoursesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
-    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
-    category?: CategoryUpdateOneWithoutCoursesNestedInput
-    subCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
-    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseUncheckedUpdateWithoutSubCoursesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseUpsertWithWhereUniqueWithoutParentCourseInput = {
-    where: CourseWhereUniqueInput
-    update: XOR<CourseUpdateWithoutParentCourseInput, CourseUncheckedUpdateWithoutParentCourseInput>
-    create: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput>
-  }
-
-  export type CourseUpdateWithWhereUniqueWithoutParentCourseInput = {
-    where: CourseWhereUniqueInput
-    data: XOR<CourseUpdateWithoutParentCourseInput, CourseUncheckedUpdateWithoutParentCourseInput>
-  }
-
-  export type CourseUpdateManyWithWhereWithoutParentCourseInput = {
-    where: CourseScalarWhereInput
-    data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyWithoutParentCourseInput>
+  export type RatingScalarWhereInput = {
+    AND?: RatingScalarWhereInput | RatingScalarWhereInput[]
+    OR?: RatingScalarWhereInput[]
+    NOT?: RatingScalarWhereInput | RatingScalarWhereInput[]
+    id?: StringFilter<"Rating"> | string
+    userId?: StringFilter<"Rating"> | string
+    courseId?: UuidFilter<"Rating"> | string
+    rating?: IntFilter<"Rating"> | number
+    comment?: StringNullableFilter<"Rating"> | string | null
+    createdAt?: DateTimeFilter<"Rating"> | Date | string
+    updatedAt?: DateTimeFilter<"Rating"> | Date | string
   }
 
   export type UserOnCourseUpsertWithWhereUniqueWithoutCourseInput = {
@@ -25410,23 +25483,100 @@ export namespace Prisma {
   export type CategoryUpdateWithoutCoursesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategories?: SubCategoryUpdateManyWithoutCategoryNestedInput
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     contents?: ContentUpdateManyWithoutCategoryNestedInput
+    subCategories?: SubCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateWithoutCoursesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategories?: SubCategoryUncheckedUpdateManyWithoutCategoryNestedInput
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     contents?: ContentUncheckedUpdateManyWithoutCategoryNestedInput
+    subCategories?: SubCategoryUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CourseUpsertWithoutSubCoursesInput = {
+    update: XOR<CourseUpdateWithoutSubCoursesInput, CourseUncheckedUpdateWithoutSubCoursesInput>
+    create: XOR<CourseCreateWithoutSubCoursesInput, CourseUncheckedCreateWithoutSubCoursesInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutSubCoursesInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutSubCoursesInput, CourseUncheckedUpdateWithoutSubCoursesInput>
+  }
+
+  export type CourseUpdateWithoutSubCoursesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
+    Category?: CategoryUpdateOneWithoutCoursesNestedInput
+    parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
+    SubCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
+    CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutSubCoursesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
+    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUpsertWithWhereUniqueWithoutParentCourseInput = {
+    where: CourseWhereUniqueInput
+    update: XOR<CourseUpdateWithoutParentCourseInput, CourseUncheckedUpdateWithoutParentCourseInput>
+    create: XOR<CourseCreateWithoutParentCourseInput, CourseUncheckedCreateWithoutParentCourseInput>
+  }
+
+  export type CourseUpdateWithWhereUniqueWithoutParentCourseInput = {
+    where: CourseWhereUniqueInput
+    data: XOR<CourseUpdateWithoutParentCourseInput, CourseUncheckedUpdateWithoutParentCourseInput>
+  }
+
+  export type CourseUpdateManyWithWhereWithoutParentCourseInput = {
+    where: CourseScalarWhereInput
+    data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyWithoutParentCourseInput>
   }
 
   export type SubCategoryUpsertWithoutCoursesInput = {
@@ -25443,9 +25593,9 @@ export namespace Prisma {
   export type SubCategoryUpdateWithoutCoursesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     category?: CategoryUpdateOneRequiredWithoutSubCategoriesNestedInput
   }
 
@@ -25453,25 +25603,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type HomeCategoryItemUpsertWithWhereUniqueWithoutCourseInput = {
-    where: HomeCategoryItemWhereUniqueInput
-    update: XOR<HomeCategoryItemUpdateWithoutCourseInput, HomeCategoryItemUncheckedUpdateWithoutCourseInput>
-    create: XOR<HomeCategoryItemCreateWithoutCourseInput, HomeCategoryItemUncheckedCreateWithoutCourseInput>
-  }
-
-  export type HomeCategoryItemUpdateWithWhereUniqueWithoutCourseInput = {
-    where: HomeCategoryItemWhereUniqueInput
-    data: XOR<HomeCategoryItemUpdateWithoutCourseInput, HomeCategoryItemUncheckedUpdateWithoutCourseInput>
-  }
-
-  export type HomeCategoryItemUpdateManyWithWhereWithoutCourseInput = {
-    where: HomeCategoryItemScalarWhereInput
-    data: XOR<HomeCategoryItemUpdateManyMutationInput, HomeCategoryItemUncheckedUpdateManyWithoutCourseInput>
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CourseSectionUpsertWithWhereUniqueWithoutCourseInput = {
@@ -25502,6 +25636,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"CourseSection"> | Date | string
   }
 
+  export type HomeCategoryItemUpsertWithWhereUniqueWithoutCourseInput = {
+    where: HomeCategoryItemWhereUniqueInput
+    update: XOR<HomeCategoryItemUpdateWithoutCourseInput, HomeCategoryItemUncheckedUpdateWithoutCourseInput>
+    create: XOR<HomeCategoryItemCreateWithoutCourseInput, HomeCategoryItemUncheckedCreateWithoutCourseInput>
+  }
+
+  export type HomeCategoryItemUpdateWithWhereUniqueWithoutCourseInput = {
+    where: HomeCategoryItemWhereUniqueInput
+    data: XOR<HomeCategoryItemUpdateWithoutCourseInput, HomeCategoryItemUncheckedUpdateWithoutCourseInput>
+  }
+
+  export type HomeCategoryItemUpdateManyWithWhereWithoutCourseInput = {
+    where: HomeCategoryItemScalarWhereInput
+    data: XOR<HomeCategoryItemUpdateManyMutationInput, HomeCategoryItemUncheckedUpdateManyWithoutCourseInput>
+  }
+
   export type ReviewUpsertWithWhereUniqueWithoutCourseInput = {
     where: ReviewWhereUniqueInput
     update: XOR<ReviewUpdateWithoutCourseInput, ReviewUncheckedUpdateWithoutCourseInput>
@@ -25530,79 +25680,54 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Review"> | Date | string
   }
 
-  export type RatingUpsertWithWhereUniqueWithoutCourseInput = {
-    where: RatingWhereUniqueInput
-    update: XOR<RatingUpdateWithoutCourseInput, RatingUncheckedUpdateWithoutCourseInput>
-    create: XOR<RatingCreateWithoutCourseInput, RatingUncheckedCreateWithoutCourseInput>
-  }
-
-  export type RatingUpdateWithWhereUniqueWithoutCourseInput = {
-    where: RatingWhereUniqueInput
-    data: XOR<RatingUpdateWithoutCourseInput, RatingUncheckedUpdateWithoutCourseInput>
-  }
-
-  export type RatingUpdateManyWithWhereWithoutCourseInput = {
-    where: RatingScalarWhereInput
-    data: XOR<RatingUpdateManyMutationInput, RatingUncheckedUpdateManyWithoutCourseInput>
-  }
-
-  export type RatingScalarWhereInput = {
-    AND?: RatingScalarWhereInput | RatingScalarWhereInput[]
-    OR?: RatingScalarWhereInput[]
-    NOT?: RatingScalarWhereInput | RatingScalarWhereInput[]
-    id?: StringFilter<"Rating"> | string
-    userId?: StringFilter<"Rating"> | string
-    courseId?: UuidFilter<"Rating"> | string
-    rating?: IntFilter<"Rating"> | number
-    comment?: StringNullableFilter<"Rating"> | string | null
-    createdAt?: DateTimeFilter<"Rating"> | Date | string
-    updatedAt?: DateTimeFilter<"Rating"> | Date | string
-  }
-
   export type CourseCreateWithoutUsersInput = {
-    id?: string
-    image?: string | null
     name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    isDeleted?: boolean
+    createdAt?: Date | string
     description?: string | null
     duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingCreateNestedManyWithoutCourseInput
+    Category?: CategoryCreateNestedOneWithoutCoursesInput
     parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
     subCourses?: CourseCreateNestedManyWithoutParentCourseInput
-    category?: CategoryCreateNestedOneWithoutCoursesInput
-    subCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
-    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
+    SubCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
     CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
     reviews?: ReviewCreateNestedManyWithoutCourseInput
-    ratings?: RatingCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutUsersInput = {
-    id?: string
-    image?: string | null
     name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
+    image?: string | null
     enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
     date?: Date | string
-    parentCourseId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     categoryId?: string | null
     subCategoryId?: string | null
-    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    parentCourseId?: string | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
+    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
+    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutUsersInput = {
@@ -25622,100 +25747,53 @@ export namespace Prisma {
   }
 
   export type CourseUpdateWithoutUsersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUpdateManyWithoutCourseNestedInput
+    Category?: CategoryUpdateOneWithoutCoursesNestedInput
     parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
     subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
-    category?: CategoryUpdateOneWithoutCoursesNestedInput
-    subCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
-    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
+    SubCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
     CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
     reviews?: ReviewUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutUsersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseCreateWithoutCourseSectionInput = {
-    id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
-    subCourses?: CourseCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseCreateNestedManyWithoutCourseInput
-    category?: CategoryCreateNestedOneWithoutCoursesInput
-    subCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
-    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
-    reviews?: ReviewCreateNestedManyWithoutCourseInput
-    ratings?: RatingCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseUncheckedCreateWithoutCourseSectionInput = {
-    id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    parentCourseId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    categoryId?: string | null
-    subCategoryId?: string | null
-    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
-    ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseCreateOrConnectWithoutCourseSectionInput = {
-    where: CourseWhereUniqueInput
-    create: XOR<CourseCreateWithoutCourseSectionInput, CourseUncheckedCreateWithoutCourseSectionInput>
+    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
+    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type ActivityCreateWithoutSectionInput = {
@@ -25752,61 +25830,59 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CourseUpsertWithoutCourseSectionInput = {
-    update: XOR<CourseUpdateWithoutCourseSectionInput, CourseUncheckedUpdateWithoutCourseSectionInput>
+  export type CourseCreateWithoutCourseSectionInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseCreateNestedManyWithoutCourseInput
+    Category?: CategoryCreateNestedOneWithoutCoursesInput
+    parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
+    subCourses?: CourseCreateNestedManyWithoutParentCourseInput
+    SubCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
+    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
+    reviews?: ReviewCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutCourseSectionInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    categoryId?: string | null
+    subCategoryId?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    parentCourseId?: string | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
+    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutCourseSectionInput = {
+    where: CourseWhereUniqueInput
     create: XOR<CourseCreateWithoutCourseSectionInput, CourseUncheckedCreateWithoutCourseSectionInput>
-    where?: CourseWhereInput
-  }
-
-  export type CourseUpdateToOneWithWhereWithoutCourseSectionInput = {
-    where?: CourseWhereInput
-    data: XOR<CourseUpdateWithoutCourseSectionInput, CourseUncheckedUpdateWithoutCourseSectionInput>
-  }
-
-  export type CourseUpdateWithoutCourseSectionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
-    subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
-    category?: CategoryUpdateOneWithoutCoursesNestedInput
-    subCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
-    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseUncheckedUpdateWithoutCourseSectionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type ActivityUpsertWithWhereUniqueWithoutSectionInput = {
@@ -25839,6 +25915,67 @@ export namespace Prisma {
     sectionId?: StringFilter<"Activity"> | string
     createdAt?: DateTimeFilter<"Activity"> | Date | string
     updatedAt?: DateTimeFilter<"Activity"> | Date | string
+  }
+
+  export type CourseUpsertWithoutCourseSectionInput = {
+    update: XOR<CourseUpdateWithoutCourseSectionInput, CourseUncheckedUpdateWithoutCourseSectionInput>
+    create: XOR<CourseCreateWithoutCourseSectionInput, CourseUncheckedCreateWithoutCourseSectionInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutCourseSectionInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutCourseSectionInput, CourseUncheckedUpdateWithoutCourseSectionInput>
+  }
+
+  export type CourseUpdateWithoutCourseSectionInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
+    Category?: CategoryUpdateOneWithoutCoursesNestedInput
+    parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
+    subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
+    SubCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
+    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutCourseSectionInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
+    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseSectionCreateWithoutActivitiesInput = {
@@ -25894,49 +26031,53 @@ export namespace Prisma {
   }
 
   export type CourseCreateWithoutReviewsInput = {
-    id?: string
-    image?: string | null
     name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    isDeleted?: boolean
+    createdAt?: Date | string
     description?: string | null
     duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    ratings?: RatingCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseCreateNestedManyWithoutCourseInput
+    Category?: CategoryCreateNestedOneWithoutCoursesInput
     parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
     subCourses?: CourseCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseCreateNestedManyWithoutCourseInput
-    category?: CategoryCreateNestedOneWithoutCoursesInput
-    subCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
-    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
+    SubCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
     CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
-    ratings?: RatingCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutReviewsInput = {
-    id?: string
-    image?: string | null
     name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
+    image?: string | null
     enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
     date?: Date | string
-    parentCourseId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     categoryId?: string | null
     subCategoryId?: string | null
-    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
-    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    parentCourseId?: string | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
+    users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
+    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
+    CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutReviewsInput = {
@@ -25956,94 +26097,102 @@ export namespace Prisma {
   }
 
   export type CourseUpdateWithoutReviewsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
+    Category?: CategoryUpdateOneWithoutCoursesNestedInput
     parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
     subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
-    category?: CategoryUpdateOneWithoutCoursesNestedInput
-    subCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
-    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
+    SubCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
     CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutReviewsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
+    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
+    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseCreateWithoutRatingsInput = {
-    id?: string
-    image?: string | null
     name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    isDeleted?: boolean
+    createdAt?: Date | string
     description?: string | null
     duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
     updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
+    users?: UserOnCourseCreateNestedManyWithoutCourseInput
+    Category?: CategoryCreateNestedOneWithoutCoursesInput
     parentCourse?: CourseCreateNestedOneWithoutSubCoursesInput
     subCourses?: CourseCreateNestedManyWithoutParentCourseInput
-    users?: UserOnCourseCreateNestedManyWithoutCourseInput
-    category?: CategoryCreateNestedOneWithoutCoursesInput
-    subCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
-    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
+    SubCategory?: SubCategoryCreateNestedOneWithoutCoursesInput
     CourseSection?: CourseSectionCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemCreateNestedManyWithoutCourseInput
     reviews?: ReviewCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutRatingsInput = {
-    id?: string
-    image?: string | null
     name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
+    image?: string | null
     enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
     date?: Date | string
-    parentCourseId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
     categoryId?: string | null
     subCategoryId?: string | null
-    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    parentCourseId?: string | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
+    subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
     CourseSection?: CourseSectionUncheckedCreateNestedManyWithoutCourseInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedCreateNestedManyWithoutCourseInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutCourseInput
   }
 
@@ -26064,48 +26213,52 @@ export namespace Prisma {
   }
 
   export type CourseUpdateWithoutRatingsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
+    Category?: CategoryUpdateOneWithoutCoursesNestedInput
     parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
     subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
-    category?: CategoryUpdateOneWithoutCoursesNestedInput
-    subCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
-    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
+    SubCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
     CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
     reviews?: ReviewUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutRatingsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
+    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
     CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
   }
 
@@ -26116,25 +26269,25 @@ export namespace Prisma {
     fileUrl?: string | null
     thumbnailUrl?: string | null
     author?: string | null
-    content?: string | null
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    content?: string | null
     category?: CategoryCreateNestedOneWithoutContentsInput
   }
 
   export type ContentUncheckedCreateWithoutTypeInput = {
     id?: string
-    categoryId?: string | null
     title: string
     description?: string | null
     fileUrl?: string | null
     thumbnailUrl?: string | null
     author?: string | null
-    content?: string | null
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    categoryId?: string | null
+    content?: string | null
   }
 
   export type ContentCreateOrConnectWithoutTypeInput = {
@@ -26163,6 +26316,33 @@ export namespace Prisma {
     data: XOR<ContentUpdateManyMutationInput, ContentUncheckedUpdateManyWithoutTypeInput>
   }
 
+  export type CategoryCreateWithoutContentsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isDeleted?: boolean
+    type: $Enums.CategoryType
+    courses?: CourseCreateNestedManyWithoutCategoryInput
+    subCategories?: SubCategoryCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUncheckedCreateWithoutContentsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isDeleted?: boolean
+    type: $Enums.CategoryType
+    courses?: CourseUncheckedCreateNestedManyWithoutCategoryInput
+    subCategories?: SubCategoryUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryCreateOrConnectWithoutContentsInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutContentsInput, CategoryUncheckedCreateWithoutContentsInput>
+  }
+
   export type ContentTypeCreateWithoutContentsInput = {
     id?: string
     name: string
@@ -26184,31 +26364,37 @@ export namespace Prisma {
     create: XOR<ContentTypeCreateWithoutContentsInput, ContentTypeUncheckedCreateWithoutContentsInput>
   }
 
-  export type CategoryCreateWithoutContentsInput = {
-    id?: string
-    name: string
-    isDeleted?: boolean
-    type: $Enums.CategoryType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    subCategories?: SubCategoryCreateNestedManyWithoutCategoryInput
-    courses?: CourseCreateNestedManyWithoutCategoryInput
-  }
-
-  export type CategoryUncheckedCreateWithoutContentsInput = {
-    id?: string
-    name: string
-    isDeleted?: boolean
-    type: $Enums.CategoryType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    subCategories?: SubCategoryUncheckedCreateNestedManyWithoutCategoryInput
-    courses?: CourseUncheckedCreateNestedManyWithoutCategoryInput
-  }
-
-  export type CategoryCreateOrConnectWithoutContentsInput = {
-    where: CategoryWhereUniqueInput
+  export type CategoryUpsertWithoutContentsInput = {
+    update: XOR<CategoryUpdateWithoutContentsInput, CategoryUncheckedUpdateWithoutContentsInput>
     create: XOR<CategoryCreateWithoutContentsInput, CategoryUncheckedCreateWithoutContentsInput>
+    where?: CategoryWhereInput
+  }
+
+  export type CategoryUpdateToOneWithWhereWithoutContentsInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutContentsInput, CategoryUncheckedUpdateWithoutContentsInput>
+  }
+
+  export type CategoryUpdateWithoutContentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
+    courses?: CourseUpdateManyWithoutCategoryNestedInput
+    subCategories?: SubCategoryUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryUncheckedUpdateWithoutContentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
+    courses?: CourseUncheckedUpdateManyWithoutCategoryNestedInput
+    subCategories?: SubCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type ContentTypeUpsertWithoutContentsInput = {
@@ -26238,64 +26424,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CategoryUpsertWithoutContentsInput = {
-    update: XOR<CategoryUpdateWithoutContentsInput, CategoryUncheckedUpdateWithoutContentsInput>
-    create: XOR<CategoryCreateWithoutContentsInput, CategoryUncheckedCreateWithoutContentsInput>
-    where?: CategoryWhereInput
-  }
-
-  export type CategoryUpdateToOneWithWhereWithoutContentsInput = {
-    where?: CategoryWhereInput
-    data: XOR<CategoryUpdateWithoutContentsInput, CategoryUncheckedUpdateWithoutContentsInput>
-  }
-
-  export type CategoryUpdateWithoutContentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategories?: SubCategoryUpdateManyWithoutCategoryNestedInput
-    courses?: CourseUpdateManyWithoutCategoryNestedInput
-  }
-
-  export type CategoryUncheckedUpdateWithoutContentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategories?: SubCategoryUncheckedUpdateManyWithoutCategoryNestedInput
-    courses?: CourseUncheckedUpdateManyWithoutCategoryNestedInput
-  }
-
-  export type SubCategoryCreateManyCategoryInput = {
-    id?: string
-    name: string
-    isDeleted?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type CourseCreateManyCategoryInput = {
-    id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    parentCourseId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    subCategoryId?: string | null
-  }
-
   export type ContentCreateManyCategoryInput = {
     id?: string
     typeId: string
@@ -26304,99 +26432,37 @@ export namespace Prisma {
     fileUrl?: string | null
     thumbnailUrl?: string | null
     author?: string | null
-    content?: string | null
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    content?: string | null
   }
 
-  export type SubCategoryUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courses?: CourseUpdateManyWithoutSubCategoryNestedInput
+  export type CourseCreateManyCategoryInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    subCategoryId?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    parentCourseId?: string | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
   }
 
-  export type SubCategoryUncheckedUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courses?: CourseUncheckedUpdateManyWithoutSubCategoryNestedInput
-  }
-
-  export type SubCategoryUncheckedUpdateManyWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CourseUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
-    subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
-    subCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
-    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseUncheckedUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseUncheckedUpdateManyWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
+  export type SubCategoryCreateManyCategoryInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isDeleted?: boolean
   }
 
   export type ContentUpdateWithoutCategoryInput = {
@@ -26406,10 +26472,10 @@ export namespace Prisma {
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
     author?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
     type?: ContentTypeUpdateOneRequiredWithoutContentsNestedInput
   }
 
@@ -26421,10 +26487,10 @@ export namespace Prisma {
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
     author?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContentUncheckedUpdateManyWithoutCategoryInput = {
@@ -26435,171 +26501,229 @@ export namespace Prisma {
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
     author?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CourseUpdateWithoutCategoryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
+    parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
+    subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
+    SubCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
+    CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutCategoryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
+    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
+    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateManyWithoutCategoryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SubCategoryUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    courses?: CourseUpdateManyWithoutSubCategoryNestedInput
+  }
+
+  export type SubCategoryUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    courses?: CourseUncheckedUpdateManyWithoutSubCategoryNestedInput
+  }
+
+  export type SubCategoryUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CourseCreateManySubCategoryInput = {
-    id?: string
-    image?: string | null
     name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    categoryId?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
     description?: string | null
     duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
     parentCourseId?: string | null
-    createdAt?: Date | string
     updatedAt?: Date | string
-    categoryId?: string | null
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
   }
 
   export type CourseUpdateWithoutSubCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
+    Category?: CategoryUpdateOneWithoutCoursesNestedInput
     parentCourse?: CourseUpdateOneWithoutSubCoursesNestedInput
     subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
-    category?: CategoryUpdateOneWithoutCoursesNestedInput
-    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
     CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
     reviews?: ReviewUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutSubCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
     parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
+    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
+    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutSubCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
     parentCourseId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HomeCategoryItemCreateManyHomeCategoryInput = {
     id?: string
-    courseId: string
-    type: $Enums.CourseType
     createdAt?: Date | string
     updatedAt?: Date | string
+    type: $Enums.CourseType
+    courseId: string
+    isDeleted?: boolean
   }
 
   export type HomeCategoryItemUpdateWithoutHomeCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     course?: CourseUpdateOneRequiredWithoutHomeCategoryItemNestedInput
   }
 
   export type HomeCategoryItemUncheckedUpdateWithoutHomeCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    courseId?: StringFieldUpdateOperationsInput | string
-    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+    courseId?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HomeCategoryItemUncheckedUpdateManyWithoutHomeCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    courseId?: StringFieldUpdateOperationsInput | string
-    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CourseCreateManyParentCourseInput = {
-    id?: string
-    image?: string | null
-    name: string
-    description?: string | null
-    duration?: number | null
-    videoCount?: number
-    enrolledCount?: number
-    isDeleted?: boolean
-    rating?: number
-    date?: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    categoryId?: string | null
-    subCategoryId?: string | null
-  }
-
-  export type UserOnCourseCreateManyCourseInput = {
-    id?: string
-    userId: string
-    status?: $Enums.CourseStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type HomeCategoryItemCreateManyCourseInput = {
-    id?: string
-    homeCategoryId: string
-    type: $Enums.CourseType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type CourseSectionCreateManyCourseInput = {
-    id?: string
-    title: string
-    description?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ReviewCreateManyCourseInput = {
-    id?: string
-    userId: string
-    text: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+    courseId?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type RatingCreateManyCourseInput = {
@@ -26611,67 +26735,83 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CourseUpdateWithoutParentCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
-    category?: CategoryUpdateOneWithoutCoursesNestedInput
-    subCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
-    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUpdateManyWithoutCourseNestedInput
+  export type UserOnCourseCreateManyCourseInput = {
+    id?: string
+    userId: string
+    status?: $Enums.CourseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type CourseUncheckedUpdateWithoutParentCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
-    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
-    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
-    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
-    ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
+  export type CourseCreateManyParentCourseInput = {
+    name: string
+    image?: string | null
+    enrolledCount?: number
+    date?: Date | string
+    categoryId?: string | null
+    subCategoryId?: string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    description?: string | null
+    duration?: number | null
+    updatedAt?: Date | string
+    videoCount?: number
+    id?: string
+    rating?: number
+    previewImage?: string | null
+    previewVideo?: string | null
   }
 
-  export type CourseUncheckedUpdateManyWithoutParentCourseInput = {
+  export type CourseSectionCreateManyCourseInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HomeCategoryItemCreateManyCourseInput = {
+    id?: string
+    homeCategoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    type: $Enums.CourseType
+    isDeleted?: boolean
+  }
+
+  export type ReviewCreateManyCourseInput = {
+    id?: string
+    userId: string
+    text: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RatingUpdateWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
-    videoCount?: IntFieldUpdateOperationsInput | number
-    enrolledCount?: IntFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    rating?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type RatingUncheckedUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RatingUncheckedUpdateManyWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserOnCourseUpdateWithoutCourseInput = {
@@ -26698,28 +26838,73 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type HomeCategoryItemUpdateWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+  export type CourseUpdateWithoutParentCourseInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    homeCategory?: HomeCategoryUpdateOneRequiredWithoutItemsNestedInput
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUpdateManyWithoutCourseNestedInput
+    Category?: CategoryUpdateOneWithoutCoursesNestedInput
+    subCourses?: CourseUpdateManyWithoutParentCourseNestedInput
+    SubCategory?: SubCategoryUpdateOneWithoutCoursesNestedInput
+    CourseSection?: CourseSectionUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUpdateManyWithoutCourseNestedInput
   }
 
-  export type HomeCategoryItemUncheckedUpdateWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    homeCategoryId?: StringFieldUpdateOperationsInput | string
-    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+  export type CourseUncheckedUpdateWithoutParentCourseInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
+    users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
+    subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
+    CourseSection?: CourseSectionUncheckedUpdateManyWithoutCourseNestedInput
+    HomeCategoryItem?: HomeCategoryItemUncheckedUpdateManyWithoutCourseNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutCourseNestedInput
   }
 
-  export type HomeCategoryItemUncheckedUpdateManyWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    homeCategoryId?: StringFieldUpdateOperationsInput | string
-    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+  export type CourseUncheckedUpdateManyWithoutParentCourseInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    enrolledCount?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videoCount?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    previewImage?: NullableStringFieldUpdateOperationsInput | string | null
+    previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CourseSectionUpdateWithoutCourseInput = {
@@ -26748,6 +26933,33 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HomeCategoryItemUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    homeCategory?: HomeCategoryUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type HomeCategoryItemUncheckedUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    homeCategoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type HomeCategoryItemUncheckedUpdateManyWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    homeCategoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumCourseTypeFieldUpdateOperationsInput | $Enums.CourseType
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type ReviewUpdateWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
@@ -26768,33 +26980,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RatingUpdateWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RatingUncheckedUpdateWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RatingUncheckedUpdateManyWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26849,16 +27034,16 @@ export namespace Prisma {
 
   export type ContentCreateManyTypeInput = {
     id?: string
-    categoryId?: string | null
     title: string
     description?: string | null
     fileUrl?: string | null
     thumbnailUrl?: string | null
     author?: string | null
-    content?: string | null
     publishedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    categoryId?: string | null
+    content?: string | null
   }
 
   export type ContentUpdateWithoutTypeInput = {
@@ -26868,39 +27053,39 @@ export namespace Prisma {
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
     author?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
     category?: CategoryUpdateOneWithoutContentsNestedInput
   }
 
   export type ContentUncheckedUpdateWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
     author?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContentUncheckedUpdateManyWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
     author?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: NullableStringFieldUpdateOperationsInput | string | null
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
