@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateHomeSliderDto } from './dto/create-home-slider.dto';
 import { UpdateHomeSliderDto } from './dto/update-home-slider.dto';
@@ -34,26 +38,58 @@ export class HomeSliderService {
   }
 
   async update(id: string, dto: UpdateHomeSliderDto) {
-    await this.findOne(id);
+    await this.findOne(id); // Ensure slider exists
 
     let imageUrl: string | undefined = undefined;
 
     if (dto.image) {
-      const base64Data = dto.image.replace(/^data:image\/\w+;base64,/, '');
-      const buffer = Buffer.from(base64Data, 'base64');
+      // Check if it's a base64 string
+      const isBase64 = dto.image.match(/^data:image\/\w+;base64,/);
 
-      const fileName = `slider_${Date.now()}.png`;
+      if (isBase64) {
+        // It's a base64 string with data URL prefix
+        const base64Data = dto.image.replace(/^data:image\/\w+;base64,/, '');
 
-      // upload to optional folder: "slider"
-      imageUrl = await this.minio.uploadImage(buffer, fileName, 'slider', true);
+        try {
+          const buffer = Buffer.from(base64Data, 'base64');
+          const fileName = `slider_${Date.now()}.png`;
+
+          // upload to minio - use folder from dto or default
+          imageUrl = await this.minio.uploadImage(
+            buffer,
+            fileName,
+            dto.folder || 'slider',
+            dto.isPublic !== undefined ? dto.isPublic : true,
+          );
+        } catch (error) {
+          throw new BadRequestException('Invalid base64 image data');
+        }
+      } else {
+        // It might already be a URL or invalid data
+        // For simplicity, we'll assume it's a valid Minio URL
+        // You could add validation here to check if it's a valid Minio URL
+        imageUrl = dto.image;
+      }
+    }
+
+    // Prepare update data
+    const updateData: any = {
+      updatedAt: new Date(),
+    };
+
+    if (imageUrl) {
+      updateData.image = imageUrl;
+    }
+
+    // If folder or isPublic are provided, we don't store them in the slider table
+    // but we could log them or handle them differently
+    if (dto.folder) {
+      updateData.folder = dto.folder; // If you want to store folder info
     }
 
     return this.prisma.course.homeSlider.update({
       where: { id },
-      data: {
-        ...(imageUrl ? { image: imageUrl } : {}),
-        updatedAt: new Date(),
-      },
+      data: updateData,
     });
   }
 
