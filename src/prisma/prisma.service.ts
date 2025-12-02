@@ -10,6 +10,7 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
   auth = new AuthClient();
   user = new UserClient();
   course = new CourseClient();
+    upload: any;
 
   async onModuleInit() {
     await this.auth.$connect();
