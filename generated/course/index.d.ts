@@ -98,6 +98,11 @@ export type ContentType = $Result.DefaultSelection<Prisma.$ContentTypePayload>
  * 
  */
 export type Content = $Result.DefaultSelection<Prisma.$ContentPayload>
+/**
+ * Model newAndEvents
+ * 
+ */
+export type newAndEvents = $Result.DefaultSelection<Prisma.$newAndEventsPayload>
 
 /**
  * Enums
@@ -105,7 +110,8 @@ export type Content = $Result.DefaultSelection<Prisma.$ContentPayload>
 export namespace $Enums {
   export const CategoryType: {
   NORMAL: 'NORMAL',
-  FEATURE: 'FEATURE'
+  FEATURE: 'FEATURE',
+  CATEGORY_ONLY: 'CATEGORY_ONLY'
 };
 
 export type CategoryType = (typeof CategoryType)[keyof typeof CategoryType]
@@ -128,9 +134,11 @@ export type CourseStatus = (typeof CourseStatus)[keyof typeof CourseStatus]
 
 
 export const ActivityType: {
-  FILE: 'FILE',
+  PDF_FILE: 'PDF_FILE',
+  VIDEO_FILE: 'VIDEO_FILE',
   H5P: 'H5P',
-  URL: 'URL',
+  WEB_URL: 'WEB_URL',
+  YOUTUBE_LINK: 'YOUTUBE_LINK',
   PAGE: 'PAGE'
 };
 
@@ -445,6 +453,16 @@ export class PrismaClient<
     * ```
     */
   get content(): Prisma.ContentDelegate<ExtArgs>;
+
+  /**
+   * `prisma.newAndEvents`: Exposes CRUD operations for the **newAndEvents** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NewAndEvents
+    * const newAndEvents = await prisma.newAndEvents.findMany()
+    * ```
+    */
+  get newAndEvents(): Prisma.newAndEventsDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -938,7 +956,8 @@ export namespace Prisma {
     Rating: 'Rating',
     Faq: 'Faq',
     ContentType: 'ContentType',
-    Content: 'Content'
+    Content: 'Content',
+    newAndEvents: 'newAndEvents'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -955,7 +974,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'post' | 'postEvent' | 'postView' | 'homeSlider' | 'category' | 'subCategory' | 'homeCategory' | 'homeCategoryItem' | 'course' | 'userOnCourse' | 'courseSection' | 'activity' | 'review' | 'rating' | 'faq' | 'contentType' | 'content'
+      modelProps: 'post' | 'postEvent' | 'postView' | 'homeSlider' | 'category' | 'subCategory' | 'homeCategory' | 'homeCategoryItem' | 'course' | 'userOnCourse' | 'courseSection' | 'activity' | 'review' | 'rating' | 'faq' | 'contentType' | 'content' | 'newAndEvents'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -2146,6 +2165,76 @@ export namespace Prisma {
           count: {
             args: Prisma.ContentCountArgs<ExtArgs>,
             result: $Utils.Optional<ContentCountAggregateOutputType> | number
+          }
+        }
+      }
+      newAndEvents: {
+        payload: Prisma.$newAndEventsPayload<ExtArgs>
+        fields: Prisma.newAndEventsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.newAndEventsFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$newAndEventsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.newAndEventsFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$newAndEventsPayload>
+          }
+          findFirst: {
+            args: Prisma.newAndEventsFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$newAndEventsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.newAndEventsFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$newAndEventsPayload>
+          }
+          findMany: {
+            args: Prisma.newAndEventsFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$newAndEventsPayload>[]
+          }
+          create: {
+            args: Prisma.newAndEventsCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$newAndEventsPayload>
+          }
+          createMany: {
+            args: Prisma.newAndEventsCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.newAndEventsCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$newAndEventsPayload>[]
+          }
+          delete: {
+            args: Prisma.newAndEventsDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$newAndEventsPayload>
+          }
+          update: {
+            args: Prisma.newAndEventsUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$newAndEventsPayload>
+          }
+          deleteMany: {
+            args: Prisma.newAndEventsDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.newAndEventsUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.newAndEventsUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$newAndEventsPayload>
+          }
+          aggregate: {
+            args: Prisma.NewAndEventsAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateNewAndEvents>
+          }
+          groupBy: {
+            args: Prisma.newAndEventsGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<NewAndEventsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.newAndEventsCountArgs<ExtArgs>,
+            result: $Utils.Optional<NewAndEventsCountAggregateOutputType> | number
           }
         }
       }
@@ -12490,8 +12579,18 @@ export namespace Prisma {
 
   export type AggregateCourseSection = {
     _count: CourseSectionCountAggregateOutputType | null
+    _avg: CourseSectionAvgAggregateOutputType | null
+    _sum: CourseSectionSumAggregateOutputType | null
     _min: CourseSectionMinAggregateOutputType | null
     _max: CourseSectionMaxAggregateOutputType | null
+  }
+
+  export type CourseSectionAvgAggregateOutputType = {
+    order: number | null
+  }
+
+  export type CourseSectionSumAggregateOutputType = {
+    order: number | null
   }
 
   export type CourseSectionMinAggregateOutputType = {
@@ -12501,6 +12600,7 @@ export namespace Prisma {
     courseId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    order: number | null
   }
 
   export type CourseSectionMaxAggregateOutputType = {
@@ -12510,6 +12610,7 @@ export namespace Prisma {
     courseId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    order: number | null
   }
 
   export type CourseSectionCountAggregateOutputType = {
@@ -12519,9 +12620,18 @@ export namespace Prisma {
     courseId: number
     createdAt: number
     updatedAt: number
+    order: number
     _all: number
   }
 
+
+  export type CourseSectionAvgAggregateInputType = {
+    order?: true
+  }
+
+  export type CourseSectionSumAggregateInputType = {
+    order?: true
+  }
 
   export type CourseSectionMinAggregateInputType = {
     id?: true
@@ -12530,6 +12640,7 @@ export namespace Prisma {
     courseId?: true
     createdAt?: true
     updatedAt?: true
+    order?: true
   }
 
   export type CourseSectionMaxAggregateInputType = {
@@ -12539,6 +12650,7 @@ export namespace Prisma {
     courseId?: true
     createdAt?: true
     updatedAt?: true
+    order?: true
   }
 
   export type CourseSectionCountAggregateInputType = {
@@ -12548,6 +12660,7 @@ export namespace Prisma {
     courseId?: true
     createdAt?: true
     updatedAt?: true
+    order?: true
     _all?: true
   }
 
@@ -12589,6 +12702,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: CourseSectionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CourseSectionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: CourseSectionMinAggregateInputType
@@ -12619,6 +12744,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CourseSectionCountAggregateInputType | true
+    _avg?: CourseSectionAvgAggregateInputType
+    _sum?: CourseSectionSumAggregateInputType
     _min?: CourseSectionMinAggregateInputType
     _max?: CourseSectionMaxAggregateInputType
   }
@@ -12630,7 +12757,10 @@ export namespace Prisma {
     courseId: string
     createdAt: Date
     updatedAt: Date
+    order: number | null
     _count: CourseSectionCountAggregateOutputType | null
+    _avg: CourseSectionAvgAggregateOutputType | null
+    _sum: CourseSectionSumAggregateOutputType | null
     _min: CourseSectionMinAggregateOutputType | null
     _max: CourseSectionMaxAggregateOutputType | null
   }
@@ -12656,6 +12786,7 @@ export namespace Prisma {
     courseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    order?: boolean
     activities?: boolean | CourseSection$activitiesArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
     _count?: boolean | CourseSectionCountOutputTypeDefaultArgs<ExtArgs>
@@ -12668,6 +12799,7 @@ export namespace Prisma {
     courseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    order?: boolean
   }
 
 
@@ -12691,6 +12823,7 @@ export namespace Prisma {
       courseId: string
       createdAt: Date
       updatedAt: Date
+      order: number | null
     }, ExtArgs["result"]["courseSection"]>
     composites: {}
   }
@@ -13120,6 +13253,7 @@ export namespace Prisma {
     readonly courseId: FieldRef<"CourseSection", 'String'>
     readonly createdAt: FieldRef<"CourseSection", 'DateTime'>
     readonly updatedAt: FieldRef<"CourseSection", 'DateTime'>
+    readonly order: FieldRef<"CourseSection", 'Int'>
   }
     
 
@@ -13485,12 +13619,10 @@ export namespace Prisma {
   }
 
   export type ActivityAvgAggregateOutputType = {
-    duration: number | null
     order: number | null
   }
 
   export type ActivitySumAggregateOutputType = {
-    duration: number | null
     order: number | null
   }
 
@@ -13499,12 +13631,11 @@ export namespace Prisma {
     title: string | null
     type: $Enums.ActivityType | null
     content: string | null
-    videoUrl: string | null
-    duration: number | null
     order: number | null
     sectionId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    description: string | null
   }
 
   export type ActivityMaxAggregateOutputType = {
@@ -13512,12 +13643,11 @@ export namespace Prisma {
     title: string | null
     type: $Enums.ActivityType | null
     content: string | null
-    videoUrl: string | null
-    duration: number | null
     order: number | null
     sectionId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    description: string | null
   }
 
   export type ActivityCountAggregateOutputType = {
@@ -13525,23 +13655,20 @@ export namespace Prisma {
     title: number
     type: number
     content: number
-    videoUrl: number
-    duration: number
     order: number
     sectionId: number
     createdAt: number
     updatedAt: number
+    description: number
     _all: number
   }
 
 
   export type ActivityAvgAggregateInputType = {
-    duration?: true
     order?: true
   }
 
   export type ActivitySumAggregateInputType = {
-    duration?: true
     order?: true
   }
 
@@ -13550,12 +13677,11 @@ export namespace Prisma {
     title?: true
     type?: true
     content?: true
-    videoUrl?: true
-    duration?: true
     order?: true
     sectionId?: true
     createdAt?: true
     updatedAt?: true
+    description?: true
   }
 
   export type ActivityMaxAggregateInputType = {
@@ -13563,12 +13689,11 @@ export namespace Prisma {
     title?: true
     type?: true
     content?: true
-    videoUrl?: true
-    duration?: true
     order?: true
     sectionId?: true
     createdAt?: true
     updatedAt?: true
+    description?: true
   }
 
   export type ActivityCountAggregateInputType = {
@@ -13576,12 +13701,11 @@ export namespace Prisma {
     title?: true
     type?: true
     content?: true
-    videoUrl?: true
-    duration?: true
     order?: true
     sectionId?: true
     createdAt?: true
     updatedAt?: true
+    description?: true
     _all?: true
   }
 
@@ -13676,12 +13800,11 @@ export namespace Prisma {
     title: string
     type: $Enums.ActivityType
     content: string | null
-    videoUrl: string | null
-    duration: number | null
     order: number
     sectionId: string
     createdAt: Date
     updatedAt: Date
+    description: string | null
     _count: ActivityCountAggregateOutputType | null
     _avg: ActivityAvgAggregateOutputType | null
     _sum: ActivitySumAggregateOutputType | null
@@ -13708,12 +13831,11 @@ export namespace Prisma {
     title?: boolean
     type?: boolean
     content?: boolean
-    videoUrl?: boolean
-    duration?: boolean
     order?: boolean
     sectionId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    description?: boolean
     section?: boolean | CourseSectionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["activity"]>
 
@@ -13722,12 +13844,11 @@ export namespace Prisma {
     title?: boolean
     type?: boolean
     content?: boolean
-    videoUrl?: boolean
-    duration?: boolean
     order?: boolean
     sectionId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    description?: boolean
   }
 
 
@@ -13746,12 +13867,11 @@ export namespace Prisma {
       title: string
       type: $Enums.ActivityType
       content: string | null
-      videoUrl: string | null
-      duration: number | null
       order: number
       sectionId: string
       createdAt: Date
       updatedAt: Date
+      description: string | null
     }, ExtArgs["result"]["activity"]>
     composites: {}
   }
@@ -14177,12 +14297,11 @@ export namespace Prisma {
     readonly title: FieldRef<"Activity", 'String'>
     readonly type: FieldRef<"Activity", 'ActivityType'>
     readonly content: FieldRef<"Activity", 'String'>
-    readonly videoUrl: FieldRef<"Activity", 'String'>
-    readonly duration: FieldRef<"Activity", 'Int'>
     readonly order: FieldRef<"Activity", 'Int'>
     readonly sectionId: FieldRef<"Activity", 'String'>
     readonly createdAt: FieldRef<"Activity", 'DateTime'>
     readonly updatedAt: FieldRef<"Activity", 'DateTime'>
+    readonly description: FieldRef<"Activity", 'String'>
   }
     
 
@@ -19411,6 +19530,959 @@ export namespace Prisma {
 
 
   /**
+   * Model newAndEvents
+   */
+
+  export type AggregateNewAndEvents = {
+    _count: NewAndEventsCountAggregateOutputType | null
+    _min: NewAndEventsMinAggregateOutputType | null
+    _max: NewAndEventsMaxAggregateOutputType | null
+  }
+
+  export type NewAndEventsMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    image: string | null
+    description: string | null
+    date: string | null
+    time: string | null
+    isDeleted: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+    location: string | null
+  }
+
+  export type NewAndEventsMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    image: string | null
+    description: string | null
+    date: string | null
+    time: string | null
+    isDeleted: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+    location: string | null
+  }
+
+  export type NewAndEventsCountAggregateOutputType = {
+    id: number
+    title: number
+    image: number
+    description: number
+    date: number
+    time: number
+    isDeleted: number
+    created_at: number
+    updated_at: number
+    location: number
+    _all: number
+  }
+
+
+  export type NewAndEventsMinAggregateInputType = {
+    id?: true
+    title?: true
+    image?: true
+    description?: true
+    date?: true
+    time?: true
+    isDeleted?: true
+    created_at?: true
+    updated_at?: true
+    location?: true
+  }
+
+  export type NewAndEventsMaxAggregateInputType = {
+    id?: true
+    title?: true
+    image?: true
+    description?: true
+    date?: true
+    time?: true
+    isDeleted?: true
+    created_at?: true
+    updated_at?: true
+    location?: true
+  }
+
+  export type NewAndEventsCountAggregateInputType = {
+    id?: true
+    title?: true
+    image?: true
+    description?: true
+    date?: true
+    time?: true
+    isDeleted?: true
+    created_at?: true
+    updated_at?: true
+    location?: true
+    _all?: true
+  }
+
+  export type NewAndEventsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which newAndEvents to aggregate.
+     */
+    where?: newAndEventsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newAndEvents to fetch.
+     */
+    orderBy?: newAndEventsOrderByWithRelationInput | newAndEventsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: newAndEventsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newAndEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newAndEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned newAndEvents
+    **/
+    _count?: true | NewAndEventsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NewAndEventsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NewAndEventsMaxAggregateInputType
+  }
+
+  export type GetNewAndEventsAggregateType<T extends NewAndEventsAggregateArgs> = {
+        [P in keyof T & keyof AggregateNewAndEvents]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNewAndEvents[P]>
+      : GetScalarType<T[P], AggregateNewAndEvents[P]>
+  }
+
+
+
+
+  export type newAndEventsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: newAndEventsWhereInput
+    orderBy?: newAndEventsOrderByWithAggregationInput | newAndEventsOrderByWithAggregationInput[]
+    by: NewAndEventsScalarFieldEnum[] | NewAndEventsScalarFieldEnum
+    having?: newAndEventsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NewAndEventsCountAggregateInputType | true
+    _min?: NewAndEventsMinAggregateInputType
+    _max?: NewAndEventsMaxAggregateInputType
+  }
+
+  export type NewAndEventsGroupByOutputType = {
+    id: string
+    title: string
+    image: string
+    description: string
+    date: string
+    time: string
+    isDeleted: boolean
+    created_at: Date
+    updated_at: Date
+    location: string | null
+    _count: NewAndEventsCountAggregateOutputType | null
+    _min: NewAndEventsMinAggregateOutputType | null
+    _max: NewAndEventsMaxAggregateOutputType | null
+  }
+
+  type GetNewAndEventsGroupByPayload<T extends newAndEventsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NewAndEventsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NewAndEventsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NewAndEventsGroupByOutputType[P]>
+            : GetScalarType<T[P], NewAndEventsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type newAndEventsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    image?: boolean
+    description?: boolean
+    date?: boolean
+    time?: boolean
+    isDeleted?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    location?: boolean
+  }, ExtArgs["result"]["newAndEvents"]>
+
+  export type newAndEventsSelectScalar = {
+    id?: boolean
+    title?: boolean
+    image?: boolean
+    description?: boolean
+    date?: boolean
+    time?: boolean
+    isDeleted?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    location?: boolean
+  }
+
+
+
+  export type $newAndEventsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "newAndEvents"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      image: string
+      description: string
+      date: string
+      time: string
+      isDeleted: boolean
+      created_at: Date
+      updated_at: Date
+      location: string | null
+    }, ExtArgs["result"]["newAndEvents"]>
+    composites: {}
+  }
+
+
+  type newAndEventsGetPayload<S extends boolean | null | undefined | newAndEventsDefaultArgs> = $Result.GetResult<Prisma.$newAndEventsPayload, S>
+
+  type newAndEventsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<newAndEventsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: NewAndEventsCountAggregateInputType | true
+    }
+
+  export interface newAndEventsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['newAndEvents'], meta: { name: 'newAndEvents' } }
+    /**
+     * Find zero or one NewAndEvents that matches the filter.
+     * @param {newAndEventsFindUniqueArgs} args - Arguments to find a NewAndEvents
+     * @example
+     * // Get one NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends newAndEventsFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, newAndEventsFindUniqueArgs<ExtArgs>>
+    ): Prisma__newAndEventsClient<$Result.GetResult<Prisma.$newAndEventsPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one NewAndEvents that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {newAndEventsFindUniqueOrThrowArgs} args - Arguments to find a NewAndEvents
+     * @example
+     * // Get one NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends newAndEventsFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, newAndEventsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__newAndEventsClient<$Result.GetResult<Prisma.$newAndEventsPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first NewAndEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newAndEventsFindFirstArgs} args - Arguments to find a NewAndEvents
+     * @example
+     * // Get one NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends newAndEventsFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, newAndEventsFindFirstArgs<ExtArgs>>
+    ): Prisma__newAndEventsClient<$Result.GetResult<Prisma.$newAndEventsPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first NewAndEvents that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newAndEventsFindFirstOrThrowArgs} args - Arguments to find a NewAndEvents
+     * @example
+     * // Get one NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends newAndEventsFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, newAndEventsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__newAndEventsClient<$Result.GetResult<Prisma.$newAndEventsPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more NewAndEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newAndEventsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.findMany()
+     * 
+     * // Get first 10 NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const newAndEventsWithIdOnly = await prisma.newAndEvents.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends newAndEventsFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, newAndEventsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$newAndEventsPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a NewAndEvents.
+     * @param {newAndEventsCreateArgs} args - Arguments to create a NewAndEvents.
+     * @example
+     * // Create one NewAndEvents
+     * const NewAndEvents = await prisma.newAndEvents.create({
+     *   data: {
+     *     // ... data to create a NewAndEvents
+     *   }
+     * })
+     * 
+    **/
+    create<T extends newAndEventsCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, newAndEventsCreateArgs<ExtArgs>>
+    ): Prisma__newAndEventsClient<$Result.GetResult<Prisma.$newAndEventsPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many NewAndEvents.
+     * @param {newAndEventsCreateManyArgs} args - Arguments to create many NewAndEvents.
+     * @example
+     * // Create many NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends newAndEventsCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, newAndEventsCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NewAndEvents and returns the data saved in the database.
+     * @param {newAndEventsCreateManyAndReturnArgs} args - Arguments to create many NewAndEvents.
+     * @example
+     * // Create many NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NewAndEvents and only return the `id`
+     * const newAndEventsWithIdOnly = await prisma.newAndEvents.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends newAndEventsCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, newAndEventsCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$newAndEventsPayload<ExtArgs>, T, 'createManyAndReturn'>>
+
+    /**
+     * Delete a NewAndEvents.
+     * @param {newAndEventsDeleteArgs} args - Arguments to delete one NewAndEvents.
+     * @example
+     * // Delete one NewAndEvents
+     * const NewAndEvents = await prisma.newAndEvents.delete({
+     *   where: {
+     *     // ... filter to delete one NewAndEvents
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends newAndEventsDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, newAndEventsDeleteArgs<ExtArgs>>
+    ): Prisma__newAndEventsClient<$Result.GetResult<Prisma.$newAndEventsPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one NewAndEvents.
+     * @param {newAndEventsUpdateArgs} args - Arguments to update one NewAndEvents.
+     * @example
+     * // Update one NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends newAndEventsUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, newAndEventsUpdateArgs<ExtArgs>>
+    ): Prisma__newAndEventsClient<$Result.GetResult<Prisma.$newAndEventsPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more NewAndEvents.
+     * @param {newAndEventsDeleteManyArgs} args - Arguments to filter NewAndEvents to delete.
+     * @example
+     * // Delete a few NewAndEvents
+     * const { count } = await prisma.newAndEvents.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends newAndEventsDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, newAndEventsDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewAndEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newAndEventsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends newAndEventsUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, newAndEventsUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one NewAndEvents.
+     * @param {newAndEventsUpsertArgs} args - Arguments to update or create a NewAndEvents.
+     * @example
+     * // Update or create a NewAndEvents
+     * const newAndEvents = await prisma.newAndEvents.upsert({
+     *   create: {
+     *     // ... data to create a NewAndEvents
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NewAndEvents we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends newAndEventsUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, newAndEventsUpsertArgs<ExtArgs>>
+    ): Prisma__newAndEventsClient<$Result.GetResult<Prisma.$newAndEventsPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of NewAndEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newAndEventsCountArgs} args - Arguments to filter NewAndEvents to count.
+     * @example
+     * // Count the number of NewAndEvents
+     * const count = await prisma.newAndEvents.count({
+     *   where: {
+     *     // ... the filter for the NewAndEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends newAndEventsCountArgs>(
+      args?: Subset<T, newAndEventsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NewAndEventsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NewAndEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewAndEventsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NewAndEventsAggregateArgs>(args: Subset<T, NewAndEventsAggregateArgs>): Prisma.PrismaPromise<GetNewAndEventsAggregateType<T>>
+
+    /**
+     * Group by NewAndEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newAndEventsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends newAndEventsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: newAndEventsGroupByArgs['orderBy'] }
+        : { orderBy?: newAndEventsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, newAndEventsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewAndEventsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the newAndEvents model
+   */
+  readonly fields: newAndEventsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for newAndEvents.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__newAndEventsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the newAndEvents model
+   */ 
+  interface newAndEventsFieldRefs {
+    readonly id: FieldRef<"newAndEvents", 'String'>
+    readonly title: FieldRef<"newAndEvents", 'String'>
+    readonly image: FieldRef<"newAndEvents", 'String'>
+    readonly description: FieldRef<"newAndEvents", 'String'>
+    readonly date: FieldRef<"newAndEvents", 'String'>
+    readonly time: FieldRef<"newAndEvents", 'String'>
+    readonly isDeleted: FieldRef<"newAndEvents", 'Boolean'>
+    readonly created_at: FieldRef<"newAndEvents", 'DateTime'>
+    readonly updated_at: FieldRef<"newAndEvents", 'DateTime'>
+    readonly location: FieldRef<"newAndEvents", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * newAndEvents findUnique
+   */
+  export type newAndEventsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+    /**
+     * Filter, which newAndEvents to fetch.
+     */
+    where: newAndEventsWhereUniqueInput
+  }
+
+  /**
+   * newAndEvents findUniqueOrThrow
+   */
+  export type newAndEventsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+    /**
+     * Filter, which newAndEvents to fetch.
+     */
+    where: newAndEventsWhereUniqueInput
+  }
+
+  /**
+   * newAndEvents findFirst
+   */
+  export type newAndEventsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+    /**
+     * Filter, which newAndEvents to fetch.
+     */
+    where?: newAndEventsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newAndEvents to fetch.
+     */
+    orderBy?: newAndEventsOrderByWithRelationInput | newAndEventsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for newAndEvents.
+     */
+    cursor?: newAndEventsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newAndEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newAndEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of newAndEvents.
+     */
+    distinct?: NewAndEventsScalarFieldEnum | NewAndEventsScalarFieldEnum[]
+  }
+
+  /**
+   * newAndEvents findFirstOrThrow
+   */
+  export type newAndEventsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+    /**
+     * Filter, which newAndEvents to fetch.
+     */
+    where?: newAndEventsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newAndEvents to fetch.
+     */
+    orderBy?: newAndEventsOrderByWithRelationInput | newAndEventsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for newAndEvents.
+     */
+    cursor?: newAndEventsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newAndEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newAndEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of newAndEvents.
+     */
+    distinct?: NewAndEventsScalarFieldEnum | NewAndEventsScalarFieldEnum[]
+  }
+
+  /**
+   * newAndEvents findMany
+   */
+  export type newAndEventsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+    /**
+     * Filter, which newAndEvents to fetch.
+     */
+    where?: newAndEventsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newAndEvents to fetch.
+     */
+    orderBy?: newAndEventsOrderByWithRelationInput | newAndEventsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing newAndEvents.
+     */
+    cursor?: newAndEventsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newAndEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newAndEvents.
+     */
+    skip?: number
+    distinct?: NewAndEventsScalarFieldEnum | NewAndEventsScalarFieldEnum[]
+  }
+
+  /**
+   * newAndEvents create
+   */
+  export type newAndEventsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+    /**
+     * The data needed to create a newAndEvents.
+     */
+    data: XOR<newAndEventsCreateInput, newAndEventsUncheckedCreateInput>
+  }
+
+  /**
+   * newAndEvents createMany
+   */
+  export type newAndEventsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many newAndEvents.
+     */
+    data: newAndEventsCreateManyInput | newAndEventsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * newAndEvents createManyAndReturn
+   */
+  export type newAndEventsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+    /**
+     * The data used to create many newAndEvents.
+     */
+    data: newAndEventsCreateManyInput | newAndEventsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * newAndEvents update
+   */
+  export type newAndEventsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+    /**
+     * The data needed to update a newAndEvents.
+     */
+    data: XOR<newAndEventsUpdateInput, newAndEventsUncheckedUpdateInput>
+    /**
+     * Choose, which newAndEvents to update.
+     */
+    where: newAndEventsWhereUniqueInput
+  }
+
+  /**
+   * newAndEvents updateMany
+   */
+  export type newAndEventsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update newAndEvents.
+     */
+    data: XOR<newAndEventsUpdateManyMutationInput, newAndEventsUncheckedUpdateManyInput>
+    /**
+     * Filter which newAndEvents to update
+     */
+    where?: newAndEventsWhereInput
+  }
+
+  /**
+   * newAndEvents upsert
+   */
+  export type newAndEventsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+    /**
+     * The filter to search for the newAndEvents to update in case it exists.
+     */
+    where: newAndEventsWhereUniqueInput
+    /**
+     * In case the newAndEvents found by the `where` argument doesn't exist, create a new newAndEvents with this data.
+     */
+    create: XOR<newAndEventsCreateInput, newAndEventsUncheckedCreateInput>
+    /**
+     * In case the newAndEvents was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<newAndEventsUpdateInput, newAndEventsUncheckedUpdateInput>
+  }
+
+  /**
+   * newAndEvents delete
+   */
+  export type newAndEventsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+    /**
+     * Filter which newAndEvents to delete.
+     */
+    where: newAndEventsWhereUniqueInput
+  }
+
+  /**
+   * newAndEvents deleteMany
+   */
+  export type newAndEventsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which newAndEvents to delete
+     */
+    where?: newAndEventsWhereInput
+  }
+
+  /**
+   * newAndEvents without action
+   */
+  export type newAndEventsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newAndEvents
+     */
+    select?: newAndEventsSelect<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -19564,7 +20636,8 @@ export namespace Prisma {
     description: 'description',
     courseId: 'courseId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    order: 'order'
   };
 
   export type CourseSectionScalarFieldEnum = (typeof CourseSectionScalarFieldEnum)[keyof typeof CourseSectionScalarFieldEnum]
@@ -19575,12 +20648,11 @@ export namespace Prisma {
     title: 'title',
     type: 'type',
     content: 'content',
-    videoUrl: 'videoUrl',
-    duration: 'duration',
     order: 'order',
     sectionId: 'sectionId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    description: 'description'
   };
 
   export type ActivityScalarFieldEnum = (typeof ActivityScalarFieldEnum)[keyof typeof ActivityScalarFieldEnum]
@@ -19650,6 +20722,22 @@ export namespace Prisma {
   };
 
   export type ContentScalarFieldEnum = (typeof ContentScalarFieldEnum)[keyof typeof ContentScalarFieldEnum]
+
+
+  export const NewAndEventsScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    image: 'image',
+    description: 'description',
+    date: 'date',
+    time: 'time',
+    isDeleted: 'isDeleted',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    location: 'location'
+  };
+
+  export type NewAndEventsScalarFieldEnum = (typeof NewAndEventsScalarFieldEnum)[keyof typeof NewAndEventsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -20534,6 +21622,7 @@ export namespace Prisma {
     courseId?: UuidFilter<"CourseSection"> | string
     createdAt?: DateTimeFilter<"CourseSection"> | Date | string
     updatedAt?: DateTimeFilter<"CourseSection"> | Date | string
+    order?: IntNullableFilter<"CourseSection"> | number | null
     activities?: ActivityListRelationFilter
     course?: XOR<CourseRelationFilter, CourseWhereInput>
   }
@@ -20545,6 +21634,7 @@ export namespace Prisma {
     courseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    order?: SortOrderInput | SortOrder
     activities?: ActivityOrderByRelationAggregateInput
     course?: CourseOrderByWithRelationInput
   }
@@ -20559,6 +21649,7 @@ export namespace Prisma {
     courseId?: UuidFilter<"CourseSection"> | string
     createdAt?: DateTimeFilter<"CourseSection"> | Date | string
     updatedAt?: DateTimeFilter<"CourseSection"> | Date | string
+    order?: IntNullableFilter<"CourseSection"> | number | null
     activities?: ActivityListRelationFilter
     course?: XOR<CourseRelationFilter, CourseWhereInput>
   }, "id">
@@ -20570,9 +21661,12 @@ export namespace Prisma {
     courseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    order?: SortOrderInput | SortOrder
     _count?: CourseSectionCountOrderByAggregateInput
+    _avg?: CourseSectionAvgOrderByAggregateInput
     _max?: CourseSectionMaxOrderByAggregateInput
     _min?: CourseSectionMinOrderByAggregateInput
+    _sum?: CourseSectionSumOrderByAggregateInput
   }
 
   export type CourseSectionScalarWhereWithAggregatesInput = {
@@ -20585,6 +21679,7 @@ export namespace Prisma {
     courseId?: UuidWithAggregatesFilter<"CourseSection"> | string
     createdAt?: DateTimeWithAggregatesFilter<"CourseSection"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"CourseSection"> | Date | string
+    order?: IntNullableWithAggregatesFilter<"CourseSection"> | number | null
   }
 
   export type ActivityWhereInput = {
@@ -20595,12 +21690,11 @@ export namespace Prisma {
     title?: StringFilter<"Activity"> | string
     type?: EnumActivityTypeFilter<"Activity"> | $Enums.ActivityType
     content?: StringNullableFilter<"Activity"> | string | null
-    videoUrl?: StringNullableFilter<"Activity"> | string | null
-    duration?: IntNullableFilter<"Activity"> | number | null
     order?: IntFilter<"Activity"> | number
     sectionId?: StringFilter<"Activity"> | string
     createdAt?: DateTimeFilter<"Activity"> | Date | string
     updatedAt?: DateTimeFilter<"Activity"> | Date | string
+    description?: StringNullableFilter<"Activity"> | string | null
     section?: XOR<CourseSectionRelationFilter, CourseSectionWhereInput>
   }
 
@@ -20609,12 +21703,11 @@ export namespace Prisma {
     title?: SortOrder
     type?: SortOrder
     content?: SortOrderInput | SortOrder
-    videoUrl?: SortOrderInput | SortOrder
-    duration?: SortOrderInput | SortOrder
     order?: SortOrder
     sectionId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    description?: SortOrderInput | SortOrder
     section?: CourseSectionOrderByWithRelationInput
   }
 
@@ -20626,12 +21719,11 @@ export namespace Prisma {
     title?: StringFilter<"Activity"> | string
     type?: EnumActivityTypeFilter<"Activity"> | $Enums.ActivityType
     content?: StringNullableFilter<"Activity"> | string | null
-    videoUrl?: StringNullableFilter<"Activity"> | string | null
-    duration?: IntNullableFilter<"Activity"> | number | null
     order?: IntFilter<"Activity"> | number
     sectionId?: StringFilter<"Activity"> | string
     createdAt?: DateTimeFilter<"Activity"> | Date | string
     updatedAt?: DateTimeFilter<"Activity"> | Date | string
+    description?: StringNullableFilter<"Activity"> | string | null
     section?: XOR<CourseSectionRelationFilter, CourseSectionWhereInput>
   }, "id">
 
@@ -20640,12 +21732,11 @@ export namespace Prisma {
     title?: SortOrder
     type?: SortOrder
     content?: SortOrderInput | SortOrder
-    videoUrl?: SortOrderInput | SortOrder
-    duration?: SortOrderInput | SortOrder
     order?: SortOrder
     sectionId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    description?: SortOrderInput | SortOrder
     _count?: ActivityCountOrderByAggregateInput
     _avg?: ActivityAvgOrderByAggregateInput
     _max?: ActivityMaxOrderByAggregateInput
@@ -20661,12 +21752,11 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Activity"> | string
     type?: EnumActivityTypeWithAggregatesFilter<"Activity"> | $Enums.ActivityType
     content?: StringNullableWithAggregatesFilter<"Activity"> | string | null
-    videoUrl?: StringNullableWithAggregatesFilter<"Activity"> | string | null
-    duration?: IntNullableWithAggregatesFilter<"Activity"> | number | null
     order?: IntWithAggregatesFilter<"Activity"> | number
     sectionId?: StringWithAggregatesFilter<"Activity"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
+    description?: StringNullableWithAggregatesFilter<"Activity"> | string | null
   }
 
   export type ReviewWhereInput = {
@@ -20999,6 +22089,83 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Content"> | Date | string
     categoryId?: StringNullableWithAggregatesFilter<"Content"> | string | null
     content?: StringNullableWithAggregatesFilter<"Content"> | string | null
+  }
+
+  export type newAndEventsWhereInput = {
+    AND?: newAndEventsWhereInput | newAndEventsWhereInput[]
+    OR?: newAndEventsWhereInput[]
+    NOT?: newAndEventsWhereInput | newAndEventsWhereInput[]
+    id?: StringFilter<"newAndEvents"> | string
+    title?: StringFilter<"newAndEvents"> | string
+    image?: StringFilter<"newAndEvents"> | string
+    description?: StringFilter<"newAndEvents"> | string
+    date?: StringFilter<"newAndEvents"> | string
+    time?: StringFilter<"newAndEvents"> | string
+    isDeleted?: BoolFilter<"newAndEvents"> | boolean
+    created_at?: DateTimeFilter<"newAndEvents"> | Date | string
+    updated_at?: DateTimeFilter<"newAndEvents"> | Date | string
+    location?: StringNullableFilter<"newAndEvents"> | string | null
+  }
+
+  export type newAndEventsOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    image?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    isDeleted?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    location?: SortOrderInput | SortOrder
+  }
+
+  export type newAndEventsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: newAndEventsWhereInput | newAndEventsWhereInput[]
+    OR?: newAndEventsWhereInput[]
+    NOT?: newAndEventsWhereInput | newAndEventsWhereInput[]
+    title?: StringFilter<"newAndEvents"> | string
+    image?: StringFilter<"newAndEvents"> | string
+    description?: StringFilter<"newAndEvents"> | string
+    date?: StringFilter<"newAndEvents"> | string
+    time?: StringFilter<"newAndEvents"> | string
+    isDeleted?: BoolFilter<"newAndEvents"> | boolean
+    created_at?: DateTimeFilter<"newAndEvents"> | Date | string
+    updated_at?: DateTimeFilter<"newAndEvents"> | Date | string
+    location?: StringNullableFilter<"newAndEvents"> | string | null
+  }, "id">
+
+  export type newAndEventsOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    image?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    isDeleted?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    location?: SortOrderInput | SortOrder
+    _count?: newAndEventsCountOrderByAggregateInput
+    _max?: newAndEventsMaxOrderByAggregateInput
+    _min?: newAndEventsMinOrderByAggregateInput
+  }
+
+  export type newAndEventsScalarWhereWithAggregatesInput = {
+    AND?: newAndEventsScalarWhereWithAggregatesInput | newAndEventsScalarWhereWithAggregatesInput[]
+    OR?: newAndEventsScalarWhereWithAggregatesInput[]
+    NOT?: newAndEventsScalarWhereWithAggregatesInput | newAndEventsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"newAndEvents"> | string
+    title?: StringWithAggregatesFilter<"newAndEvents"> | string
+    image?: StringWithAggregatesFilter<"newAndEvents"> | string
+    description?: StringWithAggregatesFilter<"newAndEvents"> | string
+    date?: StringWithAggregatesFilter<"newAndEvents"> | string
+    time?: StringWithAggregatesFilter<"newAndEvents"> | string
+    isDeleted?: BoolWithAggregatesFilter<"newAndEvents"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"newAndEvents"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"newAndEvents"> | Date | string
+    location?: StringNullableWithAggregatesFilter<"newAndEvents"> | string | null
   }
 
   export type PostCreateInput = {
@@ -21772,6 +22939,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    order?: number | null
     activities?: ActivityCreateNestedManyWithoutSectionInput
     course: CourseCreateNestedOneWithoutCourseSectionInput
   }
@@ -21783,6 +22951,7 @@ export namespace Prisma {
     courseId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    order?: number | null
     activities?: ActivityUncheckedCreateNestedManyWithoutSectionInput
   }
 
@@ -21792,6 +22961,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: NullableIntFieldUpdateOperationsInput | number | null
     activities?: ActivityUpdateManyWithoutSectionNestedInput
     course?: CourseUpdateOneRequiredWithoutCourseSectionNestedInput
   }
@@ -21803,6 +22973,7 @@ export namespace Prisma {
     courseId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: NullableIntFieldUpdateOperationsInput | number | null
     activities?: ActivityUncheckedUpdateManyWithoutSectionNestedInput
   }
 
@@ -21813,6 +22984,7 @@ export namespace Prisma {
     courseId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    order?: number | null
   }
 
   export type CourseSectionUpdateManyMutationInput = {
@@ -21821,6 +22993,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CourseSectionUncheckedUpdateManyInput = {
@@ -21830,6 +23003,7 @@ export namespace Prisma {
     courseId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ActivityCreateInput = {
@@ -21837,11 +23011,10 @@ export namespace Prisma {
     title: string
     type?: $Enums.ActivityType
     content?: string | null
-    videoUrl?: string | null
-    duration?: number | null
     order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    description?: string | null
     section: CourseSectionCreateNestedOneWithoutActivitiesInput
   }
 
@@ -21850,12 +23023,11 @@ export namespace Prisma {
     title: string
     type?: $Enums.ActivityType
     content?: string | null
-    videoUrl?: string | null
-    duration?: number | null
     order?: number
     sectionId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    description?: string | null
   }
 
   export type ActivityUpdateInput = {
@@ -21863,11 +23035,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     section?: CourseSectionUpdateOneRequiredWithoutActivitiesNestedInput
   }
 
@@ -21876,12 +23047,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
     sectionId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ActivityCreateManyInput = {
@@ -21889,12 +23059,11 @@ export namespace Prisma {
     title: string
     type?: $Enums.ActivityType
     content?: string | null
-    videoUrl?: string | null
-    duration?: number | null
     order?: number
     sectionId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    description?: string | null
   }
 
   export type ActivityUpdateManyMutationInput = {
@@ -21902,11 +23071,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ActivityUncheckedUpdateManyInput = {
@@ -21914,12 +23082,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
     sectionId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReviewCreateInput = {
@@ -22277,6 +23444,97 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type newAndEventsCreateInput = {
+    id: string
+    title: string
+    image: string
+    description: string
+    date: string
+    time: string
+    isDeleted?: boolean
+    created_at?: Date | string
+    updated_at: Date | string
+    location?: string | null
+  }
+
+  export type newAndEventsUncheckedCreateInput = {
+    id: string
+    title: string
+    image: string
+    description: string
+    date: string
+    time: string
+    isDeleted?: boolean
+    created_at?: Date | string
+    updated_at: Date | string
+    location?: string | null
+  }
+
+  export type newAndEventsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type newAndEventsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type newAndEventsCreateManyInput = {
+    id: string
+    title: string
+    image: string
+    description: string
+    date: string
+    time: string
+    isDeleted?: boolean
+    created_at?: Date | string
+    updated_at: Date | string
+    location?: string | null
+  }
+
+  export type newAndEventsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type newAndEventsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -23108,6 +24366,11 @@ export namespace Prisma {
     courseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    order?: SortOrder
+  }
+
+  export type CourseSectionAvgOrderByAggregateInput = {
+    order?: SortOrder
   }
 
   export type CourseSectionMaxOrderByAggregateInput = {
@@ -23117,6 +24380,7 @@ export namespace Prisma {
     courseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    order?: SortOrder
   }
 
   export type CourseSectionMinOrderByAggregateInput = {
@@ -23126,6 +24390,11 @@ export namespace Prisma {
     courseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    order?: SortOrder
+  }
+
+  export type CourseSectionSumOrderByAggregateInput = {
+    order?: SortOrder
   }
 
   export type EnumActivityTypeFilter<$PrismaModel = never> = {
@@ -23145,16 +24414,14 @@ export namespace Prisma {
     title?: SortOrder
     type?: SortOrder
     content?: SortOrder
-    videoUrl?: SortOrder
-    duration?: SortOrder
     order?: SortOrder
     sectionId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    description?: SortOrder
   }
 
   export type ActivityAvgOrderByAggregateInput = {
-    duration?: SortOrder
     order?: SortOrder
   }
 
@@ -23163,12 +24430,11 @@ export namespace Prisma {
     title?: SortOrder
     type?: SortOrder
     content?: SortOrder
-    videoUrl?: SortOrder
-    duration?: SortOrder
     order?: SortOrder
     sectionId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    description?: SortOrder
   }
 
   export type ActivityMinOrderByAggregateInput = {
@@ -23176,16 +24442,14 @@ export namespace Prisma {
     title?: SortOrder
     type?: SortOrder
     content?: SortOrder
-    videoUrl?: SortOrder
-    duration?: SortOrder
     order?: SortOrder
     sectionId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    description?: SortOrder
   }
 
   export type ActivitySumOrderByAggregateInput = {
-    duration?: SortOrder
     order?: SortOrder
   }
 
@@ -23363,6 +24627,45 @@ export namespace Prisma {
     updatedAt?: SortOrder
     categoryId?: SortOrder
     content?: SortOrder
+  }
+
+  export type newAndEventsCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    image?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    isDeleted?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    location?: SortOrder
+  }
+
+  export type newAndEventsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    image?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    isDeleted?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    location?: SortOrder
+  }
+
+  export type newAndEventsMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    image?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    time?: SortOrder
+    isDeleted?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    location?: SortOrder
   }
 
   export type PostCreatetagsInput = {
@@ -25336,6 +26639,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    order?: number | null
     activities?: ActivityCreateNestedManyWithoutSectionInput
   }
 
@@ -25345,6 +26649,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    order?: number | null
     activities?: ActivityUncheckedCreateNestedManyWithoutSectionInput
   }
 
@@ -25634,6 +26939,7 @@ export namespace Prisma {
     courseId?: UuidFilter<"CourseSection"> | string
     createdAt?: DateTimeFilter<"CourseSection"> | Date | string
     updatedAt?: DateTimeFilter<"CourseSection"> | Date | string
+    order?: IntNullableFilter<"CourseSection"> | number | null
   }
 
   export type HomeCategoryItemUpsertWithWhereUniqueWithoutCourseInput = {
@@ -25801,11 +27107,10 @@ export namespace Prisma {
     title: string
     type?: $Enums.ActivityType
     content?: string | null
-    videoUrl?: string | null
-    duration?: number | null
     order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    description?: string | null
   }
 
   export type ActivityUncheckedCreateWithoutSectionInput = {
@@ -25813,11 +27118,10 @@ export namespace Prisma {
     title: string
     type?: $Enums.ActivityType
     content?: string | null
-    videoUrl?: string | null
-    duration?: number | null
     order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    description?: string | null
   }
 
   export type ActivityCreateOrConnectWithoutSectionInput = {
@@ -25909,12 +27213,11 @@ export namespace Prisma {
     title?: StringFilter<"Activity"> | string
     type?: EnumActivityTypeFilter<"Activity"> | $Enums.ActivityType
     content?: StringNullableFilter<"Activity"> | string | null
-    videoUrl?: StringNullableFilter<"Activity"> | string | null
-    duration?: IntNullableFilter<"Activity"> | number | null
     order?: IntFilter<"Activity"> | number
     sectionId?: StringFilter<"Activity"> | string
     createdAt?: DateTimeFilter<"Activity"> | Date | string
     updatedAt?: DateTimeFilter<"Activity"> | Date | string
+    description?: StringNullableFilter<"Activity"> | string | null
   }
 
   export type CourseUpsertWithoutCourseSectionInput = {
@@ -25984,6 +27287,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    order?: number | null
     course: CourseCreateNestedOneWithoutCourseSectionInput
   }
 
@@ -25994,6 +27298,7 @@ export namespace Prisma {
     courseId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    order?: number | null
   }
 
   export type CourseSectionCreateOrConnectWithoutActivitiesInput = {
@@ -26018,6 +27323,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: NullableIntFieldUpdateOperationsInput | number | null
     course?: CourseUpdateOneRequiredWithoutCourseSectionNestedInput
   }
 
@@ -26028,6 +27334,7 @@ export namespace Prisma {
     courseId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CourseCreateWithoutReviewsInput = {
@@ -26768,6 +28075,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    order?: number | null
   }
 
   export type HomeCategoryItemCreateManyCourseInput = {
@@ -26913,6 +28221,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: NullableIntFieldUpdateOperationsInput | number | null
     activities?: ActivityUpdateManyWithoutSectionNestedInput
   }
 
@@ -26922,6 +28231,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: NullableIntFieldUpdateOperationsInput | number | null
     activities?: ActivityUncheckedUpdateManyWithoutSectionNestedInput
   }
 
@@ -26931,6 +28241,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type HomeCategoryItemUpdateWithoutCourseInput = {
@@ -26989,11 +28300,10 @@ export namespace Prisma {
     title: string
     type?: $Enums.ActivityType
     content?: string | null
-    videoUrl?: string | null
-    duration?: number | null
     order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    description?: string | null
   }
 
   export type ActivityUpdateWithoutSectionInput = {
@@ -27001,11 +28311,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ActivityUncheckedUpdateWithoutSectionInput = {
@@ -27013,11 +28322,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ActivityUncheckedUpdateManyWithoutSectionInput = {
@@ -27025,11 +28333,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     type?: EnumActivityTypeFieldUpdateOperationsInput | $Enums.ActivityType
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    duration?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContentCreateManyTypeInput = {
@@ -27185,6 +28492,10 @@ export namespace Prisma {
      * @deprecated Use ContentDefaultArgs instead
      */
     export type ContentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ContentDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use newAndEventsDefaultArgs instead
+     */
+    export type newAndEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = newAndEventsDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

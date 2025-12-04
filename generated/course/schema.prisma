@@ -154,6 +154,7 @@ model CourseSection {
   courseId    String     @map("course_id") @db.Uuid
   createdAt   DateTime   @default(now()) @map("created_at")
   updatedAt   DateTime   @updatedAt @map("updated_at")
+  order       Int?
   activities  Activity[]
   course      Course     @relation(fields: [courseId], references: [id])
 
@@ -161,17 +162,16 @@ model CourseSection {
 }
 
 model Activity {
-  id        String        @id @default(uuid())
-  title     String
-  type      ActivityType  @default(URL)
-  content   String?
-  videoUrl  String?       @map("video_url")
-  duration  Int?
-  order     Int           @default(0)
-  sectionId String        @map("section_id")
-  createdAt DateTime      @default(now()) @map("created_at")
-  updatedAt DateTime      @updatedAt @map("updated_at")
-  section   CourseSection @relation(fields: [sectionId], references: [id])
+  id          String        @id @default(uuid())
+  title       String
+  type        ActivityType  @default(PAGE)
+  content     String?
+  order       Int           @default(0)
+  sectionId   String        @map("section_id")
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+  description String?
+  section     CourseSection @relation(fields: [sectionId], references: [id])
 
   @@map("activity")
 }
@@ -240,9 +240,23 @@ model Content {
   @@map("contents")
 }
 
+model newAndEvents {
+  id          String   @id
+  title       String
+  image       String
+  description String
+  date        String
+  time        String
+  isDeleted   Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updated_at  DateTime
+  location    String?
+}
+
 enum CategoryType {
   NORMAL
   FEATURE
+  CATEGORY_ONLY
 }
 
 enum CourseType {
@@ -251,9 +265,11 @@ enum CourseType {
 }
 
 enum ActivityType {
-  FILE
+  PDF_FILE
+  VIDEO_FILE
   H5P
-  URL
+  WEB_URL
+  YOUTUBE_LINK
   PAGE
 }
 

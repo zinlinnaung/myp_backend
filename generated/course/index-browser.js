@@ -229,7 +229,8 @@ exports.Prisma.CourseSectionScalarFieldEnum = {
   description: 'description',
   courseId: 'courseId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  order: 'order'
 };
 
 exports.Prisma.ActivityScalarFieldEnum = {
@@ -237,12 +238,11 @@ exports.Prisma.ActivityScalarFieldEnum = {
   title: 'title',
   type: 'type',
   content: 'content',
-  videoUrl: 'videoUrl',
-  duration: 'duration',
   order: 'order',
   sectionId: 'sectionId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  description: 'description'
 };
 
 exports.Prisma.ReviewScalarFieldEnum = {
@@ -296,6 +296,19 @@ exports.Prisma.ContentScalarFieldEnum = {
   content: 'content'
 };
 
+exports.Prisma.NewAndEventsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  image: 'image',
+  description: 'description',
+  date: 'date',
+  time: 'time',
+  isDeleted: 'isDeleted',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  location: 'location'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -323,7 +336,8 @@ exports.Prisma.JsonNullValueFilter = {
 };
 exports.CategoryType = exports.$Enums.CategoryType = {
   NORMAL: 'NORMAL',
-  FEATURE: 'FEATURE'
+  FEATURE: 'FEATURE',
+  CATEGORY_ONLY: 'CATEGORY_ONLY'
 };
 
 exports.CourseType = exports.$Enums.CourseType = {
@@ -337,9 +351,11 @@ exports.CourseStatus = exports.$Enums.CourseStatus = {
 };
 
 exports.ActivityType = exports.$Enums.ActivityType = {
-  FILE: 'FILE',
+  PDF_FILE: 'PDF_FILE',
+  VIDEO_FILE: 'VIDEO_FILE',
   H5P: 'H5P',
-  URL: 'URL',
+  WEB_URL: 'WEB_URL',
+  YOUTUBE_LINK: 'YOUTUBE_LINK',
   PAGE: 'PAGE'
 };
 
@@ -360,7 +376,8 @@ exports.Prisma.ModelName = {
   Rating: 'Rating',
   Faq: 'Faq',
   ContentType: 'ContentType',
-  Content: 'Content'
+  Content: 'Content',
+  newAndEvents: 'newAndEvents'
 };
 
 /**
