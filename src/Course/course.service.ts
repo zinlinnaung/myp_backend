@@ -17,6 +17,7 @@ export class CourseService {
   async findOne(id: string) {
     const course = await this.prisma.course.course.findUnique({
       where: { id },
+      include: { CourseSection: true },
     });
     if (!course) throw new NotFoundException('Course not found');
     return course;
