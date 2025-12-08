@@ -19,6 +19,7 @@ import { HomeCategoryModule } from './HomeCategory/home-category.module';
 import { HomeSliderModule } from './HomeSlider/home-slider.module';
 import { MinioModule } from './Minio/minio.module';
 import { CourseSectionModule } from './Course-section/course-section.module';
+import { ActivityModule } from './Course-activities/activity.module';
 // import { AtGuard } from './common/guards';
 // import { AuthenticationModule } from './authentication/authentication.module';
 // import { UserModule } from './user/user.module';
@@ -45,6 +46,7 @@ import { CourseSectionModule } from './Course-section/course-section.module';
 
     MinioModule,
     CourseModule,
+    ActivityModule,
     CourseSectionModule,
     CategoryModule,
     UserModule,
