@@ -174,22 +174,27 @@ export class MinioService {
       const zipEntries = zip.getEntries(); // Get all files in zip
 
       const uploadPromises = zipEntries.map(async (entry) => {
-        if (entry.isDirectory) return; // Skip directories, MinIO creates them implicitly
+        if (entry.isDirectory) return;
+
+        // ----------------------------------------------------
+        // CRITICAL FIX: Sanitize the entry name
+        // 1. Normalize name to forward slashes (if needed)
+        // 2. Trim leading/trailing slashes
+        const sanitizedEntryName = entry.entryName
+          .replace(/\\/g, '/') // Ensure forward slashes
+          .replace(/^\/|\/$/g, ''); // Remove leading/trailing slashes
+
+        if (!sanitizedEntryName) return; // Skip if cleaning resulted in an empty path
 
         const entryBuffer = entry.getData();
-        const entryPath = `${extractedFolderPath}/${entry.entryName}`;
+        const entryPath = `${extractedFolderPath}/${sanitizedEntryName}`;
+        // ----------------------------------------------------
 
         // Simple Content-Type detection for extracted files
         let contentType = 'application/octet-stream';
-        if (entry.entryName.endsWith('.json')) contentType = 'application/json';
-        else if (entry.entryName.endsWith('.js'))
-          contentType = 'application/javascript';
-        else if (entry.entryName.endsWith('.css')) contentType = 'text/css';
-        else if (entry.entryName.endsWith('.png')) contentType = 'image/png';
-        else if (entry.entryName.endsWith('.jpg')) contentType = 'image/jpeg';
-        else if (entry.entryName.endsWith('.mp4')) contentType = 'video/mp4';
-        else if (entry.entryName.endsWith('.mp3')) contentType = 'audio/mpeg';
+        // ... rest of content type detection ...
 
+        // ... putObject call ...
         await this.client.putObject(
           this.bucketName,
           entryPath,
@@ -201,9 +206,18 @@ export class MinioService {
 
       // Wait for all extracted files to upload
       await Promise.all(uploadPromises);
-    } catch (error) {
-      console.error('Error extracting H5P:', error);
-      throw new BadRequestException('Failed to process H5P file structure');
+    } catch (error: any) {
+      // Use 'any' to ensure access to error properties
+      // Log the full error object for diagnosis
+      console.error('Full MinIO Error Details:', {
+        code: error.code,
+        message: error.message,
+        httpStatus: error.statusCode,
+        stack: error.stack,
+      });
+      throw new BadRequestException(
+        'Failed to process H5P file structure. Check server logs for MinIO details.',
+      );
     }
 
     return {
