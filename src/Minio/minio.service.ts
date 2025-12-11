@@ -153,40 +153,56 @@ export class MinioService {
     const timestamp = Date.now();
     const uniqueId = `${activityId}_${timestamp}`;
 
-    // 1. Define Paths
-    // Path for the original .h5p file
     const originalH5PPath = `private/h5p/h5p/${uniqueId}.h5p`;
-    // Folder path for extracted content
     const extractedFolderPath = `private/h5p/extracted/${uniqueId}`;
 
-    // 2. Upload the Original .h5p File
-    await this.client.putObject(
-      this.bucketName,
-      originalH5PPath,
-      fileBuffer,
-      fileBuffer.length,
-      { 'Content-Type': 'application/zip' }, // H5P is a zip
-    );
-
-    // 3. Extract and Upload Contents
     try {
+      // 1️⃣ Upload original H5P file
+      await this.client.putObject(
+        this.bucketName,
+        originalH5PPath,
+        fileBuffer,
+        fileBuffer.length,
+        { 'Content-Type': 'application/zip' },
+      );
+
+      // 2️⃣ Extract ZIP
       const zip = new AdmZip(fileBuffer);
       const zipEntries = zip.getEntries();
 
       const uploadPromises = zipEntries.map(async (entry) => {
         if (entry.isDirectory) return;
 
+        // --- SANITIZE PATH COMPLETELY ---
         const sanitizedEntryName = entry.entryName
           .replace(/\\/g, '/')
-          .replace(/^\/|\/$/g, '');
+          .replace(/\.\./g, '')
+          .replace(/^\/+/, '')
+          .replace(/\/+$/, '')
+          .replace(/\/{2,}/g, '/');
 
         if (!sanitizedEntryName) return;
 
         const entryBuffer = entry.getData();
+
+        // Skip empty files (MinIO throws S3Error on 0-byte upload)
+        if (!entryBuffer || entryBuffer.length === 0) {
+          console.warn(`Skipping empty file: ${sanitizedEntryName}`);
+          return;
+        }
+
         const entryPath = `${extractedFolderPath}/${sanitizedEntryName}`;
 
+        // --- CONTENT TYPE ---
         let contentType = 'application/octet-stream';
+        if (entryPath.endsWith('.json')) contentType = 'application/json';
+        else if (entryPath.endsWith('.js'))
+          contentType = 'application/javascript';
+        else if (entryPath.endsWith('.css')) contentType = 'text/css';
+        else if (entryPath.endsWith('.svg')) contentType = 'image/svg+xml';
+        else if (entryPath.endsWith('.html')) contentType = 'text/html';
 
+        // --- UPLOAD FILE TO MINIO ---
         await this.client.putObject(
           this.bucketName,
           entryPath,
@@ -197,26 +213,30 @@ export class MinioService {
       });
 
       await Promise.all(uploadPromises);
+
+      return {
+        originalPath: originalH5PPath,
+        extractedFolder: extractedFolderPath,
+        mainEntryFile: `${extractedFolderPath}/h5p.json`,
+        timestamp: timestamp,
+      };
     } catch (error: any) {
-      console.error('Full MinIO Error Details:', {
+      // 🔥 LOG FULL ERROR DETAILS
+      console.error('---- FULL MINIO ERROR ----');
+      console.error({
         code: error.code,
         message: error.message,
-        httpStatus: error.statusCode,
+        statusCode: error.statusCode,
         resource: error.resource,
+        bucketName: error.bucketName,
         region: error.region,
         stack: error.stack,
       });
+      console.error('---------------------------');
 
       throw new BadRequestException(
-        'Failed to process H5P file structure. Check server logs for MinIO details.',
+        'Failed to extract and upload H5P. Check logs for details.',
       );
     }
-
-    return {
-      originalPath: originalH5PPath,
-      extractedFolder: extractedFolderPath,
-      mainEntryFile: `${extractedFolderPath}/h5p.json`, // Usually the entry point
-      timestamp: timestamp,
-    };
   }
 }
