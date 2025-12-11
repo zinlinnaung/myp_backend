@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import AdmZip from 'adm-zip';
 import { randomBytes } from 'crypto';
 import { Client } from 'minio';
 
@@ -142,5 +143,74 @@ export class MinioService {
 
   async getSignedUrl(objectName: string) {
     return this.client.presignedGetObject(this.bucketName, objectName, 60);
+  }
+
+  async uploadAndExtractH5P(
+    fileBuffer: Buffer,
+    fileName: string,
+    activityId: string,
+  ) {
+    const timestamp = Date.now();
+    const uniqueId = `${activityId}_${timestamp}`;
+
+    // 1. Define Paths
+    // Path for the original .h5p file
+    const originalH5PPath = `private/h5p/h5p/${uniqueId}.h5p`;
+    // Folder path for extracted content
+    const extractedFolderPath = `private/h5p/extracted/${uniqueId}`;
+
+    // 2. Upload the Original .h5p File
+    await this.client.putObject(
+      this.bucketName,
+      originalH5PPath,
+      fileBuffer,
+      fileBuffer.length,
+      { 'Content-Type': 'application/zip' }, // H5P is a zip
+    );
+
+    // 3. Extract and Upload Contents
+    try {
+      const zip = new AdmZip(fileBuffer);
+      const zipEntries = zip.getEntries(); // Get all files in zip
+
+      const uploadPromises = zipEntries.map(async (entry) => {
+        if (entry.isDirectory) return; // Skip directories, MinIO creates them implicitly
+
+        const entryBuffer = entry.getData();
+        const entryPath = `${extractedFolderPath}/${entry.entryName}`;
+
+        // Simple Content-Type detection for extracted files
+        let contentType = 'application/octet-stream';
+        if (entry.entryName.endsWith('.json')) contentType = 'application/json';
+        else if (entry.entryName.endsWith('.js'))
+          contentType = 'application/javascript';
+        else if (entry.entryName.endsWith('.css')) contentType = 'text/css';
+        else if (entry.entryName.endsWith('.png')) contentType = 'image/png';
+        else if (entry.entryName.endsWith('.jpg')) contentType = 'image/jpeg';
+        else if (entry.entryName.endsWith('.mp4')) contentType = 'video/mp4';
+        else if (entry.entryName.endsWith('.mp3')) contentType = 'audio/mpeg';
+
+        await this.client.putObject(
+          this.bucketName,
+          entryPath,
+          entryBuffer,
+          entryBuffer.length,
+          { 'Content-Type': contentType },
+        );
+      });
+
+      // Wait for all extracted files to upload
+      await Promise.all(uploadPromises);
+    } catch (error) {
+      console.error('Error extracting H5P:', error);
+      throw new BadRequestException('Failed to process H5P file structure');
+    }
+
+    return {
+      originalPath: originalH5PPath,
+      extractedFolder: extractedFolderPath,
+      mainEntryFile: `${extractedFolderPath}/h5p.json`, // Usually the entry point
+      timestamp: timestamp,
+    };
   }
 }

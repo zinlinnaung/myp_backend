@@ -104,6 +104,43 @@ export class FilesController {
     );
   }
 
+  @Post('upload-h5p')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: { type: 'string', format: 'binary' },
+        activityId: { type: 'string', example: '101' },
+      },
+      required: ['file', 'activityId'],
+    },
+  })
+  async uploadH5P(
+    @UploadedFile() file: Express.Multer.File,
+    @Body('activityId') activityId: string,
+  ) {
+    if (!file) throw new BadRequestException('File is required');
+    if (!activityId) throw new BadRequestException('Activity ID is required');
+
+    // Check file extension
+    if (!file.originalname.endsWith('.h5p')) {
+      throw new BadRequestException('Only .h5p files are allowed');
+    }
+
+    const result = await this.minioService.uploadAndExtractH5P(
+      file.buffer,
+      file.originalname,
+      activityId,
+    );
+
+    return {
+      message: 'H5P uploaded and extracted successfully',
+      data: result,
+    };
+  }
+
   /**
    * Download private file using temporary key (Existing)
    */
