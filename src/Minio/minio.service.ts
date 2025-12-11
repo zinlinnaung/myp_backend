@@ -2,10 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { randomBytes } from 'crypto';
 import { Client } from 'minio';
 
+// Helper interface for bulk uploads
+export interface BufferedFile {
+  buffer: Buffer;
+  fileName: string;
+}
+
 @Injectable()
 export class MinioService {
   private readonly bucketName = 'dev';
 
+  // NOTE: In production, move these sensitive values to environment variables (.env)
   private readonly client = new Client({
     endPoint: 'mmyouth-minio.bitmyanmar.info',
     port: 443,
@@ -18,7 +25,36 @@ export class MinioService {
   private tempKeys = new Map<string, any>();
 
   /**
-   * Upload image (public or private)
+   * 1. NEW: Upload a single file specifically to dev/public/{folder}
+   * Returns: The public URL
+   */
+  async uploadPublicFile(
+    fileBuffer: Buffer,
+    fileName: string,
+    folderName: string,
+  ): Promise<string> {
+    // Reuse existing logic with isPublic = true
+    return this.uploadImage(fileBuffer, fileName, folderName, true);
+  }
+
+  /**
+   * 2. NEW: Upload multiple files (a folder's content) to dev/public/{folder}
+   * Returns: Array of public URLs
+   */
+  async uploadPublicFolder(
+    files: BufferedFile[],
+    folderName: string,
+  ): Promise<string[]> {
+    // Execute all uploads in parallel
+    const uploadPromises = files.map((file) =>
+      this.uploadPublicFile(file.buffer, file.fileName, folderName),
+    );
+
+    return Promise.all(uploadPromises);
+  }
+
+  /**
+   * Existing generic upload method
    */
   async uploadImage(
     fileBuffer: Buffer,
@@ -32,16 +68,19 @@ export class MinioService {
     const baseFolder = isPublic ? 'public' : 'private';
     const objectName = `${baseFolder}/${folder}/${fileName}`;
 
+    // Simple Content-Type detection
+    let contentType = 'application/octet-stream';
+    if (fileName.endsWith('.png')) contentType = 'image/png';
+    else if (fileName.endsWith('.jpg') || fileName.endsWith('.jpeg'))
+      contentType = 'image/jpeg';
+    else if (fileName.endsWith('.pdf')) contentType = 'application/pdf';
+
     await this.client.putObject(
       this.bucketName,
       objectName,
       fileBuffer,
       fileBuffer.length,
-      {
-        'Content-Type': fileName.endsWith('.png')
-          ? 'image/png'
-          : 'application/octet-stream',
-      },
+      { 'Content-Type': contentType },
     );
 
     if (isPublic) {
@@ -55,14 +94,14 @@ export class MinioService {
     );
   }
 
-  /**
-   * Upload private image with temporary key
-   */
+  // ... [Keep the rest of your existing methods: uploadImagePrivate, getObjectStream, etc.] ...
+
   async uploadImagePrivate(
     fileBuffer: Buffer,
     fileName: string,
     folder: string,
   ) {
+    // ... existing implementation ...
     const exists = await this.client.bucketExists(this.bucketName);
     if (!exists) await this.client.makeBucket(this.bucketName);
 
@@ -74,9 +113,8 @@ export class MinioService {
       fileBuffer.length,
     );
 
-    // Generate temporary key
     const token = randomBytes(32).toString('hex');
-    const expiresIn = 24 * 60 * 60 * 1000; // 24 hours
+    const expiresIn = 24 * 60 * 60 * 1000;
     const expiresAt = Date.now() + expiresIn;
 
     this.tempKeys.set(token, { token, objectName, expiresAt });
@@ -84,35 +122,25 @@ export class MinioService {
     const baseUrl = 'https://mmyouth-minio.bitmyanmar.info';
     const encodedPath = encodeURIComponent(objectName);
     const url = `/files/download?path=${encodedPath}&key=${token}`;
-    const fullUrl = `${baseUrl}${url}`;
 
     return {
       path: objectName,
       url,
-      fullUrl,
+      fullUrl: `${baseUrl}${url}`,
       key: token,
       expiresAt,
     };
   }
 
-  /**
-   * Get a MinIO object stream
-   */
   async getObjectStream(objectName: string) {
     return this.client.getObject(this.bucketName, objectName);
   }
 
-  /**
-   * Validate temporary key
-   */
   async validateTempKey(token: string) {
     return this.tempKeys.get(token) || null;
   }
 
-  /**
-   * Generate presigned MinIO URL
-   */
   async getSignedUrl(objectName: string) {
-    return this.client.presignedGetObject(this.bucketName, objectName, 60); // 1 min
+    return this.client.presignedGetObject(this.bucketName, objectName, 60);
   }
 }

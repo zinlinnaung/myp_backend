@@ -5,11 +5,12 @@ import {
   Query,
   UseInterceptors,
   UploadedFile,
+  UploadedFiles, // Import this for multiple files
   Res,
   BadRequestException,
   Body,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express'; // Import FilesInterceptor
 import { Response } from 'express';
 import { MinioService } from './minio.service';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
@@ -20,7 +21,61 @@ export class FilesController {
   constructor(private readonly minioService: MinioService) {}
 
   /**
-   * Upload private image
+   * NEW: Upload multiple files to public folder
+   * Uploads to: dev/public/{folder_name}/...
+   */
+  @Post('upload-public-folder')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FilesInterceptor('files')) // Note the plural 'Files'
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        folder: {
+          type: 'string',
+          example: 'events/2023',
+          description: 'Target folder path inside public',
+        },
+        files: {
+          type: 'array', // Array type
+          items: {
+            type: 'string',
+            format: 'binary',
+          },
+        },
+      },
+      required: ['folder', 'files'],
+    },
+  })
+  async uploadPublicFolder(
+    @UploadedFiles() files: Array<Express.Multer.File>, // Array of files
+    @Body('folder') folder: string,
+  ) {
+    if (!files || files.length === 0)
+      throw new BadRequestException('Files are required');
+    if (!folder) throw new BadRequestException('Folder is required');
+
+    // Map Multer files to the interface expected by service
+    const bufferedFiles = files.map((file) => ({
+      buffer: file.buffer,
+      fileName: file.originalname,
+    }));
+
+    const urls = await this.minioService.uploadPublicFolder(
+      bufferedFiles,
+      folder,
+    );
+
+    return {
+      message: 'Upload successful',
+      folder: `public/${folder}`,
+      count: urls.length,
+      urls: urls,
+    };
+  }
+
+  /**
+   * Upload private image (Existing)
    */
   @Post('upload-private')
   @ApiConsumes('multipart/form-data')
@@ -50,7 +105,7 @@ export class FilesController {
   }
 
   /**
-   * Download private file using temporary key
+   * Download private file using temporary key (Existing)
    */
   @Get('download')
   async downloadPrivateFile(
