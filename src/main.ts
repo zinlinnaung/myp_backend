@@ -5,6 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
 import { join } from 'path';
+import { urlencoded } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -19,6 +20,7 @@ async function bootstrap() {
   app.enableCors();
   app.setGlobalPrefix('api');
   app.useBodyParser('json', { limit: '10mb' });
+  app.use(urlencoded({ extended: true, limit: '500mb' }));
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads', // Adjust the prefix as needed
   });
