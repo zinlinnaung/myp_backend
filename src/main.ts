@@ -19,7 +19,7 @@ async function bootstrap() {
   );
   app.enableCors();
   app.setGlobalPrefix('api');
-  app.useBodyParser('json', { limit: '10mb' });
+  app.useBodyParser('json', { limit: '10000mb' });
   app.use(urlencoded({ extended: true, limit: '500mb' }));
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads', // Adjust the prefix as needed
