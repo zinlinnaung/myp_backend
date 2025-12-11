@@ -16,10 +16,11 @@ export class ActivityService {
         content: dto.content,
         order: dto.order,
         description: dto.description,
-        sectionId: dto.sectionId, // <-- THIS FIXES THE ERROR
-      } as Prisma.ActivityUncheckedCreateInput,
+        sectionId: dto.sectionId,
+      },
     });
   }
+  
 
   async findAll() {
     return this.prisma.course.activity.findMany({
