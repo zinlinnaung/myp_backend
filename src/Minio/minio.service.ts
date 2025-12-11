@@ -156,7 +156,7 @@ export class MinioService {
     const originalH5PPath = `private/h5p/h5p/${uniqueId}.h5p`;
     const extractedFolderPath = `private/h5p/extracted/${uniqueId}`;
 
-    // Helper to create "folders" in MinIO
+    // Helper: create "folders" in MinIO
     const ensureFolderExists = async (path: string) => {
       if (!path) return;
       const parts = path.split('/');
@@ -164,7 +164,6 @@ export class MinioService {
       for (const part of parts) {
         current += part + '/';
         try {
-          // MinIO doesn't fail if object exists
           await this.client.putObject(
             this.bucketName,
             current,
@@ -174,6 +173,18 @@ export class MinioService {
           // ignore errors
         }
       }
+    };
+
+    // Helper: sanitize entry names for MinIO
+    const sanitizePath = (entryName: string) => {
+      return entryName
+        .replace(/\\/g, '/') // backslashes → forward slashes
+        .replace(/\.\./g, '') // remove parent traversal
+        .replace(/\s+/g, '_') // replace spaces
+        .replace(/[^\w\-./]/g, '') // remove unsafe characters
+        .replace(/^\/+/, '') // remove leading slashes
+        .replace(/\/+$/, '') // remove trailing slashes
+        .replace(/\/{2,}/g, '/'); // collapse duplicate slashes
     };
 
     try {
@@ -190,30 +201,30 @@ export class MinioService {
       const zip = new AdmZip(fileBuffer);
       const zipEntries = zip.getEntries();
 
-      // 3️⃣ Upload each extracted file
-      for (const entry of zipEntries) {
-        if (entry.isDirectory) continue;
-
-        // --- SANITIZE PATH ---
-        const sanitizedEntryName = entry.entryName
-          .replace(/\\/g, '/')
-          .replace(/\.\./g, '') // remove parent traversal
-          .replace(/^\/+/, '') // remove leading slashes
-          .replace(/\/+$/, '') // remove trailing slashes
-          .replace(/\/{2,}/g, '/'); // collapse double slashes
-
-        if (!sanitizedEntryName) continue;
-
-        const entryBuffer = entry.getData();
-        if (!entryBuffer || entryBuffer.length === 0) continue;
+      // 3️⃣ Prepare upload promises
+      const uploadPromises = zipEntries.map(async (entry) => {
+        const sanitizedEntryName = sanitizePath(entry.entryName);
+        if (!sanitizedEntryName) return;
 
         const entryPath = `${extractedFolderPath}/${sanitizedEntryName}`;
 
-        // --- ENSURE PARENT FOLDERS EXIST ---
+        // Ensure parent folders exist
         const parentFolder = entryPath.split('/').slice(0, -1).join('/');
         await ensureFolderExists(parentFolder);
 
-        // --- SIMPLE CONTENT TYPE DETECTION ---
+        if (entry.isDirectory) {
+          // create folder object
+          await ensureFolderExists(entryPath);
+          return;
+        }
+
+        const entryBuffer = entry.getData();
+        if (!entryBuffer || entryBuffer.length === 0) {
+          // skip empty files
+          return;
+        }
+
+        // Simple content type detection
         let contentType = 'application/octet-stream';
         if (entryPath.endsWith('.json')) contentType = 'application/json';
         else if (entryPath.endsWith('.js'))
@@ -225,7 +236,7 @@ export class MinioService {
         else if (entryPath.endsWith('.jpg') || entryPath.endsWith('.jpeg'))
           contentType = 'image/jpeg';
 
-        // --- UPLOAD FILE ---
+        // Upload file
         await this.client.putObject(
           this.bucketName,
           entryPath,
@@ -233,7 +244,10 @@ export class MinioService {
           entryBuffer.length,
           { 'Content-Type': contentType },
         );
-      }
+      });
+
+      // 4️⃣ Wait for all uploads to finish
+      await Promise.all(uploadPromises);
 
       return {
         originalPath: originalH5PPath,
