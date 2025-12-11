@@ -156,6 +156,26 @@ export class MinioService {
     const originalH5PPath = `private/h5p/h5p/${uniqueId}.h5p`;
     const extractedFolderPath = `private/h5p/extracted/${uniqueId}`;
 
+    // Helper to create "folders" in MinIO
+    const ensureFolderExists = async (path: string) => {
+      if (!path) return;
+      const parts = path.split('/');
+      let current = '';
+      for (const part of parts) {
+        current += part + '/';
+        try {
+          // MinIO doesn't fail if object exists
+          await this.client.putObject(
+            this.bucketName,
+            current,
+            Buffer.alloc(0),
+          );
+        } catch (e) {
+          // ignore errors
+        }
+      }
+    };
+
     try {
       // 1️⃣ Upload original H5P file
       await this.client.putObject(
@@ -170,30 +190,30 @@ export class MinioService {
       const zip = new AdmZip(fileBuffer);
       const zipEntries = zip.getEntries();
 
-      const uploadPromises = zipEntries.map(async (entry) => {
-        if (entry.isDirectory) return;
+      // 3️⃣ Upload each extracted file
+      for (const entry of zipEntries) {
+        if (entry.isDirectory) continue;
 
-        // --- SANITIZE PATH COMPLETELY ---
+        // --- SANITIZE PATH ---
         const sanitizedEntryName = entry.entryName
           .replace(/\\/g, '/')
-          .replace(/\.\./g, '')
-          .replace(/^\/+/, '')
-          .replace(/\/+$/, '')
-          .replace(/\/{2,}/g, '/');
+          .replace(/\.\./g, '') // remove parent traversal
+          .replace(/^\/+/, '') // remove leading slashes
+          .replace(/\/+$/, '') // remove trailing slashes
+          .replace(/\/{2,}/g, '/'); // collapse double slashes
 
-        if (!sanitizedEntryName) return;
+        if (!sanitizedEntryName) continue;
 
         const entryBuffer = entry.getData();
-
-        // Skip empty files (MinIO throws S3Error on 0-byte upload)
-        if (!entryBuffer || entryBuffer.length === 0) {
-          console.warn(`Skipping empty file: ${sanitizedEntryName}`);
-          return;
-        }
+        if (!entryBuffer || entryBuffer.length === 0) continue;
 
         const entryPath = `${extractedFolderPath}/${sanitizedEntryName}`;
 
-        // --- CONTENT TYPE ---
+        // --- ENSURE PARENT FOLDERS EXIST ---
+        const parentFolder = entryPath.split('/').slice(0, -1).join('/');
+        await ensureFolderExists(parentFolder);
+
+        // --- SIMPLE CONTENT TYPE DETECTION ---
         let contentType = 'application/octet-stream';
         if (entryPath.endsWith('.json')) contentType = 'application/json';
         else if (entryPath.endsWith('.js'))
@@ -201,8 +221,11 @@ export class MinioService {
         else if (entryPath.endsWith('.css')) contentType = 'text/css';
         else if (entryPath.endsWith('.svg')) contentType = 'image/svg+xml';
         else if (entryPath.endsWith('.html')) contentType = 'text/html';
+        else if (entryPath.endsWith('.png')) contentType = 'image/png';
+        else if (entryPath.endsWith('.jpg') || entryPath.endsWith('.jpeg'))
+          contentType = 'image/jpeg';
 
-        // --- UPLOAD FILE TO MINIO ---
+        // --- UPLOAD FILE ---
         await this.client.putObject(
           this.bucketName,
           entryPath,
@@ -210,18 +233,16 @@ export class MinioService {
           entryBuffer.length,
           { 'Content-Type': contentType },
         );
-      });
-
-      await Promise.all(uploadPromises);
+      }
 
       return {
         originalPath: originalH5PPath,
         extractedFolder: extractedFolderPath,
         mainEntryFile: `${extractedFolderPath}/h5p.json`,
-        timestamp: timestamp,
+        timestamp,
       };
     } catch (error: any) {
-      // 🔥 LOG FULL ERROR DETAILS
+      // Full logging for MinIO errors
       console.error('---- FULL MINIO ERROR ----');
       console.error({
         code: error.code,
@@ -235,7 +256,7 @@ export class MinioService {
       console.error('---------------------------');
 
       throw new BadRequestException(
-        'Failed to extract and upload H5P. Check logs for details.',
+        'Failed to extract and upload H5P. Check server logs for details.',
       );
     }
   }
