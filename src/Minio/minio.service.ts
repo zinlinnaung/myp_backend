@@ -169,56 +169,56 @@ export class MinioService {
     );
 
     // 3. Extract and Upload Contents
-    try {
-      const zip = new AdmZip(fileBuffer);
-      const zipEntries = zip.getEntries(); // Get all files in zip
+    // try {
+    const zip = new AdmZip(fileBuffer);
+    const zipEntries = zip.getEntries(); // Get all files in zip
 
-      const uploadPromises = zipEntries.map(async (entry) => {
-        if (entry.isDirectory) return;
+    const uploadPromises = zipEntries.map(async (entry) => {
+      if (entry.isDirectory) return;
 
-        // ----------------------------------------------------
-        // CRITICAL FIX: Sanitize the entry name
-        // 1. Normalize name to forward slashes (if needed)
-        // 2. Trim leading/trailing slashes
-        const sanitizedEntryName = entry.entryName
-          .replace(/\\/g, '/') // Ensure forward slashes
-          .replace(/^\/|\/$/g, ''); // Remove leading/trailing slashes
+      // ----------------------------------------------------
+      // CRITICAL FIX: Sanitize the entry name
+      // 1. Normalize name to forward slashes (if needed)
+      // 2. Trim leading/trailing slashes
+      const sanitizedEntryName = entry.entryName
+        .replace(/\\/g, '/') // Ensure forward slashes
+        .replace(/^\/|\/$/g, ''); // Remove leading/trailing slashes
 
-        if (!sanitizedEntryName) return; // Skip if cleaning resulted in an empty path
+      if (!sanitizedEntryName) return; // Skip if cleaning resulted in an empty path
 
-        const entryBuffer = entry.getData();
-        const entryPath = `${extractedFolderPath}/${sanitizedEntryName}`;
-        // ----------------------------------------------------
+      const entryBuffer = entry.getData();
+      const entryPath = `${extractedFolderPath}/${sanitizedEntryName}`;
+      // ----------------------------------------------------
 
-        // Simple Content-Type detection for extracted files
-        let contentType = 'application/octet-stream';
-        // ... rest of content type detection ...
+      // Simple Content-Type detection for extracted files
+      let contentType = 'application/octet-stream';
+      // ... rest of content type detection ...
 
-        // ... putObject call ...
-        await this.client.putObject(
-          this.bucketName,
-          entryPath,
-          entryBuffer,
-          entryBuffer.length,
-          { 'Content-Type': contentType },
-        );
-      });
-
-      // Wait for all extracted files to upload
-      await Promise.all(uploadPromises);
-    } catch (error: any) {
-      // Use 'any' to ensure access to error properties
-      // Log the full error object for diagnosis
-      console.error('Full MinIO Error Details:', {
-        code: error.code,
-        message: error.message,
-        httpStatus: error.statusCode,
-        stack: error.stack,
-      });
-      throw new BadRequestException(
-        'Failed to process H5P file structure. Check server logs for MinIO details.',
+      // ... putObject call ...
+      await this.client.putObject(
+        this.bucketName,
+        entryPath,
+        entryBuffer,
+        entryBuffer.length,
+        { 'Content-Type': contentType },
       );
-    }
+    });
+
+    // Wait for all extracted files to upload
+    await Promise.all(uploadPromises);
+    // } catch (error: any) {
+    //   // Use 'any' to ensure access to error properties
+    //   // Log the full error object for diagnosis
+    //   console.error('Full MinIO Error Details:', {
+    //     code: error.code,
+    //     message: error.message,
+    //     httpStatus: error.statusCode,
+    //     stack: error.stack,
+    //   });
+    //   throw new BadRequestException(
+    //     'Failed to process H5P file structure. Check server logs for MinIO details.',
+    //   );
+    // }
 
     return {
       originalPath: originalH5PPath,
