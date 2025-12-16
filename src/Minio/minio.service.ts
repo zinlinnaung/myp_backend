@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import AdmZip from 'adm-zip';
+import AdmZip = require('adm-zip');
 import { randomBytes } from 'crypto';
 import { Client } from 'minio';
-import path from 'path';
+import * as path from 'path';
 
 // Helper interface for bulk uploads
 export interface BufferedFile {
@@ -249,17 +249,16 @@ export class MinioService {
     buffer: Buffer,
     destinationFolder: string,
   ): Promise<void> {
+    // This line caused the error. With the fix above, 'AdmZip' is now the correct constructor.
     const zip = new AdmZip(buffer);
     const zipEntries = zip.getEntries();
 
-    // Create a promise for each file in the zip
     const uploadPromises = zipEntries.map(async (entry) => {
       if (entry.isDirectory) return;
 
       const fileContent = entry.getData();
 
-      // Construct the full path inside MinIO (preserving zip folder structure)
-      // entry.entryName includes the internal folder structure (e.g., "H5P.CoursePresentation-1.21/library.json")
+      // Use entry.entryName to keep the folder structure (e.g. "css/styles.css")
       const objectName = `${destinationFolder}/${entry.entryName}`;
 
       const contentType = this.getContentType(entry.entryName);
@@ -273,8 +272,6 @@ export class MinioService {
       );
     });
 
-    // Run all uploads in parallel
-    // Note: For very large H5P files, you might want to limit concurrency (e.g. using p-limit)
     await Promise.all(uploadPromises);
   }
 
