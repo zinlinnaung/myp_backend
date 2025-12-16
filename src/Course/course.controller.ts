@@ -6,6 +6,7 @@ import {
   Delete,
   Param,
   Body,
+  ParseUUIDPipe, // 1. Import the Pipe
 } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CreateCourseDto, UpdateCourseDto } from './dto/course.dto';
@@ -25,17 +26,23 @@ export class CourseController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  // 2. Apply the pipe to the @Param
+  findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.courseService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() dto: UpdateCourseDto) {
+  // 3. Apply to update as well
+  update(
+    @Param('id', new ParseUUIDPipe()) id: string,
+    @Body() dto: UpdateCourseDto,
+  ) {
     return this.courseService.update(id, dto);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
+  // 4. Apply to delete
+  delete(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.courseService.delete(id);
   }
 }
