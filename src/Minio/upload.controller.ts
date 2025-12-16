@@ -129,7 +129,7 @@ export class FilesController {
       throw new BadRequestException('Only .h5p files are allowed');
     }
 
-    const result = await this.minioService.uploadAndExtractH5P(
+    const result = await this.minioService.uploadH5P(
       file.buffer,
       file.originalname,
       activityId,
