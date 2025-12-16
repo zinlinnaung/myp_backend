@@ -145,27 +145,114 @@ export class MinioService {
     return this.client.presignedGetObject(this.bucketName, objectName, 60);
   }
 
-  async uploadH5P(fileBuffer: Buffer, fileName: string, activityId: string) {
+  async uploadAndExtractH5P(
+    fileBuffer: Buffer,
+    fileName: string,
+    activityId: string,
+  ) {
     const timestamp = Date.now();
     const uniqueId = `${activityId}_${timestamp}`;
 
-    // Path for the single H5P file
     const originalH5PPath = `private/h5p/h5p/${uniqueId}.h5p`;
+    const extractedFolderPath = `private/h5p/extracted/${uniqueId}`;
+
+    // Helper: create "folders" in MinIO
+    const ensureFolderExists = async (path: string) => {
+      if (!path) return;
+      const parts = path.split('/');
+      let current = '';
+      for (const part of parts) {
+        current += part + '/';
+        try {
+          await this.client.putObject(
+            this.bucketName,
+            current,
+            Buffer.alloc(0),
+          );
+        } catch (e) {
+          // ignore errors
+        }
+      }
+    };
+
+    // Helper: sanitize entry names for MinIO
+    const sanitizePath = (entryName: string) => {
+      return entryName
+        .replace(/\\/g, '/') // backslashes → forward slashes
+        .replace(/\.\./g, '') // remove parent traversal
+        .replace(/\s+/g, '_') // replace spaces
+        .replace(/[^\w\-./]/g, '') // remove unsafe characters
+        .replace(/^\/+/, '') // remove leading slashes
+        .replace(/\/+$/, '') // remove trailing slashes
+        .replace(/\/{2,}/g, '/'); // collapse duplicate slashes
+    };
 
     try {
-      // 1️⃣ Upload original H5P file ONLY
+      // 1️⃣ Upload original H5P file
       await this.client.putObject(
         this.bucketName,
         originalH5PPath,
         fileBuffer,
         fileBuffer.length,
-        // H5P files are ZIP archives, so 'application/zip' or 'application/x-h5p' is appropriate
         { 'Content-Type': 'application/zip' },
       );
 
-      // Return only the path to the file
+      // 2️⃣ Extract ZIP
+      const zip = new AdmZip(fileBuffer);
+      const zipEntries = zip.getEntries();
+
+      // 3️⃣ Prepare upload promises
+      const uploadPromises = zipEntries.map(async (entry) => {
+        const sanitizedEntryName = sanitizePath(entry.entryName);
+        if (!sanitizedEntryName) return;
+
+        const entryPath = `${extractedFolderPath}/${sanitizedEntryName}`;
+
+        // Ensure parent folders exist
+        const parentFolder = entryPath.split('/').slice(0, -1).join('/');
+        await ensureFolderExists(parentFolder);
+
+        if (entry.isDirectory) {
+          // create folder object
+          await ensureFolderExists(entryPath);
+          return;
+        }
+
+        const entryBuffer = entry.getData();
+        if (!entryBuffer || entryBuffer.length === 0) {
+          // skip empty files
+          return;
+        }
+
+        // Simple content type detection
+        let contentType = 'application/octet-stream';
+        if (entryPath.endsWith('.json')) contentType = 'application/json';
+        else if (entryPath.endsWith('.js'))
+          contentType = 'application/javascript';
+        else if (entryPath.endsWith('.css')) contentType = 'text/css';
+        else if (entryPath.endsWith('.svg')) contentType = 'image/svg+xml';
+        else if (entryPath.endsWith('.html')) contentType = 'text/html';
+        else if (entryPath.endsWith('.png')) contentType = 'image/png';
+        else if (entryPath.endsWith('.jpg') || entryPath.endsWith('.jpeg'))
+          contentType = 'image/jpeg';
+
+        // Upload file
+        await this.client.putObject(
+          this.bucketName,
+          entryPath,
+          entryBuffer,
+          entryBuffer.length,
+          { 'Content-Type': contentType },
+        );
+      });
+
+      // 4️⃣ Wait for all uploads to finish
+      await Promise.all(uploadPromises);
+
       return {
         originalPath: originalH5PPath,
+        extractedFolder: extractedFolderPath,
+        mainEntryFile: `${extractedFolderPath}/h5p.json`,
         timestamp,
       };
     } catch (error: any) {
@@ -174,13 +261,16 @@ export class MinioService {
       console.error({
         code: error.code,
         message: error.message,
+        statusCode: error.statusCode,
+        resource: error.resource,
         bucketName: error.bucketName,
+        region: error.region,
         stack: error.stack,
       });
       console.error('---------------------------');
 
       throw new BadRequestException(
-        'Failed to upload H5P file. Check server logs for details.',
+        'Failed to extract and upload H5P. Check server logs for details.',
       );
     }
   }
