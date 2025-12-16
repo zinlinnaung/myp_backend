@@ -21,6 +21,7 @@ import { MinioModule } from './Minio/minio.module';
 import { CourseSectionModule } from './Course-section/course-section.module';
 import { ActivityModule } from './Course-activities/activity.module';
 import { ContentModule } from './E-library/content.module';
+import * as multer from 'multer'; // <-- 1. IMPORT MULTER
 // import { AtGuard } from './common/guards';
 // import { AuthenticationModule } from './authentication/authentication.module';
 // import { UserModule } from './user/user.module';
@@ -37,7 +38,12 @@ import { ContentModule } from './E-library/content.module';
   imports: [
     // ConfigModule.forRoot({ isGlobal: true }),
     MulterModule.register({
-      dest: './uploads', // Specify the destination directory here
+      // 2. CHANGE DEST TO STORAGE:
+      storage: multer.memoryStorage(),
+      // 3. (Optional but recommended) Increase limits for large H5P files
+      limits: {
+        fileSize: 100 * 1024 * 1024, // Example: Increase limit to 100MB
+      },
     }),
     // AuthenticationModule,
     // UserModule,
