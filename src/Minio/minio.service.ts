@@ -3,7 +3,7 @@ import AdmZip = require('adm-zip');
 import { randomBytes } from 'crypto';
 import { Client } from 'minio';
 import * as path from 'path';
-
+import * as unzipper from 'unzipper'; // <-- ADD THIS IMPORT
 // Helper interface for bulk uploads
 export interface BufferedFile {
   buffer: Buffer;
@@ -199,6 +199,7 @@ export class MinioService {
     fileName: string,
     activityId: string,
   ) {
+    console.log(`[H5P Diagnostic] Buffer Size: ${fileBuffer.length} bytes`);
     const timestamp = Date.now();
     const uniqueId = `${activityId}_${timestamp}`;
 
@@ -249,32 +250,43 @@ export class MinioService {
     buffer: Buffer,
     destinationFolder: string,
   ): Promise<void> {
-    // This line caused the error. With the fix above, 'AdmZip' is now the correct constructor.
-    const zip = new AdmZip(buffer);
-    const zipEntries = zip.getEntries();
+    // Create a new promise to manage the asynchronous unzipping and uploading
+    return new Promise<void>((resolve, reject) => {
+      // Use a .then() chain on unzipper.Open.buffer for async handling
+      unzipper.Open.buffer(buffer)
+        .then(async (directory) => {
+          const uploadPromises = directory.files.map(async (entry) => {
+            if (entry.type === 'Directory') return; // Skip directories
 
-    const uploadPromises = zipEntries.map(async (entry) => {
-      if (entry.isDirectory) return;
+            // The object name retains the internal folder structure
+            const objectName = `${destinationFolder}/${entry.path}`;
+            const contentType = this.getContentType(entry.path);
 
-      const fileContent = entry.getData();
+            // Get the stream for the file content
+            const fileStream = entry.stream();
 
-      // Use entry.entryName to keep the folder structure (e.g. "css/styles.css")
-      const objectName = `${destinationFolder}/${entry.entryName}`;
+            // Upload the file using MinIO's putObject with a stream
+            // MinIO requires the size (entry.uncompressedSize) when using a stream.
+            await this.client.putObject(
+              this.bucketName,
+              objectName,
+              fileStream,
+              entry.uncompressedSize, // IMPORTANT: Use uncompressedSize
+              { 'Content-Type': contentType },
+            );
+          });
 
-      const contentType = this.getContentType(entry.entryName);
-
-      await this.client.putObject(
-        this.bucketName,
-        objectName,
-        fileContent,
-        fileContent.length,
-        { 'Content-Type': contentType },
-      );
+          // Wait for ALL file uploads to complete
+          await Promise.all(uploadPromises);
+          resolve(); // Resolve the main promise when done
+        })
+        .catch((error) => {
+          // Log the error from the new library to diagnose
+          console.error('Unzipper/Extraction Error:', error);
+          reject(error);
+        });
     });
-
-    await Promise.all(uploadPromises);
   }
-
   /**
    * Helper: Determine Content-Type based on extension
    * H5P relies heavily on correct mime types for JSON, JS, and CSS.
