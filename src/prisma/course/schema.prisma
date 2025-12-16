@@ -47,10 +47,11 @@ model PostView {
 }
 
 model HomeSlider {
-  id        String   @id @default(uuid())
-  image     String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @map("updated_at")
+  id           String   @id @default(uuid())
+  image        String
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @default(now()) @map("updated_at")
+  websiteImage String?
 }
 
 model Category {
@@ -60,6 +61,7 @@ model Category {
   updatedAt     DateTime      @default(now()) @map("updated_at")
   isDeleted     Boolean       @default(false)
   type          CategoryType
+  image         String?
   contents      Content[]
   courses       Course[]
   subCategories SubCategory[]
@@ -126,11 +128,13 @@ model Course {
   previewVideo     String?
   ratings          Rating[]
   users            UserOnCourse[]
+  certificate      certificate[]
   Category         Category?          @relation(fields: [categoryId], references: [id])
   parentCourse     Course?            @relation("CourseToParent", fields: [parentCourseId], references: [id])
   subCourses       Course[]           @relation("CourseToParent")
   SubCategory      SubCategory?       @relation(fields: [subCategoryId], references: [id])
   CourseSection    CourseSection[]
+  feedback         feedback[]
   HomeCategoryItem HomeCategoryItem[]
   reviews          Review[]
 
@@ -251,6 +255,65 @@ model newAndEvents {
   created_at  DateTime @default(now())
   updated_at  DateTime
   location    String?
+}
+
+model certificate {
+  id         String   @id
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime
+  courseId   String   @db.Uuid
+  course     Course   @relation(fields: [courseId], references: [id])
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model course2 {
+  name           String?
+  image          String?
+  enrolledCount  Int?
+  date           DateTime?
+  categoryId     String?
+  subCategoryId  String?
+  isDeleted      Boolean?
+  createdAt      DateTime?
+  description    String?
+  duration       Int?
+  parentCourseId String?   @db.Uuid
+  updatedAt      DateTime?
+  videoCount     Int?
+  id             String?   @db.Uuid
+  rating         Float?
+  previewImage   String?
+  previewVideo   String?
+
+  @@ignore
+}
+
+model feedback {
+  id         String   @id
+  text       String
+  created_at DateTime @default(now())
+  updated_at DateTime
+  courseId   String   @db.Uuid
+  course     Course   @relation(fields: [courseId], references: [id])
+}
+
+model userOnActivity {
+  id         String   @id
+  userId     String
+  time       String?
+  created_at DateTime @default(now())
+  updated_at DateTime
+  activityId String
+}
+
+model userOnSection {
+  id         String   @id
+  userId     String
+  sectionId  String
+  time       String?
+  created_at DateTime @default(now())
+  updated_at DateTime
 }
 
 enum CategoryType {
