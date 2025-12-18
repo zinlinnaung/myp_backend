@@ -155,7 +155,8 @@ exports.Prisma.HomeSliderScalarFieldEnum = {
   id: 'id',
   image: 'image',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  websiteImage: 'websiteImage'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -164,7 +165,8 @@ exports.Prisma.CategoryScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   isDeleted: 'isDeleted',
-  type: 'type'
+  type: 'type',
+  image: 'image'
 };
 
 exports.Prisma.SubCategoryScalarFieldEnum = {
@@ -191,7 +193,8 @@ exports.Prisma.HomeCategoryItemScalarFieldEnum = {
   updatedAt: 'updatedAt',
   type: 'type',
   courseId: 'courseId',
-  isDeleted: 'isDeleted'
+  isDeleted: 'isDeleted',
+  course2Id: 'course2Id'
 };
 
 exports.Prisma.CourseScalarFieldEnum = {
@@ -220,7 +223,10 @@ exports.Prisma.UserOnCourseScalarFieldEnum = {
   courseId: 'courseId',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  certificate: 'certificate',
+  completedPercentage: 'completedPercentage',
+  course2Id: 'course2Id'
 };
 
 exports.Prisma.CourseSectionScalarFieldEnum = {
@@ -230,7 +236,9 @@ exports.Prisma.CourseSectionScalarFieldEnum = {
   courseId: 'courseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  order: 'order'
+  order: 'order',
+  isDeleted: 'isDeleted',
+  course2Id: 'course2Id'
 };
 
 exports.Prisma.ActivityScalarFieldEnum = {
@@ -242,7 +250,8 @@ exports.Prisma.ActivityScalarFieldEnum = {
   sectionId: 'sectionId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  description: 'description'
+  description: 'description',
+  isDeleted: 'isDeleted'
 };
 
 exports.Prisma.ReviewScalarFieldEnum = {
@@ -251,7 +260,8 @@ exports.Prisma.ReviewScalarFieldEnum = {
   userId: 'userId',
   text: 'text',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  course2Id: 'course2Id'
 };
 
 exports.Prisma.RatingScalarFieldEnum = {
@@ -261,7 +271,8 @@ exports.Prisma.RatingScalarFieldEnum = {
   rating: 'rating',
   comment: 'comment',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  course2Id: 'course2Id'
 };
 
 exports.Prisma.FaqScalarFieldEnum = {
@@ -309,6 +320,71 @@ exports.Prisma.NewAndEventsScalarFieldEnum = {
   location: 'location'
 };
 
+exports.Prisma.CertificateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  courseId: 'courseId',
+  course2Id: 'course2Id'
+};
+
+exports.Prisma.FeedbackScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  courseId: 'courseId',
+  course2Id: 'course2Id'
+};
+
+exports.Prisma.UserOnActivityScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  time: 'time',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  activityId: 'activityId'
+};
+
+exports.Prisma.UserOnSectionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sectionId: 'sectionId',
+  time: 'time',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Certificate_templatesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  backgroundImage: 'backgroundImage',
+  components: 'components',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Course2ScalarFieldEnum = {
+  id: 'id',
+  image: 'image',
+  name: 'name',
+  description: 'description',
+  duration: 'duration',
+  videoCount: 'videoCount',
+  enrolledCount: 'enrolledCount',
+  isDeleted: 'isDeleted',
+  rating: 'rating',
+  date: 'date',
+  parentCourseId: 'parentCourseId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  categoryId: 'categoryId',
+  subCategoryId: 'subCategoryId',
+  previewImage: 'previewImage',
+  previewVideo: 'previewVideo'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -316,6 +392,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -377,7 +457,13 @@ exports.Prisma.ModelName = {
   Faq: 'Faq',
   ContentType: 'ContentType',
   Content: 'Content',
-  newAndEvents: 'newAndEvents'
+  newAndEvents: 'newAndEvents',
+  certificate: 'certificate',
+  feedback: 'feedback',
+  userOnActivity: 'userOnActivity',
+  userOnSection: 'userOnSection',
+  certificate_templates: 'certificate_templates',
+  course2: 'course2'
 };
 
 /**
