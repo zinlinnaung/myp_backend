@@ -5,21 +5,21 @@ import {
   UpdateFeedbackTemplateDto,
 } from './feedback-template.dto';
 import { Prisma } from '@prisma/client';
-import { v4 as uuidv4 } from 'uuid'; // Import UUID generator
+
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class FeedbackTemplateService {
   constructor(private prisma: PrismaService) {}
 
   async create(dto: CreateFeedbackTemplateDto) {
-    // You MUST provide id and updated_at manually here
     return this.prisma.course.feedback_templates.create({
       data: {
-        id: uuidv4(), // Fixes missing id error
+        id: randomUUID(), // Built-in Node.js UUID generator
         name: dto.name,
         description: dto.description,
         content: dto.content as Prisma.JsonArray,
-        updated_at: new Date(), // Fixes missing updated_at error
+        updated_at: new Date(),
         created_at: new Date(),
       },
     });
