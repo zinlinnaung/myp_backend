@@ -23,6 +23,7 @@ import { ActivityModule } from './Course-activities/activity.module';
 import { ContentModule } from './E-library/content.module';
 import * as multer from 'multer'; // <-- 1. IMPORT MULTER
 import { CertificateTemplateModule } from './Certificate_template/certificate-templates.module';
+import { FeedbackTemplateModule } from './Feedback/feedback-template.module';
 // import { AtGuard } from './common/guards';
 // import { AuthenticationModule } from './authentication/authentication.module';
 // import { UserModule } from './user/user.module';
@@ -64,6 +65,7 @@ import { CertificateTemplateModule } from './Certificate_template/certificate-te
     ContentModule,
     HomeSliderModule,
     CertificateTemplateModule,
+    FeedbackTemplateModule,
 
     // MlcheckerModule,
     // CmsModule,

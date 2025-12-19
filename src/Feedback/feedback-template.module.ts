@@ -11,4 +11,4 @@ import { FeedbackTemplateService } from './feedback-template.service';
     PrismaService,
   ],
 })
-export class CertificateTemplateModule {}
+export class FeedbackTemplateModule {}
