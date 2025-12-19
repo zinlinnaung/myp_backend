@@ -385,6 +385,16 @@ exports.Prisma.Course2ScalarFieldEnum = {
   previewVideo: 'previewVideo'
 };
 
+exports.Prisma.Feedback_templatesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  content: 'content',
+  isDeleted: 'isDeleted',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -436,7 +446,8 @@ exports.ActivityType = exports.$Enums.ActivityType = {
   H5P: 'H5P',
   WEB_URL: 'WEB_URL',
   YOUTUBE_LINK: 'YOUTUBE_LINK',
-  PAGE: 'PAGE'
+  PAGE: 'PAGE',
+  CERTIFICATE: 'CERTIFICATE'
 };
 
 exports.Prisma.ModelName = {
@@ -463,7 +474,8 @@ exports.Prisma.ModelName = {
   userOnActivity: 'userOnActivity',
   userOnSection: 'userOnSection',
   certificate_templates: 'certificate_templates',
-  course2: 'course2'
+  course2: 'course2',
+  feedback_templates: 'feedback_templates'
 };
 
 /**

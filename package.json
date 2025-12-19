@@ -41,7 +41,8 @@
     "prisma": "5.14.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "unzipper": "^0.12.3"
+    "unzipper": "^0.12.3",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
@@ -53,6 +54,7 @@
     "@types/multer": "^2.0.0",
     "@types/node": "^20.3.1",
     "@types/supertest": "^6.0.0",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "eslint": "^8.0.0",

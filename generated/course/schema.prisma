@@ -361,6 +361,16 @@ model course2 {
   review             Review[]
 }
 
+model feedback_templates {
+  id          String   @id
+  name        String
+  description String?
+  content     Json
+  isDeleted   Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updated_at  DateTime
+}
+
 enum CategoryType {
   NORMAL
   FEATURE
@@ -379,6 +389,7 @@ enum ActivityType {
   WEB_URL
   YOUTUBE_LINK
   PAGE
+  CERTIFICATE
 }
 
 enum CourseStatus {

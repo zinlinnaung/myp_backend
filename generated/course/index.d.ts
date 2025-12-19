@@ -133,6 +133,11 @@ export type certificate_templates = $Result.DefaultSelection<Prisma.$certificate
  * 
  */
 export type course2 = $Result.DefaultSelection<Prisma.$course2Payload>
+/**
+ * Model feedback_templates
+ * 
+ */
+export type feedback_templates = $Result.DefaultSelection<Prisma.$feedback_templatesPayload>
 
 /**
  * Enums
@@ -169,7 +174,8 @@ export const ActivityType: {
   H5P: 'H5P',
   WEB_URL: 'WEB_URL',
   YOUTUBE_LINK: 'YOUTUBE_LINK',
-  PAGE: 'PAGE'
+  PAGE: 'PAGE',
+  CERTIFICATE: 'CERTIFICATE'
 };
 
 export type ActivityType = (typeof ActivityType)[keyof typeof ActivityType]
@@ -553,6 +559,16 @@ export class PrismaClient<
     * ```
     */
   get course2(): Prisma.course2Delegate<ExtArgs>;
+
+  /**
+   * `prisma.feedback_templates`: Exposes CRUD operations for the **feedback_templates** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Feedback_templates
+    * const feedback_templates = await prisma.feedback_templates.findMany()
+    * ```
+    */
+  get feedback_templates(): Prisma.feedback_templatesDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -1053,7 +1069,8 @@ export namespace Prisma {
     userOnActivity: 'userOnActivity',
     userOnSection: 'userOnSection',
     certificate_templates: 'certificate_templates',
-    course2: 'course2'
+    course2: 'course2',
+    feedback_templates: 'feedback_templates'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1070,7 +1087,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'post' | 'postEvent' | 'postView' | 'homeSlider' | 'category' | 'subCategory' | 'homeCategory' | 'homeCategoryItem' | 'course' | 'userOnCourse' | 'courseSection' | 'activity' | 'review' | 'rating' | 'faq' | 'contentType' | 'content' | 'newAndEvents' | 'certificate' | 'feedback' | 'userOnActivity' | 'userOnSection' | 'certificate_templates' | 'course2'
+      modelProps: 'post' | 'postEvent' | 'postView' | 'homeSlider' | 'category' | 'subCategory' | 'homeCategory' | 'homeCategoryItem' | 'course' | 'userOnCourse' | 'courseSection' | 'activity' | 'review' | 'rating' | 'faq' | 'contentType' | 'content' | 'newAndEvents' | 'certificate' | 'feedback' | 'userOnActivity' | 'userOnSection' | 'certificate_templates' | 'course2' | 'feedback_templates'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -2751,6 +2768,76 @@ export namespace Prisma {
           count: {
             args: Prisma.course2CountArgs<ExtArgs>,
             result: $Utils.Optional<Course2CountAggregateOutputType> | number
+          }
+        }
+      }
+      feedback_templates: {
+        payload: Prisma.$feedback_templatesPayload<ExtArgs>
+        fields: Prisma.feedback_templatesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.feedback_templatesFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$feedback_templatesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.feedback_templatesFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$feedback_templatesPayload>
+          }
+          findFirst: {
+            args: Prisma.feedback_templatesFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$feedback_templatesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.feedback_templatesFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$feedback_templatesPayload>
+          }
+          findMany: {
+            args: Prisma.feedback_templatesFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$feedback_templatesPayload>[]
+          }
+          create: {
+            args: Prisma.feedback_templatesCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$feedback_templatesPayload>
+          }
+          createMany: {
+            args: Prisma.feedback_templatesCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.feedback_templatesCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$feedback_templatesPayload>[]
+          }
+          delete: {
+            args: Prisma.feedback_templatesDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$feedback_templatesPayload>
+          }
+          update: {
+            args: Prisma.feedback_templatesUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$feedback_templatesPayload>
+          }
+          deleteMany: {
+            args: Prisma.feedback_templatesDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.feedback_templatesUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.feedback_templatesUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$feedback_templatesPayload>
+          }
+          aggregate: {
+            args: Prisma.Feedback_templatesAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateFeedback_templates>
+          }
+          groupBy: {
+            args: Prisma.feedback_templatesGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Feedback_templatesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.feedback_templatesCountArgs<ExtArgs>,
+            result: $Utils.Optional<Feedback_templatesCountAggregateOutputType> | number
           }
         }
       }
@@ -27750,6 +27837,922 @@ export namespace Prisma {
 
 
   /**
+   * Model feedback_templates
+   */
+
+  export type AggregateFeedback_templates = {
+    _count: Feedback_templatesCountAggregateOutputType | null
+    _min: Feedback_templatesMinAggregateOutputType | null
+    _max: Feedback_templatesMaxAggregateOutputType | null
+  }
+
+  export type Feedback_templatesMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    isDeleted: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Feedback_templatesMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    isDeleted: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Feedback_templatesCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    content: number
+    isDeleted: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type Feedback_templatesMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    isDeleted?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Feedback_templatesMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    isDeleted?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Feedback_templatesCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    content?: true
+    isDeleted?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type Feedback_templatesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which feedback_templates to aggregate.
+     */
+    where?: feedback_templatesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of feedback_templates to fetch.
+     */
+    orderBy?: feedback_templatesOrderByWithRelationInput | feedback_templatesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: feedback_templatesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` feedback_templates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` feedback_templates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned feedback_templates
+    **/
+    _count?: true | Feedback_templatesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Feedback_templatesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Feedback_templatesMaxAggregateInputType
+  }
+
+  export type GetFeedback_templatesAggregateType<T extends Feedback_templatesAggregateArgs> = {
+        [P in keyof T & keyof AggregateFeedback_templates]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFeedback_templates[P]>
+      : GetScalarType<T[P], AggregateFeedback_templates[P]>
+  }
+
+
+
+
+  export type feedback_templatesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: feedback_templatesWhereInput
+    orderBy?: feedback_templatesOrderByWithAggregationInput | feedback_templatesOrderByWithAggregationInput[]
+    by: Feedback_templatesScalarFieldEnum[] | Feedback_templatesScalarFieldEnum
+    having?: feedback_templatesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Feedback_templatesCountAggregateInputType | true
+    _min?: Feedback_templatesMinAggregateInputType
+    _max?: Feedback_templatesMaxAggregateInputType
+  }
+
+  export type Feedback_templatesGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    content: JsonValue
+    isDeleted: boolean
+    created_at: Date
+    updated_at: Date
+    _count: Feedback_templatesCountAggregateOutputType | null
+    _min: Feedback_templatesMinAggregateOutputType | null
+    _max: Feedback_templatesMaxAggregateOutputType | null
+  }
+
+  type GetFeedback_templatesGroupByPayload<T extends feedback_templatesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Feedback_templatesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Feedback_templatesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Feedback_templatesGroupByOutputType[P]>
+            : GetScalarType<T[P], Feedback_templatesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type feedback_templatesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    content?: boolean
+    isDeleted?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["feedback_templates"]>
+
+  export type feedback_templatesSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    content?: boolean
+    isDeleted?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+
+
+  export type $feedback_templatesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "feedback_templates"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      content: Prisma.JsonValue
+      isDeleted: boolean
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["feedback_templates"]>
+    composites: {}
+  }
+
+
+  type feedback_templatesGetPayload<S extends boolean | null | undefined | feedback_templatesDefaultArgs> = $Result.GetResult<Prisma.$feedback_templatesPayload, S>
+
+  type feedback_templatesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<feedback_templatesFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Feedback_templatesCountAggregateInputType | true
+    }
+
+  export interface feedback_templatesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['feedback_templates'], meta: { name: 'feedback_templates' } }
+    /**
+     * Find zero or one Feedback_templates that matches the filter.
+     * @param {feedback_templatesFindUniqueArgs} args - Arguments to find a Feedback_templates
+     * @example
+     * // Get one Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends feedback_templatesFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, feedback_templatesFindUniqueArgs<ExtArgs>>
+    ): Prisma__feedback_templatesClient<$Result.GetResult<Prisma.$feedback_templatesPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Feedback_templates that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {feedback_templatesFindUniqueOrThrowArgs} args - Arguments to find a Feedback_templates
+     * @example
+     * // Get one Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends feedback_templatesFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, feedback_templatesFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__feedback_templatesClient<$Result.GetResult<Prisma.$feedback_templatesPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Feedback_templates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {feedback_templatesFindFirstArgs} args - Arguments to find a Feedback_templates
+     * @example
+     * // Get one Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends feedback_templatesFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, feedback_templatesFindFirstArgs<ExtArgs>>
+    ): Prisma__feedback_templatesClient<$Result.GetResult<Prisma.$feedback_templatesPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Feedback_templates that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {feedback_templatesFindFirstOrThrowArgs} args - Arguments to find a Feedback_templates
+     * @example
+     * // Get one Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends feedback_templatesFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, feedback_templatesFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__feedback_templatesClient<$Result.GetResult<Prisma.$feedback_templatesPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Feedback_templates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {feedback_templatesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.findMany()
+     * 
+     * // Get first 10 Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const feedback_templatesWithIdOnly = await prisma.feedback_templates.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends feedback_templatesFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, feedback_templatesFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$feedback_templatesPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Feedback_templates.
+     * @param {feedback_templatesCreateArgs} args - Arguments to create a Feedback_templates.
+     * @example
+     * // Create one Feedback_templates
+     * const Feedback_templates = await prisma.feedback_templates.create({
+     *   data: {
+     *     // ... data to create a Feedback_templates
+     *   }
+     * })
+     * 
+    **/
+    create<T extends feedback_templatesCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, feedback_templatesCreateArgs<ExtArgs>>
+    ): Prisma__feedback_templatesClient<$Result.GetResult<Prisma.$feedback_templatesPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Feedback_templates.
+     * @param {feedback_templatesCreateManyArgs} args - Arguments to create many Feedback_templates.
+     * @example
+     * // Create many Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends feedback_templatesCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, feedback_templatesCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Feedback_templates and returns the data saved in the database.
+     * @param {feedback_templatesCreateManyAndReturnArgs} args - Arguments to create many Feedback_templates.
+     * @example
+     * // Create many Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Feedback_templates and only return the `id`
+     * const feedback_templatesWithIdOnly = await prisma.feedback_templates.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends feedback_templatesCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, feedback_templatesCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$feedback_templatesPayload<ExtArgs>, T, 'createManyAndReturn'>>
+
+    /**
+     * Delete a Feedback_templates.
+     * @param {feedback_templatesDeleteArgs} args - Arguments to delete one Feedback_templates.
+     * @example
+     * // Delete one Feedback_templates
+     * const Feedback_templates = await prisma.feedback_templates.delete({
+     *   where: {
+     *     // ... filter to delete one Feedback_templates
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends feedback_templatesDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, feedback_templatesDeleteArgs<ExtArgs>>
+    ): Prisma__feedback_templatesClient<$Result.GetResult<Prisma.$feedback_templatesPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Feedback_templates.
+     * @param {feedback_templatesUpdateArgs} args - Arguments to update one Feedback_templates.
+     * @example
+     * // Update one Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends feedback_templatesUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, feedback_templatesUpdateArgs<ExtArgs>>
+    ): Prisma__feedback_templatesClient<$Result.GetResult<Prisma.$feedback_templatesPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Feedback_templates.
+     * @param {feedback_templatesDeleteManyArgs} args - Arguments to filter Feedback_templates to delete.
+     * @example
+     * // Delete a few Feedback_templates
+     * const { count } = await prisma.feedback_templates.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends feedback_templatesDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, feedback_templatesDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Feedback_templates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {feedback_templatesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends feedback_templatesUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, feedback_templatesUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Feedback_templates.
+     * @param {feedback_templatesUpsertArgs} args - Arguments to update or create a Feedback_templates.
+     * @example
+     * // Update or create a Feedback_templates
+     * const feedback_templates = await prisma.feedback_templates.upsert({
+     *   create: {
+     *     // ... data to create a Feedback_templates
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Feedback_templates we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends feedback_templatesUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, feedback_templatesUpsertArgs<ExtArgs>>
+    ): Prisma__feedback_templatesClient<$Result.GetResult<Prisma.$feedback_templatesPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Feedback_templates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {feedback_templatesCountArgs} args - Arguments to filter Feedback_templates to count.
+     * @example
+     * // Count the number of Feedback_templates
+     * const count = await prisma.feedback_templates.count({
+     *   where: {
+     *     // ... the filter for the Feedback_templates we want to count
+     *   }
+     * })
+    **/
+    count<T extends feedback_templatesCountArgs>(
+      args?: Subset<T, feedback_templatesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Feedback_templatesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Feedback_templates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Feedback_templatesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Feedback_templatesAggregateArgs>(args: Subset<T, Feedback_templatesAggregateArgs>): Prisma.PrismaPromise<GetFeedback_templatesAggregateType<T>>
+
+    /**
+     * Group by Feedback_templates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {feedback_templatesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends feedback_templatesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: feedback_templatesGroupByArgs['orderBy'] }
+        : { orderBy?: feedback_templatesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, feedback_templatesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFeedback_templatesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the feedback_templates model
+   */
+  readonly fields: feedback_templatesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for feedback_templates.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__feedback_templatesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the feedback_templates model
+   */ 
+  interface feedback_templatesFieldRefs {
+    readonly id: FieldRef<"feedback_templates", 'String'>
+    readonly name: FieldRef<"feedback_templates", 'String'>
+    readonly description: FieldRef<"feedback_templates", 'String'>
+    readonly content: FieldRef<"feedback_templates", 'Json'>
+    readonly isDeleted: FieldRef<"feedback_templates", 'Boolean'>
+    readonly created_at: FieldRef<"feedback_templates", 'DateTime'>
+    readonly updated_at: FieldRef<"feedback_templates", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * feedback_templates findUnique
+   */
+  export type feedback_templatesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+    /**
+     * Filter, which feedback_templates to fetch.
+     */
+    where: feedback_templatesWhereUniqueInput
+  }
+
+  /**
+   * feedback_templates findUniqueOrThrow
+   */
+  export type feedback_templatesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+    /**
+     * Filter, which feedback_templates to fetch.
+     */
+    where: feedback_templatesWhereUniqueInput
+  }
+
+  /**
+   * feedback_templates findFirst
+   */
+  export type feedback_templatesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+    /**
+     * Filter, which feedback_templates to fetch.
+     */
+    where?: feedback_templatesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of feedback_templates to fetch.
+     */
+    orderBy?: feedback_templatesOrderByWithRelationInput | feedback_templatesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for feedback_templates.
+     */
+    cursor?: feedback_templatesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` feedback_templates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` feedback_templates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of feedback_templates.
+     */
+    distinct?: Feedback_templatesScalarFieldEnum | Feedback_templatesScalarFieldEnum[]
+  }
+
+  /**
+   * feedback_templates findFirstOrThrow
+   */
+  export type feedback_templatesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+    /**
+     * Filter, which feedback_templates to fetch.
+     */
+    where?: feedback_templatesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of feedback_templates to fetch.
+     */
+    orderBy?: feedback_templatesOrderByWithRelationInput | feedback_templatesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for feedback_templates.
+     */
+    cursor?: feedback_templatesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` feedback_templates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` feedback_templates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of feedback_templates.
+     */
+    distinct?: Feedback_templatesScalarFieldEnum | Feedback_templatesScalarFieldEnum[]
+  }
+
+  /**
+   * feedback_templates findMany
+   */
+  export type feedback_templatesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+    /**
+     * Filter, which feedback_templates to fetch.
+     */
+    where?: feedback_templatesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of feedback_templates to fetch.
+     */
+    orderBy?: feedback_templatesOrderByWithRelationInput | feedback_templatesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing feedback_templates.
+     */
+    cursor?: feedback_templatesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` feedback_templates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` feedback_templates.
+     */
+    skip?: number
+    distinct?: Feedback_templatesScalarFieldEnum | Feedback_templatesScalarFieldEnum[]
+  }
+
+  /**
+   * feedback_templates create
+   */
+  export type feedback_templatesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+    /**
+     * The data needed to create a feedback_templates.
+     */
+    data: XOR<feedback_templatesCreateInput, feedback_templatesUncheckedCreateInput>
+  }
+
+  /**
+   * feedback_templates createMany
+   */
+  export type feedback_templatesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many feedback_templates.
+     */
+    data: feedback_templatesCreateManyInput | feedback_templatesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * feedback_templates createManyAndReturn
+   */
+  export type feedback_templatesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+    /**
+     * The data used to create many feedback_templates.
+     */
+    data: feedback_templatesCreateManyInput | feedback_templatesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * feedback_templates update
+   */
+  export type feedback_templatesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+    /**
+     * The data needed to update a feedback_templates.
+     */
+    data: XOR<feedback_templatesUpdateInput, feedback_templatesUncheckedUpdateInput>
+    /**
+     * Choose, which feedback_templates to update.
+     */
+    where: feedback_templatesWhereUniqueInput
+  }
+
+  /**
+   * feedback_templates updateMany
+   */
+  export type feedback_templatesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update feedback_templates.
+     */
+    data: XOR<feedback_templatesUpdateManyMutationInput, feedback_templatesUncheckedUpdateManyInput>
+    /**
+     * Filter which feedback_templates to update
+     */
+    where?: feedback_templatesWhereInput
+  }
+
+  /**
+   * feedback_templates upsert
+   */
+  export type feedback_templatesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+    /**
+     * The filter to search for the feedback_templates to update in case it exists.
+     */
+    where: feedback_templatesWhereUniqueInput
+    /**
+     * In case the feedback_templates found by the `where` argument doesn't exist, create a new feedback_templates with this data.
+     */
+    create: XOR<feedback_templatesCreateInput, feedback_templatesUncheckedCreateInput>
+    /**
+     * In case the feedback_templates was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<feedback_templatesUpdateInput, feedback_templatesUncheckedUpdateInput>
+  }
+
+  /**
+   * feedback_templates delete
+   */
+  export type feedback_templatesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+    /**
+     * Filter which feedback_templates to delete.
+     */
+    where: feedback_templatesWhereUniqueInput
+  }
+
+  /**
+   * feedback_templates deleteMany
+   */
+  export type feedback_templatesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which feedback_templates to delete
+     */
+    where?: feedback_templatesWhereInput
+  }
+
+  /**
+   * feedback_templates without action
+   */
+  export type feedback_templatesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the feedback_templates
+     */
+    select?: feedback_templatesSelect<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -28099,6 +29102,19 @@ export namespace Prisma {
   };
 
   export type Course2ScalarFieldEnum = (typeof Course2ScalarFieldEnum)[keyof typeof Course2ScalarFieldEnum]
+
+
+  export const Feedback_templatesScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    content: 'content',
+    isDeleted: 'isDeleted',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type Feedback_templatesScalarFieldEnum = (typeof Feedback_templatesScalarFieldEnum)[keyof typeof Feedback_templatesScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -30078,6 +31094,68 @@ export namespace Prisma {
     previewVideo?: StringNullableWithAggregatesFilter<"course2"> | string | null
   }
 
+  export type feedback_templatesWhereInput = {
+    AND?: feedback_templatesWhereInput | feedback_templatesWhereInput[]
+    OR?: feedback_templatesWhereInput[]
+    NOT?: feedback_templatesWhereInput | feedback_templatesWhereInput[]
+    id?: StringFilter<"feedback_templates"> | string
+    name?: StringFilter<"feedback_templates"> | string
+    description?: StringNullableFilter<"feedback_templates"> | string | null
+    content?: JsonFilter<"feedback_templates">
+    isDeleted?: BoolFilter<"feedback_templates"> | boolean
+    created_at?: DateTimeFilter<"feedback_templates"> | Date | string
+    updated_at?: DateTimeFilter<"feedback_templates"> | Date | string
+  }
+
+  export type feedback_templatesOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    content?: SortOrder
+    isDeleted?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type feedback_templatesWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: feedback_templatesWhereInput | feedback_templatesWhereInput[]
+    OR?: feedback_templatesWhereInput[]
+    NOT?: feedback_templatesWhereInput | feedback_templatesWhereInput[]
+    name?: StringFilter<"feedback_templates"> | string
+    description?: StringNullableFilter<"feedback_templates"> | string | null
+    content?: JsonFilter<"feedback_templates">
+    isDeleted?: BoolFilter<"feedback_templates"> | boolean
+    created_at?: DateTimeFilter<"feedback_templates"> | Date | string
+    updated_at?: DateTimeFilter<"feedback_templates"> | Date | string
+  }, "id">
+
+  export type feedback_templatesOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    content?: SortOrder
+    isDeleted?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: feedback_templatesCountOrderByAggregateInput
+    _max?: feedback_templatesMaxOrderByAggregateInput
+    _min?: feedback_templatesMinOrderByAggregateInput
+  }
+
+  export type feedback_templatesScalarWhereWithAggregatesInput = {
+    AND?: feedback_templatesScalarWhereWithAggregatesInput | feedback_templatesScalarWhereWithAggregatesInput[]
+    OR?: feedback_templatesScalarWhereWithAggregatesInput[]
+    NOT?: feedback_templatesScalarWhereWithAggregatesInput | feedback_templatesScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"feedback_templates"> | string
+    name?: StringWithAggregatesFilter<"feedback_templates"> | string
+    description?: StringNullableWithAggregatesFilter<"feedback_templates"> | string | null
+    content?: JsonWithAggregatesFilter<"feedback_templates">
+    isDeleted?: BoolWithAggregatesFilter<"feedback_templates"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"feedback_templates"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"feedback_templates"> | Date | string
+  }
+
   export type PostCreateInput = {
     id?: string
     title: string
@@ -32021,6 +33099,76 @@ export namespace Prisma {
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type feedback_templatesCreateInput = {
+    id: string
+    name: string
+    description?: string | null
+    content: JsonNullValueInput | InputJsonValue
+    isDeleted?: boolean
+    created_at?: Date | string
+    updated_at: Date | string
+  }
+
+  export type feedback_templatesUncheckedCreateInput = {
+    id: string
+    name: string
+    description?: string | null
+    content: JsonNullValueInput | InputJsonValue
+    isDeleted?: boolean
+    created_at?: Date | string
+    updated_at: Date | string
+  }
+
+  export type feedback_templatesUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: JsonNullValueInput | InputJsonValue
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type feedback_templatesUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: JsonNullValueInput | InputJsonValue
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type feedback_templatesCreateManyInput = {
+    id: string
+    name: string
+    description?: string | null
+    content: JsonNullValueInput | InputJsonValue
+    isDeleted?: boolean
+    created_at?: Date | string
+    updated_at: Date | string
+  }
+
+  export type feedback_templatesUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: JsonNullValueInput | InputJsonValue
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type feedback_templatesUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: JsonNullValueInput | InputJsonValue
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -33515,6 +34663,34 @@ export namespace Prisma {
     videoCount?: SortOrder
     enrolledCount?: SortOrder
     rating?: SortOrder
+  }
+
+  export type feedback_templatesCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    content?: SortOrder
+    isDeleted?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type feedback_templatesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    isDeleted?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type feedback_templatesMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    isDeleted?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type PostCreatetagsInput = {
@@ -41371,6 +42547,10 @@ export namespace Prisma {
      * @deprecated Use course2DefaultArgs instead
      */
     export type course2Args<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = course2DefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use feedback_templatesDefaultArgs instead
+     */
+    export type feedback_templatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = feedback_templatesDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
