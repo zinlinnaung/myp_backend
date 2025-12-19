@@ -379,6 +379,7 @@ enum ActivityType {
   WEB_URL
   YOUTUBE_LINK
   PAGE
+  CERTIFICATE
 }
 
 enum CourseStatus {
