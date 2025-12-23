@@ -18,7 +18,7 @@ export class CourseService {
     const course = await this.prisma.course.course.findUnique({
       where: { id },
       include: {
-        course_section: {
+        CourseSection: {
           include: { activities: true },
         },
       },
