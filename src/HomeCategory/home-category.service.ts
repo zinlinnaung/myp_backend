@@ -22,6 +22,7 @@ export class HomeCategoryService {
           ? {
               create: dto.itemIds.map((courseId) => ({
                 courseId,
+                course2Id: courseId, // to satisfy Prisma schema
                 type: 'NORMAL' as const, // Prisma enum
               })),
             }
