@@ -15,15 +15,29 @@ export class HomeCategoryService {
 
   // ----------------- HomeCategory -----------------
   async createCategory(dto: CreateHomeCategoryDto) {
+    if (dto.itemIds && dto.itemIds.length > 0) {
+      // 1. VALIDATE: Check if these IDs exist in the 'Course' model
+      const existing = await this.prisma.course.course.findMany({
+        where: { id: { in: dto.itemIds } },
+        select: { id: true },
+      });
+
+      if (existing.length !== dto.itemIds.length) {
+        throw new NotFoundException(
+          `One or more Course IDs were not found in the primary Course table. 
+           Found ${existing.length} of ${dto.itemIds.length}.`,
+        );
+      }
+    }
+
     return this.prisma.course.homeCategory.create({
       data: {
         name: dto.name,
         items: dto.itemIds
           ? {
               create: dto.itemIds.map((courseId) => ({
-                courseId,
-
-                type: 'NORMAL' as const, // Prisma enum
+                courseId: courseId, // Must match an ID in the 'course' table
+                type: 'NORMAL',
               })),
             }
           : undefined,
