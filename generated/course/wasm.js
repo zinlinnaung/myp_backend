@@ -198,21 +198,21 @@ exports.Prisma.HomeCategoryItemScalarFieldEnum = {
 };
 
 exports.Prisma.CourseScalarFieldEnum = {
-  id: 'id',
-  image: 'image',
   name: 'name',
-  description: 'description',
-  duration: 'duration',
-  videoCount: 'videoCount',
+  image: 'image',
   enrolledCount: 'enrolledCount',
-  isDeleted: 'isDeleted',
-  rating: 'rating',
   date: 'date',
-  parentCourseId: 'parentCourseId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
   categoryId: 'categoryId',
   subCategoryId: 'subCategoryId',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt',
+  description: 'description',
+  duration: 'duration',
+  parentCourseId: 'parentCourseId',
+  updatedAt: 'updatedAt',
+  videoCount: 'videoCount',
+  id: 'id',
+  rating: 'rating',
   previewImage: 'previewImage',
   previewVideo: 'previewVideo'
 };
@@ -366,21 +366,21 @@ exports.Prisma.Certificate_templatesScalarFieldEnum = {
 };
 
 exports.Prisma.Course2ScalarFieldEnum = {
-  name: 'name',
+  id: 'id',
   image: 'image',
-  enrolledCount: 'enrolledCount',
-  date: 'date',
-  categoryId: 'categoryId',
-  subCategoryId: 'subCategoryId',
-  isDeleted: 'isDeleted',
-  createdAt: 'createdAt',
+  name: 'name',
   description: 'description',
   duration: 'duration',
-  parentCourseId: 'parentCourseId',
-  updatedAt: 'updatedAt',
   videoCount: 'videoCount',
-  id: 'id',
+  enrolledCount: 'enrolledCount',
+  isDeleted: 'isDeleted',
   rating: 'rating',
+  date: 'date',
+  parentCourseId: 'parentCourseId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  categoryId: 'categoryId',
+  subCategoryId: 'subCategoryId',
   previewImage: 'previewImage',
   previewVideo: 'previewVideo'
 };

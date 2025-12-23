@@ -104,8 +104,8 @@ model HomeCategoryItem {
   courseId       String       @db.Uuid
   isDeleted      Boolean      @default(false)
   course2Id      String?      @db.Uuid
-  course2        Course?      @relation(fields: [course2Id], references: [id])
-  course         course2      @relation(fields: [courseId], references: [id])
+  course2        course2?     @relation(fields: [course2Id], references: [id])
+  course         Course       @relation(fields: [courseId], references: [id])
   homeCategory   HomeCategory @relation(fields: [homeCategoryId], references: [id])
 
   @@unique([homeCategoryId, courseId])
@@ -113,34 +113,34 @@ model HomeCategoryItem {
 }
 
 model Course {
-  id                 String             @id(map: "course2_pkey") @default(uuid()) @map("id") @db.Uuid
-  image              String?
-  name               String
-  description        String?
-  duration           Int?
-  videoCount         Int                @default(0)
-  enrolledCount      Int                @default(0)
-  isDeleted          Boolean            @default(false)
-  rating             Float              @default(0)
-  date               DateTime           @default(now())
-  parentCourseId     String?            @db.Uuid
-  createdAt          DateTime           @default(now())
-  updatedAt          DateTime           @updatedAt
-  categoryId         String?
-  subCategoryId      String?
-  previewImage       String?
-  previewVideo       String?
-  Rating             Rating[]
-  UserOnCourse       UserOnCourse[]
-  certificate        certificate[]
-  Category           Category?          @relation(fields: [categoryId], references: [id], map: "course2_categoryId_fkey")
-  parentCourse       Course?            @relation("CourseToParent", fields: [parentCourseId], references: [id], map: "course2_parentCourseId_fkey")
-  subCourses         Course[]           @relation("CourseToParent")
-  SubCategory        SubCategory?       @relation(fields: [subCategoryId], references: [id], map: "course2_subCategoryId_fkey")
-  course_section     CourseSection[]
-  feedback           feedback[]
-  home_category_item HomeCategoryItem[]
-  review             Review[]
+  name             String
+  image            String?
+  enrolledCount    Int                @default(0)
+  date             DateTime           @default(now())
+  categoryId       String?
+  subCategoryId    String?
+  isDeleted        Boolean            @default(false)
+  createdAt        DateTime           @default(now())
+  description      String?
+  duration         Int?
+  parentCourseId   String?            @db.Uuid
+  updatedAt        DateTime           @updatedAt
+  videoCount       Int                @default(0)
+  id               String             @id @default(uuid()) @map("id") @db.Uuid
+  rating           Float              @default(0)
+  previewImage     String?
+  previewVideo     String?
+  ratings          Rating[]
+  users            UserOnCourse[]
+  certificate      certificate[]
+  Category         Category?          @relation(fields: [categoryId], references: [id], map: "course2_categoryId_fkey")
+  parentCourse     Course?            @relation("CourseToParent", fields: [parentCourseId], references: [id], map: "course2_parentCourseId_fkey")
+  subCourses       Course[]           @relation("CourseToParent")
+  SubCategory      SubCategory?       @relation(fields: [subCategoryId], references: [id], map: "course2_subCategoryId_fkey")
+  CourseSection    CourseSection[]
+  feedback         feedback[]
+  HomeCategoryItem HomeCategoryItem[]
+  reviews          Review[]
 
   @@map("course")
 }
@@ -155,8 +155,8 @@ model UserOnCourse {
   certificate         String?
   completedPercentage Int          @default(0)
   course2Id           String?      @db.Uuid
-  course2             Course?      @relation(fields: [course2Id], references: [id])
-  Course              course2      @relation(fields: [courseId], references: [id])
+  course2             course2?     @relation(fields: [course2Id], references: [id])
+  Course              Course       @relation(fields: [courseId], references: [id])
 
   @@unique([userId, courseId])
 }
@@ -172,8 +172,8 @@ model CourseSection {
   isDeleted     Boolean         @default(false)
   course2Id     String?         @db.Uuid
   activities    Activity[]
-  course2       Course?         @relation(fields: [course2Id], references: [id])
-  course        course2         @relation(fields: [courseId], references: [id])
+  course2       course2?        @relation(fields: [course2Id], references: [id])
+  course        Course          @relation(fields: [courseId], references: [id])
   userOnSection userOnSection[]
 
   @@map("course_section")
@@ -204,8 +204,8 @@ model Review {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   course2Id String?  @db.Uuid
-  course2   Course?  @relation(fields: [course2Id], references: [id])
-  Course    course2  @relation(fields: [courseId], references: [id])
+  course2   course2? @relation(fields: [course2Id], references: [id])
+  Course    Course   @relation(fields: [courseId], references: [id])
 
   @@map("review")
 }
@@ -219,8 +219,8 @@ model Rating {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   course2Id String?  @db.Uuid
-  course2   Course?  @relation(fields: [course2Id], references: [id])
-  course    course2  @relation(fields: [courseId], references: [id])
+  course2   course2? @relation(fields: [course2Id], references: [id])
+  course    Course   @relation(fields: [courseId], references: [id])
 }
 
 model Faq {
@@ -284,8 +284,8 @@ model certificate {
   updated_at DateTime
   courseId   String   @db.Uuid
   course2Id  String?  @db.Uuid
-  course2    Course?  @relation(fields: [course2Id], references: [id])
-  course     course2  @relation(fields: [courseId], references: [id])
+  course2    course2? @relation(fields: [course2Id], references: [id])
+  course     Course   @relation(fields: [courseId], references: [id])
 }
 
 model feedback {
@@ -295,8 +295,8 @@ model feedback {
   updated_at DateTime
   courseId   String   @db.Uuid
   course2Id  String?  @db.Uuid
-  course2    Course?  @relation(fields: [course2Id], references: [id])
-  course     course2  @relation(fields: [courseId], references: [id])
+  course2    course2? @relation(fields: [course2Id], references: [id])
+  course     Course   @relation(fields: [courseId], references: [id])
 }
 
 model userOnActivity {
@@ -331,34 +331,34 @@ model certificate_templates {
 }
 
 model course2 {
-  name             String
-  image            String?
-  enrolledCount    Int                @default(0)
-  date             DateTime           @default(now())
-  categoryId       String?
-  subCategoryId    String?
-  isDeleted        Boolean            @default(false)
-  createdAt        DateTime           @default(now())
-  description      String?
-  duration         Int?
-  parentCourseId   String?            @db.Uuid
-  updatedAt        DateTime
-  videoCount       Int                @default(0)
-  id               String             @id(map: "course_pkey") @db.Uuid
-  rating           Float              @default(0)
-  previewImage     String?
-  previewVideo     String?
-  ratings          Rating[]
-  users            UserOnCourse[]
-  certificate      certificate[]
-  category         Category?          @relation(fields: [categoryId], references: [id], map: "course_categoryId_fkey")
-  course2          course2?           @relation("course2Tocourse2", fields: [parentCourseId], references: [id], map: "course_parentCourseId_fkey")
-  other_course2    course2[]          @relation("course2Tocourse2")
-  sub_category     SubCategory?       @relation(fields: [subCategoryId], references: [id], map: "course_subCategoryId_fkey")
-  CourseSection    CourseSection[]
-  feedback         feedback[]
-  HomeCategoryItem HomeCategoryItem[]
-  reviews          Review[]
+  id                 String             @id @db.Uuid
+  image              String?
+  name               String
+  description        String?
+  duration           Int?
+  videoCount         Int                @default(0)
+  enrolledCount      Int                @default(0)
+  isDeleted          Boolean            @default(false)
+  rating             Float              @default(0)
+  date               DateTime           @default(now())
+  parentCourseId     String?            @db.Uuid
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime
+  categoryId         String?
+  subCategoryId      String?
+  previewImage       String?
+  previewVideo       String?
+  Rating             Rating[]
+  UserOnCourse       UserOnCourse[]
+  certificate        certificate[]
+  category           Category?          @relation(fields: [categoryId], references: [id], map: "course_categoryId_fkey")
+  course2            course2?           @relation("course2Tocourse2", fields: [parentCourseId], references: [id], map: "course_parentCourseId_fkey")
+  other_course2      course2[]          @relation("course2Tocourse2")
+  sub_category       SubCategory?       @relation(fields: [subCategoryId], references: [id], map: "course_subCategoryId_fkey")
+  course_section     CourseSection[]
+  feedback           feedback[]
+  home_category_item HomeCategoryItem[]
+  review             Review[]
 }
 
 model feedback_templates {
