@@ -198,21 +198,21 @@ exports.Prisma.HomeCategoryItemScalarFieldEnum = {
 };
 
 exports.Prisma.CourseScalarFieldEnum = {
-  name: 'name',
+  id: 'id',
   image: 'image',
-  enrolledCount: 'enrolledCount',
-  date: 'date',
-  categoryId: 'categoryId',
-  subCategoryId: 'subCategoryId',
-  isDeleted: 'isDeleted',
-  createdAt: 'createdAt',
+  name: 'name',
   description: 'description',
   duration: 'duration',
-  parentCourseId: 'parentCourseId',
-  updatedAt: 'updatedAt',
   videoCount: 'videoCount',
-  id: 'id',
+  enrolledCount: 'enrolledCount',
+  isDeleted: 'isDeleted',
   rating: 'rating',
+  date: 'date',
+  parentCourseId: 'parentCourseId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  categoryId: 'categoryId',
+  subCategoryId: 'subCategoryId',
   previewImage: 'previewImage',
   previewVideo: 'previewVideo'
 };
@@ -366,21 +366,21 @@ exports.Prisma.Certificate_templatesScalarFieldEnum = {
 };
 
 exports.Prisma.Course2ScalarFieldEnum = {
-  id: 'id',
-  image: 'image',
   name: 'name',
-  description: 'description',
-  duration: 'duration',
-  videoCount: 'videoCount',
+  image: 'image',
   enrolledCount: 'enrolledCount',
-  isDeleted: 'isDeleted',
-  rating: 'rating',
   date: 'date',
-  parentCourseId: 'parentCourseId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
   categoryId: 'categoryId',
   subCategoryId: 'subCategoryId',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt',
+  description: 'description',
+  duration: 'duration',
+  parentCourseId: 'parentCourseId',
+  updatedAt: 'updatedAt',
+  videoCount: 'videoCount',
+  id: 'id',
+  rating: 'rating',
   previewImage: 'previewImage',
   previewVideo: 'previewVideo'
 };
@@ -447,7 +447,8 @@ exports.ActivityType = exports.$Enums.ActivityType = {
   WEB_URL: 'WEB_URL',
   YOUTUBE_LINK: 'YOUTUBE_LINK',
   PAGE: 'PAGE',
-  CERTIFICATE: 'CERTIFICATE'
+  CERTIFICATE: 'CERTIFICATE',
+  FEEDBACK: 'FEEDBACK'
 };
 
 exports.Prisma.ModelName = {
