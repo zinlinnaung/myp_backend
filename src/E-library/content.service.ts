@@ -1,6 +1,9 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-
 import { CreateContentDto, UpdateContentDto } from './create-content.dto';
 import { MinioService } from 'src/Minio/minio.service';
 
@@ -11,20 +14,24 @@ export class ContentService {
     private minioService: MinioService,
   ) {}
 
-  // Handles the file upload and returns the public URL
+  /**
+   * Uploads a file to Minio and returns the public URL
+   */
   async uploadFile(file: Express.Multer.File) {
     if (!file) throw new BadRequestException('No file provided');
 
-    // Using your MinioService's public upload method
     const url = await this.minioService.uploadPublicFile(
       file.buffer,
-      `${Date.now()}-${file.originalname}`, // Unique filename
-      'elibrary-assets', // Folder name in bucket
+      `${Date.now()}-${file.originalname.replace(/\s/g, '_')}`,
+      'elibrary',
     );
 
     return { url };
   }
 
+  /**
+   * Creates a new content record
+   */
   async create(data: CreateContentDto) {
     return this.prisma.course.content.create({
       data: {
@@ -33,14 +40,21 @@ export class ContentService {
         content: data.content,
         fileUrl: data.fileUrl,
         thumbnailUrl: data.thumbnailUrl,
-        // Assuming your DTO sends Type ID and Category ID
-        type: { connect: { id: data.typeId } },
-        category: { connect: { id: data.categoryId } },
+        author: data.author,
+        publishedAt: data.publishedAt ? new Date(data.publishedAt) : null,
+        // Relation handling: Only connect if ID is provided
+        type: data.typeId ? { connect: { id: data.typeId } } : undefined,
+        category: data.categoryId
+          ? { connect: { id: data.categoryId } }
+          : undefined,
       },
     });
   }
 
-  findAll() {
+  /**
+   * Retrieves all content with relations
+   */
+  async findAll() {
     return this.prisma.course.content.findMany({
       include: {
         type: true,
@@ -50,13 +64,21 @@ export class ContentService {
     });
   }
 
-  findOne(id: string) {
-    return this.prisma.course.content.findUnique({
+  /**
+   * Retrieves a single content by ID
+   */
+  async findOne(id: string) {
+    const item = await this.prisma.course.content.findUnique({
       where: { id },
       include: { type: true, category: true },
     });
+    if (!item) throw new NotFoundException(`Content with ID ${id} not found`);
+    return item;
   }
 
+  /**
+   * Updates an existing content record
+   */
   async update(id: string, data: UpdateContentDto) {
     return this.prisma.course.content.update({
       where: { id },
@@ -66,13 +88,18 @@ export class ContentService {
         content: data.content,
         fileUrl: data.fileUrl,
         thumbnailUrl: data.thumbnailUrl,
-        typeId: data.typeId, // Direct update if field exists
-        categoryId: data.categoryId, // Direct update if field exists
+        author: data.author,
+        publishedAt: data.publishedAt ? new Date(data.publishedAt) : undefined,
+        typeId: data.typeId,
+        categoryId: data.categoryId,
       },
     });
   }
 
-  remove(id: string) {
+  /**
+   * Deletes a content record
+   */
+  async remove(id: string) {
     return this.prisma.course.content.delete({ where: { id } });
   }
 }
