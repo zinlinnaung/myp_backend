@@ -4,7 +4,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-
 import { MinioService } from 'src/Minio/minio.service';
 import { CreateContentDto, UpdateContentDto } from './create-content.dto';
 
@@ -34,7 +33,10 @@ export class ContentService {
    * Creates a new content record
    */
   async create(data: CreateContentDto) {
-    // The error was here: ensured 'title' is explicitly mapped
+    if (!data.typeId || typeof data.typeId !== 'string') {
+      throw new BadRequestException('typeId must be a non-empty string');
+    }
+
     return this.prisma.course.content.create({
       data: {
         title: data.title,
@@ -44,8 +46,7 @@ export class ContentService {
         thumbnailUrl: data.thumbnailUrl,
         author: data.author || 'Admin',
         publishedAt: data.publishedAt ? new Date(data.publishedAt) : new Date(),
-        // Prisma relation mapping
-        type: data.typeId ? { connect: { id: data.typeId } } : undefined,
+        type: { connect: { id: data.typeId } },
         category: data.categoryId
           ? { connect: { id: data.categoryId } }
           : undefined,
@@ -53,14 +54,19 @@ export class ContentService {
     });
   }
 
+  /**
+   * Updates an existing content record
+   */
   async update(id: string, data: UpdateContentDto) {
+    if (data.typeId && typeof data.typeId !== 'string') {
+      throw new BadRequestException('typeId must be a string');
+    }
+
     return this.prisma.course.content.update({
       where: { id },
       data: {
         ...data,
         publishedAt: data.publishedAt ? new Date(data.publishedAt) : undefined,
-        // Update foreign keys directly if they exist in schema,
-        // or use 'connect' if they are relation objects.
         typeId: data.typeId,
         categoryId: data.categoryId,
       },
@@ -88,29 +94,10 @@ export class ContentService {
       where: { id },
       include: { type: true, category: true },
     });
+
     if (!item) throw new NotFoundException(`Content with ID ${id} not found`);
     return item;
   }
-
-  /**
-   * Updates an existing content record
-   */
-  // async update(id: string, data: UpdateContentDto) {
-  //   return this.prisma.course.content.update({
-  //     where: { id },
-  //     data: {
-  //       title: data.title,
-  //       description: data.description,
-  //       content: data.content,
-  //       fileUrl: data.fileUrl,
-  //       thumbnailUrl: data.thumbnailUrl,
-  //       author: data.author,
-  //       publishedAt: data.publishedAt ? new Date(data.publishedAt) : undefined,
-  //       typeId: data.typeId,
-  //       categoryId: data.categoryId,
-  //     },
-  //   });
-  // }
 
   /**
    * Deletes a content record
