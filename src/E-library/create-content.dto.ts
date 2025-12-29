@@ -12,7 +12,7 @@ export class CreateContentDto {
   title: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   typeId: string;
 
   @IsOptional()
