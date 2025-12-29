@@ -1,3 +1,4 @@
+// src/content/dto/create-content.dto.ts
 export class CreateContentDto {
   typeId: string;
   title: string;
@@ -12,6 +13,7 @@ export class CreateContentDto {
 
 // src/content/dto/update-content.dto.ts
 export class UpdateContentDto {
+  typeId?: string; // <-- Added this line
   title?: string;
   description?: string;
   fileUrl?: string;

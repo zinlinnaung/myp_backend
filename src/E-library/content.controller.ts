@@ -6,13 +6,24 @@ import {
   Param,
   Put,
   Delete,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { ContentService } from './content.service';
 import { CreateContentDto, UpdateContentDto } from './create-content.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('content')
 export class ContentController {
   constructor(private readonly contentService: ContentService) {}
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    // 1. Upload to Minio
+    // 2. Return the URL to the frontend
+    return this.contentService.uploadFile(file);
+  }
 
   @Post()
   create(@Body() dto: CreateContentDto) {
