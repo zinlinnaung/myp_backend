@@ -4,8 +4,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateContentDto, UpdateContentDto } from './create-content.dto';
+
 import { MinioService } from 'src/Minio/minio.service';
+import { CreateContentDto, UpdateContentDto } from './create-content.dto';
 
 @Injectable()
 export class ContentService {

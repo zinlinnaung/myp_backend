@@ -10,8 +10,9 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 import { ContentService } from './content.service';
-import { CreateContentDto, UpdateContentDto } from './create-content.dto';
+
 import { FileInterceptor } from '@nestjs/platform-express';
+import { CreateContentDto, UpdateContentDto } from './create-content.dto';
 
 @Controller('content')
 export class ContentController {

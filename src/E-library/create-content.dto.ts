@@ -1,25 +1,83 @@
-// src/content/dto/create-content.dto.ts
+import {
+  IsString,
+  IsOptional,
+  IsNotEmpty,
+  IsDateString,
+  IsUrl,
+} from 'class-validator';
+
 export class CreateContentDto {
-  typeId: string;
+  @IsString()
+  @IsNotEmpty()
   title: string;
+
+  @IsString()
+  @IsNotEmpty()
+  typeId: string;
+
+  @IsOptional()
+  @IsString()
   description?: string;
-  fileUrl?: string;
-  thumbnailUrl?: string;
-  author?: string;
-  publishedAt?: Date;
-  categoryId?: string;
+
+  @IsOptional()
+  @IsString()
   content?: string;
+
+  @IsOptional()
+  @IsUrl({}, { message: 'fileUrl must be a valid URL' })
+  fileUrl?: string;
+
+  @IsOptional()
+  @IsUrl({}, { message: 'thumbnailUrl must be a valid URL' })
+  thumbnailUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  author?: string;
+
+  @IsOptional()
+  @IsDateString()
+  publishedAt?: Date;
+
+  @IsOptional()
+  @IsString()
+  categoryId?: string;
 }
 
-// src/content/dto/update-content.dto.ts
 export class UpdateContentDto {
-  typeId?: string; // <-- Added this line
+  @IsOptional()
+  @IsString()
   title?: string;
+
+  @IsOptional()
+  @IsString()
+  typeId?: string;
+
+  @IsOptional()
+  @IsString()
   description?: string;
-  fileUrl?: string;
-  thumbnailUrl?: string;
-  author?: string;
-  publishedAt?: Date;
-  categoryId?: string;
+
+  @IsOptional()
+  @IsString()
   content?: string;
+
+  @IsOptional()
+  @IsUrl({}, { message: 'fileUrl must be a valid URL' })
+  fileUrl?: string;
+
+  @IsOptional()
+  @IsUrl({}, { message: 'thumbnailUrl must be a valid URL' })
+  thumbnailUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  author?: string;
+
+  @IsOptional()
+  @IsDateString()
+  publishedAt?: Date;
+
+  @IsOptional()
+  @IsString()
+  categoryId?: string;
 }
