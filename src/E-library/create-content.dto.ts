@@ -24,11 +24,11 @@ export class CreateContentDto {
   content?: string;
 
   @IsOptional()
-  @IsUrl({}, { message: 'fileUrl must be a valid URL' })
+  @IsString()
   fileUrl?: string;
 
   @IsOptional()
-  @IsUrl({}, { message: 'thumbnailUrl must be a valid URL' })
+  @IsString()
   thumbnailUrl?: string;
 
   @IsOptional()
@@ -62,11 +62,11 @@ export class UpdateContentDto {
   content?: string;
 
   @IsOptional()
-  @IsUrl({}, { message: 'fileUrl must be a valid URL' })
+  @IsString()
   fileUrl?: string;
 
   @IsOptional()
-  @IsUrl({}, { message: 'thumbnailUrl must be a valid URL' })
+  @IsString()
   thumbnailUrl?: string;
 
   @IsOptional()
