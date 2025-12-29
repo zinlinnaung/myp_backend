@@ -3,7 +3,6 @@ import {
   IsOptional,
   IsNotEmpty,
   IsDateString,
-  IsUrl,
 } from 'class-validator';
 
 export class CreateContentDto {
@@ -12,8 +11,8 @@ export class CreateContentDto {
   title: string;
 
   @IsString()
-  @IsOptional()
-  typeId: string;
+  @IsNotEmpty()
+  typeId: string; // must be provided
 
   @IsOptional()
   @IsString()
@@ -51,7 +50,7 @@ export class UpdateContentDto {
 
   @IsOptional()
   @IsString()
-  typeId?: string;
+  typeId?: string; // optional for update
 
   @IsOptional()
   @IsString()

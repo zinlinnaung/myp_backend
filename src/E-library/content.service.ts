@@ -33,10 +33,7 @@ export class ContentService {
    * Creates a new content record
    */
   async create(data: CreateContentDto) {
-    if (!data.typeId || typeof data.typeId !== 'string') {
-      throw new BadRequestException('typeId must be a non-empty string');
-    }
-
+    // No need for extra typeId check because DTO validates it
     return this.prisma.course.content.create({
       data: {
         title: data.title,
@@ -46,7 +43,7 @@ export class ContentService {
         thumbnailUrl: data.thumbnailUrl,
         author: data.author || 'Admin',
         publishedAt: data.publishedAt ? new Date(data.publishedAt) : new Date(),
-        type: { connect: { id: data.typeId } },
+        type: { connect: { id: data.typeId } }, // connect by ID
         category: data.categoryId
           ? { connect: { id: data.categoryId } }
           : undefined,
@@ -54,22 +51,27 @@ export class ContentService {
     });
   }
 
-  /**
-   * Updates an existing content record
-   */
   async update(id: string, data: UpdateContentDto) {
-    if (data.typeId && typeof data.typeId !== 'string') {
-      throw new BadRequestException('typeId must be a string');
+    // Map publishedAt if provided
+    const updatedData: any = {
+      ...data,
+      publishedAt: data.publishedAt ? new Date(data.publishedAt) : undefined,
+    };
+
+    // Prisma expects nested connect for relations
+    if (data.typeId) {
+      updatedData.type = { connect: { id: data.typeId } };
+      delete updatedData.typeId;
+    }
+
+    if (data.categoryId) {
+      updatedData.category = { connect: { id: data.categoryId } };
+      delete updatedData.categoryId;
     }
 
     return this.prisma.course.content.update({
       where: { id },
-      data: {
-        ...data,
-        publishedAt: data.publishedAt ? new Date(data.publishedAt) : undefined,
-        typeId: data.typeId,
-        categoryId: data.categoryId,
-      },
+      data: updatedData,
     });
   }
 
