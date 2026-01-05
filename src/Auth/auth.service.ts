@@ -34,14 +34,14 @@ export class AuthService {
     });
   }
 
-  async findUserById(id: string) {
-    const user = await this.prisma.auth.user.findUnique({
-      where: { id },
-      include: { refreshTokens: true, otpSessions: true },
-    });
-    if (!user) throw new NotFoundException('User not found');
-    return user;
-  }
+  // async findUserById(id: string) {
+  //   const user = await this.prisma.auth.user.findUnique({
+  //     where: { id },
+  //     include: { refreshTokens: true, otpSessions: true },
+  //   });
+  //   if (!user) throw new NotFoundException('User not found');
+  //   return user;
+  // }
 
   async updateUser(id: string, dto: UpdateAuthUserDto) {
     await this.findUserById(id);
@@ -53,35 +53,42 @@ export class AuthService {
     return this.prisma.auth.user.delete({ where: { id } });
   }
 
-  async login(email: string, pass: string) {
-    // 1. Find user by email
-    const user = await this.prisma.auth.user.findUnique({
-      where: { email },
-      include: {
-        instructor: {
-          include: {
-            roles: true, // Crucial for the UI PrivateRoutes logic
-          },
+  private get userInclude() {
+    return {
+      instructor: {
+        include: {
+          roles: true,
         },
       },
+    };
+  }
+
+  async findUserById(id: string) {
+    const user = await this.prisma.auth.user.findUnique({
+      where: { id },
+      include: this.userInclude, // Now includes Instructor and Roles
+    });
+    if (!user) throw new NotFoundException('User not found');
+
+    const { password, ...result } = user;
+    return result;
+  }
+
+  async login(email: string, pass: string) {
+    const user = await this.prisma.auth.user.findUnique({
+      where: { email },
+      include: this.userInclude,
     });
 
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
+    if (!user) throw new UnauthorizedException('Invalid credentials');
 
-    // 2. Compare plain text password with hashed password
     const isMatch = await bcrypt.compare(pass, user.password);
+    if (!isMatch) throw new UnauthorizedException('Invalid credentials');
 
-    if (!isMatch) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-
-    // 3. Return the user and a token
-    // (In production, replace 'fake-jwt-token' with a real JWT sign)
+    const { password, ...safeUser } = user;
     return {
-      api_token: `secret-session-token-${user.id}`,
-      user: user,
+      api_token: `secret-token-${user.id}`, // In production, use JWT
+      user: safeUser,
     };
   }
 
