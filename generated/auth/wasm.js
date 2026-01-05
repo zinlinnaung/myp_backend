@@ -148,6 +148,24 @@ exports.Prisma.RefreshTokenScalarFieldEnum = {
   isRevoked: 'isRevoked'
 };
 
+exports.Prisma.InstructorScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  fullName: 'fullName',
+  bio: 'bio',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  permissions: 'permissions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.OtpSessionScalarFieldEnum = {
   id: 'id',
   phone: 'phone',
@@ -181,11 +199,26 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Permission = exports.$Enums.Permission = {
+  CREATE_STUDENT: 'CREATE_STUDENT',
+  EDIT_STUDENT: 'EDIT_STUDENT',
+  DELETE_STUDENT: 'DELETE_STUDENT',
+  VIEW_STUDENT: 'VIEW_STUDENT',
+  CREATE_INSTRUCTOR: 'CREATE_INSTRUCTOR',
+  EDIT_INSTRUCTOR: 'EDIT_INSTRUCTOR',
+  DELETE_INSTRUCTOR: 'DELETE_INSTRUCTOR',
+  VIEW_INSTRUCTOR: 'VIEW_INSTRUCTOR',
+  CREATE_COURSE: 'CREATE_COURSE',
+  EDIT_COURSE: 'EDIT_COURSE',
+  DELETE_COURSE: 'DELETE_COURSE',
+  VIEW_COURSE: 'VIEW_COURSE'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
   RefreshToken: 'RefreshToken',
+  Instructor: 'Instructor',
+  Role: 'Role',
   OtpSession: 'OtpSession'
 };
 

@@ -28,6 +28,7 @@ model User {
   township      String?
   otpSessions   OtpSession[]
   refreshTokens RefreshToken[]
+  Instructor    Instructor[]
 
   @@map("users")
 }
@@ -42,6 +43,60 @@ model RefreshToken {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("refresh_tokens")
+}
+
+model Instructor {
+  id     String @id @default(uuid())
+  userId String @unique @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // From the UI: "Full Name" is handled by User model or stored here if preferred
+  fullName String  @map("full_name")
+  bio      String?
+
+  // Many-to-many relationship with roles
+  roles Role[] @relation("InstructorRoles")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("instructors")
+}
+
+model Role {
+  id          String  @id @default(uuid())
+  name        String  @unique // e.g., "Admin", "Instructor", "Assistant"
+  description String? // From the "Role Description" field in UI
+
+  // Permissions stored as an array of Enums
+  permissions Permission[]
+
+  instructors Instructor[] @relation("InstructorRoles")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("roles")
+}
+
+enum Permission {
+  // Students
+  CREATE_STUDENT
+  EDIT_STUDENT
+  DELETE_STUDENT
+  VIEW_STUDENT
+
+  // Instructors
+  CREATE_INSTRUCTOR
+  EDIT_INSTRUCTOR
+  DELETE_INSTRUCTOR
+  VIEW_INSTRUCTOR
+
+  // Courses
+  CREATE_COURSE
+  EDIT_COURSE
+  DELETE_COURSE
+  VIEW_COURSE
 }
 
 model OtpSession {

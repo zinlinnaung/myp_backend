@@ -457,7 +457,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/it-bit/Zinlinnaung/nyp_admin_backend/generated/course",
+      "value": "E:\\Work\\myp_backend\\generated\\course",
       "fromEnvVar": null
     },
     "config": {
@@ -466,7 +466,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
