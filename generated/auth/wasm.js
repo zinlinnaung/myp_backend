@@ -130,13 +130,18 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   phone: 'phone',
-  googleId: 'googleId',
   city: 'city',
   country: 'country',
   dateOfBirth: 'dateOfBirth',
   feedback: 'feedback',
   gender: 'gender',
-  township: 'township'
+  township: 'township',
+  age_range: 'age_range',
+  avatar: 'avatar',
+  bio: 'bio',
+  location: 'location',
+  website: 'website',
+  googleId: 'googleId'
 };
 
 exports.Prisma.RefreshTokenScalarFieldEnum = {
@@ -146,24 +151,6 @@ exports.Prisma.RefreshTokenScalarFieldEnum = {
   expiresAt: 'expiresAt',
   createdAt: 'createdAt',
   isRevoked: 'isRevoked'
-};
-
-exports.Prisma.InstructorScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  fullName: 'fullName',
-  bio: 'bio',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.RoleScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  permissions: 'permissions',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.OtpSessionScalarFieldEnum = {
@@ -183,6 +170,24 @@ exports.Prisma.OtpSessionScalarFieldEnum = {
   delivery_status: 'delivery_status',
   last_attempt_at: 'last_attempt_at',
   sms_poh_message_id: 'sms_poh_message_id'
+};
+
+exports.Prisma.InstructorScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  fullName: 'fullName',
+  bio: 'bio',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  permissions: 'permissions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -217,9 +222,9 @@ exports.Permission = exports.$Enums.Permission = {
 exports.Prisma.ModelName = {
   User: 'User',
   RefreshToken: 'RefreshToken',
+  OtpSession: 'OtpSession',
   Instructor: 'Instructor',
-  Role: 'Role',
-  OtpSession: 'OtpSession'
+  Role: 'Role'
 };
 
 /**

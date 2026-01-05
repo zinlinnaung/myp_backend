@@ -24,6 +24,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type RefreshToken = $Result.DefaultSelection<Prisma.$RefreshTokenPayload>
 /**
+ * Model OtpSession
+ * 
+ */
+export type OtpSession = $Result.DefaultSelection<Prisma.$OtpSessionPayload>
+/**
  * Model Instructor
  * 
  */
@@ -33,11 +38,6 @@ export type Instructor = $Result.DefaultSelection<Prisma.$InstructorPayload>
  * 
  */
 export type Role = $Result.DefaultSelection<Prisma.$RolePayload>
-/**
- * Model OtpSession
- * 
- */
-export type OtpSession = $Result.DefaultSelection<Prisma.$OtpSessionPayload>
 
 /**
  * Enums
@@ -209,6 +209,16 @@ export class PrismaClient<
   get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs>;
 
   /**
+   * `prisma.otpSession`: Exposes CRUD operations for the **OtpSession** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OtpSessions
+    * const otpSessions = await prisma.otpSession.findMany()
+    * ```
+    */
+  get otpSession(): Prisma.OtpSessionDelegate<ExtArgs>;
+
+  /**
    * `prisma.instructor`: Exposes CRUD operations for the **Instructor** model.
     * Example usage:
     * ```ts
@@ -227,16 +237,6 @@ export class PrismaClient<
     * ```
     */
   get role(): Prisma.RoleDelegate<ExtArgs>;
-
-  /**
-   * `prisma.otpSession`: Exposes CRUD operations for the **OtpSession** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more OtpSessions
-    * const otpSessions = await prisma.otpSession.findMany()
-    * ```
-    */
-  get otpSession(): Prisma.OtpSessionDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -716,9 +716,9 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     RefreshToken: 'RefreshToken',
+    OtpSession: 'OtpSession',
     Instructor: 'Instructor',
-    Role: 'Role',
-    OtpSession: 'OtpSession'
+    Role: 'Role'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -735,7 +735,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'refreshToken' | 'instructor' | 'role' | 'otpSession'
+      modelProps: 'user' | 'refreshToken' | 'otpSession' | 'instructor' | 'role'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -879,6 +879,76 @@ export namespace Prisma {
           }
         }
       }
+      OtpSession: {
+        payload: Prisma.$OtpSessionPayload<ExtArgs>
+        fields: Prisma.OtpSessionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OtpSessionFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OtpSessionFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
+          }
+          findFirst: {
+            args: Prisma.OtpSessionFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OtpSessionFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
+          }
+          findMany: {
+            args: Prisma.OtpSessionFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>[]
+          }
+          create: {
+            args: Prisma.OtpSessionCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
+          }
+          createMany: {
+            args: Prisma.OtpSessionCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OtpSessionCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>[]
+          }
+          delete: {
+            args: Prisma.OtpSessionDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
+          }
+          update: {
+            args: Prisma.OtpSessionUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
+          }
+          deleteMany: {
+            args: Prisma.OtpSessionDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OtpSessionUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.OtpSessionUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
+          }
+          aggregate: {
+            args: Prisma.OtpSessionAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateOtpSession>
+          }
+          groupBy: {
+            args: Prisma.OtpSessionGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<OtpSessionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OtpSessionCountArgs<ExtArgs>,
+            result: $Utils.Optional<OtpSessionCountAggregateOutputType> | number
+          }
+        }
+      }
       Instructor: {
         payload: Prisma.$InstructorPayload<ExtArgs>
         fields: Prisma.InstructorFieldRefs
@@ -1016,76 +1086,6 @@ export namespace Prisma {
           count: {
             args: Prisma.RoleCountArgs<ExtArgs>,
             result: $Utils.Optional<RoleCountAggregateOutputType> | number
-          }
-        }
-      }
-      OtpSession: {
-        payload: Prisma.$OtpSessionPayload<ExtArgs>
-        fields: Prisma.OtpSessionFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.OtpSessionFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.OtpSessionFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
-          }
-          findFirst: {
-            args: Prisma.OtpSessionFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.OtpSessionFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
-          }
-          findMany: {
-            args: Prisma.OtpSessionFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>[]
-          }
-          create: {
-            args: Prisma.OtpSessionCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
-          }
-          createMany: {
-            args: Prisma.OtpSessionCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.OtpSessionCreateManyAndReturnArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>[]
-          }
-          delete: {
-            args: Prisma.OtpSessionDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
-          }
-          update: {
-            args: Prisma.OtpSessionUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
-          }
-          deleteMany: {
-            args: Prisma.OtpSessionDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.OtpSessionUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.OtpSessionUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$OtpSessionPayload>
-          }
-          aggregate: {
-            args: Prisma.OtpSessionAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateOtpSession>
-          }
-          groupBy: {
-            args: Prisma.OtpSessionGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<OtpSessionGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.OtpSessionCountArgs<ExtArgs>,
-            result: $Utils.Optional<OtpSessionCountAggregateOutputType> | number
           }
         }
       }
@@ -1251,13 +1251,11 @@ export namespace Prisma {
   export type UserCountOutputType = {
     otpSessions: number
     refreshTokens: number
-    Instructor: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     otpSessions?: boolean | UserCountOutputTypeCountOtpSessionsArgs
     refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
-    Instructor?: boolean | UserCountOutputTypeCountInstructorArgs
   }
 
   // Custom InputTypes
@@ -1283,13 +1281,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountRefreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RefreshTokenWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountInstructorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: InstructorWhereInput
   }
 
 
@@ -1380,13 +1371,18 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     phone: string | null
-    googleId: string | null
     city: string | null
     country: string | null
     dateOfBirth: Date | null
     feedback: string | null
     gender: string | null
     township: string | null
+    age_range: string | null
+    avatar: string | null
+    bio: string | null
+    location: string | null
+    website: string | null
+    googleId: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1400,13 +1396,18 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     phone: string | null
-    googleId: string | null
     city: string | null
     country: string | null
     dateOfBirth: Date | null
     feedback: string | null
     gender: string | null
     township: string | null
+    age_range: string | null
+    avatar: string | null
+    bio: string | null
+    location: string | null
+    website: string | null
+    googleId: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1420,13 +1421,18 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     phone: number
-    googleId: number
     city: number
     country: number
     dateOfBirth: number
     feedback: number
     gender: number
     township: number
+    age_range: number
+    avatar: number
+    bio: number
+    location: number
+    website: number
+    googleId: number
     _all: number
   }
 
@@ -1442,13 +1448,18 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     phone?: true
-    googleId?: true
     city?: true
     country?: true
     dateOfBirth?: true
     feedback?: true
     gender?: true
     township?: true
+    age_range?: true
+    avatar?: true
+    bio?: true
+    location?: true
+    website?: true
+    googleId?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1462,13 +1473,18 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     phone?: true
-    googleId?: true
     city?: true
     country?: true
     dateOfBirth?: true
     feedback?: true
     gender?: true
     township?: true
+    age_range?: true
+    avatar?: true
+    bio?: true
+    location?: true
+    website?: true
+    googleId?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1482,13 +1498,18 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     phone?: true
-    googleId?: true
     city?: true
     country?: true
     dateOfBirth?: true
     feedback?: true
     gender?: true
     township?: true
+    age_range?: true
+    avatar?: true
+    bio?: true
+    location?: true
+    website?: true
+    googleId?: true
     _all?: true
   }
 
@@ -1566,22 +1587,27 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
-    email: string
+    email: string | null
     username: string
-    password: string | null
+    password: string
     firstName: string | null
     lastName: string | null
     isActive: boolean
     createdAt: Date
     updatedAt: Date
     phone: string | null
-    googleId: string | null
     city: string | null
     country: string | null
     dateOfBirth: Date | null
     feedback: string | null
     gender: string | null
     township: string | null
+    age_range: string | null
+    avatar: string | null
+    bio: string | null
+    location: string | null
+    website: string | null
+    googleId: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1612,16 +1638,21 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     phone?: boolean
-    googleId?: boolean
     city?: boolean
     country?: boolean
     dateOfBirth?: boolean
     feedback?: boolean
     gender?: boolean
     township?: boolean
+    age_range?: boolean
+    avatar?: boolean
+    bio?: boolean
+    location?: boolean
+    website?: boolean
+    googleId?: boolean
     otpSessions?: boolean | User$otpSessionsArgs<ExtArgs>
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
-    Instructor?: boolean | User$InstructorArgs<ExtArgs>
+    instructor?: boolean | User$instructorArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1636,20 +1667,25 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     phone?: boolean
-    googleId?: boolean
     city?: boolean
     country?: boolean
     dateOfBirth?: boolean
     feedback?: boolean
     gender?: boolean
     township?: boolean
+    age_range?: boolean
+    avatar?: boolean
+    bio?: boolean
+    location?: boolean
+    website?: boolean
+    googleId?: boolean
   }
 
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     otpSessions?: boolean | User$otpSessionsArgs<ExtArgs>
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
-    Instructor?: boolean | User$InstructorArgs<ExtArgs>
+    instructor?: boolean | User$instructorArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1659,26 +1695,31 @@ export namespace Prisma {
     objects: {
       otpSessions: Prisma.$OtpSessionPayload<ExtArgs>[]
       refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
-      Instructor: Prisma.$InstructorPayload<ExtArgs>[]
+      instructor: Prisma.$InstructorPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      email: string
+      email: string | null
       username: string
-      password: string | null
+      password: string
       firstName: string | null
       lastName: string | null
       isActive: boolean
       createdAt: Date
       updatedAt: Date
       phone: string | null
-      googleId: string | null
       city: string | null
       country: string | null
       dateOfBirth: Date | null
       feedback: string | null
       gender: string | null
       township: string | null
+      age_range: string | null
+      avatar: string | null
+      bio: string | null
+      location: string | null
+      website: string | null
+      googleId: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2074,7 +2115,7 @@ export namespace Prisma {
 
     refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    Instructor<T extends User$InstructorArgs<ExtArgs> = {}>(args?: Subset<T, User$InstructorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstructorPayload<ExtArgs>, T, 'findMany'> | Null>;
+    instructor<T extends User$instructorArgs<ExtArgs> = {}>(args?: Subset<T, User$instructorArgs<ExtArgs>>): Prisma__InstructorClient<$Result.GetResult<Prisma.$InstructorPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2114,13 +2155,18 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly phone: FieldRef<"User", 'String'>
-    readonly googleId: FieldRef<"User", 'String'>
     readonly city: FieldRef<"User", 'String'>
     readonly country: FieldRef<"User", 'String'>
     readonly dateOfBirth: FieldRef<"User", 'DateTime'>
     readonly feedback: FieldRef<"User", 'String'>
     readonly gender: FieldRef<"User", 'String'>
     readonly township: FieldRef<"User", 'String'>
+    readonly age_range: FieldRef<"User", 'String'>
+    readonly avatar: FieldRef<"User", 'String'>
+    readonly bio: FieldRef<"User", 'String'>
+    readonly location: FieldRef<"User", 'String'>
+    readonly website: FieldRef<"User", 'String'>
+    readonly googleId: FieldRef<"User", 'String'>
   }
     
 
@@ -2479,9 +2525,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.Instructor
+   * User.instructor
    */
-  export type User$InstructorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$instructorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Instructor
      */
@@ -2491,11 +2537,6 @@ export namespace Prisma {
      */
     include?: InstructorInclude<ExtArgs> | null
     where?: InstructorWhereInput
-    orderBy?: InstructorOrderByWithRelationInput | InstructorOrderByWithRelationInput[]
-    cursor?: InstructorWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: InstructorScalarFieldEnum | InstructorScalarFieldEnum[]
   }
 
   /**
@@ -3471,6 +3512,1126 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: RefreshTokenInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OtpSession
+   */
+
+  export type AggregateOtpSession = {
+    _count: OtpSessionCountAggregateOutputType | null
+    _avg: OtpSessionAvgAggregateOutputType | null
+    _sum: OtpSessionSumAggregateOutputType | null
+    _min: OtpSessionMinAggregateOutputType | null
+    _max: OtpSessionMaxAggregateOutputType | null
+  }
+
+  export type OtpSessionAvgAggregateOutputType = {
+    attempt_count: number | null
+  }
+
+  export type OtpSessionSumAggregateOutputType = {
+    attempt_count: number | null
+  }
+
+  export type OtpSessionMinAggregateOutputType = {
+    id: string | null
+    phone: string | null
+    email: string | null
+    transId: string | null
+    userId: string | null
+    otpCode: string | null
+    service: string | null
+    app: string | null
+    isVerified: boolean | null
+    expiresAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    attempt_count: number | null
+    delivery_status: string | null
+    last_attempt_at: Date | null
+    sms_poh_message_id: string | null
+  }
+
+  export type OtpSessionMaxAggregateOutputType = {
+    id: string | null
+    phone: string | null
+    email: string | null
+    transId: string | null
+    userId: string | null
+    otpCode: string | null
+    service: string | null
+    app: string | null
+    isVerified: boolean | null
+    expiresAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    attempt_count: number | null
+    delivery_status: string | null
+    last_attempt_at: Date | null
+    sms_poh_message_id: string | null
+  }
+
+  export type OtpSessionCountAggregateOutputType = {
+    id: number
+    phone: number
+    email: number
+    transId: number
+    userId: number
+    otpCode: number
+    service: number
+    app: number
+    isVerified: number
+    expiresAt: number
+    createdAt: number
+    updatedAt: number
+    attempt_count: number
+    delivery_status: number
+    last_attempt_at: number
+    sms_poh_message_id: number
+    _all: number
+  }
+
+
+  export type OtpSessionAvgAggregateInputType = {
+    attempt_count?: true
+  }
+
+  export type OtpSessionSumAggregateInputType = {
+    attempt_count?: true
+  }
+
+  export type OtpSessionMinAggregateInputType = {
+    id?: true
+    phone?: true
+    email?: true
+    transId?: true
+    userId?: true
+    otpCode?: true
+    service?: true
+    app?: true
+    isVerified?: true
+    expiresAt?: true
+    createdAt?: true
+    updatedAt?: true
+    attempt_count?: true
+    delivery_status?: true
+    last_attempt_at?: true
+    sms_poh_message_id?: true
+  }
+
+  export type OtpSessionMaxAggregateInputType = {
+    id?: true
+    phone?: true
+    email?: true
+    transId?: true
+    userId?: true
+    otpCode?: true
+    service?: true
+    app?: true
+    isVerified?: true
+    expiresAt?: true
+    createdAt?: true
+    updatedAt?: true
+    attempt_count?: true
+    delivery_status?: true
+    last_attempt_at?: true
+    sms_poh_message_id?: true
+  }
+
+  export type OtpSessionCountAggregateInputType = {
+    id?: true
+    phone?: true
+    email?: true
+    transId?: true
+    userId?: true
+    otpCode?: true
+    service?: true
+    app?: true
+    isVerified?: true
+    expiresAt?: true
+    createdAt?: true
+    updatedAt?: true
+    attempt_count?: true
+    delivery_status?: true
+    last_attempt_at?: true
+    sms_poh_message_id?: true
+    _all?: true
+  }
+
+  export type OtpSessionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OtpSession to aggregate.
+     */
+    where?: OtpSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtpSessions to fetch.
+     */
+    orderBy?: OtpSessionOrderByWithRelationInput | OtpSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OtpSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtpSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtpSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OtpSessions
+    **/
+    _count?: true | OtpSessionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OtpSessionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OtpSessionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OtpSessionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OtpSessionMaxAggregateInputType
+  }
+
+  export type GetOtpSessionAggregateType<T extends OtpSessionAggregateArgs> = {
+        [P in keyof T & keyof AggregateOtpSession]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOtpSession[P]>
+      : GetScalarType<T[P], AggregateOtpSession[P]>
+  }
+
+
+
+
+  export type OtpSessionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OtpSessionWhereInput
+    orderBy?: OtpSessionOrderByWithAggregationInput | OtpSessionOrderByWithAggregationInput[]
+    by: OtpSessionScalarFieldEnum[] | OtpSessionScalarFieldEnum
+    having?: OtpSessionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OtpSessionCountAggregateInputType | true
+    _avg?: OtpSessionAvgAggregateInputType
+    _sum?: OtpSessionSumAggregateInputType
+    _min?: OtpSessionMinAggregateInputType
+    _max?: OtpSessionMaxAggregateInputType
+  }
+
+  export type OtpSessionGroupByOutputType = {
+    id: string
+    phone: string | null
+    email: string | null
+    transId: string
+    userId: string | null
+    otpCode: string | null
+    service: string
+    app: string
+    isVerified: boolean
+    expiresAt: Date
+    createdAt: Date
+    updatedAt: Date
+    attempt_count: number
+    delivery_status: string
+    last_attempt_at: Date | null
+    sms_poh_message_id: string | null
+    _count: OtpSessionCountAggregateOutputType | null
+    _avg: OtpSessionAvgAggregateOutputType | null
+    _sum: OtpSessionSumAggregateOutputType | null
+    _min: OtpSessionMinAggregateOutputType | null
+    _max: OtpSessionMaxAggregateOutputType | null
+  }
+
+  type GetOtpSessionGroupByPayload<T extends OtpSessionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OtpSessionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OtpSessionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OtpSessionGroupByOutputType[P]>
+            : GetScalarType<T[P], OtpSessionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OtpSessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    phone?: boolean
+    email?: boolean
+    transId?: boolean
+    userId?: boolean
+    otpCode?: boolean
+    service?: boolean
+    app?: boolean
+    isVerified?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    attempt_count?: boolean
+    delivery_status?: boolean
+    last_attempt_at?: boolean
+    sms_poh_message_id?: boolean
+    user?: boolean | OtpSession$userArgs<ExtArgs>
+  }, ExtArgs["result"]["otpSession"]>
+
+  export type OtpSessionSelectScalar = {
+    id?: boolean
+    phone?: boolean
+    email?: boolean
+    transId?: boolean
+    userId?: boolean
+    otpCode?: boolean
+    service?: boolean
+    app?: boolean
+    isVerified?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    attempt_count?: boolean
+    delivery_status?: boolean
+    last_attempt_at?: boolean
+    sms_poh_message_id?: boolean
+  }
+
+
+  export type OtpSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | OtpSession$userArgs<ExtArgs>
+  }
+
+
+  export type $OtpSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OtpSession"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      phone: string | null
+      email: string | null
+      transId: string
+      userId: string | null
+      otpCode: string | null
+      service: string
+      app: string
+      isVerified: boolean
+      expiresAt: Date
+      createdAt: Date
+      updatedAt: Date
+      attempt_count: number
+      delivery_status: string
+      last_attempt_at: Date | null
+      sms_poh_message_id: string | null
+    }, ExtArgs["result"]["otpSession"]>
+    composites: {}
+  }
+
+
+  type OtpSessionGetPayload<S extends boolean | null | undefined | OtpSessionDefaultArgs> = $Result.GetResult<Prisma.$OtpSessionPayload, S>
+
+  type OtpSessionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<OtpSessionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: OtpSessionCountAggregateInputType | true
+    }
+
+  export interface OtpSessionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OtpSession'], meta: { name: 'OtpSession' } }
+    /**
+     * Find zero or one OtpSession that matches the filter.
+     * @param {OtpSessionFindUniqueArgs} args - Arguments to find a OtpSession
+     * @example
+     * // Get one OtpSession
+     * const otpSession = await prisma.otpSession.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends OtpSessionFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionFindUniqueArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one OtpSession that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {OtpSessionFindUniqueOrThrowArgs} args - Arguments to find a OtpSession
+     * @example
+     * // Get one OtpSession
+     * const otpSession = await prisma.otpSession.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends OtpSessionFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first OtpSession that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpSessionFindFirstArgs} args - Arguments to find a OtpSession
+     * @example
+     * // Get one OtpSession
+     * const otpSession = await prisma.otpSession.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends OtpSessionFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionFindFirstArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first OtpSession that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpSessionFindFirstOrThrowArgs} args - Arguments to find a OtpSession
+     * @example
+     * // Get one OtpSession
+     * const otpSession = await prisma.otpSession.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends OtpSessionFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more OtpSessions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpSessionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OtpSessions
+     * const otpSessions = await prisma.otpSession.findMany()
+     * 
+     * // Get first 10 OtpSessions
+     * const otpSessions = await prisma.otpSession.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const otpSessionWithIdOnly = await prisma.otpSession.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends OtpSessionFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a OtpSession.
+     * @param {OtpSessionCreateArgs} args - Arguments to create a OtpSession.
+     * @example
+     * // Create one OtpSession
+     * const OtpSession = await prisma.otpSession.create({
+     *   data: {
+     *     // ... data to create a OtpSession
+     *   }
+     * })
+     * 
+    **/
+    create<T extends OtpSessionCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionCreateArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many OtpSessions.
+     * @param {OtpSessionCreateManyArgs} args - Arguments to create many OtpSessions.
+     * @example
+     * // Create many OtpSessions
+     * const otpSession = await prisma.otpSession.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends OtpSessionCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OtpSessions and returns the data saved in the database.
+     * @param {OtpSessionCreateManyAndReturnArgs} args - Arguments to create many OtpSessions.
+     * @example
+     * // Create many OtpSessions
+     * const otpSession = await prisma.otpSession.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OtpSessions and only return the `id`
+     * const otpSessionWithIdOnly = await prisma.otpSession.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends OtpSessionCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'createManyAndReturn'>>
+
+    /**
+     * Delete a OtpSession.
+     * @param {OtpSessionDeleteArgs} args - Arguments to delete one OtpSession.
+     * @example
+     * // Delete one OtpSession
+     * const OtpSession = await prisma.otpSession.delete({
+     *   where: {
+     *     // ... filter to delete one OtpSession
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends OtpSessionDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionDeleteArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one OtpSession.
+     * @param {OtpSessionUpdateArgs} args - Arguments to update one OtpSession.
+     * @example
+     * // Update one OtpSession
+     * const otpSession = await prisma.otpSession.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends OtpSessionUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionUpdateArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more OtpSessions.
+     * @param {OtpSessionDeleteManyArgs} args - Arguments to filter OtpSessions to delete.
+     * @example
+     * // Delete a few OtpSessions
+     * const { count } = await prisma.otpSession.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends OtpSessionDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OtpSessionDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OtpSessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpSessionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OtpSessions
+     * const otpSession = await prisma.otpSession.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends OtpSessionUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one OtpSession.
+     * @param {OtpSessionUpsertArgs} args - Arguments to update or create a OtpSession.
+     * @example
+     * // Update or create a OtpSession
+     * const otpSession = await prisma.otpSession.upsert({
+     *   create: {
+     *     // ... data to create a OtpSession
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OtpSession we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends OtpSessionUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, OtpSessionUpsertArgs<ExtArgs>>
+    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of OtpSessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpSessionCountArgs} args - Arguments to filter OtpSessions to count.
+     * @example
+     * // Count the number of OtpSessions
+     * const count = await prisma.otpSession.count({
+     *   where: {
+     *     // ... the filter for the OtpSessions we want to count
+     *   }
+     * })
+    **/
+    count<T extends OtpSessionCountArgs>(
+      args?: Subset<T, OtpSessionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OtpSessionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OtpSession.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpSessionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OtpSessionAggregateArgs>(args: Subset<T, OtpSessionAggregateArgs>): Prisma.PrismaPromise<GetOtpSessionAggregateType<T>>
+
+    /**
+     * Group by OtpSession.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpSessionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OtpSessionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OtpSessionGroupByArgs['orderBy'] }
+        : { orderBy?: OtpSessionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OtpSessionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOtpSessionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OtpSession model
+   */
+  readonly fields: OtpSessionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OtpSession.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OtpSessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    user<T extends OtpSession$userArgs<ExtArgs> = {}>(args?: Subset<T, OtpSession$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the OtpSession model
+   */ 
+  interface OtpSessionFieldRefs {
+    readonly id: FieldRef<"OtpSession", 'String'>
+    readonly phone: FieldRef<"OtpSession", 'String'>
+    readonly email: FieldRef<"OtpSession", 'String'>
+    readonly transId: FieldRef<"OtpSession", 'String'>
+    readonly userId: FieldRef<"OtpSession", 'String'>
+    readonly otpCode: FieldRef<"OtpSession", 'String'>
+    readonly service: FieldRef<"OtpSession", 'String'>
+    readonly app: FieldRef<"OtpSession", 'String'>
+    readonly isVerified: FieldRef<"OtpSession", 'Boolean'>
+    readonly expiresAt: FieldRef<"OtpSession", 'DateTime'>
+    readonly createdAt: FieldRef<"OtpSession", 'DateTime'>
+    readonly updatedAt: FieldRef<"OtpSession", 'DateTime'>
+    readonly attempt_count: FieldRef<"OtpSession", 'Int'>
+    readonly delivery_status: FieldRef<"OtpSession", 'String'>
+    readonly last_attempt_at: FieldRef<"OtpSession", 'DateTime'>
+    readonly sms_poh_message_id: FieldRef<"OtpSession", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OtpSession findUnique
+   */
+  export type OtpSessionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which OtpSession to fetch.
+     */
+    where: OtpSessionWhereUniqueInput
+  }
+
+  /**
+   * OtpSession findUniqueOrThrow
+   */
+  export type OtpSessionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which OtpSession to fetch.
+     */
+    where: OtpSessionWhereUniqueInput
+  }
+
+  /**
+   * OtpSession findFirst
+   */
+  export type OtpSessionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which OtpSession to fetch.
+     */
+    where?: OtpSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtpSessions to fetch.
+     */
+    orderBy?: OtpSessionOrderByWithRelationInput | OtpSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OtpSessions.
+     */
+    cursor?: OtpSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtpSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtpSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OtpSessions.
+     */
+    distinct?: OtpSessionScalarFieldEnum | OtpSessionScalarFieldEnum[]
+  }
+
+  /**
+   * OtpSession findFirstOrThrow
+   */
+  export type OtpSessionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which OtpSession to fetch.
+     */
+    where?: OtpSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtpSessions to fetch.
+     */
+    orderBy?: OtpSessionOrderByWithRelationInput | OtpSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OtpSessions.
+     */
+    cursor?: OtpSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtpSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtpSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OtpSessions.
+     */
+    distinct?: OtpSessionScalarFieldEnum | OtpSessionScalarFieldEnum[]
+  }
+
+  /**
+   * OtpSession findMany
+   */
+  export type OtpSessionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which OtpSessions to fetch.
+     */
+    where?: OtpSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtpSessions to fetch.
+     */
+    orderBy?: OtpSessionOrderByWithRelationInput | OtpSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OtpSessions.
+     */
+    cursor?: OtpSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtpSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtpSessions.
+     */
+    skip?: number
+    distinct?: OtpSessionScalarFieldEnum | OtpSessionScalarFieldEnum[]
+  }
+
+  /**
+   * OtpSession create
+   */
+  export type OtpSessionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OtpSession.
+     */
+    data: XOR<OtpSessionCreateInput, OtpSessionUncheckedCreateInput>
+  }
+
+  /**
+   * OtpSession createMany
+   */
+  export type OtpSessionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OtpSessions.
+     */
+    data: OtpSessionCreateManyInput | OtpSessionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OtpSession createManyAndReturn
+   */
+  export type OtpSessionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
+    /**
+     * The data used to create many OtpSessions.
+     */
+    data: OtpSessionCreateManyInput | OtpSessionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OtpSession update
+   */
+  export type OtpSessionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OtpSession.
+     */
+    data: XOR<OtpSessionUpdateInput, OtpSessionUncheckedUpdateInput>
+    /**
+     * Choose, which OtpSession to update.
+     */
+    where: OtpSessionWhereUniqueInput
+  }
+
+  /**
+   * OtpSession updateMany
+   */
+  export type OtpSessionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OtpSessions.
+     */
+    data: XOR<OtpSessionUpdateManyMutationInput, OtpSessionUncheckedUpdateManyInput>
+    /**
+     * Filter which OtpSessions to update
+     */
+    where?: OtpSessionWhereInput
+  }
+
+  /**
+   * OtpSession upsert
+   */
+  export type OtpSessionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OtpSession to update in case it exists.
+     */
+    where: OtpSessionWhereUniqueInput
+    /**
+     * In case the OtpSession found by the `where` argument doesn't exist, create a new OtpSession with this data.
+     */
+    create: XOR<OtpSessionCreateInput, OtpSessionUncheckedCreateInput>
+    /**
+     * In case the OtpSession was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OtpSessionUpdateInput, OtpSessionUncheckedUpdateInput>
+  }
+
+  /**
+   * OtpSession delete
+   */
+  export type OtpSessionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
+    /**
+     * Filter which OtpSession to delete.
+     */
+    where: OtpSessionWhereUniqueInput
+  }
+
+  /**
+   * OtpSession deleteMany
+   */
+  export type OtpSessionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OtpSessions to delete
+     */
+    where?: OtpSessionWhereInput
+  }
+
+  /**
+   * OtpSession.user
+   */
+  export type OtpSession$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * OtpSession without action
+   */
+  export type OtpSessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpSession
+     */
+    select?: OtpSessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpSessionInclude<ExtArgs> | null
   }
 
 
@@ -5442,1126 +6603,6 @@ export namespace Prisma {
 
 
   /**
-   * Model OtpSession
-   */
-
-  export type AggregateOtpSession = {
-    _count: OtpSessionCountAggregateOutputType | null
-    _avg: OtpSessionAvgAggregateOutputType | null
-    _sum: OtpSessionSumAggregateOutputType | null
-    _min: OtpSessionMinAggregateOutputType | null
-    _max: OtpSessionMaxAggregateOutputType | null
-  }
-
-  export type OtpSessionAvgAggregateOutputType = {
-    attempt_count: number | null
-  }
-
-  export type OtpSessionSumAggregateOutputType = {
-    attempt_count: number | null
-  }
-
-  export type OtpSessionMinAggregateOutputType = {
-    id: string | null
-    phone: string | null
-    email: string | null
-    transId: string | null
-    userId: string | null
-    otpCode: string | null
-    service: string | null
-    app: string | null
-    isVerified: boolean | null
-    expiresAt: Date | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    attempt_count: number | null
-    delivery_status: string | null
-    last_attempt_at: Date | null
-    sms_poh_message_id: string | null
-  }
-
-  export type OtpSessionMaxAggregateOutputType = {
-    id: string | null
-    phone: string | null
-    email: string | null
-    transId: string | null
-    userId: string | null
-    otpCode: string | null
-    service: string | null
-    app: string | null
-    isVerified: boolean | null
-    expiresAt: Date | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    attempt_count: number | null
-    delivery_status: string | null
-    last_attempt_at: Date | null
-    sms_poh_message_id: string | null
-  }
-
-  export type OtpSessionCountAggregateOutputType = {
-    id: number
-    phone: number
-    email: number
-    transId: number
-    userId: number
-    otpCode: number
-    service: number
-    app: number
-    isVerified: number
-    expiresAt: number
-    createdAt: number
-    updatedAt: number
-    attempt_count: number
-    delivery_status: number
-    last_attempt_at: number
-    sms_poh_message_id: number
-    _all: number
-  }
-
-
-  export type OtpSessionAvgAggregateInputType = {
-    attempt_count?: true
-  }
-
-  export type OtpSessionSumAggregateInputType = {
-    attempt_count?: true
-  }
-
-  export type OtpSessionMinAggregateInputType = {
-    id?: true
-    phone?: true
-    email?: true
-    transId?: true
-    userId?: true
-    otpCode?: true
-    service?: true
-    app?: true
-    isVerified?: true
-    expiresAt?: true
-    createdAt?: true
-    updatedAt?: true
-    attempt_count?: true
-    delivery_status?: true
-    last_attempt_at?: true
-    sms_poh_message_id?: true
-  }
-
-  export type OtpSessionMaxAggregateInputType = {
-    id?: true
-    phone?: true
-    email?: true
-    transId?: true
-    userId?: true
-    otpCode?: true
-    service?: true
-    app?: true
-    isVerified?: true
-    expiresAt?: true
-    createdAt?: true
-    updatedAt?: true
-    attempt_count?: true
-    delivery_status?: true
-    last_attempt_at?: true
-    sms_poh_message_id?: true
-  }
-
-  export type OtpSessionCountAggregateInputType = {
-    id?: true
-    phone?: true
-    email?: true
-    transId?: true
-    userId?: true
-    otpCode?: true
-    service?: true
-    app?: true
-    isVerified?: true
-    expiresAt?: true
-    createdAt?: true
-    updatedAt?: true
-    attempt_count?: true
-    delivery_status?: true
-    last_attempt_at?: true
-    sms_poh_message_id?: true
-    _all?: true
-  }
-
-  export type OtpSessionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which OtpSession to aggregate.
-     */
-    where?: OtpSessionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OtpSessions to fetch.
-     */
-    orderBy?: OtpSessionOrderByWithRelationInput | OtpSessionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: OtpSessionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OtpSessions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OtpSessions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned OtpSessions
-    **/
-    _count?: true | OtpSessionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: OtpSessionAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: OtpSessionSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: OtpSessionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: OtpSessionMaxAggregateInputType
-  }
-
-  export type GetOtpSessionAggregateType<T extends OtpSessionAggregateArgs> = {
-        [P in keyof T & keyof AggregateOtpSession]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateOtpSession[P]>
-      : GetScalarType<T[P], AggregateOtpSession[P]>
-  }
-
-
-
-
-  export type OtpSessionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OtpSessionWhereInput
-    orderBy?: OtpSessionOrderByWithAggregationInput | OtpSessionOrderByWithAggregationInput[]
-    by: OtpSessionScalarFieldEnum[] | OtpSessionScalarFieldEnum
-    having?: OtpSessionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: OtpSessionCountAggregateInputType | true
-    _avg?: OtpSessionAvgAggregateInputType
-    _sum?: OtpSessionSumAggregateInputType
-    _min?: OtpSessionMinAggregateInputType
-    _max?: OtpSessionMaxAggregateInputType
-  }
-
-  export type OtpSessionGroupByOutputType = {
-    id: string
-    phone: string | null
-    email: string | null
-    transId: string
-    userId: string | null
-    otpCode: string | null
-    service: string
-    app: string
-    isVerified: boolean
-    expiresAt: Date
-    createdAt: Date
-    updatedAt: Date
-    attempt_count: number
-    delivery_status: string
-    last_attempt_at: Date | null
-    sms_poh_message_id: string | null
-    _count: OtpSessionCountAggregateOutputType | null
-    _avg: OtpSessionAvgAggregateOutputType | null
-    _sum: OtpSessionSumAggregateOutputType | null
-    _min: OtpSessionMinAggregateOutputType | null
-    _max: OtpSessionMaxAggregateOutputType | null
-  }
-
-  type GetOtpSessionGroupByPayload<T extends OtpSessionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<OtpSessionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof OtpSessionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], OtpSessionGroupByOutputType[P]>
-            : GetScalarType<T[P], OtpSessionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type OtpSessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    phone?: boolean
-    email?: boolean
-    transId?: boolean
-    userId?: boolean
-    otpCode?: boolean
-    service?: boolean
-    app?: boolean
-    isVerified?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    attempt_count?: boolean
-    delivery_status?: boolean
-    last_attempt_at?: boolean
-    sms_poh_message_id?: boolean
-    user?: boolean | OtpSession$userArgs<ExtArgs>
-  }, ExtArgs["result"]["otpSession"]>
-
-  export type OtpSessionSelectScalar = {
-    id?: boolean
-    phone?: boolean
-    email?: boolean
-    transId?: boolean
-    userId?: boolean
-    otpCode?: boolean
-    service?: boolean
-    app?: boolean
-    isVerified?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    attempt_count?: boolean
-    delivery_status?: boolean
-    last_attempt_at?: boolean
-    sms_poh_message_id?: boolean
-  }
-
-
-  export type OtpSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | OtpSession$userArgs<ExtArgs>
-  }
-
-
-  export type $OtpSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "OtpSession"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      phone: string | null
-      email: string | null
-      transId: string
-      userId: string | null
-      otpCode: string | null
-      service: string
-      app: string
-      isVerified: boolean
-      expiresAt: Date
-      createdAt: Date
-      updatedAt: Date
-      attempt_count: number
-      delivery_status: string
-      last_attempt_at: Date | null
-      sms_poh_message_id: string | null
-    }, ExtArgs["result"]["otpSession"]>
-    composites: {}
-  }
-
-
-  type OtpSessionGetPayload<S extends boolean | null | undefined | OtpSessionDefaultArgs> = $Result.GetResult<Prisma.$OtpSessionPayload, S>
-
-  type OtpSessionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<OtpSessionFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: OtpSessionCountAggregateInputType | true
-    }
-
-  export interface OtpSessionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OtpSession'], meta: { name: 'OtpSession' } }
-    /**
-     * Find zero or one OtpSession that matches the filter.
-     * @param {OtpSessionFindUniqueArgs} args - Arguments to find a OtpSession
-     * @example
-     * // Get one OtpSession
-     * const otpSession = await prisma.otpSession.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends OtpSessionFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, OtpSessionFindUniqueArgs<ExtArgs>>
-    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one OtpSession that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {OtpSessionFindUniqueOrThrowArgs} args - Arguments to find a OtpSession
-     * @example
-     * // Get one OtpSession
-     * const otpSession = await prisma.otpSession.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends OtpSessionFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, OtpSessionFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first OtpSession that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OtpSessionFindFirstArgs} args - Arguments to find a OtpSession
-     * @example
-     * // Get one OtpSession
-     * const otpSession = await prisma.otpSession.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends OtpSessionFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, OtpSessionFindFirstArgs<ExtArgs>>
-    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first OtpSession that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OtpSessionFindFirstOrThrowArgs} args - Arguments to find a OtpSession
-     * @example
-     * // Get one OtpSession
-     * const otpSession = await prisma.otpSession.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends OtpSessionFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, OtpSessionFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more OtpSessions that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OtpSessionFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all OtpSessions
-     * const otpSessions = await prisma.otpSession.findMany()
-     * 
-     * // Get first 10 OtpSessions
-     * const otpSessions = await prisma.otpSession.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const otpSessionWithIdOnly = await prisma.otpSession.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends OtpSessionFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, OtpSessionFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a OtpSession.
-     * @param {OtpSessionCreateArgs} args - Arguments to create a OtpSession.
-     * @example
-     * // Create one OtpSession
-     * const OtpSession = await prisma.otpSession.create({
-     *   data: {
-     *     // ... data to create a OtpSession
-     *   }
-     * })
-     * 
-    **/
-    create<T extends OtpSessionCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, OtpSessionCreateArgs<ExtArgs>>
-    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many OtpSessions.
-     * @param {OtpSessionCreateManyArgs} args - Arguments to create many OtpSessions.
-     * @example
-     * // Create many OtpSessions
-     * const otpSession = await prisma.otpSession.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-    **/
-    createMany<T extends OtpSessionCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, OtpSessionCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many OtpSessions and returns the data saved in the database.
-     * @param {OtpSessionCreateManyAndReturnArgs} args - Arguments to create many OtpSessions.
-     * @example
-     * // Create many OtpSessions
-     * const otpSession = await prisma.otpSession.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many OtpSessions and only return the `id`
-     * const otpSessionWithIdOnly = await prisma.otpSession.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-    **/
-    createManyAndReturn<T extends OtpSessionCreateManyAndReturnArgs<ExtArgs>>(
-      args?: SelectSubset<T, OtpSessionCreateManyAndReturnArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'createManyAndReturn'>>
-
-    /**
-     * Delete a OtpSession.
-     * @param {OtpSessionDeleteArgs} args - Arguments to delete one OtpSession.
-     * @example
-     * // Delete one OtpSession
-     * const OtpSession = await prisma.otpSession.delete({
-     *   where: {
-     *     // ... filter to delete one OtpSession
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends OtpSessionDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, OtpSessionDeleteArgs<ExtArgs>>
-    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one OtpSession.
-     * @param {OtpSessionUpdateArgs} args - Arguments to update one OtpSession.
-     * @example
-     * // Update one OtpSession
-     * const otpSession = await prisma.otpSession.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends OtpSessionUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, OtpSessionUpdateArgs<ExtArgs>>
-    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more OtpSessions.
-     * @param {OtpSessionDeleteManyArgs} args - Arguments to filter OtpSessions to delete.
-     * @example
-     * // Delete a few OtpSessions
-     * const { count } = await prisma.otpSession.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends OtpSessionDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, OtpSessionDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more OtpSessions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OtpSessionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many OtpSessions
-     * const otpSession = await prisma.otpSession.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends OtpSessionUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, OtpSessionUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one OtpSession.
-     * @param {OtpSessionUpsertArgs} args - Arguments to update or create a OtpSession.
-     * @example
-     * // Update or create a OtpSession
-     * const otpSession = await prisma.otpSession.upsert({
-     *   create: {
-     *     // ... data to create a OtpSession
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the OtpSession we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends OtpSessionUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, OtpSessionUpsertArgs<ExtArgs>>
-    ): Prisma__OtpSessionClient<$Result.GetResult<Prisma.$OtpSessionPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of OtpSessions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OtpSessionCountArgs} args - Arguments to filter OtpSessions to count.
-     * @example
-     * // Count the number of OtpSessions
-     * const count = await prisma.otpSession.count({
-     *   where: {
-     *     // ... the filter for the OtpSessions we want to count
-     *   }
-     * })
-    **/
-    count<T extends OtpSessionCountArgs>(
-      args?: Subset<T, OtpSessionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], OtpSessionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a OtpSession.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OtpSessionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends OtpSessionAggregateArgs>(args: Subset<T, OtpSessionAggregateArgs>): Prisma.PrismaPromise<GetOtpSessionAggregateType<T>>
-
-    /**
-     * Group by OtpSession.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OtpSessionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends OtpSessionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: OtpSessionGroupByArgs['orderBy'] }
-        : { orderBy?: OtpSessionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, OtpSessionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOtpSessionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the OtpSession model
-   */
-  readonly fields: OtpSessionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for OtpSession.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__OtpSessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-    user<T extends OtpSession$userArgs<ExtArgs> = {}>(args?: Subset<T, OtpSession$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the OtpSession model
-   */ 
-  interface OtpSessionFieldRefs {
-    readonly id: FieldRef<"OtpSession", 'String'>
-    readonly phone: FieldRef<"OtpSession", 'String'>
-    readonly email: FieldRef<"OtpSession", 'String'>
-    readonly transId: FieldRef<"OtpSession", 'String'>
-    readonly userId: FieldRef<"OtpSession", 'String'>
-    readonly otpCode: FieldRef<"OtpSession", 'String'>
-    readonly service: FieldRef<"OtpSession", 'String'>
-    readonly app: FieldRef<"OtpSession", 'String'>
-    readonly isVerified: FieldRef<"OtpSession", 'Boolean'>
-    readonly expiresAt: FieldRef<"OtpSession", 'DateTime'>
-    readonly createdAt: FieldRef<"OtpSession", 'DateTime'>
-    readonly updatedAt: FieldRef<"OtpSession", 'DateTime'>
-    readonly attempt_count: FieldRef<"OtpSession", 'Int'>
-    readonly delivery_status: FieldRef<"OtpSession", 'String'>
-    readonly last_attempt_at: FieldRef<"OtpSession", 'DateTime'>
-    readonly sms_poh_message_id: FieldRef<"OtpSession", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * OtpSession findUnique
-   */
-  export type OtpSessionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-    /**
-     * Filter, which OtpSession to fetch.
-     */
-    where: OtpSessionWhereUniqueInput
-  }
-
-  /**
-   * OtpSession findUniqueOrThrow
-   */
-  export type OtpSessionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-    /**
-     * Filter, which OtpSession to fetch.
-     */
-    where: OtpSessionWhereUniqueInput
-  }
-
-  /**
-   * OtpSession findFirst
-   */
-  export type OtpSessionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-    /**
-     * Filter, which OtpSession to fetch.
-     */
-    where?: OtpSessionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OtpSessions to fetch.
-     */
-    orderBy?: OtpSessionOrderByWithRelationInput | OtpSessionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for OtpSessions.
-     */
-    cursor?: OtpSessionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OtpSessions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OtpSessions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of OtpSessions.
-     */
-    distinct?: OtpSessionScalarFieldEnum | OtpSessionScalarFieldEnum[]
-  }
-
-  /**
-   * OtpSession findFirstOrThrow
-   */
-  export type OtpSessionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-    /**
-     * Filter, which OtpSession to fetch.
-     */
-    where?: OtpSessionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OtpSessions to fetch.
-     */
-    orderBy?: OtpSessionOrderByWithRelationInput | OtpSessionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for OtpSessions.
-     */
-    cursor?: OtpSessionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OtpSessions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OtpSessions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of OtpSessions.
-     */
-    distinct?: OtpSessionScalarFieldEnum | OtpSessionScalarFieldEnum[]
-  }
-
-  /**
-   * OtpSession findMany
-   */
-  export type OtpSessionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-    /**
-     * Filter, which OtpSessions to fetch.
-     */
-    where?: OtpSessionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OtpSessions to fetch.
-     */
-    orderBy?: OtpSessionOrderByWithRelationInput | OtpSessionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing OtpSessions.
-     */
-    cursor?: OtpSessionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OtpSessions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OtpSessions.
-     */
-    skip?: number
-    distinct?: OtpSessionScalarFieldEnum | OtpSessionScalarFieldEnum[]
-  }
-
-  /**
-   * OtpSession create
-   */
-  export type OtpSessionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-    /**
-     * The data needed to create a OtpSession.
-     */
-    data: XOR<OtpSessionCreateInput, OtpSessionUncheckedCreateInput>
-  }
-
-  /**
-   * OtpSession createMany
-   */
-  export type OtpSessionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many OtpSessions.
-     */
-    data: OtpSessionCreateManyInput | OtpSessionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * OtpSession createManyAndReturn
-   */
-  export type OtpSessionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-    /**
-     * The data used to create many OtpSessions.
-     */
-    data: OtpSessionCreateManyInput | OtpSessionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * OtpSession update
-   */
-  export type OtpSessionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-    /**
-     * The data needed to update a OtpSession.
-     */
-    data: XOR<OtpSessionUpdateInput, OtpSessionUncheckedUpdateInput>
-    /**
-     * Choose, which OtpSession to update.
-     */
-    where: OtpSessionWhereUniqueInput
-  }
-
-  /**
-   * OtpSession updateMany
-   */
-  export type OtpSessionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update OtpSessions.
-     */
-    data: XOR<OtpSessionUpdateManyMutationInput, OtpSessionUncheckedUpdateManyInput>
-    /**
-     * Filter which OtpSessions to update
-     */
-    where?: OtpSessionWhereInput
-  }
-
-  /**
-   * OtpSession upsert
-   */
-  export type OtpSessionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-    /**
-     * The filter to search for the OtpSession to update in case it exists.
-     */
-    where: OtpSessionWhereUniqueInput
-    /**
-     * In case the OtpSession found by the `where` argument doesn't exist, create a new OtpSession with this data.
-     */
-    create: XOR<OtpSessionCreateInput, OtpSessionUncheckedCreateInput>
-    /**
-     * In case the OtpSession was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<OtpSessionUpdateInput, OtpSessionUncheckedUpdateInput>
-  }
-
-  /**
-   * OtpSession delete
-   */
-  export type OtpSessionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-    /**
-     * Filter which OtpSession to delete.
-     */
-    where: OtpSessionWhereUniqueInput
-  }
-
-  /**
-   * OtpSession deleteMany
-   */
-  export type OtpSessionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which OtpSessions to delete
-     */
-    where?: OtpSessionWhereInput
-  }
-
-  /**
-   * OtpSession.user
-   */
-  export type OtpSession$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
-   * OtpSession without action
-   */
-  export type OtpSessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OtpSession
-     */
-    select?: OtpSessionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OtpSessionInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -6586,13 +6627,18 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     phone: 'phone',
-    googleId: 'googleId',
     city: 'city',
     country: 'country',
     dateOfBirth: 'dateOfBirth',
     feedback: 'feedback',
     gender: 'gender',
-    township: 'township'
+    township: 'township',
+    age_range: 'age_range',
+    avatar: 'avatar',
+    bio: 'bio',
+    location: 'location',
+    website: 'website',
+    googleId: 'googleId'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -6608,6 +6654,28 @@ export namespace Prisma {
   };
 
   export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
+
+
+  export const OtpSessionScalarFieldEnum: {
+    id: 'id',
+    phone: 'phone',
+    email: 'email',
+    transId: 'transId',
+    userId: 'userId',
+    otpCode: 'otpCode',
+    service: 'service',
+    app: 'app',
+    isVerified: 'isVerified',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    attempt_count: 'attempt_count',
+    delivery_status: 'delivery_status',
+    last_attempt_at: 'last_attempt_at',
+    sms_poh_message_id: 'sms_poh_message_id'
+  };
+
+  export type OtpSessionScalarFieldEnum = (typeof OtpSessionScalarFieldEnum)[keyof typeof OtpSessionScalarFieldEnum]
 
 
   export const InstructorScalarFieldEnum: {
@@ -6632,28 +6700,6 @@ export namespace Prisma {
   };
 
   export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
-
-
-  export const OtpSessionScalarFieldEnum: {
-    id: 'id',
-    phone: 'phone',
-    email: 'email',
-    transId: 'transId',
-    userId: 'userId',
-    otpCode: 'otpCode',
-    service: 'service',
-    app: 'app',
-    isVerified: 'isVerified',
-    expiresAt: 'expiresAt',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    attempt_count: 'attempt_count',
-    delivery_status: 'delivery_status',
-    last_attempt_at: 'last_attempt_at',
-    sms_poh_message_id: 'sms_poh_message_id'
-  };
-
-  export type OtpSessionScalarFieldEnum = (typeof OtpSessionScalarFieldEnum)[keyof typeof OtpSessionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6721,20 +6767,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Permission[]'
-   */
-  export type ListEnumPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Permission[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Permission'
-   */
-  export type EnumPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Permission'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -6745,6 +6777,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Permission[]'
+   */
+  export type ListEnumPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Permission[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Permission'
+   */
+  export type EnumPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Permission'>
     
 
 
@@ -6770,48 +6816,58 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
+    email?: StringNullableFilter<"User"> | string | null
     username?: StringFilter<"User"> | string
-    password?: StringNullableFilter<"User"> | string | null
+    password?: StringFilter<"User"> | string
     firstName?: StringNullableFilter<"User"> | string | null
     lastName?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     phone?: StringNullableFilter<"User"> | string | null
-    googleId?: StringNullableFilter<"User"> | string | null
     city?: StringNullableFilter<"User"> | string | null
     country?: StringNullableFilter<"User"> | string | null
     dateOfBirth?: DateTimeNullableFilter<"User"> | Date | string | null
     feedback?: StringNullableFilter<"User"> | string | null
     gender?: StringNullableFilter<"User"> | string | null
     township?: StringNullableFilter<"User"> | string | null
+    age_range?: StringNullableFilter<"User"> | string | null
+    avatar?: StringNullableFilter<"User"> | string | null
+    bio?: StringNullableFilter<"User"> | string | null
+    location?: StringNullableFilter<"User"> | string | null
+    website?: StringNullableFilter<"User"> | string | null
+    googleId?: StringNullableFilter<"User"> | string | null
     otpSessions?: OtpSessionListRelationFilter
     refreshTokens?: RefreshTokenListRelationFilter
-    Instructor?: InstructorListRelationFilter
+    instructor?: XOR<InstructorNullableRelationFilter, InstructorWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    email?: SortOrder
+    email?: SortOrderInput | SortOrder
     username?: SortOrder
-    password?: SortOrderInput | SortOrder
+    password?: SortOrder
     firstName?: SortOrderInput | SortOrder
     lastName?: SortOrderInput | SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     phone?: SortOrderInput | SortOrder
-    googleId?: SortOrderInput | SortOrder
     city?: SortOrderInput | SortOrder
     country?: SortOrderInput | SortOrder
     dateOfBirth?: SortOrderInput | SortOrder
     feedback?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
     township?: SortOrderInput | SortOrder
+    age_range?: SortOrderInput | SortOrder
+    avatar?: SortOrderInput | SortOrder
+    bio?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    googleId?: SortOrderInput | SortOrder
     otpSessions?: OtpSessionOrderByRelationAggregateInput
     refreshTokens?: RefreshTokenOrderByRelationAggregateInput
-    Instructor?: InstructorOrderByRelationAggregateInput
+    instructor?: InstructorOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -6823,7 +6879,7 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    password?: StringNullableFilter<"User"> | string | null
+    password?: StringFilter<"User"> | string
     firstName?: StringNullableFilter<"User"> | string | null
     lastName?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
@@ -6835,29 +6891,39 @@ export namespace Prisma {
     feedback?: StringNullableFilter<"User"> | string | null
     gender?: StringNullableFilter<"User"> | string | null
     township?: StringNullableFilter<"User"> | string | null
+    age_range?: StringNullableFilter<"User"> | string | null
+    avatar?: StringNullableFilter<"User"> | string | null
+    bio?: StringNullableFilter<"User"> | string | null
+    location?: StringNullableFilter<"User"> | string | null
+    website?: StringNullableFilter<"User"> | string | null
     otpSessions?: OtpSessionListRelationFilter
     refreshTokens?: RefreshTokenListRelationFilter
-    Instructor?: InstructorListRelationFilter
+    instructor?: XOR<InstructorNullableRelationFilter, InstructorWhereInput> | null
   }, "id" | "email" | "username" | "phone" | "googleId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    email?: SortOrder
+    email?: SortOrderInput | SortOrder
     username?: SortOrder
-    password?: SortOrderInput | SortOrder
+    password?: SortOrder
     firstName?: SortOrderInput | SortOrder
     lastName?: SortOrderInput | SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     phone?: SortOrderInput | SortOrder
-    googleId?: SortOrderInput | SortOrder
     city?: SortOrderInput | SortOrder
     country?: SortOrderInput | SortOrder
     dateOfBirth?: SortOrderInput | SortOrder
     feedback?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
     township?: SortOrderInput | SortOrder
+    age_range?: SortOrderInput | SortOrder
+    avatar?: SortOrderInput | SortOrder
+    bio?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    googleId?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -6868,22 +6934,27 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
+    email?: StringNullableWithAggregatesFilter<"User"> | string | null
     username?: StringWithAggregatesFilter<"User"> | string
-    password?: StringNullableWithAggregatesFilter<"User"> | string | null
+    password?: StringWithAggregatesFilter<"User"> | string
     firstName?: StringNullableWithAggregatesFilter<"User"> | string | null
     lastName?: StringNullableWithAggregatesFilter<"User"> | string | null
     isActive?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     phone?: StringNullableWithAggregatesFilter<"User"> | string | null
-    googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
     city?: StringNullableWithAggregatesFilter<"User"> | string | null
     country?: StringNullableWithAggregatesFilter<"User"> | string | null
     dateOfBirth?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     feedback?: StringNullableWithAggregatesFilter<"User"> | string | null
     gender?: StringNullableWithAggregatesFilter<"User"> | string | null
     township?: StringNullableWithAggregatesFilter<"User"> | string | null
+    age_range?: StringNullableWithAggregatesFilter<"User"> | string | null
+    avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
+    bio?: StringNullableWithAggregatesFilter<"User"> | string | null
+    location?: StringNullableWithAggregatesFilter<"User"> | string | null
+    website?: StringNullableWithAggregatesFilter<"User"> | string | null
+    googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type RefreshTokenWhereInput = {
@@ -6944,6 +7015,118 @@ export namespace Prisma {
     expiresAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
     isRevoked?: BoolWithAggregatesFilter<"RefreshToken"> | boolean
+  }
+
+  export type OtpSessionWhereInput = {
+    AND?: OtpSessionWhereInput | OtpSessionWhereInput[]
+    OR?: OtpSessionWhereInput[]
+    NOT?: OtpSessionWhereInput | OtpSessionWhereInput[]
+    id?: StringFilter<"OtpSession"> | string
+    phone?: StringNullableFilter<"OtpSession"> | string | null
+    email?: StringNullableFilter<"OtpSession"> | string | null
+    transId?: StringFilter<"OtpSession"> | string
+    userId?: StringNullableFilter<"OtpSession"> | string | null
+    otpCode?: StringNullableFilter<"OtpSession"> | string | null
+    service?: StringFilter<"OtpSession"> | string
+    app?: StringFilter<"OtpSession"> | string
+    isVerified?: BoolFilter<"OtpSession"> | boolean
+    expiresAt?: DateTimeFilter<"OtpSession"> | Date | string
+    createdAt?: DateTimeFilter<"OtpSession"> | Date | string
+    updatedAt?: DateTimeFilter<"OtpSession"> | Date | string
+    attempt_count?: IntFilter<"OtpSession"> | number
+    delivery_status?: StringFilter<"OtpSession"> | string
+    last_attempt_at?: DateTimeNullableFilter<"OtpSession"> | Date | string | null
+    sms_poh_message_id?: StringNullableFilter<"OtpSession"> | string | null
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }
+
+  export type OtpSessionOrderByWithRelationInput = {
+    id?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    transId?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    otpCode?: SortOrderInput | SortOrder
+    service?: SortOrder
+    app?: SortOrder
+    isVerified?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    attempt_count?: SortOrder
+    delivery_status?: SortOrder
+    last_attempt_at?: SortOrderInput | SortOrder
+    sms_poh_message_id?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type OtpSessionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    transId?: string
+    AND?: OtpSessionWhereInput | OtpSessionWhereInput[]
+    OR?: OtpSessionWhereInput[]
+    NOT?: OtpSessionWhereInput | OtpSessionWhereInput[]
+    phone?: StringNullableFilter<"OtpSession"> | string | null
+    email?: StringNullableFilter<"OtpSession"> | string | null
+    userId?: StringNullableFilter<"OtpSession"> | string | null
+    otpCode?: StringNullableFilter<"OtpSession"> | string | null
+    service?: StringFilter<"OtpSession"> | string
+    app?: StringFilter<"OtpSession"> | string
+    isVerified?: BoolFilter<"OtpSession"> | boolean
+    expiresAt?: DateTimeFilter<"OtpSession"> | Date | string
+    createdAt?: DateTimeFilter<"OtpSession"> | Date | string
+    updatedAt?: DateTimeFilter<"OtpSession"> | Date | string
+    attempt_count?: IntFilter<"OtpSession"> | number
+    delivery_status?: StringFilter<"OtpSession"> | string
+    last_attempt_at?: DateTimeNullableFilter<"OtpSession"> | Date | string | null
+    sms_poh_message_id?: StringNullableFilter<"OtpSession"> | string | null
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }, "id" | "transId">
+
+  export type OtpSessionOrderByWithAggregationInput = {
+    id?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    transId?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    otpCode?: SortOrderInput | SortOrder
+    service?: SortOrder
+    app?: SortOrder
+    isVerified?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    attempt_count?: SortOrder
+    delivery_status?: SortOrder
+    last_attempt_at?: SortOrderInput | SortOrder
+    sms_poh_message_id?: SortOrderInput | SortOrder
+    _count?: OtpSessionCountOrderByAggregateInput
+    _avg?: OtpSessionAvgOrderByAggregateInput
+    _max?: OtpSessionMaxOrderByAggregateInput
+    _min?: OtpSessionMinOrderByAggregateInput
+    _sum?: OtpSessionSumOrderByAggregateInput
+  }
+
+  export type OtpSessionScalarWhereWithAggregatesInput = {
+    AND?: OtpSessionScalarWhereWithAggregatesInput | OtpSessionScalarWhereWithAggregatesInput[]
+    OR?: OtpSessionScalarWhereWithAggregatesInput[]
+    NOT?: OtpSessionScalarWhereWithAggregatesInput | OtpSessionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"OtpSession"> | string
+    phone?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
+    email?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
+    transId?: StringWithAggregatesFilter<"OtpSession"> | string
+    userId?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
+    otpCode?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
+    service?: StringWithAggregatesFilter<"OtpSession"> | string
+    app?: StringWithAggregatesFilter<"OtpSession"> | string
+    isVerified?: BoolWithAggregatesFilter<"OtpSession"> | boolean
+    expiresAt?: DateTimeWithAggregatesFilter<"OtpSession"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"OtpSession"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"OtpSession"> | Date | string
+    attempt_count?: IntWithAggregatesFilter<"OtpSession"> | number
+    delivery_status?: StringWithAggregatesFilter<"OtpSession"> | string
+    last_attempt_at?: DateTimeNullableWithAggregatesFilter<"OtpSession"> | Date | string | null
+    sms_poh_message_id?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
   }
 
   export type InstructorWhereInput = {
@@ -7069,268 +7252,191 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Role"> | Date | string
   }
 
-  export type OtpSessionWhereInput = {
-    AND?: OtpSessionWhereInput | OtpSessionWhereInput[]
-    OR?: OtpSessionWhereInput[]
-    NOT?: OtpSessionWhereInput | OtpSessionWhereInput[]
-    id?: StringFilter<"OtpSession"> | string
-    phone?: StringNullableFilter<"OtpSession"> | string | null
-    email?: StringNullableFilter<"OtpSession"> | string | null
-    transId?: StringFilter<"OtpSession"> | string
-    userId?: StringNullableFilter<"OtpSession"> | string | null
-    otpCode?: StringNullableFilter<"OtpSession"> | string | null
-    service?: StringFilter<"OtpSession"> | string
-    app?: StringFilter<"OtpSession"> | string
-    isVerified?: BoolFilter<"OtpSession"> | boolean
-    expiresAt?: DateTimeFilter<"OtpSession"> | Date | string
-    createdAt?: DateTimeFilter<"OtpSession"> | Date | string
-    updatedAt?: DateTimeFilter<"OtpSession"> | Date | string
-    attempt_count?: IntFilter<"OtpSession"> | number
-    delivery_status?: StringFilter<"OtpSession"> | string
-    last_attempt_at?: DateTimeNullableFilter<"OtpSession"> | Date | string | null
-    sms_poh_message_id?: StringNullableFilter<"OtpSession"> | string | null
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
-  }
-
-  export type OtpSessionOrderByWithRelationInput = {
-    id?: SortOrder
-    phone?: SortOrderInput | SortOrder
-    email?: SortOrderInput | SortOrder
-    transId?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    otpCode?: SortOrderInput | SortOrder
-    service?: SortOrder
-    app?: SortOrder
-    isVerified?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    attempt_count?: SortOrder
-    delivery_status?: SortOrder
-    last_attempt_at?: SortOrderInput | SortOrder
-    sms_poh_message_id?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type OtpSessionWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    transId?: string
-    AND?: OtpSessionWhereInput | OtpSessionWhereInput[]
-    OR?: OtpSessionWhereInput[]
-    NOT?: OtpSessionWhereInput | OtpSessionWhereInput[]
-    phone?: StringNullableFilter<"OtpSession"> | string | null
-    email?: StringNullableFilter<"OtpSession"> | string | null
-    userId?: StringNullableFilter<"OtpSession"> | string | null
-    otpCode?: StringNullableFilter<"OtpSession"> | string | null
-    service?: StringFilter<"OtpSession"> | string
-    app?: StringFilter<"OtpSession"> | string
-    isVerified?: BoolFilter<"OtpSession"> | boolean
-    expiresAt?: DateTimeFilter<"OtpSession"> | Date | string
-    createdAt?: DateTimeFilter<"OtpSession"> | Date | string
-    updatedAt?: DateTimeFilter<"OtpSession"> | Date | string
-    attempt_count?: IntFilter<"OtpSession"> | number
-    delivery_status?: StringFilter<"OtpSession"> | string
-    last_attempt_at?: DateTimeNullableFilter<"OtpSession"> | Date | string | null
-    sms_poh_message_id?: StringNullableFilter<"OtpSession"> | string | null
-    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
-  }, "id" | "transId">
-
-  export type OtpSessionOrderByWithAggregationInput = {
-    id?: SortOrder
-    phone?: SortOrderInput | SortOrder
-    email?: SortOrderInput | SortOrder
-    transId?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    otpCode?: SortOrderInput | SortOrder
-    service?: SortOrder
-    app?: SortOrder
-    isVerified?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    attempt_count?: SortOrder
-    delivery_status?: SortOrder
-    last_attempt_at?: SortOrderInput | SortOrder
-    sms_poh_message_id?: SortOrderInput | SortOrder
-    _count?: OtpSessionCountOrderByAggregateInput
-    _avg?: OtpSessionAvgOrderByAggregateInput
-    _max?: OtpSessionMaxOrderByAggregateInput
-    _min?: OtpSessionMinOrderByAggregateInput
-    _sum?: OtpSessionSumOrderByAggregateInput
-  }
-
-  export type OtpSessionScalarWhereWithAggregatesInput = {
-    AND?: OtpSessionScalarWhereWithAggregatesInput | OtpSessionScalarWhereWithAggregatesInput[]
-    OR?: OtpSessionScalarWhereWithAggregatesInput[]
-    NOT?: OtpSessionScalarWhereWithAggregatesInput | OtpSessionScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"OtpSession"> | string
-    phone?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
-    email?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
-    transId?: StringWithAggregatesFilter<"OtpSession"> | string
-    userId?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
-    otpCode?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
-    service?: StringWithAggregatesFilter<"OtpSession"> | string
-    app?: StringWithAggregatesFilter<"OtpSession"> | string
-    isVerified?: BoolWithAggregatesFilter<"OtpSession"> | boolean
-    expiresAt?: DateTimeWithAggregatesFilter<"OtpSession"> | Date | string
-    createdAt?: DateTimeWithAggregatesFilter<"OtpSession"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"OtpSession"> | Date | string
-    attempt_count?: IntWithAggregatesFilter<"OtpSession"> | number
-    delivery_status?: StringWithAggregatesFilter<"OtpSession"> | string
-    last_attempt_at?: DateTimeNullableWithAggregatesFilter<"OtpSession"> | Date | string | null
-    sms_poh_message_id?: StringNullableWithAggregatesFilter<"OtpSession"> | string | null
-  }
-
   export type UserCreateInput = {
     id?: string
-    email: string
+    email?: string | null
     username: string
-    password?: string | null
+    password?: string
     firstName?: string | null
     lastName?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     phone?: string | null
-    googleId?: string | null
     city?: string | null
     country?: string | null
     dateOfBirth?: Date | string | null
     feedback?: string | null
     gender?: string | null
     township?: string | null
+    age_range?: string | null
+    avatar?: string | null
+    bio?: string | null
+    location?: string | null
+    website?: string | null
+    googleId?: string | null
     otpSessions?: OtpSessionCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    instructor?: InstructorCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
-    email: string
+    email?: string | null
     username: string
-    password?: string | null
+    password?: string
     firstName?: string | null
     lastName?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     phone?: string | null
-    googleId?: string | null
     city?: string | null
     country?: string | null
     dateOfBirth?: Date | string | null
     feedback?: string | null
     gender?: string | null
     township?: string | null
+    age_range?: string | null
+    avatar?: string | null
+    bio?: string | null
+    location?: string | null
+    website?: string | null
+    googleId?: string | null
     otpSessions?: OtpSessionUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    instructor?: InstructorUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     township?: NullableStringFieldUpdateOperationsInput | string | null
+    age_range?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     otpSessions?: OtpSessionUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    instructor?: InstructorUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     township?: NullableStringFieldUpdateOperationsInput | string | null
+    age_range?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     otpSessions?: OtpSessionUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    instructor?: InstructorUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
-    email: string
+    email?: string | null
     username: string
-    password?: string | null
+    password?: string
     firstName?: string | null
     lastName?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     phone?: string | null
-    googleId?: string | null
     city?: string | null
     country?: string | null
     dateOfBirth?: Date | string | null
     feedback?: string | null
     gender?: string | null
     township?: string | null
+    age_range?: string | null
+    avatar?: string | null
+    bio?: string | null
+    location?: string | null
+    website?: string | null
+    googleId?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     township?: NullableStringFieldUpdateOperationsInput | string | null
+    age_range?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     township?: NullableStringFieldUpdateOperationsInput | string | null
+    age_range?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RefreshTokenCreateInput = {
@@ -7393,6 +7499,138 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isRevoked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type OtpSessionCreateInput = {
+    id?: string
+    phone?: string | null
+    email?: string | null
+    transId: string
+    otpCode?: string | null
+    service?: string
+    app?: string
+    isVerified?: boolean
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attempt_count?: number
+    delivery_status?: string
+    last_attempt_at?: Date | string | null
+    sms_poh_message_id?: string | null
+    user?: UserCreateNestedOneWithoutOtpSessionsInput
+  }
+
+  export type OtpSessionUncheckedCreateInput = {
+    id?: string
+    phone?: string | null
+    email?: string | null
+    transId: string
+    userId?: string | null
+    otpCode?: string | null
+    service?: string
+    app?: string
+    isVerified?: boolean
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attempt_count?: number
+    delivery_status?: string
+    last_attempt_at?: Date | string | null
+    sms_poh_message_id?: string | null
+  }
+
+  export type OtpSessionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    transId?: StringFieldUpdateOperationsInput | string
+    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
+    service?: StringFieldUpdateOperationsInput | string
+    app?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneWithoutOtpSessionsNestedInput
+  }
+
+  export type OtpSessionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    transId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
+    service?: StringFieldUpdateOperationsInput | string
+    app?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OtpSessionCreateManyInput = {
+    id?: string
+    phone?: string | null
+    email?: string | null
+    transId: string
+    userId?: string | null
+    otpCode?: string | null
+    service?: string
+    app?: string
+    isVerified?: boolean
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attempt_count?: number
+    delivery_status?: string
+    last_attempt_at?: Date | string | null
+    sms_poh_message_id?: string | null
+  }
+
+  export type OtpSessionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    transId?: StringFieldUpdateOperationsInput | string
+    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
+    service?: StringFieldUpdateOperationsInput | string
+    app?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OtpSessionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    transId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
+    service?: StringFieldUpdateOperationsInput | string
+    app?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempt_count?: IntFieldUpdateOperationsInput | number
+    delivery_status?: StringFieldUpdateOperationsInput | string
+    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InstructorCreateInput = {
@@ -7528,138 +7766,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OtpSessionCreateInput = {
-    id?: string
-    phone?: string | null
-    email?: string | null
-    transId: string
-    otpCode?: string | null
-    service?: string
-    app?: string
-    isVerified?: boolean
-    expiresAt: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    attempt_count?: number
-    delivery_status?: string
-    last_attempt_at?: Date | string | null
-    sms_poh_message_id?: string | null
-    user?: UserCreateNestedOneWithoutOtpSessionsInput
-  }
-
-  export type OtpSessionUncheckedCreateInput = {
-    id?: string
-    phone?: string | null
-    email?: string | null
-    transId: string
-    userId?: string | null
-    otpCode?: string | null
-    service?: string
-    app?: string
-    isVerified?: boolean
-    expiresAt: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    attempt_count?: number
-    delivery_status?: string
-    last_attempt_at?: Date | string | null
-    sms_poh_message_id?: string | null
-  }
-
-  export type OtpSessionUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    transId?: StringFieldUpdateOperationsInput | string
-    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
-    service?: StringFieldUpdateOperationsInput | string
-    app?: StringFieldUpdateOperationsInput | string
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    attempt_count?: IntFieldUpdateOperationsInput | number
-    delivery_status?: StringFieldUpdateOperationsInput | string
-    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneWithoutOtpSessionsNestedInput
-  }
-
-  export type OtpSessionUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    transId?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
-    service?: StringFieldUpdateOperationsInput | string
-    app?: StringFieldUpdateOperationsInput | string
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    attempt_count?: IntFieldUpdateOperationsInput | number
-    delivery_status?: StringFieldUpdateOperationsInput | string
-    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type OtpSessionCreateManyInput = {
-    id?: string
-    phone?: string | null
-    email?: string | null
-    transId: string
-    userId?: string | null
-    otpCode?: string | null
-    service?: string
-    app?: string
-    isVerified?: boolean
-    expiresAt: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    attempt_count?: number
-    delivery_status?: string
-    last_attempt_at?: Date | string | null
-    sms_poh_message_id?: string | null
-  }
-
-  export type OtpSessionUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    transId?: StringFieldUpdateOperationsInput | string
-    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
-    service?: StringFieldUpdateOperationsInput | string
-    app?: StringFieldUpdateOperationsInput | string
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    attempt_count?: IntFieldUpdateOperationsInput | number
-    delivery_status?: StringFieldUpdateOperationsInput | string
-    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type OtpSessionUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    transId?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    otpCode?: NullableStringFieldUpdateOperationsInput | string | null
-    service?: StringFieldUpdateOperationsInput | string
-    app?: StringFieldUpdateOperationsInput | string
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    attempt_count?: IntFieldUpdateOperationsInput | number
-    delivery_status?: StringFieldUpdateOperationsInput | string
-    last_attempt_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sms_poh_message_id?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7729,10 +7835,9 @@ export namespace Prisma {
     none?: RefreshTokenWhereInput
   }
 
-  export type InstructorListRelationFilter = {
-    every?: InstructorWhereInput
-    some?: InstructorWhereInput
-    none?: InstructorWhereInput
+  export type InstructorNullableRelationFilter = {
+    is?: InstructorWhereInput | null
+    isNot?: InstructorWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -7748,10 +7853,6 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type InstructorOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -7763,13 +7864,18 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     phone?: SortOrder
-    googleId?: SortOrder
     city?: SortOrder
     country?: SortOrder
     dateOfBirth?: SortOrder
     feedback?: SortOrder
     gender?: SortOrder
     township?: SortOrder
+    age_range?: SortOrder
+    avatar?: SortOrder
+    bio?: SortOrder
+    location?: SortOrder
+    website?: SortOrder
+    googleId?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -7783,13 +7889,18 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     phone?: SortOrder
-    googleId?: SortOrder
     city?: SortOrder
     country?: SortOrder
     dateOfBirth?: SortOrder
     feedback?: SortOrder
     gender?: SortOrder
     township?: SortOrder
+    age_range?: SortOrder
+    avatar?: SortOrder
+    bio?: SortOrder
+    location?: SortOrder
+    website?: SortOrder
+    googleId?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -7803,13 +7914,18 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     phone?: SortOrder
-    googleId?: SortOrder
     city?: SortOrder
     country?: SortOrder
     dateOfBirth?: SortOrder
     feedback?: SortOrder
     gender?: SortOrder
     township?: SortOrder
+    age_range?: SortOrder
+    avatar?: SortOrder
+    bio?: SortOrder
+    location?: SortOrder
+    website?: SortOrder
+    googleId?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -7916,76 +8032,6 @@ export namespace Prisma {
     isRevoked?: SortOrder
   }
 
-  export type RoleListRelationFilter = {
-    every?: RoleWhereInput
-    some?: RoleWhereInput
-    none?: RoleWhereInput
-  }
-
-  export type RoleOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type InstructorCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    fullName?: SortOrder
-    bio?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type InstructorMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    fullName?: SortOrder
-    bio?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type InstructorMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    fullName?: SortOrder
-    bio?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type EnumPermissionNullableListFilter<$PrismaModel = never> = {
-    equals?: $Enums.Permission[] | ListEnumPermissionFieldRefInput<$PrismaModel> | null
-    has?: $Enums.Permission | EnumPermissionFieldRefInput<$PrismaModel> | null
-    hasEvery?: $Enums.Permission[] | ListEnumPermissionFieldRefInput<$PrismaModel>
-    hasSome?: $Enums.Permission[] | ListEnumPermissionFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
-  export type RoleCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    permissions?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type RoleMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type RoleMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8083,6 +8129,86 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type RoleListRelationFilter = {
+    every?: RoleWhereInput
+    some?: RoleWhereInput
+    none?: RoleWhereInput
+  }
+
+  export type RoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InstructorCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    fullName?: SortOrder
+    bio?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstructorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    fullName?: SortOrder
+    bio?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstructorMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    fullName?: SortOrder
+    bio?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumPermissionNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.Permission[] | ListEnumPermissionFieldRefInput<$PrismaModel> | null
+    has?: $Enums.Permission | EnumPermissionFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.Permission[] | ListEnumPermissionFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.Permission[] | ListEnumPermissionFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type InstructorListRelationFilter = {
+    every?: InstructorWhereInput
+    some?: InstructorWhereInput
+    none?: InstructorWhereInput
+  }
+
+  export type InstructorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RoleCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    permissions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoleMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type OtpSessionCreateNestedManyWithoutUserInput = {
     create?: XOR<OtpSessionCreateWithoutUserInput, OtpSessionUncheckedCreateWithoutUserInput> | OtpSessionCreateWithoutUserInput[] | OtpSessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: OtpSessionCreateOrConnectWithoutUserInput | OtpSessionCreateOrConnectWithoutUserInput[]
@@ -8097,11 +8223,10 @@ export namespace Prisma {
     connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
   }
 
-  export type InstructorCreateNestedManyWithoutUserInput = {
-    create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput> | InstructorCreateWithoutUserInput[] | InstructorUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: InstructorCreateOrConnectWithoutUserInput | InstructorCreateOrConnectWithoutUserInput[]
-    createMany?: InstructorCreateManyUserInputEnvelope
-    connect?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
+  export type InstructorCreateNestedOneWithoutUserInput = {
+    create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: InstructorCreateOrConnectWithoutUserInput
+    connect?: InstructorWhereUniqueInput
   }
 
   export type OtpSessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -8118,11 +8243,10 @@ export namespace Prisma {
     connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
   }
 
-  export type InstructorUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput> | InstructorCreateWithoutUserInput[] | InstructorUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: InstructorCreateOrConnectWithoutUserInput | InstructorCreateOrConnectWithoutUserInput[]
-    createMany?: InstructorCreateManyUserInputEnvelope
-    connect?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
+  export type InstructorUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: InstructorCreateOrConnectWithoutUserInput
+    connect?: InstructorWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8173,18 +8297,14 @@ export namespace Prisma {
     deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
   }
 
-  export type InstructorUpdateManyWithoutUserNestedInput = {
-    create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput> | InstructorCreateWithoutUserInput[] | InstructorUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: InstructorCreateOrConnectWithoutUserInput | InstructorCreateOrConnectWithoutUserInput[]
-    upsert?: InstructorUpsertWithWhereUniqueWithoutUserInput | InstructorUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: InstructorCreateManyUserInputEnvelope
-    set?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
-    disconnect?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
-    delete?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
-    connect?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
-    update?: InstructorUpdateWithWhereUniqueWithoutUserInput | InstructorUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: InstructorUpdateManyWithWhereWithoutUserInput | InstructorUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: InstructorScalarWhereInput | InstructorScalarWhereInput[]
+  export type InstructorUpdateOneWithoutUserNestedInput = {
+    create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: InstructorCreateOrConnectWithoutUserInput
+    upsert?: InstructorUpsertWithoutUserInput
+    disconnect?: InstructorWhereInput | boolean
+    delete?: InstructorWhereInput | boolean
+    connect?: InstructorWhereUniqueInput
+    update?: XOR<XOR<InstructorUpdateToOneWithWhereWithoutUserInput, InstructorUpdateWithoutUserInput>, InstructorUncheckedUpdateWithoutUserInput>
   }
 
   export type OtpSessionUncheckedUpdateManyWithoutUserNestedInput = {
@@ -8215,18 +8335,14 @@ export namespace Prisma {
     deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
   }
 
-  export type InstructorUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput> | InstructorCreateWithoutUserInput[] | InstructorUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: InstructorCreateOrConnectWithoutUserInput | InstructorCreateOrConnectWithoutUserInput[]
-    upsert?: InstructorUpsertWithWhereUniqueWithoutUserInput | InstructorUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: InstructorCreateManyUserInputEnvelope
-    set?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
-    disconnect?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
-    delete?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
-    connect?: InstructorWhereUniqueInput | InstructorWhereUniqueInput[]
-    update?: InstructorUpdateWithWhereUniqueWithoutUserInput | InstructorUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: InstructorUpdateManyWithWhereWithoutUserInput | InstructorUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: InstructorScalarWhereInput | InstructorScalarWhereInput[]
+  export type InstructorUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: InstructorCreateOrConnectWithoutUserInput
+    upsert?: InstructorUpsertWithoutUserInput
+    disconnect?: InstructorWhereInput | boolean
+    delete?: InstructorWhereInput | boolean
+    connect?: InstructorWhereUniqueInput
+    update?: XOR<XOR<InstructorUpdateToOneWithWhereWithoutUserInput, InstructorUpdateWithoutUserInput>, InstructorUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutRefreshTokensInput = {
@@ -8241,6 +8357,30 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutRefreshTokensInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRefreshTokensInput, UserUpdateWithoutRefreshTokensInput>, UserUncheckedUpdateWithoutRefreshTokensInput>
+  }
+
+  export type UserCreateNestedOneWithoutOtpSessionsInput = {
+    create?: XOR<UserCreateWithoutOtpSessionsInput, UserUncheckedCreateWithoutOtpSessionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOtpSessionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneWithoutOtpSessionsNestedInput = {
+    create?: XOR<UserCreateWithoutOtpSessionsInput, UserUncheckedCreateWithoutOtpSessionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOtpSessionsInput
+    upsert?: UserUpsertWithoutOtpSessionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOtpSessionsInput, UserUpdateWithoutOtpSessionsInput>, UserUncheckedUpdateWithoutOtpSessionsInput>
   }
 
   export type UserCreateNestedOneWithoutInstructorInput = {
@@ -8340,30 +8480,6 @@ export namespace Prisma {
     update?: InstructorUpdateWithWhereUniqueWithoutRolesInput | InstructorUpdateWithWhereUniqueWithoutRolesInput[]
     updateMany?: InstructorUpdateManyWithWhereWithoutRolesInput | InstructorUpdateManyWithWhereWithoutRolesInput[]
     deleteMany?: InstructorScalarWhereInput | InstructorScalarWhereInput[]
-  }
-
-  export type UserCreateNestedOneWithoutOtpSessionsInput = {
-    create?: XOR<UserCreateWithoutOtpSessionsInput, UserUncheckedCreateWithoutOtpSessionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOtpSessionsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type UserUpdateOneWithoutOtpSessionsNestedInput = {
-    create?: XOR<UserCreateWithoutOtpSessionsInput, UserUncheckedCreateWithoutOtpSessionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOtpSessionsInput
-    upsert?: UserUpsertWithoutOtpSessionsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOtpSessionsInput, UserUpdateWithoutOtpSessionsInput>, UserUncheckedUpdateWithoutOtpSessionsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8635,11 +8751,6 @@ export namespace Prisma {
     create: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput>
   }
 
-  export type InstructorCreateManyUserInputEnvelope = {
-    data: InstructorCreateManyUserInput | InstructorCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type OtpSessionUpsertWithWhereUniqueWithoutUserInput = {
     where: OtpSessionWhereUniqueInput
     update: XOR<OtpSessionUpdateWithoutUserInput, OtpSessionUncheckedUpdateWithoutUserInput>
@@ -8706,76 +8817,87 @@ export namespace Prisma {
     isRevoked?: BoolFilter<"RefreshToken"> | boolean
   }
 
-  export type InstructorUpsertWithWhereUniqueWithoutUserInput = {
-    where: InstructorWhereUniqueInput
+  export type InstructorUpsertWithoutUserInput = {
     update: XOR<InstructorUpdateWithoutUserInput, InstructorUncheckedUpdateWithoutUserInput>
     create: XOR<InstructorCreateWithoutUserInput, InstructorUncheckedCreateWithoutUserInput>
+    where?: InstructorWhereInput
   }
 
-  export type InstructorUpdateWithWhereUniqueWithoutUserInput = {
-    where: InstructorWhereUniqueInput
+  export type InstructorUpdateToOneWithWhereWithoutUserInput = {
+    where?: InstructorWhereInput
     data: XOR<InstructorUpdateWithoutUserInput, InstructorUncheckedUpdateWithoutUserInput>
   }
 
-  export type InstructorUpdateManyWithWhereWithoutUserInput = {
-    where: InstructorScalarWhereInput
-    data: XOR<InstructorUpdateManyMutationInput, InstructorUncheckedUpdateManyWithoutUserInput>
+  export type InstructorUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: RoleUpdateManyWithoutInstructorsNestedInput
   }
 
-  export type InstructorScalarWhereInput = {
-    AND?: InstructorScalarWhereInput | InstructorScalarWhereInput[]
-    OR?: InstructorScalarWhereInput[]
-    NOT?: InstructorScalarWhereInput | InstructorScalarWhereInput[]
-    id?: StringFilter<"Instructor"> | string
-    userId?: StringFilter<"Instructor"> | string
-    fullName?: StringFilter<"Instructor"> | string
-    bio?: StringNullableFilter<"Instructor"> | string | null
-    createdAt?: DateTimeFilter<"Instructor"> | Date | string
-    updatedAt?: DateTimeFilter<"Instructor"> | Date | string
+  export type InstructorUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: RoleUncheckedUpdateManyWithoutInstructorsNestedInput
   }
 
   export type UserCreateWithoutRefreshTokensInput = {
     id?: string
-    email: string
+    email?: string | null
     username: string
-    password?: string | null
+    password?: string
     firstName?: string | null
     lastName?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     phone?: string | null
-    googleId?: string | null
     city?: string | null
     country?: string | null
     dateOfBirth?: Date | string | null
     feedback?: string | null
     gender?: string | null
     township?: string | null
+    age_range?: string | null
+    avatar?: string | null
+    bio?: string | null
+    location?: string | null
+    website?: string | null
+    googleId?: string | null
     otpSessions?: OtpSessionCreateNestedManyWithoutUserInput
-    Instructor?: InstructorCreateNestedManyWithoutUserInput
+    instructor?: InstructorCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRefreshTokensInput = {
     id?: string
-    email: string
+    email?: string | null
     username: string
-    password?: string | null
+    password?: string
     firstName?: string | null
     lastName?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     phone?: string | null
-    googleId?: string | null
     city?: string | null
     country?: string | null
     dateOfBirth?: Date | string | null
     feedback?: string | null
     gender?: string | null
     township?: string | null
+    age_range?: string | null
+    avatar?: string | null
+    bio?: string | null
+    location?: string | null
+    website?: string | null
+    googleId?: string | null
     otpSessions?: OtpSessionUncheckedCreateNestedManyWithoutUserInput
-    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
+    instructor?: InstructorUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -8796,88 +8918,232 @@ export namespace Prisma {
 
   export type UserUpdateWithoutRefreshTokensInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     township?: NullableStringFieldUpdateOperationsInput | string | null
+    age_range?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     otpSessions?: OtpSessionUpdateManyWithoutUserNestedInput
-    Instructor?: InstructorUpdateManyWithoutUserNestedInput
+    instructor?: InstructorUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRefreshTokensInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     township?: NullableStringFieldUpdateOperationsInput | string | null
+    age_range?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     otpSessions?: OtpSessionUncheckedUpdateManyWithoutUserNestedInput
-    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+    instructor?: InstructorUncheckedUpdateOneWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutInstructorInput = {
+  export type UserCreateWithoutOtpSessionsInput = {
     id?: string
-    email: string
+    email?: string | null
     username: string
-    password?: string | null
+    password?: string
     firstName?: string | null
     lastName?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     phone?: string | null
-    googleId?: string | null
     city?: string | null
     country?: string | null
     dateOfBirth?: Date | string | null
     feedback?: string | null
     gender?: string | null
     township?: string | null
+    age_range?: string | null
+    avatar?: string | null
+    bio?: string | null
+    location?: string | null
+    website?: string | null
+    googleId?: string | null
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    instructor?: InstructorCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutOtpSessionsInput = {
+    id?: string
+    email?: string | null
+    username: string
+    password?: string
+    firstName?: string | null
+    lastName?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    phone?: string | null
+    city?: string | null
+    country?: string | null
+    dateOfBirth?: Date | string | null
+    feedback?: string | null
+    gender?: string | null
+    township?: string | null
+    age_range?: string | null
+    avatar?: string | null
+    bio?: string | null
+    location?: string | null
+    website?: string | null
+    googleId?: string | null
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    instructor?: InstructorUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutOtpSessionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOtpSessionsInput, UserUncheckedCreateWithoutOtpSessionsInput>
+  }
+
+  export type UserUpsertWithoutOtpSessionsInput = {
+    update: XOR<UserUpdateWithoutOtpSessionsInput, UserUncheckedUpdateWithoutOtpSessionsInput>
+    create: XOR<UserCreateWithoutOtpSessionsInput, UserUncheckedCreateWithoutOtpSessionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOtpSessionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOtpSessionsInput, UserUncheckedUpdateWithoutOtpSessionsInput>
+  }
+
+  export type UserUpdateWithoutOtpSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    township?: NullableStringFieldUpdateOperationsInput | string | null
+    age_range?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    instructor?: InstructorUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOtpSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    township?: NullableStringFieldUpdateOperationsInput | string | null
+    age_range?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    instructor?: InstructorUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutInstructorInput = {
+    id?: string
+    email?: string | null
+    username: string
+    password?: string
+    firstName?: string | null
+    lastName?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    phone?: string | null
+    city?: string | null
+    country?: string | null
+    dateOfBirth?: Date | string | null
+    feedback?: string | null
+    gender?: string | null
+    township?: string | null
+    age_range?: string | null
+    avatar?: string | null
+    bio?: string | null
+    location?: string | null
+    website?: string | null
+    googleId?: string | null
     otpSessions?: OtpSessionCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInstructorInput = {
     id?: string
-    email: string
+    email?: string | null
     username: string
-    password?: string | null
+    password?: string
     firstName?: string | null
     lastName?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     phone?: string | null
-    googleId?: string | null
     city?: string | null
     country?: string | null
     dateOfBirth?: Date | string | null
     feedback?: string | null
     gender?: string | null
     township?: string | null
+    age_range?: string | null
+    avatar?: string | null
+    bio?: string | null
+    location?: string | null
+    website?: string | null
+    googleId?: string | null
     otpSessions?: OtpSessionUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
@@ -8923,44 +9189,54 @@ export namespace Prisma {
 
   export type UserUpdateWithoutInstructorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     township?: NullableStringFieldUpdateOperationsInput | string | null
+    age_range?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     otpSessions?: OtpSessionUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInstructorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     township?: NullableStringFieldUpdateOperationsInput | string | null
+    age_range?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     otpSessions?: OtpSessionUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -9032,108 +9308,16 @@ export namespace Prisma {
     data: XOR<InstructorUpdateManyMutationInput, InstructorUncheckedUpdateManyWithoutRolesInput>
   }
 
-  export type UserCreateWithoutOtpSessionsInput = {
-    id?: string
-    email: string
-    username: string
-    password?: string | null
-    firstName?: string | null
-    lastName?: string | null
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    phone?: string | null
-    googleId?: string | null
-    city?: string | null
-    country?: string | null
-    dateOfBirth?: Date | string | null
-    feedback?: string | null
-    gender?: string | null
-    township?: string | null
-    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    Instructor?: InstructorCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutOtpSessionsInput = {
-    id?: string
-    email: string
-    username: string
-    password?: string | null
-    firstName?: string | null
-    lastName?: string | null
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    phone?: string | null
-    googleId?: string | null
-    city?: string | null
-    country?: string | null
-    dateOfBirth?: Date | string | null
-    feedback?: string | null
-    gender?: string | null
-    township?: string | null
-    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    Instructor?: InstructorUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutOtpSessionsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutOtpSessionsInput, UserUncheckedCreateWithoutOtpSessionsInput>
-  }
-
-  export type UserUpsertWithoutOtpSessionsInput = {
-    update: XOR<UserUpdateWithoutOtpSessionsInput, UserUncheckedUpdateWithoutOtpSessionsInput>
-    create: XOR<UserCreateWithoutOtpSessionsInput, UserUncheckedCreateWithoutOtpSessionsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutOtpSessionsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutOtpSessionsInput, UserUncheckedUpdateWithoutOtpSessionsInput>
-  }
-
-  export type UserUpdateWithoutOtpSessionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    township?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    Instructor?: InstructorUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutOtpSessionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    feedback?: NullableStringFieldUpdateOperationsInput | string | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    township?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    Instructor?: InstructorUncheckedUpdateManyWithoutUserNestedInput
+  export type InstructorScalarWhereInput = {
+    AND?: InstructorScalarWhereInput | InstructorScalarWhereInput[]
+    OR?: InstructorScalarWhereInput[]
+    NOT?: InstructorScalarWhereInput | InstructorScalarWhereInput[]
+    id?: StringFilter<"Instructor"> | string
+    userId?: StringFilter<"Instructor"> | string
+    fullName?: StringFilter<"Instructor"> | string
+    bio?: StringNullableFilter<"Instructor"> | string | null
+    createdAt?: DateTimeFilter<"Instructor"> | Date | string
+    updatedAt?: DateTimeFilter<"Instructor"> | Date | string
   }
 
   export type OtpSessionCreateManyUserInput = {
@@ -9160,14 +9344,6 @@ export namespace Prisma {
     expiresAt: Date | string
     createdAt?: Date | string
     isRevoked?: boolean
-  }
-
-  export type InstructorCreateManyUserInput = {
-    id?: string
-    fullName: string
-    bio?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type OtpSessionUpdateWithoutUserInput = {
@@ -9246,32 +9422,6 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isRevoked?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type InstructorUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fullName?: StringFieldUpdateOperationsInput | string
-    bio?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    roles?: RoleUpdateManyWithoutInstructorsNestedInput
-  }
-
-  export type InstructorUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fullName?: StringFieldUpdateOperationsInput | string
-    bio?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    roles?: RoleUncheckedUpdateManyWithoutInstructorsNestedInput
-  }
-
-  export type InstructorUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fullName?: StringFieldUpdateOperationsInput | string
-    bio?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RoleUpdateWithoutInstructorsInput = {
@@ -9354,6 +9504,10 @@ export namespace Prisma {
      */
     export type RefreshTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RefreshTokenDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use OtpSessionDefaultArgs instead
+     */
+    export type OtpSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OtpSessionDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use InstructorDefaultArgs instead
      */
     export type InstructorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = InstructorDefaultArgs<ExtArgs>
@@ -9361,10 +9515,6 @@ export namespace Prisma {
      * @deprecated Use RoleDefaultArgs instead
      */
     export type RoleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RoleDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use OtpSessionDefaultArgs instead
-     */
-    export type OtpSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OtpSessionDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
