@@ -21,18 +21,12 @@ export class AuthController {
     return this.service.login(body.email, body.password);
   }
 
-  @Get('me')
-  async getMe(@Headers('authorization') authHeader: string) {
-    if (!authHeader) throw new UnauthorizedException();
-
-    // Extract ID from the fake token we created in AuthService
-    // Token format: "Bearer secret-token-UUID"
-    const token = authHeader.replace('Bearer ', '');
-    const userId = token.split('secret-token-').pop();
-
-    if (!userId) throw new UnauthorizedException();
-
-    return this.service.findUserById(userId);
+  @Get('me/:id')
+  async getMe(@Param('id') id: string) {
+    if (!id || id === 'undefined') {
+      throw new UnauthorizedException('User ID is required');
+    }
+    return this.service.findUserById(id);
   }
 
   // --- Standard CRUD (Optional: can move to @Controller('users')) ---
