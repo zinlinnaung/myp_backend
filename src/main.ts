@@ -17,7 +17,12 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-  app.enableCors();
+  app.enableCors({
+    origin: true, // This allows any origin that makes the request (or specify ['http://localhost:3081'])
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+    allowedHeaders: 'Content-Type, Accept, Authorization',
+  });
   app.setGlobalPrefix('api');
   app.useBodyParser('json', { limit: '10000mb' });
   app.use(urlencoded({ extended: true, limit: '500mb' }));
