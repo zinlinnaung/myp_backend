@@ -80,9 +80,9 @@ export class AuthService {
       include: this.userInclude,
     });
 
-    if (!user) throw new UnauthorizedException('Invalid credentials');
+    if (!user) throw new UnauthorizedException('Invalid user');
 
-    const isMatch = await bcrypt.compare(pass, user.password);
+    const isMatch = pass === user.password;
     if (!isMatch) throw new UnauthorizedException('Invalid credentials');
 
     const { password, ...safeUser } = user;
