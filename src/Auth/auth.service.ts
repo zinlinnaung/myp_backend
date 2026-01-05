@@ -13,7 +13,19 @@ export class AuthService {
 
   // User CRUD
   async createUser(dto: CreateAuthUserDto) {
-    return this.prisma.auth.user.create({ data: dto });
+    const { password, ...userData } = dto;
+
+    // 1. Generate salt and hash the password
+    const salt = await bcrypt.genSalt(12);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // 2. Save to database
+    return this.prisma.auth.user.create({
+      data: {
+        ...userData,
+        password: hashedPassword,
+      },
+    });
   }
 
   async findAllUsers() {
@@ -42,33 +54,33 @@ export class AuthService {
   }
 
   async login(email: string, pass: string) {
-    // 1. Fetch user with deeply nested Instructor -> Roles
+    // 1. Find user by email
     const user = await this.prisma.auth.user.findUnique({
       where: { email },
       include: {
         instructor: {
           include: {
-            roles: true,
+            roles: true, // Crucial for the UI PrivateRoutes logic
           },
         },
       },
     });
 
     if (!user) {
-      throw new UnauthorizedException('Invalid email or password');
+      throw new UnauthorizedException('Invalid credentials');
     }
 
-    // 2. Compare plain text password with BCrypt hash
-    const isPasswordValid = await bcrypt.compare(pass, user.password);
+    // 2. Compare plain text password with hashed password
+    const isMatch = await bcrypt.compare(pass, user.password);
 
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid email or password');
+    if (!isMatch) {
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     // 3. Return the user and a token
-    // In a real app, generate a JWT here. For now, we return the user object.
+    // (In production, replace 'fake-jwt-token' with a real JWT sign)
     return {
-      api_token: `secret-token-${user.id}`,
+      api_token: `secret-session-token-${user.id}`,
       user: user,
     };
   }
