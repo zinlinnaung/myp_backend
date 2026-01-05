@@ -18,7 +18,11 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
-    origin: true, // This allows any origin that makes the request (or specify ['http://localhost:3081'])
+    origin: [
+      'http://localhost:3081',
+      'http://localhost:3000',
+      'https://u-admin-eight.vercel.app',
+    ], // This allows any origin that makes the request (or specify ['http://localhost:3081'])
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
     allowedHeaders: 'Content-Type, Accept, Authorization',
