@@ -391,6 +391,13 @@ enum ActivityType {
   PAGE
   CERTIFICATE
   FEEDBACK
+  FORUM
+  QUIZ
+  SCORM
+  LESSON
+  CHOICE
+  RESOURCE
+  ASSIGN
 }
 
 enum CourseStatus {

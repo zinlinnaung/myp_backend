@@ -27,6 +27,7 @@ import { FeedbackTemplateModule } from './Feedback/feedback-template.module';
 import { ContentTypeModule } from './E-library/content-type.module';
 import { RolesModule } from './Role/roles.module';
 import { InstructorModule } from './Instructor/instructors.module';
+import { UserOnCourseModule } from './User_On_Course/user-on-course.module';
 // import { AtGuard } from './common/guards';
 // import { AuthenticationModule } from './authentication/authentication.module';
 // import { UserModule } from './user/user.module';
@@ -73,6 +74,7 @@ import { InstructorModule } from './Instructor/instructors.module';
 
     RolesModule,
     InstructorModule,
+    UserOnCourseModule,
 
     // MlcheckerModule,
     // CmsModule,

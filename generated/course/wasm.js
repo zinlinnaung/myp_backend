@@ -448,7 +448,14 @@ exports.ActivityType = exports.$Enums.ActivityType = {
   YOUTUBE_LINK: 'YOUTUBE_LINK',
   PAGE: 'PAGE',
   CERTIFICATE: 'CERTIFICATE',
-  FEEDBACK: 'FEEDBACK'
+  FEEDBACK: 'FEEDBACK',
+  FORUM: 'FORUM',
+  QUIZ: 'QUIZ',
+  SCORM: 'SCORM',
+  LESSON: 'LESSON',
+  CHOICE: 'CHOICE',
+  RESOURCE: 'RESOURCE',
+  ASSIGN: 'ASSIGN'
 };
 
 exports.Prisma.ModelName = {

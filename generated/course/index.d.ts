@@ -176,7 +176,14 @@ export const ActivityType: {
   YOUTUBE_LINK: 'YOUTUBE_LINK',
   PAGE: 'PAGE',
   CERTIFICATE: 'CERTIFICATE',
-  FEEDBACK: 'FEEDBACK'
+  FEEDBACK: 'FEEDBACK',
+  FORUM: 'FORUM',
+  QUIZ: 'QUIZ',
+  SCORM: 'SCORM',
+  LESSON: 'LESSON',
+  CHOICE: 'CHOICE',
+  RESOURCE: 'RESOURCE',
+  ASSIGN: 'ASSIGN'
 };
 
 export type ActivityType = (typeof ActivityType)[keyof typeof ActivityType]
