@@ -67,102 +67,134 @@ export class ActivityService {
   }
 
   async migrateH5PFromCsv(fileBuffer: Buffer) {
-    const results: any[] = [];
+    const rows: any[] = [];
     const stream = Readable.from(fileBuffer);
 
-    return new Promise((resolve, reject) => {
+    // 1. Fast CSV Parsing
+    await new Promise((resolve, reject) => {
       stream
         .pipe(csv())
-        .on('data', (data) => results.push(data))
-        .on('end', async () => {
-          try {
-            const report = await this.processMigrationRows(results);
-            resolve({
-              message: 'Batch processing completed',
-              totalRows: results.length,
-              ...report,
-            });
-          } catch (error) {
-            reject(error);
-          }
-        })
-        .on('error', (error) => reject(error));
+        .on('data', (data) => rows.push(data))
+        .on('end', resolve)
+        .on('error', reject);
     });
+
+    // 2. Trigger background process - NO AWAIT
+    this.processMigrationRows(rows).catch((err) =>
+      this.logger.error('Background migration crashed', err),
+    );
+
+    // 3. Return immediately to Controller
+    return {
+      status: 'processing',
+      message:
+        'Migration is running in the background. Check logs for progress.',
+      totalRows: rows.length,
+    };
   }
 
   private async processMigrationRows(rows: any[]) {
-    const CONCURRENCY_LIMIT = 5; // Adjust based on your server RAM (e.g., 3-10)
-    const limit = pLimit(CONCURRENCY_LIMIT);
-
+    // STRICT CONCURRENCY: Set to 1 or 2 because the source server is aggressive with 429s
+    const limit = pLimit(1);
     let successCount = 0;
     let failCount = 0;
-    const errors = [];
 
-    // Map rows to a list of "tasks"
     const tasks = rows.map((row) =>
       limit(async () => {
-        const newActivityId = row['new_activity_id'];
-        const downloadUrl = row['content'];
-
-        if (!newActivityId || !downloadUrl) {
-          return; // Skip invalid rows
-        }
+        const id = row['new_activity_id'];
+        const url = row['content'];
+        if (!id || !url) return;
 
         try {
-          // 1. Database Check (Fast)
-          const activity = await this.prisma.course.activity.findUnique({
-            where: { id: newActivityId },
-            select: { id: true }, // Only select ID to save memory
-          });
+          await this.retryWithBackoff(async () => {
+            // 1. Verify Activity exists
+            const activity = await this.prisma.course.activity.findUnique({
+              where: { id },
+              select: { id: true },
+            });
+            if (!activity) throw new Error(`Activity ${id} not found`);
 
-          if (!activity) throw new Error(`Activity ${newActivityId} not found`);
+            // 2. Resilient Download
+            const fileBuffer = await this.downloadFile(url);
 
-          // 2. Download (I/O intensive)
-          const fileBuffer = await this.downloadFile(downloadUrl);
+            // 3. Extract and Upload
+            const uploadResult = await this.h5pService.uploadH5PExtract(
+              fileBuffer,
+              'migration.h5p',
+              id,
+            );
 
-          // 3. Upload & Extract (CPU/Network intensive)
-          const uploadResult = await this.h5pService.uploadH5PExtract(
-            fileBuffer,
-            'migration.h5p',
-            newActivityId,
-          );
-
-          // 4. Update DB
-          await this.prisma.course.activity.update({
-            where: { id: newActivityId },
-            data: {
-              content: uploadResult.playerUrl,
-              type: 'H5P',
-            },
+            // 4. Final DB Update
+            await this.prisma.course.activity.update({
+              where: { id },
+              data: {
+                content: uploadResult.playerUrl,
+                type: 'H5P',
+              },
+            });
           });
 
           successCount++;
-          this.logger.log(`✅ Migrated: ${newActivityId}`);
+          this.logger.log(
+            `✅ [${successCount}/${rows.length}] Migrated: ${id}`,
+          );
+
+          // COOL DOWN: Wait 2 seconds between successful rows to avoid IP ban
+          await new Promise((res) => setTimeout(res, 2000));
         } catch (error: any) {
           failCount++;
-          errors.push({ id: newActivityId, error: error.message });
-          this.logger.error(`❌ Failed: ${newActivityId} - ${error.message}`);
+          this.logger.error(`❌ Permanent Failure: ${id} - ${error.message}`);
         }
       }),
     );
 
-    // Wait for all tasks in the limit pool to finish
     await Promise.all(tasks);
+    this.logger.log(
+      `🏁 Migration Finished. Success: ${successCount}, Failed: ${failCount}`,
+    );
+  }
 
-    return { successCount, failCount, errors };
+  private async retryWithBackoff(fn: () => Promise<any>, retries = 5) {
+    for (let i = 0; i < retries; i++) {
+      try {
+        return await fn();
+      } catch (err: any) {
+        const is429 = err.message.includes('429');
+        const isTimeout =
+          err.code === 'ETIMEDOUT' || err.message.includes('timeout');
+
+        if ((is429 || isTimeout) && i < retries - 1) {
+          // Exponential Backoff + Jitter (randomness) to break the 429 cycle
+          const jitter = Math.floor(Math.random() * 3000);
+          const delay = Math.pow(2, i) * 5000 + jitter;
+
+          this.logger.warn(
+            `Network Error (${is429 ? '429' : 'Timeout'}). Retrying in ${delay}ms...`,
+          );
+          await new Promise((res) => setTimeout(res, delay));
+          continue;
+        }
+        throw err;
+      }
+    }
   }
 
   private async downloadFile(url: string): Promise<Buffer> {
     try {
-      // FIX: Cast the configuration object to 'any' to bypass TS validation
       const config: any = {
         responseType: 'arraybuffer',
-        timeout: 60000,
-        insecureHTTPParser: true, // This will now be accepted
+        // Increased timeout to 5 minutes for those 87MB+ files
+        timeout: 300000,
+        insecureHTTPParser: true,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        headers: {
+          'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Migration-Bot/1.0',
+        },
       };
 
       const response = await axios.get<ArrayBuffer>(url, config);
-
       return Buffer.from(response.data);
     } catch (error: any) {
       throw new Error(`Download failed: ${error.message}`);

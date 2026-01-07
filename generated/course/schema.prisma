@@ -130,6 +130,8 @@ model Course {
   rating           Float              @default(0)
   previewImage     String?
   previewVideo     String?
+  createdBy        String?
+  updatedBy        String?
   ratings          Rating[]
   users            UserOnCourse[]
   certificate      certificate[]
@@ -348,6 +350,8 @@ model course2 {
   subCategoryId      String?
   previewImage       String?
   previewVideo       String?
+  createdBy          String?
+  updatedBy          String?
   Rating             Rating[]
   UserOnCourse       UserOnCourse[]
   certificate        certificate[]

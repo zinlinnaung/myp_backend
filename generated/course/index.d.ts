@@ -11205,6 +11205,8 @@ export namespace Prisma {
     rating: number | null
     previewImage: string | null
     previewVideo: string | null
+    createdBy: string | null
+    updatedBy: string | null
   }
 
   export type CourseMaxAggregateOutputType = {
@@ -11225,6 +11227,8 @@ export namespace Prisma {
     rating: number | null
     previewImage: string | null
     previewVideo: string | null
+    createdBy: string | null
+    updatedBy: string | null
   }
 
   export type CourseCountAggregateOutputType = {
@@ -11245,6 +11249,8 @@ export namespace Prisma {
     rating: number
     previewImage: number
     previewVideo: number
+    createdBy: number
+    updatedBy: number
     _all: number
   }
 
@@ -11281,6 +11287,8 @@ export namespace Prisma {
     rating?: true
     previewImage?: true
     previewVideo?: true
+    createdBy?: true
+    updatedBy?: true
   }
 
   export type CourseMaxAggregateInputType = {
@@ -11301,6 +11309,8 @@ export namespace Prisma {
     rating?: true
     previewImage?: true
     previewVideo?: true
+    createdBy?: true
+    updatedBy?: true
   }
 
   export type CourseCountAggregateInputType = {
@@ -11321,6 +11331,8 @@ export namespace Prisma {
     rating?: true
     previewImage?: true
     previewVideo?: true
+    createdBy?: true
+    updatedBy?: true
     _all?: true
   }
 
@@ -11428,6 +11440,8 @@ export namespace Prisma {
     rating: number
     previewImage: string | null
     previewVideo: string | null
+    createdBy: string | null
+    updatedBy: string | null
     _count: CourseCountAggregateOutputType | null
     _avg: CourseAvgAggregateOutputType | null
     _sum: CourseSumAggregateOutputType | null
@@ -11467,6 +11481,8 @@ export namespace Prisma {
     rating?: boolean
     previewImage?: boolean
     previewVideo?: boolean
+    createdBy?: boolean
+    updatedBy?: boolean
     ratings?: boolean | Course$ratingsArgs<ExtArgs>
     users?: boolean | Course$usersArgs<ExtArgs>
     certificate?: boolean | Course$certificateArgs<ExtArgs>
@@ -11499,6 +11515,8 @@ export namespace Prisma {
     rating?: boolean
     previewImage?: boolean
     previewVideo?: boolean
+    createdBy?: boolean
+    updatedBy?: boolean
   }
 
 
@@ -11551,6 +11569,8 @@ export namespace Prisma {
       rating: number
       previewImage: string | null
       previewVideo: string | null
+      createdBy: string | null
+      updatedBy: string | null
     }, ExtArgs["result"]["course"]>
     composites: {}
   }
@@ -12009,6 +12029,8 @@ export namespace Prisma {
     readonly rating: FieldRef<"Course", 'Float'>
     readonly previewImage: FieldRef<"Course", 'String'>
     readonly previewVideo: FieldRef<"Course", 'String'>
+    readonly createdBy: FieldRef<"Course", 'String'>
+    readonly updatedBy: FieldRef<"Course", 'String'>
   }
     
 
@@ -26503,6 +26525,8 @@ export namespace Prisma {
     subCategoryId: string | null
     previewImage: string | null
     previewVideo: string | null
+    createdBy: string | null
+    updatedBy: string | null
   }
 
   export type Course2MaxAggregateOutputType = {
@@ -26523,6 +26547,8 @@ export namespace Prisma {
     subCategoryId: string | null
     previewImage: string | null
     previewVideo: string | null
+    createdBy: string | null
+    updatedBy: string | null
   }
 
   export type Course2CountAggregateOutputType = {
@@ -26543,6 +26569,8 @@ export namespace Prisma {
     subCategoryId: number
     previewImage: number
     previewVideo: number
+    createdBy: number
+    updatedBy: number
     _all: number
   }
 
@@ -26579,6 +26607,8 @@ export namespace Prisma {
     subCategoryId?: true
     previewImage?: true
     previewVideo?: true
+    createdBy?: true
+    updatedBy?: true
   }
 
   export type Course2MaxAggregateInputType = {
@@ -26599,6 +26629,8 @@ export namespace Prisma {
     subCategoryId?: true
     previewImage?: true
     previewVideo?: true
+    createdBy?: true
+    updatedBy?: true
   }
 
   export type Course2CountAggregateInputType = {
@@ -26619,6 +26651,8 @@ export namespace Prisma {
     subCategoryId?: true
     previewImage?: true
     previewVideo?: true
+    createdBy?: true
+    updatedBy?: true
     _all?: true
   }
 
@@ -26726,6 +26760,8 @@ export namespace Prisma {
     subCategoryId: string | null
     previewImage: string | null
     previewVideo: string | null
+    createdBy: string | null
+    updatedBy: string | null
     _count: Course2CountAggregateOutputType | null
     _avg: Course2AvgAggregateOutputType | null
     _sum: Course2SumAggregateOutputType | null
@@ -26765,6 +26801,8 @@ export namespace Prisma {
     subCategoryId?: boolean
     previewImage?: boolean
     previewVideo?: boolean
+    createdBy?: boolean
+    updatedBy?: boolean
     Rating?: boolean | course2$RatingArgs<ExtArgs>
     UserOnCourse?: boolean | course2$UserOnCourseArgs<ExtArgs>
     certificate?: boolean | course2$certificateArgs<ExtArgs>
@@ -26797,6 +26835,8 @@ export namespace Prisma {
     subCategoryId?: boolean
     previewImage?: boolean
     previewVideo?: boolean
+    createdBy?: boolean
+    updatedBy?: boolean
   }
 
 
@@ -26849,6 +26889,8 @@ export namespace Prisma {
       subCategoryId: string | null
       previewImage: string | null
       previewVideo: string | null
+      createdBy: string | null
+      updatedBy: string | null
     }, ExtArgs["result"]["course2"]>
     composites: {}
   }
@@ -27307,6 +27349,8 @@ export namespace Prisma {
     readonly subCategoryId: FieldRef<"course2", 'String'>
     readonly previewImage: FieldRef<"course2", 'String'>
     readonly previewVideo: FieldRef<"course2", 'String'>
+    readonly createdBy: FieldRef<"course2", 'String'>
+    readonly updatedBy: FieldRef<"course2", 'String'>
   }
     
 
@@ -28893,7 +28937,9 @@ export namespace Prisma {
     id: 'id',
     rating: 'rating',
     previewImage: 'previewImage',
-    previewVideo: 'previewVideo'
+    previewVideo: 'previewVideo',
+    createdBy: 'createdBy',
+    updatedBy: 'updatedBy'
   };
 
   export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
@@ -29106,7 +29152,9 @@ export namespace Prisma {
     categoryId: 'categoryId',
     subCategoryId: 'subCategoryId',
     previewImage: 'previewImage',
-    previewVideo: 'previewVideo'
+    previewVideo: 'previewVideo',
+    createdBy: 'createdBy',
+    updatedBy: 'updatedBy'
   };
 
   export type Course2ScalarFieldEnum = (typeof Course2ScalarFieldEnum)[keyof typeof Course2ScalarFieldEnum]
@@ -29848,6 +29896,8 @@ export namespace Prisma {
     rating?: FloatFilter<"Course"> | number
     previewImage?: StringNullableFilter<"Course"> | string | null
     previewVideo?: StringNullableFilter<"Course"> | string | null
+    createdBy?: StringNullableFilter<"Course"> | string | null
+    updatedBy?: StringNullableFilter<"Course"> | string | null
     ratings?: RatingListRelationFilter
     users?: UserOnCourseListRelationFilter
     certificate?: CertificateListRelationFilter
@@ -29879,6 +29929,8 @@ export namespace Prisma {
     rating?: SortOrder
     previewImage?: SortOrderInput | SortOrder
     previewVideo?: SortOrderInput | SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    updatedBy?: SortOrderInput | SortOrder
     ratings?: RatingOrderByRelationAggregateInput
     users?: UserOnCourseOrderByRelationAggregateInput
     certificate?: certificateOrderByRelationAggregateInput
@@ -29913,6 +29965,8 @@ export namespace Prisma {
     rating?: FloatFilter<"Course"> | number
     previewImage?: StringNullableFilter<"Course"> | string | null
     previewVideo?: StringNullableFilter<"Course"> | string | null
+    createdBy?: StringNullableFilter<"Course"> | string | null
+    updatedBy?: StringNullableFilter<"Course"> | string | null
     ratings?: RatingListRelationFilter
     users?: UserOnCourseListRelationFilter
     certificate?: CertificateListRelationFilter
@@ -29944,6 +29998,8 @@ export namespace Prisma {
     rating?: SortOrder
     previewImage?: SortOrderInput | SortOrder
     previewVideo?: SortOrderInput | SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    updatedBy?: SortOrderInput | SortOrder
     _count?: CourseCountOrderByAggregateInput
     _avg?: CourseAvgOrderByAggregateInput
     _max?: CourseMaxOrderByAggregateInput
@@ -29972,6 +30028,8 @@ export namespace Prisma {
     rating?: FloatWithAggregatesFilter<"Course"> | number
     previewImage?: StringNullableWithAggregatesFilter<"Course"> | string | null
     previewVideo?: StringNullableWithAggregatesFilter<"Course"> | string | null
+    createdBy?: StringNullableWithAggregatesFilter<"Course"> | string | null
+    updatedBy?: StringNullableWithAggregatesFilter<"Course"> | string | null
   }
 
   export type UserOnCourseWhereInput = {
@@ -30976,6 +31034,8 @@ export namespace Prisma {
     subCategoryId?: StringNullableFilter<"course2"> | string | null
     previewImage?: StringNullableFilter<"course2"> | string | null
     previewVideo?: StringNullableFilter<"course2"> | string | null
+    createdBy?: StringNullableFilter<"course2"> | string | null
+    updatedBy?: StringNullableFilter<"course2"> | string | null
     Rating?: RatingListRelationFilter
     UserOnCourse?: UserOnCourseListRelationFilter
     certificate?: CertificateListRelationFilter
@@ -31007,6 +31067,8 @@ export namespace Prisma {
     subCategoryId?: SortOrderInput | SortOrder
     previewImage?: SortOrderInput | SortOrder
     previewVideo?: SortOrderInput | SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    updatedBy?: SortOrderInput | SortOrder
     Rating?: RatingOrderByRelationAggregateInput
     UserOnCourse?: UserOnCourseOrderByRelationAggregateInput
     certificate?: certificateOrderByRelationAggregateInput
@@ -31041,6 +31103,8 @@ export namespace Prisma {
     subCategoryId?: StringNullableFilter<"course2"> | string | null
     previewImage?: StringNullableFilter<"course2"> | string | null
     previewVideo?: StringNullableFilter<"course2"> | string | null
+    createdBy?: StringNullableFilter<"course2"> | string | null
+    updatedBy?: StringNullableFilter<"course2"> | string | null
     Rating?: RatingListRelationFilter
     UserOnCourse?: UserOnCourseListRelationFilter
     certificate?: CertificateListRelationFilter
@@ -31072,6 +31136,8 @@ export namespace Prisma {
     subCategoryId?: SortOrderInput | SortOrder
     previewImage?: SortOrderInput | SortOrder
     previewVideo?: SortOrderInput | SortOrder
+    createdBy?: SortOrderInput | SortOrder
+    updatedBy?: SortOrderInput | SortOrder
     _count?: course2CountOrderByAggregateInput
     _avg?: course2AvgOrderByAggregateInput
     _max?: course2MaxOrderByAggregateInput
@@ -31100,6 +31166,8 @@ export namespace Prisma {
     subCategoryId?: StringNullableWithAggregatesFilter<"course2"> | string | null
     previewImage?: StringNullableWithAggregatesFilter<"course2"> | string | null
     previewVideo?: StringNullableWithAggregatesFilter<"course2"> | string | null
+    createdBy?: StringNullableWithAggregatesFilter<"course2"> | string | null
+    updatedBy?: StringNullableWithAggregatesFilter<"course2"> | string | null
   }
 
   export type feedback_templatesWhereInput = {
@@ -31749,6 +31817,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
@@ -31780,6 +31850,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
@@ -31805,6 +31877,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
@@ -31836,6 +31910,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -31864,6 +31940,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
   }
 
   export type CourseUpdateManyMutationInput = {
@@ -31881,6 +31959,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CourseUncheckedUpdateManyInput = {
@@ -31901,6 +31981,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserOnCourseCreateInput = {
@@ -32953,6 +33035,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
@@ -32984,6 +33068,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
@@ -33009,6 +33095,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
@@ -33040,6 +33128,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
@@ -33068,6 +33158,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
   }
 
   export type course2UpdateManyMutationInput = {
@@ -33085,6 +33177,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type course2UncheckedUpdateManyInput = {
@@ -33105,6 +33199,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type feedback_templatesCreateInput = {
@@ -33885,6 +33981,8 @@ export namespace Prisma {
     rating?: SortOrder
     previewImage?: SortOrder
     previewVideo?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
   }
 
   export type CourseAvgOrderByAggregateInput = {
@@ -33912,6 +34010,8 @@ export namespace Prisma {
     rating?: SortOrder
     previewImage?: SortOrder
     previewVideo?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
   }
 
   export type CourseMinOrderByAggregateInput = {
@@ -33932,6 +34032,8 @@ export namespace Prisma {
     rating?: SortOrder
     previewImage?: SortOrder
     previewVideo?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
   }
 
   export type CourseSumOrderByAggregateInput = {
@@ -34617,6 +34719,8 @@ export namespace Prisma {
     subCategoryId?: SortOrder
     previewImage?: SortOrder
     previewVideo?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
   }
 
   export type course2AvgOrderByAggregateInput = {
@@ -34644,6 +34748,8 @@ export namespace Prisma {
     subCategoryId?: SortOrder
     previewImage?: SortOrder
     previewVideo?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
   }
 
   export type course2MinOrderByAggregateInput = {
@@ -34664,6 +34770,8 @@ export namespace Prisma {
     subCategoryId?: SortOrder
     previewImage?: SortOrder
     previewVideo?: SortOrder
+    createdBy?: SortOrder
+    updatedBy?: SortOrder
   }
 
   export type course2SumOrderByAggregateInput = {
@@ -36742,6 +36850,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
@@ -36771,6 +36881,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
@@ -36806,6 +36918,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
@@ -36835,6 +36949,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
@@ -36956,6 +37072,8 @@ export namespace Prisma {
     rating?: FloatFilter<"Course"> | number
     previewImage?: StringNullableFilter<"Course"> | string | null
     previewVideo?: StringNullableFilter<"Course"> | string | null
+    createdBy?: StringNullableFilter<"Course"> | string | null
+    updatedBy?: StringNullableFilter<"Course"> | string | null
   }
 
   export type course2UpsertWithWhereUniqueWithoutCategoryInput = {
@@ -36995,6 +37113,8 @@ export namespace Prisma {
     subCategoryId?: StringNullableFilter<"course2"> | string | null
     previewImage?: StringNullableFilter<"course2"> | string | null
     previewVideo?: StringNullableFilter<"course2"> | string | null
+    createdBy?: StringNullableFilter<"course2"> | string | null
+    updatedBy?: StringNullableFilter<"course2"> | string | null
   }
 
   export type SubCategoryUpsertWithWhereUniqueWithoutCategoryInput = {
@@ -37040,6 +37160,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
@@ -37069,6 +37191,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
@@ -37104,6 +37228,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
@@ -37133,6 +37259,8 @@ export namespace Prisma {
     categoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
@@ -37328,6 +37456,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
@@ -37358,6 +37488,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
@@ -37387,6 +37519,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
@@ -37417,6 +37551,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
@@ -37478,6 +37614,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
@@ -37508,6 +37646,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
@@ -37543,6 +37683,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
@@ -37573,6 +37715,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -37743,6 +37887,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
@@ -37773,6 +37919,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
@@ -37802,6 +37950,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
@@ -37831,6 +37981,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
@@ -38148,6 +38300,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
@@ -38178,6 +38332,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -38353,6 +38509,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
     category?: CategoryCreateNestedOneWithoutCourse2Input
@@ -38383,6 +38541,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
     other_course2?: course2UncheckedCreateNestedManyWithoutCourse2Input
@@ -38412,6 +38572,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
     Category?: CategoryCreateNestedOneWithoutCoursesInput
@@ -38442,6 +38604,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
     subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
@@ -38482,6 +38646,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
     category?: CategoryUpdateOneWithoutCourse2NestedInput
@@ -38512,6 +38678,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
     other_course2?: course2UncheckedUpdateManyWithoutCourse2NestedInput
@@ -38547,6 +38715,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
     Category?: CategoryUpdateOneWithoutCoursesNestedInput
@@ -38577,6 +38747,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
     subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
@@ -38637,6 +38809,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
@@ -38667,6 +38841,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
@@ -38696,6 +38872,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
@@ -38726,6 +38904,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
@@ -38824,6 +39004,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
@@ -38854,6 +39036,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
@@ -38889,6 +39073,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
@@ -38919,6 +39105,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -39093,6 +39281,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
@@ -39123,6 +39313,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
@@ -39152,6 +39344,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
@@ -39182,6 +39376,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
@@ -39222,6 +39418,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
@@ -39252,6 +39450,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
@@ -39287,6 +39487,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
@@ -39317,6 +39519,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -39341,6 +39545,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
     category?: CategoryCreateNestedOneWithoutCourse2Input
@@ -39371,6 +39577,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
     other_course2?: course2UncheckedCreateNestedManyWithoutCourse2Input
@@ -39400,6 +39608,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
     Category?: CategoryCreateNestedOneWithoutCoursesInput
@@ -39430,6 +39640,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
     subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
@@ -39470,6 +39682,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
     category?: CategoryUpdateOneWithoutCourse2NestedInput
@@ -39500,6 +39714,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
     other_course2?: course2UncheckedUpdateManyWithoutCourse2NestedInput
@@ -39535,6 +39751,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
     Category?: CategoryUpdateOneWithoutCoursesNestedInput
@@ -39565,6 +39783,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
     subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
@@ -39759,6 +39979,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     category?: CategoryCreateNestedOneWithoutCourse2Input
@@ -39789,6 +40011,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     other_course2?: course2UncheckedCreateNestedManyWithoutCourse2Input
@@ -39818,6 +40042,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     Category?: CategoryCreateNestedOneWithoutCoursesInput
@@ -39848,6 +40074,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     subCourses?: CourseUncheckedCreateNestedManyWithoutParentCourseInput
@@ -39888,6 +40116,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     category?: CategoryUpdateOneWithoutCourse2NestedInput
@@ -39918,6 +40148,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     other_course2?: course2UncheckedUpdateManyWithoutCourse2NestedInput
@@ -39953,6 +40185,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     Category?: CategoryUpdateOneWithoutCoursesNestedInput
@@ -39983,6 +40217,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     subCourses?: CourseUncheckedUpdateManyWithoutParentCourseNestedInput
@@ -40007,6 +40243,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
@@ -40037,6 +40275,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
@@ -40066,6 +40306,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingCreateNestedManyWithoutCourseInput
     users?: UserOnCourseCreateNestedManyWithoutCourseInput
     certificate?: certificateCreateNestedManyWithoutCourseInput
@@ -40096,6 +40338,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     ratings?: RatingUncheckedCreateNestedManyWithoutCourseInput
     users?: UserOnCourseUncheckedCreateNestedManyWithoutCourseInput
     certificate?: certificateUncheckedCreateNestedManyWithoutCourseInput
@@ -40136,6 +40380,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
@@ -40166,6 +40412,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
@@ -40201,6 +40449,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
@@ -40231,6 +40481,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -40510,6 +40762,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
@@ -40540,6 +40794,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
@@ -40569,6 +40825,8 @@ export namespace Prisma {
     updatedAt: Date | string
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseCreateNestedManyWithoutCourse2Input
     certificate?: certificateCreateNestedManyWithoutCourse2Input
@@ -40598,6 +40856,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
     Rating?: RatingUncheckedCreateNestedManyWithoutCourse2Input
     UserOnCourse?: UserOnCourseUncheckedCreateNestedManyWithoutCourse2Input
     certificate?: certificateUncheckedCreateNestedManyWithoutCourse2Input
@@ -40874,6 +41134,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
@@ -40904,6 +41166,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
@@ -41055,6 +41319,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
   }
 
   export type course2CreateManyCategoryInput = {
@@ -41074,6 +41340,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
   }
 
   export type SubCategoryCreateManyCategoryInput = {
@@ -41141,6 +41409,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
@@ -41170,6 +41440,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -41197,6 +41469,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type course2UpdateWithoutCategoryInput = {
@@ -41214,6 +41488,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
@@ -41243,6 +41519,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
@@ -41270,6 +41548,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SubCategoryUpdateWithoutCategoryInput = {
@@ -41317,6 +41597,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
   }
 
   export type course2CreateManySub_categoryInput = {
@@ -41336,6 +41618,8 @@ export namespace Prisma {
     categoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
   }
 
   export type CourseUpdateWithoutSubCategoryInput = {
@@ -41353,6 +41637,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
@@ -41382,6 +41668,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -41409,6 +41697,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type course2UpdateWithoutSub_categoryInput = {
@@ -41426,6 +41716,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
@@ -41455,6 +41747,8 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
@@ -41482,6 +41776,8 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HomeCategoryItemCreateManyHomeCategoryInput = {
@@ -41570,6 +41866,8 @@ export namespace Prisma {
     rating?: number
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
   }
 
   export type CourseSectionCreateManyCourseInput = {
@@ -41712,6 +42010,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUpdateManyWithoutCourseNestedInput
     certificate?: certificateUpdateManyWithoutCourseNestedInput
@@ -41741,6 +42041,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     ratings?: RatingUncheckedUpdateManyWithoutCourseNestedInput
     users?: UserOnCourseUncheckedUpdateManyWithoutCourseNestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -41768,6 +42070,8 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CourseSectionUpdateWithoutCourseInput = {
@@ -42104,6 +42408,8 @@ export namespace Prisma {
     subCategoryId?: string | null
     previewImage?: string | null
     previewVideo?: string | null
+    createdBy?: string | null
+    updatedBy?: string | null
   }
 
   export type CourseSectionCreateManyCourse2Input = {
@@ -42246,6 +42552,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUpdateManyWithoutCourse2NestedInput
@@ -42275,6 +42583,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     Rating?: RatingUncheckedUpdateManyWithoutCourse2NestedInput
     UserOnCourse?: UserOnCourseUncheckedUpdateManyWithoutCourse2NestedInput
     certificate?: certificateUncheckedUpdateManyWithoutCourse2NestedInput
@@ -42302,6 +42612,8 @@ export namespace Prisma {
     subCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
     previewImage?: NullableStringFieldUpdateOperationsInput | string | null
     previewVideo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CourseSectionUpdateWithoutCourse2Input = {

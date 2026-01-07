@@ -214,7 +214,9 @@ exports.Prisma.CourseScalarFieldEnum = {
   id: 'id',
   rating: 'rating',
   previewImage: 'previewImage',
-  previewVideo: 'previewVideo'
+  previewVideo: 'previewVideo',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
 };
 
 exports.Prisma.UserOnCourseScalarFieldEnum = {
@@ -382,7 +384,9 @@ exports.Prisma.Course2ScalarFieldEnum = {
   categoryId: 'categoryId',
   subCategoryId: 'subCategoryId',
   previewImage: 'previewImage',
-  previewVideo: 'previewVideo'
+  previewVideo: 'previewVideo',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
 };
 
 exports.Prisma.Feedback_templatesScalarFieldEnum = {

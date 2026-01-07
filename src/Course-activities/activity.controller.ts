@@ -38,14 +38,9 @@ export class ActivityController {
   })
   @UseInterceptors(FileInterceptor('file'))
   async uploadCsvMigration(@UploadedFile() file: Express.Multer.File) {
-    if (!file) {
-      throw new BadRequestException('No file uploaded');
-    }
+    if (!file) throw new BadRequestException('No file uploaded');
 
-    if (file.mimetype !== 'text/csv' && !file.originalname.endsWith('.csv')) {
-      throw new BadRequestException('Only CSV files are allowed');
-    }
-
+    // This will now return almost instantly
     return this.activityService.migrateH5PFromCsv(file.buffer);
   }
 
