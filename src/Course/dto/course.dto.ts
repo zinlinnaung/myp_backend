@@ -55,9 +55,6 @@ export class CreateCourseDto {
   @IsUUID()
   subCategoryId?: string;
 
-  // createdBy        String?
-  // updatedBy
-
   @IsOptional()
   @IsString()
   createdBy?: string;

@@ -207,40 +207,40 @@ export class MinioService {
     const originalH5PPath = `private/h5p/originals/${uniqueId}.h5p`;
     const extractedBasePath = `public/h5p/content/${uniqueId}`; // Making content public for the player
 
-    try {
-      // 1. Upload the Original .h5p File (Archive)
-      await this.client.putObject(
-        this.bucketName,
-        originalH5PPath,
-        fileBuffer,
-        fileBuffer.length,
-        { 'Content-Type': 'application/zip' },
-      );
+    // try {
+    // 1. Upload the Original .h5p File (Archive)
+    await this.client.putObject(
+      this.bucketName,
+      originalH5PPath,
+      fileBuffer,
+      fileBuffer.length,
+      { 'Content-Type': 'application/zip' },
+    );
 
-      // 2. Extract and Upload Contents
-      await this.extractAndUploadZip(fileBuffer, extractedBasePath);
+    // 2. Extract and Upload Contents
+    await this.extractAndUploadZip(fileBuffer, extractedBasePath);
 
-      const baseUrl = 'https://mmyouth-minio.bitmyanmar.info';
+    const baseUrl = 'https://mmyouth-minio.bitmyanmar.info';
 
-      return {
-        uniqueId,
-        originalPath: originalH5PPath,
-        extractedBasePath: extractedBasePath,
-        // This is usually the path the H5P player needs to load
-        playerUrl: `${baseUrl}/${this.bucketName}/${extractedBasePath}`,
-        timestamp,
-      };
-    } catch (error: any) {
-      console.error('---- FULL MINIO/H5P ERROR ----');
-      console.error({
-        code: error.code,
-        message: error.message,
-        stack: error.stack,
-      });
-      throw new BadRequestException(
-        'Failed to process H5P file. Check server logs.',
-      );
-    }
+    return {
+      uniqueId,
+      originalPath: originalH5PPath,
+      extractedBasePath: extractedBasePath,
+      // This is usually the path the H5P player needs to load
+      playerUrl: `${baseUrl}/${this.bucketName}/${extractedBasePath}`,
+      timestamp,
+    };
+    // } catch (error: any) {
+    //   console.error('---- FULL MINIO/H5P ERROR ----');
+    //   console.error({
+    //     code: error.code,
+    //     message: error.message,
+    //     stack: error.stack,
+    //   });
+    //   throw new BadRequestException(
+    //     'Failed to process H5P file. Check server logs.',
+    //   );
+    // }
   }
 
   /**
