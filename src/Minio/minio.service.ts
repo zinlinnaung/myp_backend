@@ -246,46 +246,42 @@ export class MinioService {
   /**
    * Helper: Unzips buffer in memory and uploads all files to MinIO in parallel
    */
+  // minio.service.ts
+
   private async extractAndUploadZip(
     buffer: Buffer,
     destinationFolder: string,
   ): Promise<void> {
-    // Create a new promise to manage the asynchronous unzipping and uploading
-    return new Promise<void>((resolve, reject) => {
-      // Use a .then() chain on unzipper.Open.buffer for async handling
-      unzipper.Open.buffer(buffer)
-        .then(async (directory) => {
-          const uploadPromises = directory.files.map(async (entry) => {
-            if (entry.type === 'Directory') return; // Skip directories
+    try {
+      const directory = await unzipper.Open.buffer(buffer);
 
-            // The object name retains the internal folder structure
-            const objectName = `${destinationFolder}/${entry.path}`;
-            const contentType = this.getContentType(entry.path);
+      // ❌ OLD: directory.files.map(...) with Promise.all (Triggers 429)
+      // ✅ NEW: for...of loop (Sequential)
+      for (const entry of directory.files) {
+        if (entry.type === 'Directory') continue;
 
-            // Get the stream for the file content
-            const fileStream = entry.stream();
+        const objectName = `${destinationFolder}/${entry.path}`;
+        const contentType = this.getContentType(entry.path);
 
-            // Upload the file using MinIO's putObject with a stream
-            // MinIO requires the size (entry.uncompressedSize) when using a stream.
-            await this.client.putObject(
-              this.bucketName,
-              objectName,
-              fileStream,
-              entry.uncompressedSize, // IMPORTANT: Use uncompressedSize
-              { 'Content-Type': contentType },
-            );
-          });
+        // Use a stream to keep RAM usage low
+        const fileStream = entry.stream();
 
-          // Wait for ALL file uploads to complete
-          await Promise.all(uploadPromises);
-          resolve(); // Resolve the main promise when done
-        })
-        .catch((error) => {
-          // Log the error from the new library to diagnose
-          console.error('Unzipper/Extraction Error:', error);
-          reject(error);
-        });
-    });
+        await this.client.putObject(
+          this.bucketName,
+          objectName,
+          fileStream,
+          entry.uncompressedSize,
+          { 'Content-Type': contentType },
+        );
+
+        // CRITICAL: 40ms breather between files inside the ZIP
+        // This prevents the MinIO API from rate-limiting your NestJS app
+        await new Promise((res) => setTimeout(res, 40));
+      }
+    } catch (error) {
+      console.error('Unzipper/Extraction Error:', error);
+      throw error;
+    }
   }
   /**
    * Helper: Determine Content-Type based on extension
