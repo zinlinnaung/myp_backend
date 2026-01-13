@@ -179,7 +179,6 @@ export class ActivityService {
             where: { id: activityId },
             data: {
               content: uploadResult.playerUrl,
-              type: 'H5P',
             },
           });
 
