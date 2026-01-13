@@ -149,11 +149,7 @@ export class ActivityService {
 
           // --- SKIP LOGIC ---
           // Check if content exists and looks like a URL
-          if (
-            activity.content &&
-            activity.content.startsWith('http') &&
-            activity.type != 'SCORM'
-          ) {
+          if (activity.content && activity.content.startsWith('http')) {
             this.logger.log(
               `⏭️ Skipping [${activityId}]: Content already exists.`,
             );
@@ -183,7 +179,7 @@ export class ActivityService {
             where: { id: activityId },
             data: {
               content: uploadResult.playerUrl,
-              type: scorm ? 'SCORM' : 'H5P',
+              type: 'SCORM',
             },
           });
 
