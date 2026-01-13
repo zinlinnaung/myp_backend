@@ -140,7 +140,7 @@ export class ActivityService {
           // 1. Check DB for existing content
           const activity = await this.prisma.course.activity.findUnique({
             where: { id: activityId },
-            select: { id: true, content: true },
+            select: { id: true, content: true, type: true },
           });
 
           if (!activity) {
@@ -149,7 +149,11 @@ export class ActivityService {
 
           // --- SKIP LOGIC ---
           // Check if content exists and looks like a URL
-          if (activity.content && activity.content.startsWith('http')) {
+          if (
+            activity.content &&
+            activity.content.startsWith('http') &&
+            activity.type != 'SCORM'
+          ) {
             this.logger.log(
               `⏭️ Skipping [${activityId}]: Content already exists.`,
             );

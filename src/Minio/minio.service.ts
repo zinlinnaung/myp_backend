@@ -276,7 +276,7 @@ export class MinioService {
       originalPath: originalScromPath,
       extractedBasePath: extractedBasePath,
       // This is usually the path the H5P player needs to load
-      playerUrl: `${baseUrl}/${this.bucketName}/${extractedBasePath}`,
+      playerUrl: `${baseUrl}/${this.bucketName}/${extractedBasePath}/story.html`,
       timestamp,
     };
     // } catch (error: any) {
