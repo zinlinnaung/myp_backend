@@ -183,6 +183,7 @@ export class ActivityService {
             where: { id: activityId },
             data: {
               content: uploadResult.playerUrl,
+              type: scorm ? 'SCORM' : 'H5P',
             },
           });
 
