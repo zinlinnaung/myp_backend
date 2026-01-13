@@ -149,13 +149,13 @@ export class ActivityService {
 
           // --- SKIP LOGIC ---
           // Check if content exists and looks like a URL
-          if (activity.content && activity.content.startsWith('http')) {
-            this.logger.log(
-              `⏭️ Skipping [${activityId}]: Content already exists.`,
-            );
-            skipCount++;
-            return; // Exit the retryWithBackoff callback
-          }
+          // if (activity.content && activity.content.startsWith('http')) {
+          //   this.logger.log(
+          //     `⏭️ Skipping [${activityId}]: Content already exists.`,
+          //   );
+          //   skipCount++;
+          //   return; // Exit the retryWithBackoff callback
+          // }
 
           // 2. Download
           const h5pBuffer = await this.downloadFile(url);
