@@ -273,7 +273,7 @@ export class MinioService {
 
     return {
       uniqueId,
-      originalPath: originalH5PPath,
+      originalPath: originalScromPath,
       extractedBasePath: extractedBasePath,
       // This is usually the path the H5P player needs to load
       playerUrl: `${baseUrl}/${this.bucketName}/${extractedBasePath}`,
