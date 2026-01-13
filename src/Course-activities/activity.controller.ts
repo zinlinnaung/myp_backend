@@ -41,7 +41,31 @@ export class ActivityController {
     if (!file) throw new BadRequestException('No file uploaded');
 
     // This will now return almost instantly
-    return this.activityService.migrateH5PFromCsv(file.buffer);
+    return this.activityService.migrateH5PFromCsv(file.buffer, false);
+  }
+
+  @Post('upload-csv-migration-scorm')
+  @ApiOperation({ summary: 'Migrate Scorm content via CSV' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+          description:
+            'CSV file containing new_activity_id and content (Scorm URL) columns',
+        },
+      },
+    },
+  })
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadScormMigration(@UploadedFile() file: Express.Multer.File) {
+    if (!file) throw new BadRequestException('No file uploaded');
+
+    // This will now return almost instantly
+    return this.activityService.migrateH5PFromCsv(file.buffer, true);
   }
 
   @Post()

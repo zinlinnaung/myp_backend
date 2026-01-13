@@ -75,12 +75,12 @@ export class ActivityService {
     });
   }
 
-  async migrateH5PFromCsv(fileBuffer: Buffer) {
+  async migrateH5PFromCsv(fileBuffer: Buffer, scorm: boolean) {
     if (!fileBuffer || fileBuffer.length === 0) throw new Error('CSV is empty');
 
     // Trigger detached background process
     setImmediate(() => {
-      this.runBackgroundMigrationContext(fileBuffer).catch((err) =>
+      this.runBackgroundMigrationContext(fileBuffer, scorm).catch((err) =>
         this.logger.error('💥 CRITICAL BACKGROUND CRASH', err),
       );
     });
@@ -91,7 +91,10 @@ export class ActivityService {
     };
   }
 
-  private async runBackgroundMigrationContext(fileBuffer: Buffer) {
+  private async runBackgroundMigrationContext(
+    fileBuffer: Buffer,
+    scorm: boolean,
+  ) {
     const rows: any[] = [];
     const stream = Readable.from(fileBuffer);
 
@@ -108,7 +111,7 @@ export class ActivityService {
       this.logger.log(
         `✅ Parsed ${rows.length} rows. Starting 1-hour migration loop...`,
       );
-      await this.processMigrationRows(rows);
+      await this.processMigrationRows(rows, scorm);
     } catch (error) {
       this.logger.error(`❌ Parsing failed: ${error.message}`);
     }
@@ -116,7 +119,7 @@ export class ActivityService {
 
   // activity.service.ts
 
-  private async processMigrationRows(rows: any[]) {
+  private async processMigrationRows(rows: any[], scorm: boolean) {
     const startTime = Date.now();
     let successCount = 0;
     let failCount = 0;
@@ -158,11 +161,18 @@ export class ActivityService {
           const h5pBuffer = await this.downloadFile(url);
 
           // 3. Extract and Upload (Throttled internally in MinioService)
-          const uploadResult = await this.h5pService.uploadH5PExtract(
-            h5pBuffer,
-            'migration.h5p',
-            activityId,
-          );
+
+          const uploadResult = scorm
+            ? await this.h5pService.uploadScormExtract(
+                h5pBuffer,
+                'migration.zip',
+                activityId,
+              )
+            : await this.h5pService.uploadH5PExtract(
+                h5pBuffer,
+                'migration.h5p',
+                activityId,
+              );
 
           // 4. Update Database
           await this.prisma.course.activity.update({

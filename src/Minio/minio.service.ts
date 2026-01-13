@@ -243,6 +243,55 @@ export class MinioService {
     // }
   }
 
+  async uploadScormExtract(
+    fileBuffer: Buffer,
+    fileName: string,
+    activityId: string,
+  ) {
+    console.log(`[H5P Diagnostic] Buffer Size: ${fileBuffer.length} bytes`);
+    const timestamp = Date.now();
+    const uniqueId = `${activityId}_${timestamp}`;
+
+    // Paths
+    const originalScromPath = `private/scorm/originals/${uniqueId}.zip`;
+    const extractedBasePath = `public/scorm/content/${uniqueId}`; // Making content public for the player
+
+    // try {
+    // 1. Upload the Original .h5p File (Archive)
+    await this.client.putObject(
+      this.bucketName,
+      originalScromPath,
+      fileBuffer,
+      fileBuffer.length,
+      { 'Content-Type': 'application/zip' },
+    );
+
+    // 2. Extract and Upload Contents
+    await this.extractAndUploadZip(fileBuffer, extractedBasePath);
+
+    const baseUrl = 'https://mmyouth-minio.bitmyanmar.info';
+
+    return {
+      uniqueId,
+      originalPath: originalH5PPath,
+      extractedBasePath: extractedBasePath,
+      // This is usually the path the H5P player needs to load
+      playerUrl: `${baseUrl}/${this.bucketName}/${extractedBasePath}`,
+      timestamp,
+    };
+    // } catch (error: any) {
+    //   console.error('---- FULL MINIO/H5P ERROR ----');
+    //   console.error({
+    //     code: error.code,
+    //     message: error.message,
+    //     stack: error.stack,
+    //   });
+    //   throw new BadRequestException(
+    //     'Failed to process H5P file. Check server logs.',
+    //   );
+    // }
+  }
+
   /**
    * Helper: Unzips buffer in memory and uploads all files to MinIO in parallel
    */
