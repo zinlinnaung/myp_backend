@@ -205,7 +205,7 @@ export class ActivityService {
       }
 
       // 8-second delay to prevent Cloudflare/IP bans
-      await new Promise((res) => setTimeout(res, 8000));
+      await new Promise((res) => setTimeout(res, 1000));
     }
 
     this.logger.log(
